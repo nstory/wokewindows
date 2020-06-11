@@ -10,28 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_11_155150) do
+ActiveRecord::Schema.define(version: 2020_06_11_210711) do
 
   create_table "incidents", force: :cascade do |t|
     t.string "incident_number"
-    t.integer "offense_code"
-    t.string "offense_code_group"
-    t.string "offense_description"
     t.string "district"
     t.integer "reporting_area"
     t.boolean "shooting"
-    t.datetime "occurred_on_date"
+    t.string "occurred_on_date"
     t.string "ucr_part"
     t.string "street"
     t.float "latitude"
     t.float "longitude"
     t.datetime "report_date"
-    t.integer "officer_number"
-    t.string "officer_name"
-    t.string "location_of_occurrence"
-    t.string "nature_of_incident"
+    t.text "location_of_occurrence"
+    t.text "nature_of_incident"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "offenses", force: :cascade do |t|
+    t.integer "incident_id"
+    t.integer "code"
+    t.string "code_group"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["incident_id"], name: "index_offenses_on_incident_id"
   end
 
 end
