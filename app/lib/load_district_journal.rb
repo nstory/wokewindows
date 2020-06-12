@@ -47,19 +47,11 @@ class LoadDistrictJournal
     data
   end
 
-  # the number of records the document claims to contain (use this to
-  # double-check we're parsing all the records). it seems to always be
-  # +1 above the actual record count
+  # the number of records the document claims to contain
   def get_record_count()
     pair = text_blocks.each_cons(2)
       .select { |cons| cons[1] == "Record Count:" }.first
     pair && pair[0].to_i
-  end
-
-  private
-  def pdf
-    # result is memoized so PDF is only parsed once
-    @pdf ||= Origami::PDF.read(@filename)
   end
 
   # returns array of strings
@@ -72,11 +64,27 @@ class LoadDistrictJournal
       .map { |operands| operands.join(" ") }
   end
 
+  private
+  def pdf
+    # result is memoized so PDF is only parsed once
+    @pdf ||= Origami::PDF.read(@filename)
+  end
+
   def strip_page_footers(text_blocks)
     stripped = []
     text_blocks.each do |tb|
       if "Boston Police Department" == tb && %r{^\d+/\d+/\d{4} } =~ stripped.last
+        # skip
         stripped.pop
+      elsif /, Police Commissioner/ =~ tb
+        # skip
+      elsif /^Selected & Sorted By:/ =~ tb
+        # skip
+      elsif /^Record Count:/ =~ tb
+        # skip
+        stripped.pop if /^\d+$/ =~ stripped.last
+      elsif /^(Date:|Reported|Occurred)$/ =~ tb
+        # skip
       else
         stripped << tb
       end

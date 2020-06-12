@@ -8,7 +8,7 @@ describe LoadDistrictJournal do
     # multiple tests in a single it-block so we don't repeatedly
     # parse the file
     expect(ldj.get_record_count).to eql(90)
-    expect(records.count).to eql(89)
+    expect(records.count).to eql(90)
 
     expect(records.first).to eql({
       report_date_time: "3/16/2020 12:00:06 AM",
@@ -73,6 +73,26 @@ describe LoadDistrictJournal do
 
       # record has non-ascii in nature_of_incident that should be stripped
       expect(record_906[:nature_of_incident]).to eql("M/V ACCIDENT - PROPERTY DAMAGE")
+    end
+  end
+
+  describe "alternate file format with split" do
+    let(:file) { file_fixture("district_journal_alt_format_with_split.pdf") }
+    let(:record_643) { records.find { |r| "192033643" == r[:complaint_number] } }
+
+    it "parses record split over page 1 and 2 correctly" do
+      expect(record_643[:location_of_occurrence]).to eql("C6 - 1080 MASSACHUSETTS AVE")
+      expect(record_643[:officer]).to eql("148246  JOANNE BYRNE")
+    end
+  end
+
+  describe "new format file with split" do
+    let(:file) { file_fixture("district_journal_split.pdf") }
+    let(:record_100) { records.find { |r| "192090100-00" == r[:complaint_number] } }
+
+    it "parses split record correctly" do
+      expect(record_100[:officer]).to eql("012209  RICO LUCIEN")
+      expect(record_100[:location_of_occurrence]).to eql("1415 HYDE PARK AVE")
     end
   end
 end

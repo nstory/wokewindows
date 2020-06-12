@@ -7,3 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Officer.import_from_bpd_annual_earnings(LoadCsv.new("data/CY2015_Annual_Earnings_BPD.csv").records)
 Officer.import_from_alpha_listing(LoadCsv.new("data/ALPHa_LISTING_BPD_with_badges_1.csv").records)
+journals = Dir.glob("data/journals/*.pdf").map { |p| LoadDistrictJournal.new(p) }
+Officer.import_from_journal_records(journals.flat_map(&:get_records))

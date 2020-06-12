@@ -41,6 +41,11 @@ class Officer < ApplicationRecord
     end
   end
 
+  # imports hr_name from earnings report by fuzzy-matching with journal_name
+  def self.import_from_employee_earnings_report(records)
+  end
+
+  private
   def self.convert_date(date)
     if %r{^(\d{1,2})/(\d{1,2})/(\d{1,2})$} =~ date
       year = $3.to_i
