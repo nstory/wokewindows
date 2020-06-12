@@ -9,3 +9,6 @@ Officer.import_from_bpd_annual_earnings(LoadCsv.new("data/CY2015_Annual_Earnings
 Officer.import_from_alpha_listing(LoadCsv.new("data/ALPHa_LISTING_BPD_with_badges_1.csv").records)
 journals = Dir.glob("data/journals/*.pdf").map { |p| LoadDistrictJournal.new(p) }
 Officer.import_from_journal_records(journals.flat_map(&:get_records))
+Compensation.import_earnings(LoadEmployeeEarningsReport.all_with_year)
+Officer.populate_hr_names_using_compensations
+Officer.populate_hard_coded_hr_names
