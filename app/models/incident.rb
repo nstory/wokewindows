@@ -1,6 +1,6 @@
 class Incident < ApplicationRecord
   has_many :offenses
-  has_many :incident_officers
+  has_many :incident_officers, dependent: :delete_all
   has_many :officers, through: :incident_officers
 
   serialize :location_of_occurrence, JSON

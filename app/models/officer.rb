@@ -134,11 +134,13 @@ class Officer < ApplicationRecord
     grouped_io = IncidentOfficer.find_each
       .group_by { |io| io.journal_officer.to_i }
     Officer.all.each do |officer|
-      ios = grouped_io.fetch(officer.employee_id, [])
-      ios = ios.select do |io|
-        io.journal_officer.sub(/^\d+\s+/, "") == officer.journal_name
+      Officer.transaction do
+        ios = grouped_io.fetch(officer.employee_id, [])
+        ios = ios.select do |io|
+          io.journal_officer.sub(/^\d+\s+/, "") == officer.journal_name
+        end
+        officer.incident_officers = ios
       end
-      officer.incident_officers = ios
     end
   end
 

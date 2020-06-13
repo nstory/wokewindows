@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_005503) do
+ActiveRecord::Schema.define(version: 2020_06_13_154945) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -30,6 +30,39 @@ ActiveRecord::Schema.define(version: 2020_06_13_005503) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["officer_id"], name: "index_compensations_on_officer_id"
+  end
+
+  create_table "field_contacts", force: :cascade do |t|
+    t.string "fc_num"
+    t.string "contact_date"
+    t.integer "contact_officer_employee_id"
+    t.string "contact_officer_name"
+    t.integer "supervisor_employee_id"
+    t.string "supervisor_name"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.integer "zip"
+    t.boolean "frisked"
+    t.boolean "search_person"
+    t.boolean "search_vehicle"
+    t.boolean "summons_issued"
+    t.integer "stop_duration"
+    t.string "circumstance"
+    t.string "basis"
+    t.integer "vehicle_year"
+    t.string "vehicle_state"
+    t.string "vehicle_make"
+    t.string "vehicle_model"
+    t.string "vehicle_color"
+    t.string "vehicle_style"
+    t.string "vehicle_type"
+    t.text "key_situations"
+    t.text "narrative"
+    t.string "weather"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["fc_num"], name: "index_field_contacts_on_fc_num", unique: true
   end
 
   create_table "incident_officers", force: :cascade do |t|
