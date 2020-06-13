@@ -106,5 +106,22 @@ describe Importer::FieldContact do
       expect(fc.vehicle_type).to eql(nil)
       expect(fc.narrative).to match(/^OBSERVED.*MCGAHAN$/m)
     end
+
+    it "associates the record with a contact officer" do
+      o = Officer.create({employee_id: 153458})
+      Importer::FieldContact.import([mark43_record])
+      expect(FieldContact.first.contact_officer).to eql(o)
+    end
+
+    it "associates the record with a supervisor" do
+      o = Officer.create({employee_id: 12114})
+      Importer::FieldContact.import([mark43_record])
+      expect(FieldContact.first.supervisor).to eql(o)
+    end
+
+    it "creates one record if record imported twice" do
+      2.times { Importer::FieldContact.import([mark43_record]) }
+      expect(FieldContact.count).to eql(1)
+    end
   end
 end

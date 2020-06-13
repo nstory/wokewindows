@@ -9,11 +9,15 @@ class Importer::FieldContactName
 
   FILES = [
     "data/mark43_fieldcontacts_name_for_public_2019.csv",
-    "data/rms_fieldcontacts_name_for_public_2019.csv"
+    "data/rms_fieldcontacts_name_for_public_2019.csv",
+    "data/rms_fieldcontacts_name_for_public_2018_202003111443.csv",
+    "data/rms_fieldcontacts_name_for_public_2017_202003111442.csv",
+    "data/fieldcontactnameforpublic2016.csv",
+    "data/fieldcontactnameforpublic2015.csv"
   ]
 
   def self.import_all
-    FieldContactName.destroy_all
+    FieldContactName.delete_all
     enums = FILES.map { |f| Parser::FieldContactName.new(f).records }
     enum = enums.lazy.flat_map(&:lazy)
     import(enum)
