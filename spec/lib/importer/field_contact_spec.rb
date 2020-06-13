@@ -1,5 +1,5 @@
 describe Importer::FieldContact do
-  let(:parser_record) {{
+  let(:mark43_record) {{
     :fc_num=>"FC19000622",
     :contact_date=>"2019-10-19 0:02:00",
     :contact_officer=>"153458",
@@ -25,9 +25,37 @@ describe Importer::FieldContact do
       :weather=>"NULL"
   }}
 
+  let(:rms_record) {{
+    :fc_num=>"F190047193",
+    :contact_date=>"2019-08-14 18:44:00.0",
+    :contact_officer=>"102679",
+    :contact_officer_name=>"D'ADDIECO,SANTINO S",
+    :supervisor=>"009039",
+    :supervisor_name=>"WALSH, BRENDAN",
+    :street=>"",
+    :city=>"BSTN",
+    :state=>"MA",
+    :zip=>"02111",
+    :frisked=>"",
+    :searchperson=>"",
+    :searchvehicle=>"",
+    :summonsissued=>"",
+    :stop_duration=>"Five to Ten Minutes",
+    :circumstance=>"Observed",
+    :basis=>"Intel",
+    :vehicle_year=>"",
+    :vehicle_state=>"",
+    :vehicle_make=>"",
+    :vehicle_model=>"",
+    :vehicle_color=>"",
+    :vehicle_style=>"",
+    :vehicle_type=>"",
+    :contact_reason=> "OBSERVED IN THE AREA OF WASHINGTON STREET BY TEMPLE PLACE. KNOWN H-BLOCK MEMBERS XXX AND XXX WHO BOTH ARE KNOWN TO BE ACTIVE AROUND FIREARMS AND FIREARM VIOLENCE. BRIC POSTING 19-105 HAS XXX POSSIBLY INVOLVED IN A XXX AT XXX HUTCHINGS ST AND MAY BE IN POSSESSION OF A F/A.\n\nPO D'ADDIECO/MCGAHAN"
+  }}
+
   describe ".import" do
-    it "imports a record" do
-      Importer::FieldContact.import([parser_record])
+    it "imports a mark43 record" do
+      Importer::FieldContact.import([mark43_record])
       fc = FieldContact.first
       expect(fc.fc_num).to eql("FC19000622")
       expect(fc.contact_date).to eql("2019-10-19 0:02:00")
@@ -50,6 +78,33 @@ describe Importer::FieldContact do
       expect(fc.vehicle_type).to eql(nil)
       expect(fc.key_situations).to eql(["Shots Fired"])
       expect(fc.weather).to eql(nil)
+    end
+
+    it "imports an rms record" do
+      Importer::FieldContact.import([rms_record])
+      fc = FieldContact.first
+      expect(fc.fc_num).to eql("F190047193")
+      expect(fc.contact_date).to eql("2019-08-14 18:44:00.0")
+      expect(fc.contact_officer_employee_id).to eql(102679)
+      expect(fc.contact_officer_name).to eql("D'ADDIECO,SANTINO S")
+      expect(fc.supervisor_employee_id).to eql(9039)
+      expect(fc.supervisor_name).to eql("WALSH, BRENDAN")
+      expect(fc.street).to eql(nil)
+      expect(fc.city).to eql("BSTN")
+      expect(fc.state).to eql("MA")
+      expect(fc.zip).to eql(2111)
+      expect(fc.frisked_searched).to eql(false)
+      expect(fc.stop_duration).to eql(5)
+      expect(fc.circumstance).to eql("Observed")
+      expect(fc.basis).to eql("Intel")
+      expect(fc.vehicle_year).to eql(nil)
+      expect(fc.vehicle_state).to eql(nil)
+      expect(fc.vehicle_make).to eql(nil)
+      expect(fc.vehicle_model).to eql(nil)
+      expect(fc.vehicle_color).to eql(nil)
+      expect(fc.vehicle_style).to eql(nil)
+      expect(fc.vehicle_type).to eql(nil)
+      expect(fc.narrative).to match(/^OBSERVED.*MCGAHAN$/m)
     end
   end
 end

@@ -12,11 +12,10 @@ class CreateFieldContacts < ActiveRecord::Migration[6.0]
       t.string :state
       t.integer :zip
 
-      # these fields are only in pre-Sep data
-      t.boolean :frisked
-      t.boolean :search_person
-      t.boolean :search_vehicle
-      t.boolean :summons_issued
+      # for frisked and various searched fields in pre-Sep data;
+      # will need to be brought in from field_contact_names
+      # for post-Sep data
+      t.boolean :frisked_searched
 
       t.integer :stop_duration
       t.string :circumstance
