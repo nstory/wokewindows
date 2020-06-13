@@ -114,6 +114,16 @@ describe Officer do
     end
   end
 
+  describe ".populate_incident_officers" do
+    it "populates" do
+      o = Officer.create({employee_id: 1234, journal_name: "ROFL LOL"})
+      inc = Incident.create
+      io = IncidentOfficer.create({incident: inc, journal_officer: "1234  ROFL LOL"})
+      Officer.populate_incident_officers
+      expect(io.reload.officer).to eql(o)
+    end
+  end
+
   describe ".rotated_likes" do
     it 'rotates' do
       rot = Officer.rotated_likes("A B")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_000320) do
+ActiveRecord::Schema.define(version: 2020_06_13_005503) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 2020_06_12_000320) do
     t.index ["officer_id"], name: "index_compensations_on_officer_id"
   end
 
+  create_table "incident_officers", force: :cascade do |t|
+    t.integer "incident_id"
+    t.integer "officer_id"
+    t.string "journal_officer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["incident_id"], name: "index_incident_officers_on_incident_id"
+    t.index ["officer_id"], name: "index_incident_officers_on_officer_id"
+  end
+
   create_table "incidents", force: :cascade do |t|
     t.string "incident_number"
     t.string "district"
@@ -47,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_000320) do
     t.text "nature_of_incident"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "arrests_json"
   end
 
   create_table "offenses", force: :cascade do |t|
