@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_154945) do
+ActiveRecord::Schema.define(version: 2020_06_13_194237) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -30,6 +30,27 @@ ActiveRecord::Schema.define(version: 2020_06_13_154945) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["officer_id"], name: "index_compensations_on_officer_id"
+  end
+
+  create_table "field_contact_names", force: :cascade do |t|
+    t.integer "field_contact_id"
+    t.string "fc_num"
+    t.string "contact_date"
+    t.string "sex"
+    t.string "race"
+    t.integer "age"
+    t.string "build"
+    t.string "hair_style"
+    t.string "skin_tone"
+    t.string "ethnicity"
+    t.string "other_clothing"
+    t.boolean "deceased"
+    t.string "license_state"
+    t.string "license_type"
+    t.boolean "frisked_searched"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["field_contact_id"], name: "index_field_contact_names_on_field_contact_id"
   end
 
   create_table "field_contacts", force: :cascade do |t|

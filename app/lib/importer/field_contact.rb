@@ -1,4 +1,11 @@
+# imports data from spreadsheets available at:
+# https://data.boston.gov/dataset/boston-police-department-fio
+# into the field_contacts table. supports both Mark43 and RMS
+# formats. this is idempotent; duplicates are dropped
+
 class Importer::FieldContact
+  extend Importer::FieldContactHelpers
+
   STOP_DURATION_MAPPING = {
     "Longer Than Two Hours" => 120,
     "Forty-Five to Sixty Minutes" => 45,
@@ -70,14 +77,6 @@ class Importer::FieldContact
   def self.parse_key_situations(value)
     return [] if value == "NULL" || value.blank?
     value.split(",").map(&:strip)
-  end
-
-  def self.parse_int(value)
-    (value == "NULL" || value.blank?) ? nil : value.to_i
-  end
-
-  def self.parse_string(value)
-    (value == "NULL" || value.blank?) ? nil : value
   end
 
   def self.parse_booleans(values)
