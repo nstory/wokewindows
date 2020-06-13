@@ -18,3 +18,5 @@ incidents = LoadCrimeIncidentReports.new("data/tmpqy9o_jgd.csv").get_records
 Incident.import_incident_reports(incidents)
 Incident.import_journals(journal_records)
 Officer.populate_incident_officers
+Importer::FieldContact.import_all
+Importer::FieldContactName.import_all
