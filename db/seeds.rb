@@ -17,3 +17,4 @@ Officer.populate_hard_coded_hr_names
 incidents = LoadCrimeIncidentReports.new("data/tmpqy9o_jgd.csv").get_records
 Incident.import_incident_reports(incidents)
 Incident.import_journals(journals)
+Officer.populate_incident_officers
