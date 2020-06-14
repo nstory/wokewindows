@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_210410) do
+ActiveRecord::Schema.define(version: 2020_06_14_181211) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_06_13_210410) do
   end
 
   create_table "incidents", force: :cascade do |t|
-    t.string "incident_number"
+    t.integer "incident_number"
     t.string "district"
     t.integer "reporting_area"
     t.boolean "shooting"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2020_06_13_210410) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "arrests_json"
+    t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
   end
 
   create_table "offenses", force: :cascade do |t|

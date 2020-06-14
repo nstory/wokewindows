@@ -9,12 +9,11 @@
 Importer::EmployeeListing.import_all
 journal_records = Dir.glob("data/journals/*.pdf").map { |p| LoadDistrictJournal.new(p) }.flat_map(&:get_records)
 Officer.import_from_journal_records(journal_records)
-Compensation.import_earnings(LoadEmployeeEarningsReport.all_with_year)
+Importer::EmployeeEarnings.import_all
 Officer.populate_hr_names_using_compensations
 Officer.populate_hard_coded_hr_names
 
-incidents = LoadCrimeIncidentReports.new("data/tmpqy9o_jgd.csv").get_records
-Incident.import_incident_reports(incidents)
+Importer::CrimeIncidentReports.import_all
 Incident.import_journals(journal_records)
 Officer.populate_incident_officers
 Importer::FieldContact.import_all

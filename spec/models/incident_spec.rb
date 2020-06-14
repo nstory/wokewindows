@@ -32,42 +32,6 @@ describe Incident do
       :charge=>"Assault - Assault & Battery"}]}
   }
 
-  describe ".import_incident_reports" do
-    it "imports" do
-      Incident.import_incident_reports([incident_report])
-
-      inc = Incident.first
-      expect(inc.incident_number).to eql("I92102201")
-      expect(inc.district).to eql("E13")
-      expect(inc.reporting_area).to eql(583)
-      expect(inc.shooting).to eql(false)
-      expect(inc.occurred_on_date).to eql("2019-12-20 03:08:00")
-      expect(inc.ucr_part).to eql("Xyzzy")
-      expect(inc.street).to eql("DAY ST")
-      expect(inc.latitude).to eql(42.325122)
-      expect(inc.longitude).to eql(-71.107779)
-
-      off = inc.offenses.first
-      expect(off.code).to eql(3301)
-      expect(off.code_group).to eql("ABC 123")
-      expect(off.description).to eql("VERBAL DISPUTE")
-    end
-
-    it "imports multiple offenses" do
-      second_report = {
-        incident_number: "I92102201",
-        offsense_code: 42,
-        offense_code_group: "lol",
-        offense_description: "rofl"
-      }
-      Incident.import_incident_reports([incident_report, second_report])
-      inc = Incident.first
-      expect(inc.offenses.count).to eql(2)
-    end
-
-    pending "don't import TESTTEST2 incident"
-  end
-
   describe ".import_journals" do
     it "imports" do
       Incident.import_incident_reports([incident_report])

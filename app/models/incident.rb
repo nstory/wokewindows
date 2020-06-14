@@ -15,36 +15,6 @@ class Incident < ApplicationRecord
     (arrests_json || []).map { |o| a = Arrest.new; a.attributes = o; a }
   end
 
-  def self.import_incident_reports(reports)
-    grouped = reports.group_by { |v| v[:incident_number] }
-
-    grouped.values.each_slice(1000) do |slice|
-      Incident.transaction do
-        slice.each do |incident_list|
-          first_report = incident_list.first
-          Incident.create({
-            incident_number: first_report[:incident_number],
-            district: first_report[:district],
-            reporting_area: first_report[:reporting_area],
-            shooting: ["Y", "1"].include?(first_report[:shooting]),
-            occurred_on_date: first_report[:occurred_on_date],
-            ucr_part: first_report[:ucr_part],
-            street: first_report[:street],
-            latitude: first_report[:lat],
-            longitude: first_report[:long],
-            offenses: incident_list.map do |ir|
-              Offense.new({
-                code: ir[:offense_code].to_i,
-                code_group: ir[:offense_code_group],
-                description: ir[:offense_description]
-              })
-            end
-          })
-        end
-      end
-    end
-  end
-
   def self.import_journals(journals)
     grouped = journals.group_by { |v| v[:complaint_number] }
     grouped.values.each do |lst|
