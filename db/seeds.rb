@@ -6,8 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Officer.import_from_bpd_annual_earnings(LoadCsv.new("data/CY2015_Annual_Earnings_BPD.csv").records)
-Officer.import_from_alpha_listing(LoadCsv.new("data/ALPHa_LISTING_BPD_with_badges_1.csv").records)
+Importer::EmployeeListing.import_all
 journal_records = Dir.glob("data/journals/*.pdf").map { |p| LoadDistrictJournal.new(p) }.flat_map(&:get_records)
 Officer.import_from_journal_records(journal_records)
 Compensation.import_earnings(LoadEmployeeEarningsReport.all_with_year)

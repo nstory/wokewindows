@@ -44,26 +44,6 @@ describe Officer do
     end
   end
 
-  describe ".import_from_bpd_annual_earnings" do
-    it "imports an officer" do
-      Officer.import_from_bpd_annual_earnings([
-        {name: "Clown,Bozo F", empl_id: "04242"}
-      ])
-      expect(Officer.find_by(employee_id: 4242).hr_name).to eql("Clown,Bozo F")
-    end
-  end
-
-  describe ".import_from_alpha_listing" do
-    it "imports an officer" do
-      Officer.import_from_alpha_listing([
-        {name: "Clown,Bozo F", idno6: "04242", badge: "00591", doa: "11/24/82"}
-      ])
-      o = Officer.find_by(employee_id: 4242)
-      expect(o.hr_name).to eql("Clown,Bozo F")
-      expect(o.doa).to eql("1982-11-24")
-    end
-  end
-
   describe ".populate_hr_names_using_compensations" do
     it "populates an hr_name" do
       Compensation.create({year: 2019, name: "Rofl,Lol"})

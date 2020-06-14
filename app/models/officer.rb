@@ -27,33 +27,6 @@ class Officer < ApplicationRecord
     end
   end
 
-  # imports officer information from LoadCsv parsing CY2015_Annual_Earnings_BPD.csv
-  def self.import_from_bpd_annual_earnings(records)
-    records.each do |record|
-      officer = Officer.find_or_create_by(employee_id: record[:empl_id])
-      if !officer.hr_name
-        officer.hr_name = record[:name]
-        officer.save
-      end
-    end
-  end
-
-  # imports officer information from LoadCsv parsing ALPHa_LISTING_BPD_with_badges_1.csv
-  def self.import_from_alpha_listing(records)
-    records.each do |record|
-      officer = Officer.find_or_create_by(employee_id: record[:idno6])
-      if !officer.hr_name
-        officer.hr_name = record[:name]
-        officer.save
-      end
-
-      if !officer.doa
-        officer.doa = convert_date(record[:doa])
-        officer.save
-      end
-    end
-  end
-
   def self.populate_hr_names_using_compensations
     Officer.where("hr_name IS NULL").each do |officer|
       comps = rotated_likes(officer[:journal_name]).inject(Compensation.where("0=1")) do |q,l|
