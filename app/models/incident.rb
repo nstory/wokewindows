@@ -3,9 +3,9 @@ class Incident < ApplicationRecord
   has_many :incident_officers, dependent: :delete_all
   has_many :officers, through: :incident_officers
 
-  serialize :location_of_occurrence, JSON
-  serialize :nature_of_incident, JSON
-  serialize :arrests_json, JSON
+  serialize :location_of_occurrence, Array
+  serialize :nature_of_incident, Array
+  serialize :arrests_json, Array
 
   def arrests=(arr)
     self.arrests_json = arr.map(&:as_json)
