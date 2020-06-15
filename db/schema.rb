@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_181211) do
+ActiveRecord::Schema.define(version: 2020_06_14_214215) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_181211) do
     t.string "street"
     t.float "latitude"
     t.float "longitude"
-    t.datetime "report_date"
+    t.string "report_date"
     t.text "location_of_occurrence"
     t.text "nature_of_incident"
     t.datetime "created_at", precision: 6, null: false

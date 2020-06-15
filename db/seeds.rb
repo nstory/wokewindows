@@ -6,15 +6,31 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Importer::EmployeeListing.import_all
-journal_records = Dir.glob("data/journals/*.pdf").map { |p| LoadDistrictJournal.new(p) }.flat_map(&:get_records)
-Officer.import_from_journal_records(journal_records)
-Importer::EmployeeEarnings.import_all
-Officer.populate_hr_names_using_compensations
-Officer.populate_hard_coded_hr_names
-
+# Load incidents
 Importer::CrimeIncidentReports.import_all
-Incident.import_journals(journal_records)
-Officer.populate_incident_officers
+Importer::DistrictJournal.import_all
+
+# Load annual earnings report (from HR department)
+Importer::EmployeeEarnings.import_all
+
+# Load BPD employee lists (these include empl_id field)
+Importer::EmployeeListing.import_all
+
+# Discover more BPD employees from incident_officers table, which was
+# created by Importer::DistrictJournal above
+Populater::OfficersFromIncidentOfficers.populate
+
+# use fuzzy matching to populate hr_name for officers where we
+# just have a journal_name (necessary so we can associate compensation
+# with each officer later)
+Populater::OfficerHrNames.populate
+
+# set officer field on each IncidentOfficer object
+Populater::IncidentOfficers.populate
+
+# set officer field on each Compensation object
+Populater::Compensations.populate
+
+# bring in field contacts (the importer also sets the associations)
 Importer::FieldContact.import_all
 Importer::FieldContactName.import_all

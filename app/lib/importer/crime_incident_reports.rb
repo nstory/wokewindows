@@ -1,4 +1,6 @@
 class Importer::CrimeIncidentReports
+  extend Importer::IncidentHelpers
+
   SLICE_SIZE = 500
 
   def self.import_all
@@ -16,11 +18,9 @@ class Importer::CrimeIncidentReports
 
   private
   def self.import_slice(slice)
-    numbers = slice.pluck(:incident_number).map { |n| parse_incident_number(n) }.compact
-    by_number = Hash.new { |h,k| h[k] = Incident.new }
-    by_number.merge!(
-      Incident.where(incident_number: numbers).index_by(&:incident_number)
-    )
+    numbers = slice.pluck(:incident_number)
+      .map { |n| parse_incident_number(n) }.compact
+    by_number = incidents_by_number(numbers)
 
     slice.each do |record|
       attr = map_record(record)
@@ -48,15 +48,6 @@ class Importer::CrimeIncidentReports
     }
   end
 
-  def self.parse_incident_number(str)
-    subbed = str.sub(/^I/, "").sub(/-\d\d$/, "")
-    if /^\d{7,}$/ =~ subbed
-      subbed.to_i
-    else
-      nil
-    end
-  end
-
   def self.add_offense(incident, record)
     mapped = map_offense(record)
     present = incident.offenses.to_a.any? do |o|
@@ -76,9 +67,5 @@ class Importer::CrimeIncidentReports
       code_group: parse_string(record[:offense_code_group]),
       description: parse_string(record[:offense_description])
     }
-  end
-
-  def self.parse_string(value)
-    value.blank? ? nil : value
   end
 end
