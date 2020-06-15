@@ -58,7 +58,7 @@ describe Importer::FieldContact do
       Importer::FieldContact.import([mark43_record])
       fc = FieldContact.first
       expect(fc.fc_num).to eql("FC19000622")
-      expect(fc.contact_date).to eql("2019-10-19 0:02:00")
+      expect(fc.contact_date).to eql("2019-10-19 00:02:00")
       expect(fc.contact_officer_employee_id).to eql(153458)
       expect(fc.contact_officer_name).to eql("PEGUERO, BENIS")
       expect(fc.supervisor_employee_id).to eql(12114)
@@ -84,7 +84,7 @@ describe Importer::FieldContact do
       Importer::FieldContact.import([rms_record])
       fc = FieldContact.first
       expect(fc.fc_num).to eql("F190047193")
-      expect(fc.contact_date).to eql("2019-08-14 18:44:00.0")
+      expect(fc.contact_date).to eql("2019-08-14 18:44:00")
       expect(fc.contact_officer_employee_id).to eql(102679)
       expect(fc.contact_officer_name).to eql("D'ADDIECO,SANTINO S")
       expect(fc.supervisor_employee_id).to eql(9039)
@@ -122,6 +122,13 @@ describe Importer::FieldContact do
     it "creates one record if record imported twice" do
       2.times { Importer::FieldContact.import([mark43_record]) }
       expect(FieldContact.count).to eql(1)
+    end
+
+    it "imports an rms record with weird date" do
+      rms_record[:contact_date] = "1/12/2017 10:15"
+      Importer::FieldContact.import([rms_record])
+      fc = FieldContact.first
+      expect(fc.contact_date).to eql("2017-01-12 10:15:00")
     end
   end
 end

@@ -69,7 +69,7 @@ class Importer::FieldContact
   def self.new_field_contact(record)
     FieldContact.new({
       fc_num: parse_string(record[:fc_num]),
-      contact_date: parse_string(record[:contact_date]),
+      contact_date: parse_date(record[:contact_date]),
       contact_officer_employee_id: parse_int(record[:contact_officer]),
       contact_officer_name: parse_string(record[:contact_officer_name]),
       supervisor_employee_id: parse_int(record[:supervisor]),
@@ -106,5 +106,10 @@ class Importer::FieldContact
   def self.parse_stop_duration(value)
     return nil if value == "NULL" || value.blank?
     STOP_DURATION_MAPPING.fetch(value, value.to_i)
+  end
+
+  def self.parse_date(date)
+    time = Chronic.parse(date)
+    time ? time.strftime("%F %T") : nil
   end
 end
