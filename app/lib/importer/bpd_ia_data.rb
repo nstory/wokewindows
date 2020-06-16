@@ -36,10 +36,10 @@ class Importer::BpdIaData
   def self.add_complaint_officer(complaint, record)
     attr = {
       "name" => "#{record[:last_name]},#{record[:first_name]}",
-      "title" => record[:title],
-      "badge" => record[:badge_id_number],
-      "allegation" =>  record[:allegation],
-      "finding" => record[:finding],
+      "title" => parse_string(record[:title]),
+      "badge" => parse_string(record[:badge_id_number]),
+      "allegation" =>  parse_string(record[:allegation]),
+      "finding" => parse_string(record[:finding]),
       "finding_date" => parse_date(record[:finding_date])
     }
 
@@ -51,6 +51,10 @@ class Importer::BpdIaData
     if !exists
       complaint.complaint_officers << ComplaintOfficer.create(attr)
     end
+  end
+
+  def self.parse_string(str)
+    str.blank? ? nil : str
   end
 
   def self.parse_int(str)

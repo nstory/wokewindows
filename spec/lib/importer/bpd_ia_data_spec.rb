@@ -41,4 +41,10 @@ describe Importer::BpdIaData do
     expect(Complaint.count).to eql(1)
     expect(ComplaintOfficer.count).to eql(1)
   end
+
+  it "imports blank badge as null" do
+    record[:badge_id_number] = ""
+    Importer::BpdIaData.import([record])
+    expect(ComplaintOfficer.first.badge).to eql(nil)
+  end
 end

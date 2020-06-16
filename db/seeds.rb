@@ -34,3 +34,6 @@ Populater::Compensations.populate
 # bring in field contacts (the importer also sets the associations)
 Importer::FieldContact.import_all
 Importer::FieldContactName.import_all
+
+# bring in internal affairs complaints
+Importer::BpdIaData.import_all
