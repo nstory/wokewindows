@@ -18,6 +18,7 @@ describe Importer::OfficerIaLog do
     expect(c.occurred_date).to eql("2013-12-28")
     expect(c.incident_type).to eql("Citizen complaint")
     expect(c.complaint_officers.count).to eql(2)
+    expect(c.summary).to match(/^Complain.*and a$/)
     expect(ComplaintOfficer.where("name = 'Detective James T Kirk'")).to exist
     expect(ComplaintOfficer.where("name = 'Ptl Bones Mccoy'")).to exist
   end

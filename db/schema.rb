@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_151452) do
+ActiveRecord::Schema.define(version: 2020_06_16_223836) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_06_16_151452) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "occurred_date"
+    t.string "summary"
     t.index ["ia_number"], name: "index_complaints_on_ia_number", unique: true
   end
 

@@ -29,7 +29,8 @@ class Importer::OfficerIaLog
       received_date: parse_date(record[:date_received]),
       occurred_date: parse_date(record[:date_occurred]),
       incident_type: parse_string(record[:incident_type]),
-      complaint_officers: map_complaint_officers(record)
+      complaint_officers: map_complaint_officers(record),
+      summary: parse_string(record[:summary])
     }
   end
 
