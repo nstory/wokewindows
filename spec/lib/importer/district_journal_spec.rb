@@ -66,4 +66,10 @@ describe Importer::DistrictJournal do
     Importer::DistrictJournal.import([record])
     expect(Incident.first.incident_officers.count).to eql(0)
   end
+
+  it "doesn't add an arrest where name starts with a number" do
+    record[:arrests][0][:name] = "42 CANTERBURY ROSLINDALE MA"
+    Importer::DistrictJournal.import([record])
+    expect(Incident.first.arrests.count).to eql(0)
+  end
 end

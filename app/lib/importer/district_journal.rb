@@ -63,6 +63,7 @@ class Importer::DistrictJournal
   end
 
   def self.parse_arrest(arrest)
+    return nil if /^\d/ =~ arrest[:name] # probably a misplaced address
     {"name" => arrest[:name], "charge" => arrest[:charge]}
   end
 
