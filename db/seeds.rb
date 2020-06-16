@@ -37,3 +37,5 @@ Importer::FieldContactName.import_all
 
 # bring in internal affairs complaints
 Importer::BpdIaData.import_all
+Importer::OfficerIaLog.import_all
+Populater::ComplaintOfficers.populate
