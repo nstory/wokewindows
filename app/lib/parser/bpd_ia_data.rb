@@ -1,3 +1,5 @@
+# parses data/bpd_ia_data_2001_2011.txt which was exported from
+# Copy-of-BPD-IA-Data-2001-2011-to-be-updated.pdf
 class Parser::BpdIaData
   def initialize(filename)
     @filename = filename
