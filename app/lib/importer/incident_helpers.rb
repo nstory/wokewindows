@@ -2,7 +2,9 @@ module Importer::IncidentHelpers
   def incidents_by_number(numbers)
     by_number = Hash.new { |h,k| h[k] = Incident.new }
     by_number.merge!(
-      Incident.by_incident_number(numbers)
+      Incident.includes(:offenses)
+        .where(incident_number: numbers)
+        .index_by(&:incident_number)
     )
     by_number
   end
