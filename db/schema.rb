@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_16_004759) do
+ActiveRecord::Schema.define(version: 2020_06_16_125822) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -30,6 +30,31 @@ ActiveRecord::Schema.define(version: 2020_06_16_004759) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["officer_id"], name: "index_compensations_on_officer_id"
+  end
+
+  create_table "complaint_officers", force: :cascade do |t|
+    t.integer "complaint_id"
+    t.integer "officer_id"
+    t.string "name"
+    t.string "title"
+    t.string "badge"
+    t.string "allegation"
+    t.string "finding"
+    t.string "finding_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["complaint_id"], name: "index_complaint_officers_on_complaint_id"
+    t.index ["officer_id"], name: "index_complaint_officers_on_officer_id"
+  end
+
+  create_table "complaints", force: :cascade do |t|
+    t.string "ia_number"
+    t.integer "case_number"
+    t.string "incident_type"
+    t.string "received_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ia_number"], name: "index_complaints_on_ia_number", unique: true
   end
 
   create_table "field_contact_names", force: :cascade do |t|
