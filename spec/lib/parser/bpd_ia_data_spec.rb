@@ -32,15 +32,15 @@ describe Parser::BpdIaData do
   end
 
   it "should parse a record" do
-    r = records.find { |r| r[:ia_no] == "P00101" }
-    expect(r[:case_no]).to eql("")
-    expect(r[:incident_type]).to eql("Inquiry")
-    expect(r[:received_date]).to eql("12/18/2001")
+    rec = records.find { |r| r[:ia_no] == "P00101" }
+    expect(rec[:case_no]).to eql("")
+    expect(rec[:incident_type]).to eql("Inquiry")
+    expect(rec[:received_date]).to eql("12/18/2001")
   end
 
   it "should parse finding_date" do
-    r = records.find { |r| r[:ia_no] == "9907" }
-    expect(r[:finding_date]).to eql("7/5/2007")
-    expect(r[:finding]).to eql("Not Sustained")
+    rec = records.find { |r| r[:ia_no] == "9907" }
+    expect(rec[:finding_date]).to eql("7/5/2007")
+    expect(rec[:finding]).to eql("Not Sustained")
   end
 end

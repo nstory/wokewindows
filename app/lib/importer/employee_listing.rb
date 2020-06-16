@@ -32,7 +32,8 @@ class Importer::EmployeeListing
       officer.attributes = {
         employee_id: employee_id,
         hr_name: record[:name],
-        doa: parse_doa(record[:doa])
+        doa: parse_doa(record[:doa]),
+        badge: record[:badge].blank? ? nil : record[:badge]
       }
       officer.save
     end

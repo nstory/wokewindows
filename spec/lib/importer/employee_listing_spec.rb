@@ -16,6 +16,7 @@ describe Importer::EmployeeListing do
     expect(officer.employee_id).to eql(8511)
     expect(officer.hr_name).to eql("Evans,William B")
     expect(officer.doa).to eql("1982-11-01")
+    expect(officer.badge).to eql("PC")
   end
 
   it "updates an existing record" do
@@ -23,5 +24,11 @@ describe Importer::EmployeeListing do
     Importer::EmployeeListing.import([record])
     expect(Officer.count).to eql(1)
     expect(Officer.last.hr_name).to eql("Evans,William B")
+  end
+
+  it "records blank badge as nil" do
+    record[:badge] = ""
+    Importer::EmployeeListing.import([record])
+    expect(Officer.last.badge).to eql(nil)
   end
 end
