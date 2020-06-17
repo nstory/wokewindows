@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function employee_id_renderer(data, type, row) {
   if (type != "display") {
     return data;
@@ -32,7 +34,7 @@ export function date_renderer(data, type, row) {
   if (!data) {
     return '<span class="unknown">Unknown</span>';
   }
-  return `<span class="text-monospace">${data}</span>`;
+  return moment(data).format("MMM D, YYYY");
 }
 
 export function zip_renderer(data, type, row) {

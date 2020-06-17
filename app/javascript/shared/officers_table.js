@@ -17,7 +17,9 @@ $(document).on("turbolinks:load", function() {
       {data: "field_contacts_count"},
       {data: "incidents_count"},
       {data: "zip_code", render: zip_renderer}
-    ]
+    ],
+    order: [[4, 'desc']],
+    scrollX: true
   });
 });
 

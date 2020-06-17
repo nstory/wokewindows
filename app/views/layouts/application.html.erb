@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <%# disable caching b/c restoration visits mess up datatables.net  %>
+    <meta name="turbolinks-cache-control" content="no-cache">
+
     <title>Copsonrails</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

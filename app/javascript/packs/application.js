@@ -10,7 +10,8 @@ require("channels")
 
 window.jQuery = window.$ = require("jquery");
 require("bootstrap");
-require("datatables.net-bs4");
+// require("datatables.net-bs4");
+require("datatables.net");
 
 require("shared/compensations_table")
 require("shared/officers_table")
