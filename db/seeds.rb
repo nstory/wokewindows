@@ -39,3 +39,7 @@ Importer::FieldContactName.import_all
 Importer::BpdIaData.import_all
 Importer::OfficerIaLog.import_all
 Populater::ComplaintOfficers.populate
+
+# update counter caches
+FieldContact.counter_culture_fix_counts
+IncidentOfficer.counter_culture_fix_counts

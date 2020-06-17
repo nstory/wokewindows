@@ -2,6 +2,8 @@ class IncidentOfficer < ApplicationRecord
   belongs_to :officer, optional: true
   belongs_to :incident
 
+  counter_culture :officer, column_name: :incidents_count
+
   # parses journal_officer
   def employee_id
     if matches = match_regexp
