@@ -10,9 +10,37 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require datatables.net-dt/css/jquery.dataTables.css
+ *xxx require datatables.net-dt/css/jquery.dataTables.css
+ *= require datatables.net-bs4/css/dataTables.bootstrap4.css
  */
 
 @import "bootstrap";
 
-@import "./root"
+@import "./layouts/application";
+@import "./root";
+@import "./shared/officers_table";
+
+.table-nowrap {
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+.unknown {
+  @extend .text-muted;
+  font-style: italic;
+}
+
+.earnings {
+  text-align: right;
+
+  .earnings__dollars {
+    @extend .text-monospace;
+  }
+
+  .earnings__pct {
+    @extend .text-muted;
+    @extend .small;
+    min-width: 20px;
+  }
+}

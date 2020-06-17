@@ -1,6 +1,7 @@
 # vi: ft=ruby
 
 json.officers @officers do |officer|
+  json.url officer_path(officer)
   json.employee_id officer.employee_id
   json.name officer.name
   json.title officer.title
@@ -9,4 +10,5 @@ json.officers @officers do |officer|
   json.complaints_count officer.complaints_count
   json.field_contacts_count officer.field_contacts_count
   json.incidents_count officer.incidents_count
+  json.zip_code officer.zip_code
 end

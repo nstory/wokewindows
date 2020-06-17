@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1><%= @officer.name %> <small><%= @officer.title %></small></h1>
+      <h2>Earnings</h2>
+      <%= render "shared/compensations_table", compensations: @officer.compensations %>
+    </div>
+  </div>
+</div>

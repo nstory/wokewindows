@@ -35,6 +35,16 @@ class Officer < ApplicationRecord
     c ? c.title : nil
   end
 
+  # use employee_id for resource urls
+  def to_param
+    employee_id.to_s
+  end
+
+  def zip_code
+    c = compensations.max_by(&:year)
+    c ? c.postal : nil
+  end
+
   def self.by_employee_id
     Officer.find_each.index_by(&:employee_id)
   end
