@@ -2,6 +2,16 @@
   <div class="row">
     <div class="col">
       <h1><%= @officer.name %> <small><%= @officer.title %></small></h1>
+      <dl class="row">
+        <dt class="officer__dt">Title:</dt>
+        <dd class="officer__dd"><%= @officer.title %></dt>
+        <dt class="officer__dt" title="Employee #">Emp #:</dt>
+        <dd class="officer__dd"><%= @officer.employee_id %></dt>
+        <dt class="officer__dt">Start Date:</dt>
+        <dd class="officer__dd"><%= format_date @officer.doa %></dt>
+        <dt class="officer__dt">Home Zip:</dt>
+        <dd class="officer__dd"><%= format_zip(@officer.zip_code) %></dt>
+      </dl>
       <h2>Earnings</h2>
       <%= render "shared/compensations_table", compensations: @officer.compensations %>
     </div>

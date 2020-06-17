@@ -16,9 +16,9 @@
 
 @import "bootstrap";
 
-@import "./layouts/application";
-@import "./root";
-@import "./shared/officers_table";
+@import "layouts/**/*";
+@import "shared/**/*";
+@import "*";
 
 .table-nowrap {
   th, td {

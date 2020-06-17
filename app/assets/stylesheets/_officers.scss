@@ -1,0 +1,9 @@
+.officer__dt {
+  @extend .col-sm-3;
+  @extend .col-md-2;
+}
+
+.officer__dd {
+  @extend .col-sm-9;
+  @extend .col-md-10;
+}
