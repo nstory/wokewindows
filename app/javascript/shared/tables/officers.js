@@ -12,16 +12,23 @@ $(document).on("turbolinks:load", function() {
     columns: [
       {data: "employee_id", render: employee_id_renderer},
       {data: "name", render: employee_name_renderer},
-      {data: "title", orderable: false},
+      {data: "title"},
       {data: "doa", render: date_renderer},
-      {data: "total_earnings", render: earnings_renderer, orderable: false},
-      {data: "complaints_count", render: int_renderer, orderable: false},
+      {data: "total", render: earnings_renderer},
+      {data: "regular", render: earnings_renderer},
+      {data: "retro", render: earnings_renderer},
+      {data: "other", render: earnings_renderer},
+      {data: "overtime", render: earnings_renderer},
+      {data: "injured", render: earnings_renderer},
+      {data: "detail", render: earnings_renderer},
+      {data: "quinn", render: earnings_renderer},
+      {data: "complaints_count", render: int_renderer},
       {data: "field_contacts_count", render: int_renderer},
       {data: "incidents_count", render: int_renderer},
-      {data: "zip_code", render: zip_renderer, orderable: false}
+      {data: "postal", render: zip_renderer}
     ],
-    // order: [[4, 'desc']],
-    // scrollX: true
+    order: [[4, 'desc']],
+    scrollX: true
   });
 });
 

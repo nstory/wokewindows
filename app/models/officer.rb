@@ -17,32 +17,9 @@ class Officer < ApplicationRecord
     end
   end
 
-  def total_earnings
-    comp = compensations.find { |c| c.year == 2019 }
-    comp && comp.total
-  end
-
-  # this can't be calculated with a counter cache b/c there can
-  # be multiple ComplaintOfficer objects for a given Complaint
-  # and Officer pair (e.g. when there are multiple allegations against
-  # a given officer as part of one IA case)
-  def complaints_count
-    complaints.size
-  end
-
-  def title
-    c = compensations.max_by(&:year)
-    c ? c.title : nil
-  end
-
   # use employee_id for resource urls
   def to_param
     employee_id.to_s
-  end
-
-  def zip_code
-    c = compensations.max_by(&:year)
-    c ? c.postal : nil
   end
 
   def self.by_employee_id

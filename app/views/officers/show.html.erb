@@ -10,7 +10,7 @@
         <dt class="officer__dt">Start Date:</dt>
         <dd class="officer__dd"><%= format_date @officer.doa %></dt>
         <dt class="officer__dt">Home Zip:</dt>
-        <dd class="officer__dd"><%= format_zip(@officer.zip_code) %></dt>
+        <dd class="officer__dd"><%= format_zip(@officer.postal) %></dt>
       </dl>
       <h2>Earnings</h2>
       <%= render "shared/tables/compensations", compensations: @officer.compensations %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_17_154055) do
+ActiveRecord::Schema.define(version: 2020_06_18_212450) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -163,6 +163,17 @@ ActiveRecord::Schema.define(version: 2020_06_17_154055) do
     t.string "badge"
     t.integer "field_contacts_count", default: 0, null: false
     t.integer "incidents_count", default: 0, null: false
+    t.string "title"
+    t.decimal "regular"
+    t.decimal "retro"
+    t.decimal "other"
+    t.decimal "overtime"
+    t.decimal "injured"
+    t.decimal "detail"
+    t.decimal "quinn"
+    t.decimal "total"
+    t.integer "postal"
+    t.integer "complaints_count", default: 0, null: false
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
   end
 

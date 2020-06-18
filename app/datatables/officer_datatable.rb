@@ -14,13 +14,20 @@ class OfficerDatatable < AjaxDatatablesRails::ActiveRecord
     @view_columns ||= {
       employee_id: {source: "Officer.employee_id", cond: :eq},
       name: {source: "Officer.hr_name", cond: :like},
-      title: {searchable: false, orderable: false},
+      title: {source: "Officer.title"},
       doa: {source: "Officer.doa"},
-      total_earnings: {searchable: false, orderable: false},
-      complaints_count: {searchable: false, orderable: false},
+      regular: {source: "Officer.regular", searchable: false},
+      retro: {source: "Officer.retro", searchable: false},
+      other: {source: "Officer.other", searchable: false},
+      overtime: {source: "Officer.overtime", searchable: false},
+      injured: {source: "Officer.injured", searchable: false},
+      detail: {source: "Officer.detail", searchable: false},
+      quinn: {source: "Officer.quinn", searchable: false},
+      total: {source: "Officer.total", searchable: false},
+      complaints_count: {source: "Officer.complaints_count", searchable: false},
       field_contacts_count: {source: "Officer.field_contacts_count", searchable: false},
       incidents_count: {source: "Officer.incidents_count", searchable: false},
-      zip_code: {searchable: false, orderable: false}
+      postal: {source: "Officer.postal", cond: :eq}
     }
   end
 
@@ -32,11 +39,18 @@ class OfficerDatatable < AjaxDatatablesRails::ActiveRecord
         name: record.name,
         title: record.title,
         doa: record.doa,
-        total_earnings: record.total_earnings,
+        total: record.total,
+        regular: record.regular,
+        retro: record.retro,
+        other: record.other,
+        overtime: record.overtime,
+        injured: record.injured,
+        detail: record.detail,
+        quinn: record.quinn,
         complaints_count: record.complaints_count,
         field_contacts_count: record.field_contacts_count,
         incidents_count: record.incidents_count,
-        zip_code: record.zip_code
+        postal: record.postal
       }
     end
   end
