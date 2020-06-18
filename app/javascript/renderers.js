@@ -1,3 +1,4 @@
+import escape from "lodash/escape";
 import moment from "moment";
 
 export function employee_id_renderer(data, type, row) {
@@ -32,9 +33,19 @@ export function date_renderer(data, type, row) {
     return data;
   }
   if (!data) {
-    return '<span class="unknown">Unknown</span>';
+    return '<span class="unknown">N/A</span>';
   }
   return moment(data).format("MMM D, YYYY");
+}
+
+export function date_time_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (!data) {
+    return '<span class="unknown">N/A</span>';
+  }
+  return moment(data).format("MMM D, YYYY h:mm a");
 }
 
 export function zip_renderer(data, type, row) {
@@ -45,4 +56,15 @@ export function zip_renderer(data, type, row) {
     return "";
   }
   return ("00000" + data).slice(-5);
+}
+
+// renders data as-is unless it's null, then this renders N/A
+export function na_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return '<span class="unknown">N/A</span>';
+  }
+  return `<span>${escape(data)}</span>`;
 }

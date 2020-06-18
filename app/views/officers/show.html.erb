@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1><%= @officer.name %> <small><%= @officer.title %></small></h1>
+      <h1><%= @officer.name %> <small class="d-none d-md-inline"><%= @officer.title %></small></h1>
       <dl class="row">
         <dt class="officer__dt">Title:</dt>
         <dd class="officer__dd"><%= @officer.title %></dt>
@@ -13,8 +13,9 @@
         <dd class="officer__dd"><%= format_zip(@officer.zip_code) %></dt>
       </dl>
       <h2>Earnings</h2>
-      <%= render "shared/compensations_table", compensations: @officer.compensations %>
-      <h2>Field Contacts (FIOs)</h2>
+      <%= render "shared/tables/compensations", compensations: @officer.compensations %>
+      <h2 class="mt-3">Incident Journal</h2>
+      <%= render "shared/tables/incidents" %>
     </div>
   </div>
 </div>

@@ -10,11 +10,15 @@ require("channels")
 
 window.jQuery = window.$ = require("jquery");
 require("bootstrap");
-// require("datatables.net-bs4");
-require("datatables.net");
 
-require("shared/compensations_table")
-require("shared/officers_table")
+require("datatables.net");
+require("datatables.net-responsive");
+require("datatables.net-buttons");
+require("datatables.net-buttons/js/buttons.html5");
+
+require("shared/tables/compensations");
+require("shared/tables/incidents");
+require("shared/tables/officers");
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

@@ -123,7 +123,8 @@ function dataTable($table, data) {
     info: false,
     order: [[0, 'desc']],
     paging: false,
-    searching: false
+    searching: false,
+    scrollX: true
   });
 }
 

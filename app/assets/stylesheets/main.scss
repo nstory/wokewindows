@@ -1,0 +1,32 @@
+@import "bootstrap";
+
+@import "layouts/**/*";
+@import "shared/**/*";
+@import "*";
+
+.table-nowrap {
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+.unknown {
+  @extend .text-muted;
+  font-style: italic;
+}
+
+.earnings {
+  text-align: right;
+
+  .earnings__dollars {
+    @extend .text-monospace;
+    font-size: 90%;
+  }
+
+  .earnings__pct {
+    @extend .text-muted;
+    @extend .small;
+    display: inline-block;
+    min-width: 30px;
+  }
+}
