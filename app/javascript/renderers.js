@@ -68,3 +68,13 @@ export function na_renderer(data, type, row) {
   }
   return `<span>${escape(data)}</span>`;
 }
+
+export function int_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return '<span class="unknown">N/A</span>';
+  }
+  return `<div class="text-center">${escape(data)}</div>`;
+}

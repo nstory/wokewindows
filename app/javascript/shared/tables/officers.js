@@ -1,4 +1,4 @@
-import {employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer} from "renderers";
+import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer} from "renderers";
 
 // corresponding javascript for shared/_officers_table.html.erb
 $(document).on("turbolinks:load", function() {
@@ -13,9 +13,9 @@ $(document).on("turbolinks:load", function() {
       {data: "title"},
       {data: "doa", render: date_renderer},
       {data: "total_earnings", render: earnings_renderer},
-      {data: "complaints_count"},
-      {data: "field_contacts_count"},
-      {data: "incidents_count"},
+      {data: "complaints_count", render: int_renderer},
+      {data: "field_contacts_count", render: int_renderer},
+      {data: "incidents_count", render: int_renderer},
       {data: "zip_code", render: zip_renderer}
     ],
     order: [[4, 'desc']],
