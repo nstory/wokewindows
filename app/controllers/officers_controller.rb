@@ -1,6 +1,6 @@
 class OfficersController < ApplicationController
   def index
-    @officers = Officer.includes(:compensations, :complaints).find_each
+    render json: OfficerDatatable.new(params, view_context: view_context)
   end
 
   def show

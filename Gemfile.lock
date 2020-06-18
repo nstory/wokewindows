@@ -61,6 +61,9 @@ GEM
     after_commit_action (1.1.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
+    ajax-datatables-rails (1.2.0)
+      railties (>= 5.0)
+      zeitwerk
     autoprefixer-rails (9.7.6)
       execjs
     bindex (0.8.1)
@@ -241,6 +244,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ajax-datatables-rails (= 1.2.0)
   bootsnap (>= 1.4.2)
   bootstrap (~> 4.5.0)
   byebug

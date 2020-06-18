@@ -4,22 +4,24 @@ import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_ren
 $(document).on("turbolinks:load", function() {
   $("table.officers-table").DataTable({
     ajax: {
-      url: "/officers.json",
-      dataSrc: "officers"
+      url: "/officers.json"
     },
+    pagingType: "full_numbers",
+    processing: true,
+    serverSide: true,
     columns: [
       {data: "employee_id", render: employee_id_renderer},
       {data: "name", render: employee_name_renderer},
-      {data: "title"},
+      {data: "title", orderable: false},
       {data: "doa", render: date_renderer},
-      {data: "total_earnings", render: earnings_renderer},
-      {data: "complaints_count", render: int_renderer},
+      {data: "total_earnings", render: earnings_renderer, orderable: false},
+      {data: "complaints_count", render: int_renderer, orderable: false},
       {data: "field_contacts_count", render: int_renderer},
       {data: "incidents_count", render: int_renderer},
-      {data: "zip_code", render: zip_renderer}
+      {data: "zip_code", render: zip_renderer, orderable: false}
     ],
-    order: [[4, 'desc']],
-    scrollX: true
+    // order: [[4, 'desc']],
+    // scrollX: true
   });
 });
 
