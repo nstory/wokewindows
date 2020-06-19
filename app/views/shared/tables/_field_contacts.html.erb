@@ -3,6 +3,11 @@
 <table class="field-contacts-table display compact table-nowrap"  style="width:100%" data-source="<%= datatable_field_contacts_path(format: :json) %>">
   <thead>
     <tr>
+      <th colspan="12"></th>
+      <th colspan="7">Vehicle</th>
+      <th colspan="3"></th>
+    </tr>
+    <tr>
       <th scope="col" title="Field Contact #">FC #</th>
       <th scope="col">Date</th>
       <th scope="col">Contact Officer</th>
@@ -11,7 +16,7 @@
       <th scope="col">City</th>
       <th scope="col">State</th>
       <th scope="col">Zip</th>
-      <th scope="col">Search?</th>
+      <th scope="col" title="Whether any individual was searched or frisked">Search?</th>
       <th scope="col">Duration</th>
       <th scope="col">Circumstance</th>
       <th scope="col">Basis</th>

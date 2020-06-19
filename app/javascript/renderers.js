@@ -117,5 +117,5 @@ export function yes_no_renderer(data, type, row) {
   if (data == null) {
     return  `<div class="text-center">${unknown()}</div>`;
   }
-  return `<div class="text-center">${data ? "Y" : "N"}</div>`;
+  return `<div class="text-center">${data ? 'Y' : '<span class="text-muted">N</span>'}</div>`;
 }
