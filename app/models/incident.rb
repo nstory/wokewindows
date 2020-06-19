@@ -23,6 +23,11 @@ class Incident < ApplicationRecord
     end
   end
 
+  # use incident_number for resource urls
+  def to_param
+    incident_number.to_s
+  end
+
   def self.by_incident_number(numbers)
     Incident.where(incident_number: numbers)
       .index_by(&:incident_number)

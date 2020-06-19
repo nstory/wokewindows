@@ -1,6 +1,5 @@
-import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer, na_renderer} from "renderers";
+import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer, text_renderer} from "renderers";
 
-// corresponding javascript for shared/_officers_table.html.erb
 $(document).on("turbolinks:load", function() {
   $("table.officers-table").each(function() {
     initDataTable($(this));
@@ -20,11 +19,11 @@ function initDataTable($table) {
     columns: [
       {data: "employee_id", render: employee_id_renderer},
       {data: "name", render: employee_name_renderer},
-      {data: "title"},
+      {data: "title", render: text_renderer},
       {data: "doa", render: date_renderer},
       {data: "postal", render: zip_renderer},
-      {data: "state", render: na_renderer},
-      {data: "city", render: na_renderer},
+      {data: "state", render: text_renderer},
+      {data: "city", render: text_renderer},
       {data: "total", render: earnings_renderer},
       {data: "regular", render: earnings_renderer},
       {data: "retro", render: earnings_renderer},

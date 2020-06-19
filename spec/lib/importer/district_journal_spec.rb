@@ -24,7 +24,7 @@ describe Importer::DistrictJournal do
     expect(inc.incident_officers.count).to eql(1)
     expect(inc.incident_officers.first.journal_officer).to eql("042  JAMES KIRK")
     expect(inc.arrests.count).to eql(1)
-    expect(inc.arrests.first.name).to eql("MCCOY, BONES")
+    expect(inc.arrests.first.name).to eql("MXXXX, BXXXX")
     expect(inc.arrests.first.charge).to eql("Assault - Assault & Battery")
   end
 
@@ -71,5 +71,11 @@ describe Importer::DistrictJournal do
     record[:arrests][0][:name] = "42 CANTERBURY ROSLINDALE MA"
     Importer::DistrictJournal.import([record])
     expect(Incident.first.arrests.count).to eql(0)
+  end
+
+  it "doesn't import record with invalid complaint number" do
+    record[:complaint_number] = "2020-00"
+    Importer::DistrictJournal.import([record])
+    expect(Incident.count).to eql(0)
   end
 end

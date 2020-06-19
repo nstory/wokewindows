@@ -27,6 +27,7 @@ class Importer::DistrictJournal
 
     slice.each do |record|
       attrs = map_record(record)
+      next if !attrs[:incident_number]
       inc = by_number[attrs[:incident_number]]
       inc.attributes = attrs
       add_to_array(inc, :location_of_occurrence, parse_string(record[:location_of_occurrence]))
@@ -64,7 +65,9 @@ class Importer::DistrictJournal
 
   def self.parse_arrest(arrest)
     return nil if /^\d/ =~ arrest[:name] # probably a misplaced address
-    {"name" => arrest[:name], "charge" => arrest[:charge]}
+    a = Arrest.new({name: arrest[:name], charge: arrest[:charge]})
+    a.redact!
+    a.as_json
   end
 
   def self.parse_date(date)

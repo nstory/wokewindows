@@ -17,4 +17,8 @@ class Arrest
   def attributes
     {"name" => nil, "charge" => nil}
   end
+
+  def redact!
+    self.name = name.gsub(/(?<!\b)[a-z]/i, "X") if name
+  end
 end

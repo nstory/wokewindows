@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   end
 
   resources :officers, concerns: [:with_datatable]
-  resources :incidents
+  resources :incidents, concerns: [:with_datatable]
   root "root#index"
 end

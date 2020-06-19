@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Incident #<%= @incident.incident_number %></h1>
+
+      <div class="row">
+        <div class="col">
+          <dl class="row">
+            <dt class="col-lg-4">District</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.district) %></dd>
+            <dt class="col-lg-4">Reporting Area</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.reporting_area) %></dd>
+            <dt class="col-lg-4">Shooting?</dt>
+            <dd class="col-lg-8"><%= format_shooting(@incident.shooting) %></dd>
+            <dt class="col-lg-4">Occurred</dt>
+            <dd class="col-lg-8"><%= format_date_time(@incident.occurred_on_date) %></dd>
+            <dt class="col-lg-4">Reported</dt>
+            <dd class="col-lg-8"><%= format_date_time(@incident.report_date) %></dd>
+            <dt class="col-lg-4">UCR</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.ucr_part) %></dd>
+            <dt class="col-lg-4">Street</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.street) %></dd>
+            <dt class="col-lg-4">Location</dt>
+            <dd class="col-lg-8"><%= safe_join(@incident.location_of_occurrence, ", ") %></dd>
+            <dt class="col-lg-4">Nature of Incident</dt>
+            <dd class="col-lg-8"><%= safe_join(@incident.nature_of_incident, ", ") %></dd>
+            <dt class="col-lg-4">Lat/Long</dt>
+            <dd class="col-lg-8"><%= format_lat_long(@incident.latitude, @incident.longitude) %></dd>
+            <dt class="col-lg-4">Officer(s)</dt>
+            <dd class="col-lg-8"><%= format_incident_officers(@incident.incident_officers) %></dd>
+          </dl>
+        </div>
+        <div class="col">
+          <div style="height:350px;background-color:blue"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h2>Offenses</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Code Group</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @incident.offenses.each do |offense| %>
+                <tr>
+                  <td><%= format_text(offense.code) %></td>
+                  <td><%= format_text(offense.code_group) %></td>
+                  <td><%= format_text(offense.description) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col">
+          <h2>Arrests</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Charge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @incident.arrests.each do |arrest| %>
+                <tr>
+                  <td><%= format_text(arrest.name) %></td>
+                  <td><%= format_text(arrest.charge) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,13 +1,16 @@
-<table class="incidents-table display table-nowrap" style="width:100%">
+<table class="incidents-table display compact table-nowrap" style="width:100%" data-source="<%= datatable_incidents_path(format: :json) %>">
   <thead>
-    <th scope="col">Incident #</th>
-    <th scope="col">Occurred</th>
-    <th scope="col">District</th>
-    <th scope="col">Shot?</th>
-    <th scope="col">Location</th>
-    <th scope="col">Nature of Incident</th>
-    <th scope="col">Officer(s)</th>
-    <th></th>
+    <tr>
+      <th scope="col">Incident #</th>
+      <th scope="col">Occurred</th>
+      <th scope="col">District</th>
+      <th scope="col">Shot?</th>
+      <th scope="col">Location</th>
+      <th scope="col">Street</th>
+      <th scope="col">Nature of Incident</th>
+      <th scope="col">Offenses</th>
+      <th scope="col">Officer(s)</th>
+    </tr>
   </thead>
   <tbody>
   </tbody>

@@ -1,6 +1,10 @@
 import escape from "lodash/escape";
 import moment from "moment";
 
+export function unknown() {
+   return '<span class="unknown">N/A</span>';
+}
+
 export function employee_id_renderer(data, type, row) {
   if (type != "display") {
     return data;
@@ -59,7 +63,7 @@ export function zip_renderer(data, type, row) {
 }
 
 // renders data as-is unless it's null, then this renders N/A
-export function na_renderer(data, type, row) {
+export function text_renderer(data, type, row) {
   if (type != "display") {
     return data;
   }
@@ -77,4 +81,31 @@ export function int_renderer(data, type, row) {
     return '<span class="unknown">N/A</span>';
   }
   return `<div class="text-center">${escape(data)}</div>`;
+}
+
+export function array_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return '<span class="unknown">N/A</span>';
+  }
+  return data.map((v) => escape(v)).join(", ");
+}
+
+export function see_more_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return unknown();
+  }
+  let text = "";
+  if (data[0]) {
+    text += escape(data[0]);
+  }
+  if (data.length > 1) {
+    text += ` <a href="${escape(row.url)}">(${data.length} total)</a>`;
+  }
+  return text;
 }

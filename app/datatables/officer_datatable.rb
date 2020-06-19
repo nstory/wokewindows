@@ -1,13 +1,4 @@
-class OfficerDatatable < AjaxDatatablesRails::ActiveRecord
-  extend Forwardable
-
-  def_delegators :@view, :officer_path
-
-  def initialize(params, opts = {})
-    @view = opts[:view_context]
-    super
-  end
-
+class OfficerDatatable < ApplicationDatatable
   def view_columns
     # Declare strings in this format: ModelName.column_name
     # or in aliased_join_table.column_name format
@@ -60,9 +51,7 @@ class OfficerDatatable < AjaxDatatablesRails::ActiveRecord
   end
 
   def get_raw_records
-    # insert query here
-    # User.all
-    Officer.includes(:compensations, :complaints, :zip_code).joins(:zip_code).all
+    Officer.includes(:compensations, :complaints, :zip_code).references(:zip_code).distinct
   end
 
 end
