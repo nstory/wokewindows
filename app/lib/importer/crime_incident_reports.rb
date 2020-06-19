@@ -4,7 +4,7 @@ class Importer::CrimeIncidentReports
   SLICE_SIZE = 500
 
   def self.import_all
-    parser = Parser::CrimeIncidentReports.new("data/tmpqy9o_jgd.csv")
+    parser = Parser::CrimeIncidentReports.new("data/crime_incidents_reports_20200611.csv")
     import(parser.records)
   end
 

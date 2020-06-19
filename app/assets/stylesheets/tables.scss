@@ -1,0 +1,20 @@
+.table-loading {
+  align-items: center;
+  background-color: rgba(240,240,240,0.9);
+  bottom: 0;
+  display: none;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 36px;
+
+  .loading & {
+    display: flex;
+  }
+
+  .spinner-border {
+    width: 64px;
+    height: 64px;
+  }
+}
