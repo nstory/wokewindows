@@ -23,7 +23,8 @@ class FieldContactDatatable < ApplicationDatatable
       vehicle_type: {source: "FieldContact.vehicle_type"},
       key_situations: {source: "FieldContact.key_situations"},
       narrative: {source: "FieldContact.narrative"},
-      weather: {source: "FieldContact.weather"}
+      weather: {source: "FieldContact.weather"},
+      field_contact_names_count: {source: "FieldContact.field_contact_names_count", searchable: false}
     }
   end
 
@@ -52,7 +53,8 @@ class FieldContactDatatable < ApplicationDatatable
         vehicle_type: record.vehicle_type,
         key_situations: record.key_situations,
         narrative: record.narrative,
-        weather: record.weather
+        weather: record.weather,
+        field_contact_names_count: record.field_contact_names_count
       }
     end
   end

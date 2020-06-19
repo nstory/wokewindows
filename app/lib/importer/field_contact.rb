@@ -84,6 +84,7 @@ class Importer::FieldContact
       basis: parse_string(record[:basis]),
       vehicle_year: parse_int(record[:vehicle_year]),
       vehicle_state: parse_string(record[:vehicle_state]),
+      vehicle_make: parse_string(record[:vehicle_make]),
       vehicle_model: parse_string(record[:vehicle_model]),
       vehicle_color: parse_string(record[:vehicle_color]),
       vehicle_style: parse_string(record[:vehicle_style]),

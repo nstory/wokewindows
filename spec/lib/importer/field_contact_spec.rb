@@ -45,7 +45,7 @@ describe Importer::FieldContact do
     :basis=>"Intel",
     :vehicle_year=>"",
     :vehicle_state=>"",
-    :vehicle_make=>"",
+    :vehicle_make=>"xyzzy",
     :vehicle_model=>"",
     :vehicle_color=>"",
     :vehicle_style=>"",
@@ -99,7 +99,7 @@ describe Importer::FieldContact do
       expect(fc.basis).to eql("Intel")
       expect(fc.vehicle_year).to eql(nil)
       expect(fc.vehicle_state).to eql(nil)
-      expect(fc.vehicle_make).to eql(nil)
+      expect(fc.vehicle_make).to eql("xyzzy")
       expect(fc.vehicle_model).to eql(nil)
       expect(fc.vehicle_color).to eql(nil)
       expect(fc.vehicle_style).to eql(nil)

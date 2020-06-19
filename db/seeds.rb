@@ -46,4 +46,6 @@ Importer::Zip.import_all
 # update caches
 FieldContact.counter_culture_fix_counts
 IncidentOfficer.counter_culture_fix_counts
+FieldContactName.counter_culture_fix_counts
 Populater::Officers.populate
+Populater::FieldContacts.populate

@@ -26,6 +26,7 @@ initDataTable("table.field-contacts-table", function($table, options) {
       {data: "vehicle_type", render: text_renderer},
       {data: "key_situations", render: see_more_renderer},
       {data: "weather", render: text_renderer},
+      {data: "field_contact_names_count", render: int_renderer},
       {data: "narrative", render: narrative_renderer}
     ],
     order: [[1, 'desc']]

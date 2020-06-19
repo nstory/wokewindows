@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_173658) do
+ActiveRecord::Schema.define(version: 2020_06_19_231638) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(version: 2020_06_19_173658) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "contact_officer_id"
     t.integer "supervisor_id"
+    t.integer "field_contact_names_count", default: 0, null: false
+    t.index ["contact_date"], name: "index_field_contacts_on_contact_date"
     t.index ["contact_officer_id"], name: "index_field_contacts_on_contact_officer_id"
     t.index ["fc_num"], name: "index_field_contacts_on_fc_num", unique: true
     t.index ["supervisor_id"], name: "index_field_contacts_on_supervisor_id"
