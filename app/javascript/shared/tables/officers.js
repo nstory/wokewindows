@@ -8,6 +8,7 @@ $(document).on("turbolinks:load", function() {
     },
     pagingType: "full_numbers",
     processing: true,
+    searchDelay: 1000,
     serverSide: true,
     columns: [
       {data: "employee_id", render: employee_id_renderer},
