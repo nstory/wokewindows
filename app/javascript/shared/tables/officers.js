@@ -2,9 +2,16 @@ import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_ren
 
 // corresponding javascript for shared/_officers_table.html.erb
 $(document).on("turbolinks:load", function() {
-  $("table.officers-table").DataTable({
+  $("table.officers-table").each(function() {
+    initDataTable($(this));
+  });
+});
+
+function initDataTable($table) {
+  $table.DataTable({
     ajax: {
-      url: "/officers.json"
+      url: $table.data("source"),
+      type: "POST"
     },
     pagingType: "full_numbers",
     processing: true,
@@ -33,5 +40,5 @@ $(document).on("turbolinks:load", function() {
     order: [[7, 'desc']],
     scrollX: true
   });
-});
+}
 
