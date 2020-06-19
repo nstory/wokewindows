@@ -40,6 +40,10 @@ Importer::BpdIaData.import_all
 Importer::OfficerIaLog.import_all
 Populater::ComplaintOfficers.populate
 
-# update counter caches
+# import zip data
+Importer::Zip.import_all
+
+# update caches
 FieldContact.counter_culture_fix_counts
 IncidentOfficer.counter_culture_fix_counts
+Populater::Officers.populate

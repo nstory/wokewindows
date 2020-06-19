@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_212450) do
+ActiveRecord::Schema.define(version: 2020_06_18_232136) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -175,6 +175,17 @@ ActiveRecord::Schema.define(version: 2020_06_18_212450) do
     t.integer "postal"
     t.integer "complaints_count", default: 0, null: false
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
+  end
+
+  create_table "zip_codes", force: :cascade do |t|
+    t.integer "zip"
+    t.string "city"
+    t.string "state"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["zip"], name: "index_zip_codes_on_zip", unique: true
   end
 
 end

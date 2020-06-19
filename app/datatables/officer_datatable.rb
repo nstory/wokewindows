@@ -27,7 +27,9 @@ class OfficerDatatable < AjaxDatatablesRails::ActiveRecord
       complaints_count: {source: "Officer.complaints_count", searchable: false},
       field_contacts_count: {source: "Officer.field_contacts_count", searchable: false},
       incidents_count: {source: "Officer.incidents_count", searchable: false},
-      postal: {source: "Officer.postal", cond: :eq}
+      postal: {source: "Officer.postal", cond: :eq},
+      state: {source: "ZipCode.state"},
+      city: {source: "ZipCode.city"}
     }
   end
 
@@ -50,7 +52,9 @@ class OfficerDatatable < AjaxDatatablesRails::ActiveRecord
         complaints_count: record.complaints_count,
         field_contacts_count: record.field_contacts_count,
         incidents_count: record.incidents_count,
-        postal: record.postal
+        postal: record.postal,
+        state: record.zip_code && record.zip_code.state,
+        city: record.zip_code && record.zip_code.city
       }
     end
   end
@@ -58,7 +62,7 @@ class OfficerDatatable < AjaxDatatablesRails::ActiveRecord
   def get_raw_records
     # insert query here
     # User.all
-    Officer.includes(:compensations, :complaints).all
+    Officer.includes(:compensations, :complaints, :zip_code).joins(:zip_code).all
   end
 
 end
