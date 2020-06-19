@@ -10,6 +10,12 @@
   }
 }
 
+.empty-table {
+  @extend .text-muted;
+  font-style: italic;
+  text-align: center;
+}
+
 .unknown {
   @extend .text-muted;
   font-style: italic;

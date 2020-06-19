@@ -11,5 +11,6 @@
  * It is generally better to create a new file per style scope.
  *
  *= require datatables.net-dt/css/jquery.dataTables.css
+ *= require datatables.net-buttons-dt/css/buttons.dataTables.css
  *= require main
  */

@@ -47,6 +47,9 @@
               </tr>
             </thead>
             <tbody>
+              <% if @incident.offenses.empty? %>
+                <td colspan="3" class="empty-table">Offense records not found for this incident.</td>
+              <% end %>
               <% @incident.offenses.each do |offense| %>
                 <tr>
                   <td><%= format_text(offense.code) %></td>
@@ -68,6 +71,9 @@
               </tr>
             </thead>
             <tbody>
+              <% if @incident.arrests.empty? %>
+                <td colspan="2" class="empty-table">No arrests found.<br>Arrests may have occurred if our records for this incident are incomplete.</td>
+              <% end %>
               <% @incident.arrests.each do |arrest| %>
                 <tr>
                   <td><%= format_text(arrest.name) %></td>
