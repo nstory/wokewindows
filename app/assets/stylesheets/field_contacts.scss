@@ -1,0 +1,11 @@
+dl.field-contacts-dl {
+  dt {
+    @extend .col-lg-5;
+    @extend .col-xl-4;
+  }
+
+  dd {
+    @extend .col-lg-7;
+    @extend .col-xl-8;
+  }
+}

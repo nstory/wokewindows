@@ -11,11 +11,12 @@ require("channels")
 
 require("bootstrap");
 
-require( 'datatables.net-dt' );
-require( 'datatables.net-buttons-dt' );
-require( 'datatables.net-buttons/js/buttons.html5.js' );
+require("datatables.net-dt");
+require("datatables.net-buttons-dt");
+require("datatables.net-buttons/js/buttons.html5.js");
 
 require("shared/tables/compensations");
+require("shared/tables/field_contacts");
 require("shared/tables/incidents");
 require("shared/tables/officers");
 

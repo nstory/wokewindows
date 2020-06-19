@@ -68,7 +68,7 @@ export function text_renderer(data, type, row) {
     return data;
   }
   if (data == null) {
-    return '<span class="unknown">N/A</span>';
+    return unknown();
   }
   return `<span>${escape(data)}</span>`;
 }
@@ -78,7 +78,7 @@ export function int_renderer(data, type, row) {
     return data;
   }
   if (data == null) {
-    return '<span class="unknown">N/A</span>';
+    return `<div class="text-center">${unknown()}</div>`;
   }
   return `<div class="text-center">${escape(data)}</div>`;
 }
@@ -108,4 +108,14 @@ export function see_more_renderer(data, type, row) {
     text += ` <a href="${escape(row.url)}">(${data.length} total)</a>`;
   }
   return text;
+}
+
+export function yes_no_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return  `<div class="text-center">${unknown()}</div>`;
+  }
+  return `<div class="text-center">${data ? "Y" : "N"}</div>`;
 }

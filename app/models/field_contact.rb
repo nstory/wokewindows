@@ -6,4 +6,9 @@ class FieldContact < ApplicationRecord
   has_many :field_contact_names, dependent: :delete_all
 
   counter_culture :contact_officer
+
+  # use fc_num for resource urls
+  def to_param
+    fc_num
+  end
 end

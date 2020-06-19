@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     post 'datatable', on: :collection
   end
 
-  resources :officers, concerns: [:with_datatable]
+  resources :field_contacts, concerns: [:with_datatable]
   resources :incidents, concerns: [:with_datatable]
+  resources :officers, concerns: [:with_datatable]
+
   root "root#index"
 end

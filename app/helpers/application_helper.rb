@@ -3,6 +3,11 @@ module ApplicationHelper
     raw('<span class="unknown">N/A</span>')
   end
 
+  def format_array(arr)
+    return format_unknown if arr.blank?
+    safe_join(arr, ", ")
+  end
+
   def format_date(str)
     if !str.blank?
       begin
@@ -38,5 +43,10 @@ module ApplicationHelper
       return format_unknown
     end
     str
+  end
+
+  def format_yes_no(b)
+    return format_unknown if b == nil
+    b ? "Yes" : "No"
   end
 end

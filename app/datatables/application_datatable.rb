@@ -1,7 +1,7 @@
 class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
 
-  def_delegators :@view, :officer_path, :incident_path
+  def_delegators :@view, :officer_path, :incident_path, :field_contact_path
 
   def initialize(params, opts = {})
     @view = opts[:view_context]
