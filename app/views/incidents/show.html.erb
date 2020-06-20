@@ -31,7 +31,11 @@
           </dl>
         </div>
         <div class="col-md-6">
-          <div style="height:350px" id="incident-map" data-latitude="<%= @incident.latitude %>" data-longitude="<%= @incident.longitude %>"></div>
+          <% if @incident.latitude && @incident.longitude %>
+            <div style="height:350px" id="incident-map" data-latitude="<%= @incident.latitude %>" data-longitude="<%= @incident.longitude %>"></div>
+          <% else %>
+            <p class="text-center text-muted font-italic">No latitude/longitude data for this incident</p>
+          <% end %>
         </div>
       </div>
 
