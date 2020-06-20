@@ -17,42 +17,18 @@
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand" href="/">Boston Police Watch</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Help</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Data Sets
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="<%= officers_path %>">Officers (salaries)</a>
-                <a class="dropdown-item" href="<%= field_contacts_path %>">Field Contacts (FIO)</a>
-                <a class="dropdown-item" href="<%= incidents_path %>">Incident Journal</a>
-              </div>
-            </li>
-          </ul>
-          <%# <form class="form-inline my-2 my-lg-0"> %>
-          <%#   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> %>
-          <%#   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> %>
-          <%# </form> %>
+      <% if @layout_application_fullscreen %>
+        <%= render "shared/navbar_content" %>
+      <% else %>
+        <div class="container">
+          <%= render "shared/navbar_content" %>
         </div>
-      </div>
+      <% end %>
     </nav>
     <%= yield %>
     <%= yield :javascript %>
 
-    <% if !@layout_application_hide_footer %>
+    <% if !@layout_application_fullscreen %>
       <div class="footer">
         <div class="container">
           <div class="row">
