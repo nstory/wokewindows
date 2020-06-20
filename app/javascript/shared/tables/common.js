@@ -17,7 +17,10 @@ export function initDataTable(selector, callback) {
           displayBuffer: 20
         },
         processing: true,
-        scrollResize: true
+        scrollResize: true,
+        language: {
+          info: "Showing _TOTAL_ entries"
+        }
       };
 
       callback($table, options);

@@ -1,8 +1,12 @@
 # parses incident information out of public_journal*.pdf and
 # district_journal*.pdf files distributed on bpdnews.com
-class Parser::DistrictJournal
-  def initialize(filename)
-    @filename = filename
+class Parser::DistrictJournal < Parser::Parser
+  def category
+    "district_journal"
+  end
+
+  def url
+    "https://bpdnews.com/s/#{pathname.basename.to_s}"
   end
 
   # the number of records the document claims to contain

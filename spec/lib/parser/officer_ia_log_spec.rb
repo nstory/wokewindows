@@ -1,6 +1,8 @@
 describe Parser::OfficerIaLog do
   let(:file) { file_fixture("sample_officer_ia_log.csv") }
-  let(:records) { Parser::OfficerIaLog.new(file).records }
+  let(:parser) { Parser::OfficerIaLog.new(file) }
+  let(:records) { parser.records }
+  let(:attribution) { parser.attribution }
 
   it "parses a record" do
     r = records.first
@@ -12,5 +14,11 @@ describe Parser::OfficerIaLog do
     expect(r[:summary]).to match(/^The complain.*East/)
     expect(r[:incident_type]).to eql("Citizen complaint")
     expect(r[:completed_date]).to eql("")
+  end
+
+  it "attribution" do
+    expect(attribution.filename).to eql("sample_officer_ia_log.csv")
+    expect(attribution.category).to eql("2014_officer_ia_log")
+    expect(attribution.url).to eql(nil)
   end
 end

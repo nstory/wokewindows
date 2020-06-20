@@ -1,10 +1,6 @@
 require "csv"
 
-class Parser::Csv
-  def initialize(filename)
-    @filename = filename
-  end
-
+class Parser::Csv < Parser::Parser
   def records
     Enumerator.new do |y|
       ::CSV.open(@filename, headers: true, external_encoding: "ISO-8859-1") do |csv|

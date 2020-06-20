@@ -40,6 +40,13 @@ describe Parser::DistrictJournal do
         {name: "Tyrone Kennedy", address: "12 ROGERS AVE LYNN MA", charge: "UNLICENSED OPERATION OF MV c90.10"}
       ])
     end
+
+    it "attributes" do
+      a = parser.attribution
+      expect(a.filename).to eql("district_journal.pdf")
+      expect(a.category).to eql("district_journal")
+      expect(a.url).to eql("https://bpdnews.com/s/district_journal.pdf")
+    end
   end
 
   describe "old style file" do

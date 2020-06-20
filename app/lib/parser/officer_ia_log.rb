@@ -5,6 +5,10 @@ class Parser::OfficerIaLog < Parser::Csv
     allegation_s_force_type_s_: :allegations
   }
 
+  def category
+    "2014_officer_ia_log"
+  end
+
   def map_key(key)
     MAPPING.fetch(key, key)
   end

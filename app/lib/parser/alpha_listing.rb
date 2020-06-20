@@ -3,6 +3,10 @@ class Parser::AlphaListing < Parser::Csv
     idno6: :empl_id
   }
 
+  def category
+    "alpha_listing"
+  end
+
   def map_key(key)
     MAPPING.fetch(key, key)
   end

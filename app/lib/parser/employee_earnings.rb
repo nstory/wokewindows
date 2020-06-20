@@ -19,6 +19,10 @@ class Parser::EmployeeEarnings < Parser::Csv
     :zip => :postal
   }
 
+  def category
+    "employee_earnings"
+  end
+
   def map_key(key)
     MAPPING.fetch(key, key)
   end

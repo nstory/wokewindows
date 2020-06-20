@@ -1,6 +1,8 @@
 describe Parser::BpdIaData do
   let(:file) { file_fixture("bpd_ia_data_2001_2011.txt") }
-  let(:records) { Parser::BpdIaData.new(file).records }
+  let(:parser) { Parser::BpdIaData.new(file) }
+  let(:records) { parser.records }
+  let(:attribution) { parser.attribution }
 
   it "should parse first record" do
     r = records.first
@@ -42,5 +44,11 @@ describe Parser::BpdIaData do
     rec = records.find { |r| r[:ia_no] == "9907" }
     expect(rec[:finding_date]).to eql("7/5/2007")
     expect(rec[:finding]).to eql("Not Sustained")
+  end
+
+  it "should attribute" do
+    expect(attribution.filename).to eql("bpd_ia_data_2001_2011.txt")
+    expect(attribution.category).to eql("bpd_ia_data_2001_2011")
+    expect(attribution.url).to eql(nil)
   end
 end
