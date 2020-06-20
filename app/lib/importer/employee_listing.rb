@@ -1,6 +1,6 @@
 # imports into officers a list of BPD employees created by either
 # Parser::Cy2015AnnualEarnings or Parser::AlphaListing
-class Importer::EmployeeListing
+class Importer::EmployeeListing < Importer::Importer
 
   SLICE_SIZE = 500
 
@@ -11,12 +11,11 @@ class Importer::EmployeeListing
     ]
 
     parsers.each do |parser|
-      import(parser.records)
+      new(parser).import
     end
   end
 
-  # records created by Cy2015AnnualEarnings or AlphaListing
-  def self.import(records)
+  def import
     officer_by_employee_id = Officer.find_each.index_by(&:employee_id)
     records.each_slice(SLICE_SIZE) do |slice|
       Officer.transaction do
@@ -25,7 +24,7 @@ class Importer::EmployeeListing
     end
   end
 
-  def self.import_slice(slice, officer_by_employee_id)
+  def import_slice(slice, officer_by_employee_id)
     slice.each do |record|
       employee_id = record[:empl_id].to_i
       officer = officer_by_employee_id.fetch(employee_id) { Officer.new }
@@ -35,13 +34,14 @@ class Importer::EmployeeListing
         doa: parse_doa(record[:doa]),
         badge: record[:badge].blank? ? nil : record[:badge]
       }
+      officer.add_attribution(attribution)
       officer.save
     end
   end
 
   private
   # convert 1/2/91 -> 1991-01-02
-  def self.parse_doa(doa)
+  def parse_doa(doa)
     if %r{^(\d{1,2})/(\d{1,2})/(\d{1,2})$} =~ doa
       year = $3.to_i
       year += (year < 50 ? 2000 : 1900)

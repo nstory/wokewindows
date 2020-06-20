@@ -1,4 +1,6 @@
 class Complaint < ApplicationRecord
+  include Attributable
+
   has_many :complaint_officers, dependent: :delete_all
 
   def self.by_ia_number(numbers)

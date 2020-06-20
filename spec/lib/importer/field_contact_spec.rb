@@ -53,9 +53,15 @@ describe Importer::FieldContact do
     :contact_reason=> "OBSERVED IN THE AREA OF WASHINGTON STREET BY TEMPLE PLACE. KNOWN H-BLOCK MEMBERS XXX AND XXX WHO BOTH ARE KNOWN TO BE ACTIVE AROUND FIREARMS AND FIREARM VIOLENCE. BRIC POSTING 19-105 HAS XXX POSSIBLY INVOLVED IN A XXX AT XXX HUTCHINGS ST AND MAY BE IN POSSESSION OF A F/A.\n\nPO D'ADDIECO/MCGAHAN"
   }}
 
-  describe ".import" do
-    it "imports a mark43 record" do
-      Importer::FieldContact.import([mark43_record])
+  let(:attribution) { Attribution.new filename: "a", category: "b", url: "c" }
+  let(:parser) { mock_parser(records, attribution) }
+  let(:importer) { Importer::FieldContact.new(parser) }
+
+  describe "mark43 record" do
+    let(:records) { [mark43_record] }
+
+    it "imports a record" do
+      importer.import
       fc = FieldContact.first
       expect(fc.fc_num).to eql("FC19000622")
       expect(fc.contact_date).to eql("2019-10-19 00:02:00")
@@ -78,10 +84,32 @@ describe Importer::FieldContact do
       expect(fc.vehicle_type).to eql(nil)
       expect(fc.key_situations).to eql(["Shots Fired"])
       expect(fc.weather).to eql(nil)
+      expect(fc.attributions).to eql([attribution])
     end
 
+    it "associates the record with a contact officer" do
+      o = Officer.create({employee_id: 153458})
+      importer.import
+      expect(FieldContact.first.contact_officer).to eql(o)
+    end
+
+    it "associates the record with a supervisor" do
+      o = Officer.create({employee_id: 12114})
+      importer.import
+      expect(FieldContact.first.supervisor).to eql(o)
+    end
+
+    it "creates one record if record imported twice" do
+      2.times { importer.import }
+      expect(FieldContact.count).to eql(1)
+    end
+  end
+
+  describe "rms record" do
+    let(:records) { [rms_record] }
+
     it "imports an rms record" do
-      Importer::FieldContact.import([rms_record])
+      importer.import
       fc = FieldContact.first
       expect(fc.fc_num).to eql("F190047193")
       expect(fc.contact_date).to eql("2019-08-14 18:44:00")
@@ -107,26 +135,9 @@ describe Importer::FieldContact do
       expect(fc.narrative).to match(/^OBSERVED.*MCGAHAN$/m)
     end
 
-    it "associates the record with a contact officer" do
-      o = Officer.create({employee_id: 153458})
-      Importer::FieldContact.import([mark43_record])
-      expect(FieldContact.first.contact_officer).to eql(o)
-    end
-
-    it "associates the record with a supervisor" do
-      o = Officer.create({employee_id: 12114})
-      Importer::FieldContact.import([mark43_record])
-      expect(FieldContact.first.supervisor).to eql(o)
-    end
-
-    it "creates one record if record imported twice" do
-      2.times { Importer::FieldContact.import([mark43_record]) }
-      expect(FieldContact.count).to eql(1)
-    end
-
     it "imports an rms record with weird date" do
       rms_record[:contact_date] = "1/12/2017 10:15"
-      Importer::FieldContact.import([rms_record])
+      importer.import
       fc = FieldContact.first
       expect(fc.contact_date).to eql("2017-01-12 10:15:00")
     end

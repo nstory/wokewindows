@@ -12,15 +12,20 @@ describe Importer::BpdIaData do
     :finding=>"Sustained",
     :finding_date=>"6/29/2004"
   }}
+  let(:records) { [record] }
+  let(:attribution) { Attribution.new(filename: "foo.csv", category: "bar") }
+  let(:parser) { mock_parser(records, attribution) }
+  let(:importer) { Importer::BpdIaData.new(parser) }
 
   it "imports a record" do
-    Importer::BpdIaData.import([record])
+    importer.import
     c = Complaint.first
     expect(c.ia_number).to eql("401")
     expect(c.case_number).to eql(4192)
     expect(c.incident_type).to eql("Internal investigation")
     expect(c.received_date).to eql("2001-01-02")
     expect(c.complaint_officers.size).to eql(1)
+    expect(c.attributions).to eql([attribution])
     co = c.complaint_officers.first
     expect(co.name).to eql("Kirk,James T")
     expect(co.title).to eql("Police Officer")
@@ -32,19 +37,24 @@ describe Importer::BpdIaData do
 
   it "updates a record" do
     c = Complaint.create({ia_number: "401"})
-    Importer::BpdIaData.import([record])
+    importer.import
     expect(c.reload.case_number).to eql(4192)
+    expect(c.attributions).to eql([attribution])
   end
 
-  it "doesn't dup if record imported twice" do
-    Importer::BpdIaData.import([record, record])
-    expect(Complaint.count).to eql(1)
-    expect(ComplaintOfficer.count).to eql(1)
+  describe "dup records" do
+    let(:records) { [record, record] }
+    it "doesn't dup if record imported twice" do
+      importer.import
+      expect(Complaint.count).to eql(1)
+      expect(ComplaintOfficer.count).to eql(1)
+      expect(Complaint.first.attributions.count).to eql(1)
+    end
   end
 
   it "imports blank badge as null" do
     record[:badge_id_number] = ""
-    Importer::BpdIaData.import([record])
+    importer.import
     expect(ComplaintOfficer.first.badge).to eql(nil)
   end
 end

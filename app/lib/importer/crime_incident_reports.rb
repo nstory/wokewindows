@@ -1,14 +1,15 @@
-class Importer::CrimeIncidentReports
-  extend Importer::IncidentHelpers
+class Importer::CrimeIncidentReports < Importer::Importer
 
   SLICE_SIZE = 500
 
   def self.import_all
-    parser = Parser::CrimeIncidentReports.new("data/crime_incidents_reports_20200611.csv")
-    import(parser.records)
+    parser = Parser::CrimeIncidentReports.new(
+      "data/crime_incidents_reports_20200611.csv"
+    )
+    new(parser).import
   end
 
-  def self.import(records)
+  def import
     records.each_slice(SLICE_SIZE) do |slice|
       Incident.transaction do
         import_slice(slice)
@@ -17,7 +18,7 @@ class Importer::CrimeIncidentReports
   end
 
   private
-  def self.import_slice(slice)
+  def import_slice(slice)
     numbers = slice.pluck(:incident_number)
       .map { |n| parse_incident_number(n) }.compact
     by_number = incidents_by_number(numbers)
@@ -28,13 +29,14 @@ class Importer::CrimeIncidentReports
         incident = by_number[attr[:incident_number]]
         incident.attributes = attr
         add_offense(incident, record)
+        incident.add_attribution(attribution)
       end
     end
 
     by_number.values.each(&:save)
   end
 
-  def self.map_record(record)
+  def map_record(record)
     {
       incident_number: parse_incident_number(record[:incident_number]),
       district: parse_string(record[:district]),
@@ -48,7 +50,7 @@ class Importer::CrimeIncidentReports
     }
   end
 
-  def self.add_offense(incident, record)
+  def add_offense(incident, record)
     mapped = map_offense(record)
     present = incident.offenses.to_a.any? do |o|
       o.code == mapped[:code] &&
@@ -61,7 +63,7 @@ class Importer::CrimeIncidentReports
     end
   end
 
-  def self.map_offense(record)
+  def map_offense(record)
     {
       code: record[:offense_code].to_i,
       code_group: parse_string(record[:offense_code_group]),

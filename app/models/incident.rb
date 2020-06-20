@@ -1,4 +1,6 @@
 class Incident < ApplicationRecord
+  include Attributable
+
   has_many :offenses
   has_many :incident_officers, dependent: :delete_all
   has_many :officers, through: :incident_officers

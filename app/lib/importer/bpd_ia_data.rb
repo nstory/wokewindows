@@ -1,13 +1,13 @@
 # imports the 2001-2011 data parsed by Parser::BpdIaData
-class Importer::BpdIaData
+class Importer::BpdIaData < Importer::Importer
   SLICE = 500
 
   def self.import_all
     parser = Parser::BpdIaData.new("data/bpd_ia_data_2001_2011.txt")
-    import(parser.records)
+    new(parser).import
   end
 
-  def self.import(records)
+  def import
     records.each_slice(SLICE) do |slice|
       Complaint.transaction do
         import_slice(slice)
@@ -15,7 +15,7 @@ class Importer::BpdIaData
     end
   end
 
-  def self.import_slice(slice)
+  def import_slice(slice)
     by_ia_number = Hash.new { |h,k| h[k] = Complaint.new }
     by_ia_number.merge!(Complaint.by_ia_number(slice.pluck(:ia_no)))
 
@@ -28,12 +28,13 @@ class Importer::BpdIaData
         received_date: parse_date(record[:received_date])
       }
       add_complaint_officer(complaint, record)
+      complaint.add_attribution(attribution)
       complaint.save
     end
   end
 
   private
-  def self.add_complaint_officer(complaint, record)
+  def add_complaint_officer(complaint, record)
     attr = {
       "name" => "#{record[:last_name]},#{record[:first_name]}",
       "title" => parse_string(record[:title]),
@@ -51,18 +52,5 @@ class Importer::BpdIaData
     if !exists
       complaint.complaint_officers << ComplaintOfficer.create(attr)
     end
-  end
-
-  def self.parse_string(str)
-    str.blank? ? nil : str
-  end
-
-  def self.parse_int(str)
-    str.blank? ? nil : str.to_i
-  end
-
-  def self.parse_date(date)
-    time = Chronic.parse(date)
-    time ? time.strftime("%F") : nil
   end
 end

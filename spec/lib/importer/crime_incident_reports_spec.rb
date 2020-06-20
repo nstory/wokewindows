@@ -18,6 +18,10 @@ describe Importer::CrimeIncidentReports do
     long: "-71.107779",
     location: "(42.32512200, -71.10777900)"
   }}
+  let(:records) { [record] }
+  let(:attribution) { Attribution.new filename: "a", category: "b", url: "c" }
+  let(:parser) { mock_parser(records, attribution) }
+  let(:importer) { Importer::CrimeIncidentReports.new(parser) }
 
   it "imports an incident" do
     record2 = record.dup
@@ -26,8 +30,9 @@ describe Importer::CrimeIncidentReports do
       offense_code_group: "lol",
       offense_description: "ROFL"
     })
+    records.push(record2)
 
-    Importer::CrimeIncidentReports.import([record, record2])
+    importer.import
 
     inc = Incident.first
     expect(inc.incident_number).to eql(92102201)
@@ -40,24 +45,26 @@ describe Importer::CrimeIncidentReports do
     expect(inc.latitude).to eql(42.325122)
     expect(inc.longitude).to eql(-71.107779)
     expect(inc.offenses.count).to eql(2)
+    expect(inc.attributions).to eql([attribution])
   end
 
   it "updates an existing record" do
     Incident.create incident_number: 92102201
-    Importer::CrimeIncidentReports.import([record])
+    importer.import
     expect(Incident.count).to eql(1)
     expect(Incident.first.district).to eql("E13")
   end
 
   it "imports same record twice" do
-    Importer::CrimeIncidentReports.import([record, record])
+    records.push(record)
+    importer.import
     expect(Incident.count).to eql(1)
     expect(Offense.count).to eql(1)
   end
 
   it "rejects bizarre incident number" do
     record[:incident_number] = "TEST_TEST"
-    Importer::CrimeIncidentReports.import([record])
+    importer.import
     expect(Incident.count).to eql(0)
   end
 
@@ -66,7 +73,7 @@ describe Importer::CrimeIncidentReports do
     record[:reporting_area] = ""
     record[:lat] = ""
     record[:offense_code_group] = ""
-    Importer::CrimeIncidentReports.import([record])
+    importer.import
     expect(Incident.last.ucr_part).to eql(nil)
     expect(Incident.last.reporting_area).to eql(nil)
     expect(Incident.last.latitude).to eql(nil)

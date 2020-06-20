@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_231638) do
+ActiveRecord::Schema.define(version: 2020_06_20_163745) do
 
   create_table "compensations", force: :cascade do |t|
     t.integer "officer_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_231638) do
     t.integer "year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "attributions"
     t.index ["officer_id"], name: "index_compensations_on_officer_id"
   end
 
@@ -56,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_231638) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "occurred_date"
     t.string "summary"
+    t.text "attributions"
     t.index ["ia_number"], name: "index_complaints_on_ia_number", unique: true
   end
 
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_231638) do
     t.boolean "frisked_searched"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "attributions"
     t.index ["field_contact_id"], name: "index_field_contact_names_on_field_contact_id"
   end
 
@@ -110,6 +113,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_231638) do
     t.integer "contact_officer_id"
     t.integer "supervisor_id"
     t.integer "field_contact_names_count", default: 0, null: false
+    t.text "attributions"
     t.index ["contact_date"], name: "index_field_contacts_on_contact_date"
     t.index ["contact_officer_id"], name: "index_field_contacts_on_contact_officer_id"
     t.index ["fc_num"], name: "index_field_contacts_on_fc_num", unique: true
@@ -142,6 +146,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_231638) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "arrests_json"
+    t.text "attributions"
     t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
     t.index ["occurred_on_date"], name: "index_incidents_on_occurred_on_date"
   end
@@ -177,6 +182,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_231638) do
     t.decimal "total"
     t.integer "postal"
     t.integer "complaints_count", default: 0, null: false
+    t.text "attributions"
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
   end
 

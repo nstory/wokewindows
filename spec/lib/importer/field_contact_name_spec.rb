@@ -30,13 +30,16 @@ describe Importer::FieldContactName do
     otherclothing: ""
   }}
 
-  describe ".import" do
-    before do
-      @fc = FieldContact.create(fc_num: "FC19001631")
-    end
+  let(:attribution) { Attribution.new filename: "a", category: "b", url: nil }
+  let(:parser) { mock_parser(records, attribution) }
+  let(:importer) { Importer::FieldContactName.new(parser) }
+  let!(:field_contact) { FieldContact.create(fc_num: "FC19001631") }
 
-    it "imports a mark43 record" do
-      Importer::FieldContactName.import([mark43_record])
+  describe "mark43 record" do
+    let(:records) { [mark43_record] }
+
+    it "imports" do
+      importer.import
       fcn = FieldContactName.first
       expect(fcn.fc_num).to eql("FC19001631")
       expect(fcn.contact_date).to eql("2019-12-08 04:21:00.0")
@@ -52,11 +55,16 @@ describe Importer::FieldContactName do
       expect(fcn.license_state).to eql("MA")
       expect(fcn.license_type).to eql(nil)
       expect(fcn.frisked_searched).to eql(nil)
-      expect(@fc.field_contact_names.to_a).to eql([fcn])
+      expect(fcn.attributions).to eql([attribution])
+      expect(field_contact.field_contact_names.to_a).to eql([fcn])
     end
+  end
 
-    it "imports an rms record" do
-      Importer::FieldContactName.import([rms_record])
+  describe "rms record" do
+    let(:records) { [rms_record] }
+
+    it "imports" do
+      importer.import
       fcn = FieldContactName.first
       expect(fcn.fc_num).to eql("FC19001631")
       expect(fcn.contact_date).to eql("2019-09-07 19:15:00.0")
@@ -68,7 +76,7 @@ describe Importer::FieldContactName do
       expect(fcn.skin_tone).to eql(nil)
       expect(fcn.ethnicity).to eql("Not of Hispanic Origin")
       expect(fcn.other_clothing).to eql(nil)
-      expect(@fc.field_contact_names.to_a).to eql([fcn])
+      expect(field_contact.field_contact_names.to_a).to eql([fcn])
     end
   end
 end

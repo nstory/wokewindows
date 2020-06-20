@@ -1,4 +1,4 @@
-class Importer::EmployeeEarnings
+class Importer::EmployeeEarnings < Importer::Importer
   SLICE = 1000
   FILE_BY_YEAR = {
     2019 => "data/allemployeescy2019_feb19_20final-all.csv",
@@ -16,11 +16,11 @@ class Importer::EmployeeEarnings
     Compensation.delete_all
     FILE_BY_YEAR.each do |year, filename|
       parser = Parser::EmployeeEarnings.new(filename)
-      import(year, parser.records)
+      new(parser).import(year)
     end
   end
 
-  def self.import(year, records)
+  def import(year)
     records.select { |r| r[:department] =~ /^Boston Police/i }
       .each_slice(SLICE) do |slice|
       Compensation.transaction do
@@ -29,13 +29,13 @@ class Importer::EmployeeEarnings
     end
   end
 
-  def self.import_slice(year, slice)
+  def import_slice(year, slice)
     slice.each do |record|
       import_record(year, record)
     end
   end
 
-  def self.import_record(year, record)
+  def import_record(year, record)
     Compensation.create({
       name: record[:name],
       department_name: record[:department],
@@ -49,11 +49,12 @@ class Importer::EmployeeEarnings
       quinn: parse_money(record[:quinn]),
       total: parse_money(record[:total]),
       postal: record[:postal].to_i,
-      year: year
+      year: year,
+      attributions: [attribution]
     })
   end
 
-  def self.parse_money(money)
+  def parse_money(money)
     money = money.gsub(/[^\d.]/, "")
     if /^\d+\.\d\d$/ =~ money
       money.to_f

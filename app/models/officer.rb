@@ -1,4 +1,6 @@
 class Officer < ApplicationRecord
+  include Attributable
+
   has_many :compensations
   has_many :complaint_officers
   has_many :complaints, -> { distinct }, through: :complaint_officers

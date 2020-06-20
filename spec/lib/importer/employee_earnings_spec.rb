@@ -1,5 +1,5 @@
 describe Importer::EmployeeEarnings do
-  let(:kirk_2019) {{
+  let(:record) {{
     :name=>"Kirk,James T.",
     :department=>"Boston Police Department",
     :title=>"Police Lieutenant/Hdq Dispatch",
@@ -14,8 +14,13 @@ describe Importer::EmployeeEarnings do
     :postal=>"02135"
   }}
 
+  let(:records) { [record] }
+  let(:attribution) { Attribution.new filename: "a", category: "b", url: nil }
+  let(:parser) { mock_parser(records, attribution) }
+  let(:importer) { Importer::EmployeeEarnings.new(parser) }
+
   it "imports a record" do
-    Importer::EmployeeEarnings.import(2001, [kirk_2019])
+    importer.import(2001)
     expect(Compensation.count).to eql(1)
     comp = Compensation.first
     expect(comp.name).to eql("Kirk,James T.")
@@ -31,11 +36,12 @@ describe Importer::EmployeeEarnings do
     expect(comp.total).to eql(355538.70)
     expect(comp.postal).to eql(2135)
     expect(comp.year).to eql(2001)
+    expect(comp.attributions).to eql([attribution])
   end
 
   it "doesn't import non-BPD records" do
-    kirk_2019[:department] = "Foobar"
-    Importer::EmployeeEarnings.import(2019, [kirk_2019])
+    record[:department] = "Foobar"
+    importer.import(2019)
     expect(Compensation.count).to eql(0)
   end
 end

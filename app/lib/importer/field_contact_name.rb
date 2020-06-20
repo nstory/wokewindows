@@ -4,8 +4,7 @@
 # formats. table is truncated before import to prevent duplicates.
 # this must be run after Importer::FieldContact
 
-class Importer::FieldContactName
-  extend Importer::FieldContactHelpers
+class Importer::FieldContactName < Importer::Importer
 
   FILES = [
     "data/mark43_fieldcontacts_name_for_public_2019.csv",
@@ -18,12 +17,13 @@ class Importer::FieldContactName
 
   def self.import_all
     FieldContactName.delete_all
-    enums = FILES.map { |f| Parser::FieldContactName.new(f).records }
-    enum = enums.lazy.flat_map(&:lazy)
-    import(enum)
+    FILES.each do |file|
+      parser = Parser::FieldContactName.new(f)
+      new(parser).import
+    end
   end
 
-  def self.import(records)
+  def import
     records.each_slice(500) do |slice|
       FieldContactName.transaction do
         import_slice(slice)
@@ -31,7 +31,7 @@ class Importer::FieldContactName
     end
   end
 
-  def self.import_slice(slice)
+  def import_slice(slice)
     # get the FieldContact objects for the fc_nums in this slice so
     # we can set the association
     contacts = FieldContact.where(fc_num: slice.pluck(:fc_num).uniq).to_a
@@ -39,26 +39,33 @@ class Importer::FieldContactName
     slice.each do |record|
       fcn = new_field_contact_name(record)
       fcn.field_contact = contacts_by_fc_num[fcn.fc_num]
+      fcn.add_attribution(attribution)
       fcn.save if fcn.field_contact
     end
   end
 
-  def self.new_field_contact_name(record)
+  def new_field_contact_name(record)
     FieldContactName.new({
       fc_num: record[:fc_num],
       contact_date: record[:contact_date],
-      sex: parse_string(record[:sex]),
-      race: parse_string(record[:race]),
-      age: parse_int(record[:age]),
-      build: parse_string(record[:build]),
-      hair_style: parse_string(record[:hair_style]),
-      skin_tone: parse_string(record[:skin_tone]),
-      ethnicity: parse_string(record[:ethnicity]),
-      other_clothing: parse_string(record[:otherclothing]),
+      sex: parse_nullable_string(record[:sex]),
+      race: parse_nullable_string(record[:race]),
+      age: parse_nullable_int(record[:age]),
+      build: parse_nullable_string(record[:build]),
+      hair_style: parse_nullable_string(record[:hair_style]),
+      skin_tone: parse_nullable_string(record[:skin_tone]),
+      ethnicity: parse_nullable_string(record[:ethnicity]),
+      other_clothing: parse_nullable_string(record[:otherclothing]),
       deceased: parse_boolean(record[:deceased]),
-      license_state: parse_string(record[:license_state]),
-      license_type: parse_string(record[:license_type]),
+      license_state: parse_nullable_string(record[:license_state]),
+      license_type: parse_nullable_string(record[:license_type]),
       frisked_searched: parse_boolean(record[:frisk_search])
     })
+  end
+
+  def parse_boolean(value)
+    return true if ["1", "Y"].include?(value)
+    return false if ["0", "N"].include?(value)
+    nil
   end
 end

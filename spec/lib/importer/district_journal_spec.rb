@@ -11,9 +11,13 @@ describe Importer::DistrictJournal do
       :address=>"42 BOGUS ST   BSTN, MA",
       :charge=>"Assault - Assault & Battery"}]
   }}
+  let(:records) { [record] }
+  let(:attribution) { Attribution.new filename: "a", category: "b", url: "c" }
+  let(:parser) { mock_parser(records, attribution) }
+  let(:importer) { Importer::DistrictJournal.new(parser) }
 
   it "imports an incident" do
-    Importer::DistrictJournal.import([record])
+    importer.import
     expect(Incident.count).to eql(1)
     inc = Incident.first
     expect(inc.incident_number).to eql(182000830)
@@ -26,36 +30,41 @@ describe Importer::DistrictJournal do
     expect(inc.arrests.count).to eql(1)
     expect(inc.arrests.first.name).to eql("MXXXX, BXXXX")
     expect(inc.arrests.first.charge).to eql("Assault - Assault & Battery")
+    expect(inc.attributions).to eql([attribution])
   end
 
   it "updates existing record" do
     Incident.create(incident_number: 182000830)
-    Importer::DistrictJournal.import([record])
+    importer.import
     expect(Incident.count).to eql(1)
     expect(Incident.first.location_of_occurrence).to eql(["A1 - 101 BROAD ST"])
+    expect(Incident.first.attributions).to eql([attribution])
   end
 
   it "doesn't create dup records" do
-    Importer::DistrictJournal.import([record, record])
+    records.push(record)
+    importer.import
     expect(Incident.count).to eql(1)
   end
 
-  it "doesn't dup location_of_occurrence or nature_of_incident or incident_officers or arrests" do
-    Importer::DistrictJournal.import([record, record])
-    Importer::DistrictJournal.import([record])
+  it "doesn't dup location_of_occurrence or nature_of_incident or incident_officers or arrests or attributions" do
+    importer.import
+    records.push(record)
+    importer.import
     expect(Incident.count).to eql(1)
     inc = Incident.last
     expect(inc.location_of_occurrence).to eql(["A1 - 101 BROAD ST"])
     expect(inc.nature_of_incident).to eql(["ASSAULT SIMPLE - BATTERY"])
     expect(inc.incident_officers.count).to eql(1)
     expect(inc.arrests.count).to eql(1)
+    expect(inc.attributions).to eql([attribution])
   end
 
   it "doesn't add nil location_of_occurrence of nature_of_incident" do
     Incident.create(incident_number: 182000830)
     record[:location_of_occurrence] = ""
     record[:nature_of_incident] = ""
-    Importer::DistrictJournal.import([record])
+    importer.import
     inc = Incident.first
     expect(inc.location_of_occurrence).to eql([])
     expect(inc.nature_of_incident).to eql([])
@@ -63,19 +72,19 @@ describe Importer::DistrictJournal do
 
   it "doesn't add blank officer" do
     record[:officer] = ""
-    Importer::DistrictJournal.import([record])
+    importer.import
     expect(Incident.first.incident_officers.count).to eql(0)
   end
 
   it "doesn't add an arrest where name starts with a number" do
     record[:arrests][0][:name] = "42 CANTERBURY ROSLINDALE MA"
-    Importer::DistrictJournal.import([record])
+    importer.import
     expect(Incident.first.arrests.count).to eql(0)
   end
 
   it "doesn't import record with invalid complaint number" do
     record[:complaint_number] = "2020-00"
-    Importer::DistrictJournal.import([record])
+    importer.import
     expect(Incident.count).to eql(0)
   end
 end
