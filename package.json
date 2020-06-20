@@ -16,6 +16,7 @@
     "datatables.net-responsive": "^2.2.5",
     "jquery": "^3.5.1",
     "jquery-ujs": "^1.2.2",
+    "leaflet": "^1.6.0",
     "lodash": "^4.17.15",
     "popper.js": "^1.16.0",
     "prop-types": "^15.7.2",

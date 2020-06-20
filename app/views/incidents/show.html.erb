@@ -4,7 +4,7 @@
       <h1>Incident #<%= @incident.incident_number %></h1>
 
       <div class="row">
-        <div class="col">
+        <div class="col-md-6">
           <dl class="row">
             <dt class="col-lg-4">District</dt>
             <dd class="col-lg-8"><%= format_text(@incident.district) %></dd>
@@ -30,8 +30,8 @@
             <dd class="col-lg-8"><%= format_incident_officers(@incident.incident_officers) %></dd>
           </dl>
         </div>
-        <div class="col">
-          <div style="height:350px;background-color:blue"></div>
+        <div class="col-md-6">
+          <div style="height:350px" id="incident-map" data-latitude="<%= @incident.latitude %>" data-longitude="<%= @incident.longitude %>"></div>
         </div>
       </div>
 
@@ -72,7 +72,7 @@
             </thead>
             <tbody>
               <% if @incident.arrests.empty? %>
-                <td colspan="2" class="empty-table">No arrests found.<br>Arrests may have occurred if our records for this incident are incomplete.</td>
+                <td colspan="2" class="empty-table">No arrests found for this incident.<br>Arrests may have occurred if our records for this incident are incomplete.</td>
               <% end %>
               <% @incident.arrests.each do |arrest| %>
                 <tr>
