@@ -12,6 +12,7 @@
  *
  *= require datatables.net-dt/css/jquery.dataTables.css
  *= require datatables.net-buttons-dt/css/buttons.dataTables.css
+ *= require datatables.net-scroller-dt/css/scroller.dataTables.css
  *= require leaflet/dist/leaflet.css
  *= require main
  */

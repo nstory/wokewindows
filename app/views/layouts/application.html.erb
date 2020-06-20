@@ -52,14 +52,16 @@
     <%= yield %>
     <%= yield :javascript %>
 
-    <div class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            This is an unfinished open-source project. Please use it for good. Please refrain from evil.
+    <% if !@layout_application_hide_footer %>
+      <div class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              This is an unfinished open-source project. Please use it for good. Please refrain from evil.
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </body>
 </html>

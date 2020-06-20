@@ -1,6 +1,28 @@
+.table-fullscreen-container {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 0;
+
+  .dataTables_filter {
+    padding-right: 12px;
+  }
+
+  .dataTables_info {
+    padding-left: 12px;
+  }
+
+  h1 {
+    position: absolute;
+    top: 0;
+    left: 16px;
+  }
+}
+
 .table-loading {
   align-items: center;
-  background-color: rgba(240,240,240,0.9);
   bottom: 0;
   display: none;
   justify-content: center;

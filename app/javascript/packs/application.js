@@ -14,6 +14,8 @@ require("bootstrap");
 require("datatables.net-dt");
 require("datatables.net-buttons-dt");
 require("datatables.net-buttons/js/buttons.html5.js");
+require("datatables.net-scroller-dt");
+require("datatables.net-plugins/features/scrollResize/dataTables.scrollResize.js");
 
 require("shared/tables/compensations");
 require("shared/tables/field_contacts");

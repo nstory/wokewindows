@@ -1,21 +1,9 @@
 import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer, text_renderer} from "renderers";
+import {initDataTable} from "shared/tables/common";
 
-$(document).on("turbolinks:load", function() {
-  $("table.officers-table").each(function() {
-    initDataTable($(this));
-  });
-});
-
-function initDataTable($table) {
+initDataTable("table.officers-table", function($table, options) {
   $table.DataTable({
-    ajax: {
-      url: $table.data("source"),
-      type: "POST"
-    },
-    pagingType: "full_numbers",
-    processing: true,
-    searchDelay: 1000,
-    serverSide: true,
+    ...options,
     columns: [
       {data: "employee_id", render: employee_id_renderer},
       {data: "name", render: employee_name_renderer},
@@ -36,8 +24,7 @@ function initDataTable($table) {
       {data: "field_contacts_count", render: int_renderer},
       {data: "incidents_count", render: int_renderer}
     ],
-    order: [[7, 'desc']],
-    scrollX: true
+    order: [[7, 'desc']]
   });
-}
+});
 

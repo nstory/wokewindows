@@ -75,6 +75,7 @@ function chart($chart, compensations) {
           stacked: true,
           ticks: {
             beginAtZero: true,
+            suggestedMax: 100000,
             callback: function(value, index, values) {
               return currencyFormat.format(value);
             }

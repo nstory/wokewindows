@@ -8,10 +8,16 @@ export function initDataTable(selector, callback) {
           url: $table.data("source"),
           type: "POST"
         },
-        pagingType: "full_numbers",
         searchDelay: 1000,
         serverSide: true,
-        scrollX: true
+        scrollX: true,
+        scrollY: 500,
+        deferRender: true,
+        scroller: {
+          displayBuffer: 20
+        },
+        processing: true,
+        scrollResize: true
       };
 
       callback($table, options);

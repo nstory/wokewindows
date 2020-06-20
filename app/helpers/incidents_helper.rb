@@ -21,6 +21,6 @@ module IncidentsHelper
     if bool == nil
       return format_unknown
     end
-    bool ? raw('<span class="text-warning">Yes</span>') : "No"
+    bool ? raw('<span class="text-danger">Yes</span>') : "No"
   end
 end
