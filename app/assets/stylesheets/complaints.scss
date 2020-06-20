@@ -1,0 +1,12 @@
+.complaints-dl {
+  dt {
+    @extend .col-6;
+    @extend .col-md-3;
+    @extend .col-lg-2;
+  }
+  dd {
+    @extend .col-6;
+    @extend .col-md-9;
+    @extend .col-lg-10;
+  }
+}

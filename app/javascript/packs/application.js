@@ -18,6 +18,7 @@ require("datatables.net-scroller-dt");
 require("datatables.net-plugins/features/scrollResize/dataTables.scrollResize.js");
 
 require("shared/tables/compensations");
+require("shared/tables/complaints");
 require("shared/tables/field_contacts");
 require("shared/tables/incidents");
 require("shared/tables/officers");

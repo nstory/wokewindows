@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Complaint <%= @complaint.ia_number %></h1>
+      <p>This is a complaint and/or investigation by the Internal Investigations Division of the Boston Police Department regarding the conduct of a BPD employee.</p>
+
+      <dl class="row complaints-dl">
+        <dt>IA #</dt>
+        <dd><%= format_text(@complaint.ia_number) %></dd>
+        <dt>Case #</dt>
+        <dd><%= format_text(@complaint.case_number) %></dd>
+        <dt>Incident Type</dt>
+        <dd><%= format_text(@complaint.incident_type) %></dd>
+        <dt>Received</dt>
+        <dd><%= format_date(@complaint.received_date) %></dd>
+        <dt>Occurred</dt>
+        <dd><%= format_date(@complaint.occurred_date) %></dd>
+        <dt>Summary</dt>
+        <dd><%= simple_format(@complaint.summary) %></dd>
+      </dl>
+
+      <h2>Officers and Allegations</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Badge #</th>
+            <th>Allegation</th>
+            <th>Finding</th>
+            <th>Finding Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @complaint.complaint_officers.each do |co| %>
+            <tr>
+              <td><%= format_complaint_officer(co) %></td>
+              <td><%= format_text(co.title) %></td>
+              <td><%= format_text(co.badge) %></td>
+              <td><%= format_text(co.allegation) %></td>
+              <td><%= format_text(co.finding) %></td>
+              <td><%= format_date(co.finding_date) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= render "shared/source_materials", attributions: @complaint.attributions %>
+    </div>
+  </div>
+</div>

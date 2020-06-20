@@ -10,7 +10,9 @@ class Attribution
     "field_contact_name" => "FIO Records FieldContact_Name Table",
     "employee_earnings" => "Employee Earnings Report",
     "cy2015_annual_earnings" => "BPD CY2015 Annual Earnings File",
-    "alpha_listing" => "BPD Alpha Listing with Badges"
+    "alpha_listing" => "BPD Alpha Listing with Badges",
+    "2014_officer_ia_log" => "2014 Officer IA Log",
+    "bpd_ia_data_2001_2011" => "BPD IA Data 2001 - 2011"
   }
 
   attr_accessor :filename, :category, :url
