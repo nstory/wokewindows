@@ -18,7 +18,7 @@ class Importer::FieldContactName < Importer::Importer
   def self.import_all
     FieldContactName.delete_all
     FILES.each do |file|
-      parser = Parser::FieldContactName.new(f)
+      parser = Parser::FieldContactName.new(file)
       new(parser).import
     end
   end

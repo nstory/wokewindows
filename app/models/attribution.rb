@@ -2,6 +2,17 @@
 # was imported. a given record may have multiple Attributions
 class Attribution
   include ActiveModel::Model
+
+  FRIENDLY_MAPPING = {
+    "district_journal" => "Public Journal",
+    "crime_incident_reports" => "Crime Incident Reports",
+    "field_contact" => "FIO Records FieldContact Table",
+    "field_contact_name" => "FIO Records FieldContact_Name Table",
+    "employee_earnings" => "Employee Earnings Report",
+    "cy2015_annual_earnings" => "BPD CY2015 Annual Earnings File",
+    "alpha_listing" => "BPD Alpha Listing with Badges"
+  }
+
   attr_accessor :filename, :category, :url
   validates :filename, :category, presence: true, strict: true
 
@@ -12,5 +23,9 @@ class Attribution
 
   def attributes
     {"filename" => filename, "category" => category, "url" => url}
+  end
+
+  def friendly_category
+    FRIENDLY_MAPPING.fetch(category, category)
   end
 end

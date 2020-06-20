@@ -29,7 +29,7 @@ class Importer::FieldContact < Importer::Importer
 
   def self.import_all
     FILES.each do |file|
-      parser = Parser::FieldContact.new(f)
+      parser = Parser::FieldContact.new(file)
       new(parser).import
     end
   end

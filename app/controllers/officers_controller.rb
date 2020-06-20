@@ -10,5 +10,9 @@ class OfficersController < ApplicationController
 
   def show
     @officer = Officer.includes(:compensations).find_by(employee_id: params[:id])
+    @attributions = [
+      @officer.compensations.flat_map(&:attributions),
+      @officer.attributions
+    ].flatten
   end
 end
