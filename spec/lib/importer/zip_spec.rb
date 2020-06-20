@@ -8,9 +8,13 @@ describe Importer::Zip do
     timezone: "-5",
     dst: "1"
   }}
+  let(:records) { [record] }
+  let(:attribution) { Attribution.new filename: "a", category: "b", url: nil }
+  let(:parser) { mock_parser(records, attribution) }
+  let(:importer) { Importer::Zip.new(parser) }
 
   it "imports a record" do
-    Importer::Zip.import([record])
+    importer.import
     z = ZipCode.first
     expect(z.zip).to eql(2131)
     expect(z.city).to eql("Roslindale")
@@ -20,7 +24,8 @@ describe Importer::Zip do
   end
 
   it "doesn't dup zips" do
-    Importer::Zip.import([record, record])
+    records.push(record)
+    importer.import
     expect(ZipCode.count).to eql(1)
   end
 end
