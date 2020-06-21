@@ -2,10 +2,12 @@ export function initDataTable(selector, callback) {
   $(document).on("turbolinks:load", function() {
     $(selector).each(function() {
       const $table = $(this);
+      const url = $table.data("source");
+      const tableOptions = $table.data("options") || {};
 
       const options = {
         ajax: {
-          url: $table.data("source"),
+          url: url,
           type: "POST"
         },
         searchDelay: 1000,
@@ -20,7 +22,8 @@ export function initDataTable(selector, callback) {
         scrollResize: true,
         language: {
           info: "Showing _TOTAL_ entries"
-        }
+        },
+        ...tableOptions
       };
 
       callback($table, options);

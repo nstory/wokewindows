@@ -60,6 +60,10 @@ class FieldContactDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    FieldContact.all
+    q = FieldContact.all
+    if params[:officer_id]
+      q = q.where("contact_officer_id" => params[:officer_id])
+    end
+    q
   end
 end

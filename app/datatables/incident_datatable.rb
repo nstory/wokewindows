@@ -36,7 +36,11 @@ class IncidentDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    Incident.includes(:incident_officers, :offenses).references(:incident_officers, :offenses).distinct
+    q = Incident.includes(:incident_officers, :offenses).references(:incident_officers, :offenses).distinct
+    if params[:officer_id]
+      q = q.where("incident_officers.officer_id" => params[:officer_id])
+    end
+    q
   end
 
 end

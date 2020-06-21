@@ -1,0 +1,15 @@
+<%
+  params = {format: :json}.merge(local_assigns.fetch(:params, {}))
+%>
+<table
+        class="incidents-table display compact table-nowrap"
+        style="width:100%"
+        data-source="<%= path.call(params) %>"
+        data-options="<%= JSON.generate(local_assigns.fetch(:options, {})) %>"
+        >
+        <thead>
+          <%= yield %>
+        </thead>
+        <tbody>
+        </tbody>
+</table>

@@ -12,11 +12,21 @@
         <dt class="officer__dt">Home Zip:</dt>
         <dd class="officer__dd"><%= format_zip(@officer.postal) %></dt>
       </dl>
+
       <h2>Earnings</h2>
       <%= render "shared/tables/compensations", compensations: @officer.compensations %>
-      <h2 class="mt-3">Incident Journal</h2>
 
-      <%= render "shared/source_materials", attributions: @attributions %>
+      <h2 class="mt-5">Incident Journal</h2>
+      <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to.</p>
+      <%= render "shared/tables/incidents", params: {officer_id: @officer.id}, options: {scrollY: 300, scrollResize: false, scrollCollapse: true} %>
+
+      <h2 class="mt-5">Field Contacts Journal</h2>
+      <p>Field Interrogation and Observation (FIO) reports filed by this officer.</p>
+      <%= render "shared/tables/field_contacts", params: {officer_id: @officer.id}, options: {scrollY: 300, scrollResize: false, scrollCollapse: true} %>
+
+      <div class="mt-5">
+        <%= render "shared/source_materials", attributions: @attributions %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,6 +1,11 @@
-<h1>Field Contacts (FIO)</h1>
-
-<table class="field-contacts-table display compact table-nowrap"  style="width:100%" data-source="<%= datatable_field_contacts_path(format: :json) %>">
+<%
+  params = {format: :json}.merge(local_assigns.fetch(:params, {}))
+%>
+<table class="field-contacts-table display compact table-nowrap"
+       style="width:100%"
+       data-source="<%= datatable_field_contacts_path(params) %>"
+       data-options="<%= JSON.generate(local_assigns.fetch(:options, {})) %>"
+       >
   <thead>
     <tr>
       <th colspan="12"></th>
