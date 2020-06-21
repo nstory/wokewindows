@@ -1,0 +1,5 @@
+table.help__definitions {
+  tbody tr td:first-child {
+    @extend code;
+  }
+}

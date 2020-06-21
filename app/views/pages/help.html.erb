@@ -6,13 +6,219 @@
       <h2>Data Sources</h2>
       <h3 id="alpha_listing">BPD Alpha Listing with Badges</h3>
       <p><a href="https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/">https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/</a></p>
+      <p>This is a listing of Boston Police officers from July 2016. Civilian employees are not included on this list.</p>
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IDNO6</td>
+            <td>Six digit City of Boston employee id</td>
+          </tr>
+          <tr>
+            <td>NAME</td>
+            <td>Employee name in the same format as earnings reports</td>
+          </tr>
+          <tr>
+            <td>RANK</td>
+            <td>Capt, Lieut, etc.</td>
+          </tr>
+          <tr>
+            <td>DOA</td>
+            <td>Appears to be the employee's start date (only source I've seen with this data)</td>
+          </tr>
+          <tr>
+            <td>TITLE</td>
+            <td>Same values as the <i>TITLE</i> field in the <a href="#employee_earnings">Employee Earnings Reports</a></td>
+          </tr>
+          <tr>
+            <td>orgname</td>
+            <td>Organization within the BPD (only source I've seen with this data)</td>
+          </tr>
+          <tr>
+            <td>STATUS</td>
+            <td>A or P &mdash; I'm unclear what this means</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h3 id="cy2015_annual_earnings">BPD CY2015 Annual Earnings File</h3>
       <p><a href="https://www.muckrock.com/foi/boston-3/boston-police-department-overtime-pay-2015-25166/">https://www.muckrock.com/foi/boston-3/boston-police-department-overtime-pay-2015-25166/</a></p>
+      <p>This report for the year 2015 includes all BPD employees, including civilian employees. It contains many fields that also appear in the <a href="#employee_earnings">Employee Earnings Reports</a>, and are explained in the documentation for those reports. In addition, it contains the following fields:</p>
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>EMPL ID</td>
+            <td>Six digit City of Boston employee id</td>
+          </tr>
+          <tr>
+            <td>DEPTID</td>
+            <td>Always 211000</td>
+          </tr>
+          <tr>
+            <td>EMPL RCD</td>
+            <td>This seems to be a common field in PeopleSoft systems &mdash; I'm unsure as to its meaning</td>
+          </tr>
+        </tbody>
+      </table>
 
       <h3 id="employee_earnings">Employee Earnings Report</h3>
-      <p>The City of Boston's Office of Human Resources publishes an annual report detailing the earnings of every city employee. These reports are available on Boston's open data hub, Analyze Boston.</p>
       <p><a href="https://data.boston.gov/dataset/employee-earnings-report">https://data.boston.gov/dataset/employee-earnings-report</a></p>
+      <p>The City of Boston's Office of Human Resources publishes an annual report showing how much the city paid each employee.</p>
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NAME</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>DEPARTMENT_NAME</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>TITLE</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>REGULAR</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>RETRO</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>OTHER</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>OVERTIME</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>INJURED</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>DETAIL</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>QUINN/EDUCATION INCENTIVE</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>TOTAL EARNINGS</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>POSTAL</td>
+            <td>Five digit zip code</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="crime_incident_reports">Crime Incident Reports</h3>
+      <p><a href="https://data.boston.gov/dataset/crime-incident-reports-august-2015-to-date-source-new-system">https://data.boston.gov/dataset/crime-incident-reports-august-2015-to-date-source-new-system</a></p>
+      <p>On a daily basis, The Boston Police Department posts a file to the City of Boston's Open Data Hub containing a subset of fields present in the department's crime incident report system.</p>
+      <p>If you are using this data directly for analysis, you should note that a given incident number may appear multiple times in the file. This seems to occur when multiple offenses are associated with the one incident number.</p>
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>INCIDENT_NUMBER</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>OFFENSE_CODE</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>OFFENSE_CODE_GROUP</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>OFFENSE_DESCRIPTION</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>DISTRICT</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>REPORTING_AREA</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>SHOOTING</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>OCCURRED_ON_DATE</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>YEAR</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>MONTH</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>DAY_OF_WEEK</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>HOUR</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>UCR_PART</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>STREET</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Lat</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Long</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Location</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="district_journal">Public Journal</h3>
+      <p>On a regular basis, The Boston Police Department posts a public journal of incident reports to its official website <a href="https://bpdnews.com/">bpdnews.com</a></p>
 
       <h3 id="field_contact">FIO Records FieldContact Table</h3>
       <p><a href="https://data.boston.gov/dataset/boston-police-department-fio">https://data.boston.gov/dataset/boston-police-department-fio</a></p>
