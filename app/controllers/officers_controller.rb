@@ -13,6 +13,6 @@ class OfficersController < ApplicationController
     @attributions = [
       @officer.compensations.flat_map(&:attributions),
       @officer.attributions
-    ].flatten
+    ].flatten.uniq
   end
 end

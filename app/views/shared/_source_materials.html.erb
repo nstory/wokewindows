@@ -12,7 +12,7 @@
   <tbody>
     <% attributions.each do |at| %>
       <tr>
-        <td><%= link_to at.friendly_category, "/help##{at.category}" %></td>
+        <td><%= link_to at.friendly_category, page_path('help', anchor: at.category) %></td>
         <td><%= at.url ? link_to(at.filename, at.url) : at.filename %></td>
       </tr>
     <% end %>

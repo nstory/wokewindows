@@ -23,6 +23,10 @@ class Attribution
   end
   alias_method :eql?, :==
 
+  def hash
+    attributes.hash
+  end
+
   def attributes
     {"filename" => filename, "category" => category, "url" => url}
   end

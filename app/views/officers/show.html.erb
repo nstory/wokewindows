@@ -14,15 +14,20 @@
       </dl>
 
       <h2>Earnings</h2>
+      <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston.</p>
       <%= render "shared/tables/compensations", compensations: @officer.compensations %>
 
       <h2 class="mt-5">Incident Journal</h2>
       <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to.</p>
       <%= render "shared/tables/incidents", params: {officer_id: @officer.id}, options: {scrollY: 300, scrollResize: false, scrollCollapse: true} %>
 
-      <h2 class="mt-5">Field Contacts Journal</h2>
+      <h2 class="mt-5">Field Contacts</h2>
       <p>Field Interrogation and Observation (FIO) reports filed by this officer.</p>
       <%= render "shared/tables/field_contacts", params: {officer_id: @officer.id}, options: {scrollY: 300, scrollResize: false, scrollCollapse: true} %>
+
+      <h2 class="mt-5">Complaints (IA Cases)</h2>
+      <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data is incomplete and only reflects years 2001-2011 and 2014.</p>
+      <%= render "shared/tables/complaints", params: {officer_id: @officer.id}, options: {scrollY: 300, scrollResize: false, scrollCollapse: true} %>
 
       <div class="mt-5">
         <%= render "shared/source_materials", attributions: @attributions %>

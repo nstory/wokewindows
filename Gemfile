@@ -33,6 +33,7 @@ gem 'chronic', '~> 0.10.2'
 gem 'bootstrap', '~> 4.5.0'
 gem 'counter_culture', '~> 2.5.1'
 gem 'ajax-datatables-rails', '1.2.0'
+gem 'high_voltage', '~> 3.1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
