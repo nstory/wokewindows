@@ -32,4 +32,23 @@ $(document).on("turbolinks:load", function() {
 
   Leaflet.marker([latitude, longitude], {icon: myIcon}).addTo(map);
   map.fitBounds([[latitude, longitude]], {maxZoom: 14});
+  const colors = ["#800000", "#ff0000", "#800080", "#ff00ff", "#008000", "#ff7f50", "#808000", "#00008b", "#000080", "#0000ff", "#008080", "#00ffff"];
+  let colorIndex = 0;
+
+  $.getJSON("/districts_geojson.json", function(data) {
+    const geoJson = Leaflet.geoJSON(
+      data, {
+        style: function(feature) {
+          const color = colors[colorIndex];
+          colorIndex = (colorIndex + 1) % colors.length;
+          return {color, fill: false, dashArray: `${colorIndex+5} ${colorIndex+6}`};
+        }
+      }
+    );
+    geoJson.addTo(map);
+    geoJson.getLayers().forEach((layer) => {
+      const district = layer.feature.properties.DISTRICT;
+      layer.bindTooltip(district, {permanent: true}).openTooltip();
+    });
+  });
 });
