@@ -39,4 +39,10 @@ describe Importer::OfficerIaLog do
     importer.import
     expect(Complaint.first.incident_type).to eql(nil)
   end
+
+  it "ignores dups" do
+    importer.import
+    importer.import
+    expect(Complaint.count).to eql(1)
+  end
 end

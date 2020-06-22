@@ -26,7 +26,7 @@ class Populater::Compensations
   # if a name appears twice in any year, don't use it ever
   def self.reject_list
     Compensation.connection.select_all(
-      'select year, name, count(*) as count from compensations group by year, name having count > 1'
+      'select year, name, count(*) as count from compensations group by year, name having count(*) > 1'
     ).pluck("name").uniq
   end
 end

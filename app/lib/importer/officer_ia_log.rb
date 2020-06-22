@@ -9,14 +9,12 @@ class Importer::OfficerIaLog < Importer::Importer
   end
 
   def import
-    Complaint.transaction do
-      records.each do |record|
-        attr = map_complaint(record)
-        begin
-          Complaint.create(attr)
-        rescue ActiveRecord::RecordNotUnique
-          # ignore
-        end
+    records.each do |record|
+      attr = map_complaint(record)
+      begin
+        Complaint.create(attr)
+      rescue ActiveRecord::RecordNotUnique
+        # ignore
       end
     end
   end

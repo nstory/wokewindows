@@ -45,29 +45,13 @@ class Importer::FieldContact < Importer::Importer
 
   private
   def import_slice(slice)
-    contacts = slice.map do |record|
-      new_field_contact(record)
-    end.compact
-
-    # associate the newly created field contacts with officers
-    officers = Officer.where(
-      employee_id: (contacts.map(&:contact_officer_employee_id) + contacts.map(&:supervisor_employee_id)).uniq
-    ).to_a
-    emp_id_to_officer = officers.group_by(&:employee_id).map {|k,v| [k,v.first]}.to_h
-    contacts.each do |fc|
-      fc.contact_officer = emp_id_to_officer[fc.contact_officer_employee_id]
-      fc.supervisor = emp_id_to_officer[fc.supervisor_employee_id]
-      fc.add_attribution(attribution)
-      begin
-        fc.save
-      rescue ActiveRecord::RecordNotUnique => e
-        # there's a small number of dups; ignore them
-      end
+    slice.each do |record|
+      import_record(record)
     end
   end
 
-  def new_field_contact(record)
-    FieldContact.new({
+  def import_record(record)
+    FieldContact.insert({
       fc_num: parse_nullable_string(record[:fc_num]),
       contact_date: parse_date_time(record[:contact_date]),
       contact_officer_employee_id: parse_nullable_int(record[:contact_officer]),
@@ -91,7 +75,10 @@ class Importer::FieldContact < Importer::Importer
       vehicle_type: parse_nullable_string(record[:vehicle_type]),
       key_situations: parse_key_situations(record[:key_situations]),
       narrative: parse_nullable_string(record[:contact_reason] || record[:narrative]),
-      weather: parse_nullable_string(record[:weather])
+      weather: parse_nullable_string(record[:weather]),
+      attributions: [attribution],
+      created_at: Time.now,
+      updated_at: Time.now
     })
   end
 

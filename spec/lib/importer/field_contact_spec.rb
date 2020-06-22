@@ -87,18 +87,6 @@ describe Importer::FieldContact do
       expect(fc.attributions).to eql([attribution])
     end
 
-    it "associates the record with a contact officer" do
-      o = Officer.create({employee_id: 153458})
-      importer.import
-      expect(FieldContact.first.contact_officer).to eql(o)
-    end
-
-    it "associates the record with a supervisor" do
-      o = Officer.create({employee_id: 12114})
-      importer.import
-      expect(FieldContact.first.supervisor).to eql(o)
-    end
-
     it "creates one record if record imported twice" do
       2.times { importer.import }
       expect(FieldContact.count).to eql(1)

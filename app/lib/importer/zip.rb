@@ -15,14 +15,14 @@ class Importer::Zip < Importer::Importer
   end
 
   def import_record(record)
-    ZipCode.create({
+    ZipCode.insert({
       zip: record[:zip],
       city: record[:city],
       state: record[:state],
       latitude: record[:latitude],
-      longitude: record[:longitude]
+      longitude: record[:longitude],
+      created_at: Time.now,
+      updated_at: Time.now
     })
-  rescue ActiveRecord::RecordNotUnique
-    # ignore
   end
 end

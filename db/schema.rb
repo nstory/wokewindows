@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2020_06_20_163745) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "compensations", force: :cascade do |t|
-    t.integer "officer_id"
+    t.bigint "officer_id"
     t.string "name"
     t.string "department_name"
     t.string "title"
@@ -34,8 +37,8 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
   end
 
   create_table "complaint_officers", force: :cascade do |t|
-    t.integer "complaint_id"
-    t.integer "officer_id"
+    t.bigint "complaint_id"
+    t.bigint "officer_id"
     t.string "name"
     t.string "title"
     t.string "badge"
@@ -62,7 +65,7 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
   end
 
   create_table "field_contact_names", force: :cascade do |t|
-    t.integer "field_contact_id"
+    t.bigint "field_contact_id"
     t.string "fc_num"
     t.string "contact_date"
     t.string "sex"
@@ -110,8 +113,8 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
     t.string "weather"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "contact_officer_id"
-    t.integer "supervisor_id"
+    t.bigint "contact_officer_id"
+    t.bigint "supervisor_id"
     t.integer "field_contact_names_count", default: 0, null: false
     t.text "attributions"
     t.index ["contact_date"], name: "index_field_contacts_on_contact_date"
@@ -121,8 +124,8 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
   end
 
   create_table "incident_officers", force: :cascade do |t|
-    t.integer "incident_id"
-    t.integer "officer_id"
+    t.bigint "incident_id"
+    t.bigint "officer_id"
     t.string "journal_officer"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -131,7 +134,6 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
   end
 
   create_table "incidents", force: :cascade do |t|
-    t.integer "incident_number"
     t.string "district"
     t.integer "reporting_area"
     t.boolean "shooting"
@@ -146,13 +148,14 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "arrests_json"
+    t.integer "incident_number"
     t.text "attributions"
     t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
     t.index ["occurred_on_date"], name: "index_incidents_on_occurred_on_date"
   end
 
   create_table "offenses", force: :cascade do |t|
-    t.integer "incident_id"
+    t.bigint "incident_id"
     t.integer "code"
     t.string "code_group"
     t.string "description"

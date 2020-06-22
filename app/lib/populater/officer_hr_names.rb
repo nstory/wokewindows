@@ -76,7 +76,7 @@ class Populater::OfficerHrNames
   # table. this means the name is ambiguous and we can't use
   # it for matching
   def self.duplicate_names
-    Compensation.connection.select_all('select year, name, count(*) as count from compensations group by year, name having count > 1').pluck("name").uniq
+    Compensation.connection.select_all('select year, name, count(*) as count from compensations group by year, name having count(*) > 1').pluck("name").uniq
   end
 
   def self.all_names

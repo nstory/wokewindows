@@ -35,6 +35,7 @@ gem 'counter_culture', '~> 2.5.1'
 gem 'ajax-datatables-rails', '1.2.0'
 gem 'high_voltage', '~> 3.1.2'
 gem 'metainspector', '~> 5.10.0'
+gem 'pg', '~> 1.2.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

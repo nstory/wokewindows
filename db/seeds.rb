@@ -31,9 +31,10 @@ Populater::IncidentOfficers.populate
 # set officer field on each Compensation object
 Populater::Compensations.populate
 
-# bring in field contacts (the importer also sets the associations)
+# bring in field contacts
 Importer::FieldContact.import_all
 Importer::FieldContactName.import_all
+Populater::FieldContactOfficers.populate
 
 # bring in internal affairs complaints
 Importer::BpdIaData.import_all
