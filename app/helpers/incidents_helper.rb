@@ -7,6 +7,7 @@ module IncidentsHelper
   end
 
   def format_incident_officers(ios)
+    return format_unknown if ios.empty?
     items = ios.map do |io|
       if io.officer
         link_to(io.journal_officer, officer_path(io.officer))

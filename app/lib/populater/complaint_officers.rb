@@ -26,7 +26,7 @@ class Populater::ComplaintOfficers
   private
   def self.populate_group(group, officers)
     group.each do |co|
-      # this is some ugly quadratic-ish bull
+      # this is some ugly quadratic bull****
       matching = officers.select do |off|
         match(co, off)
       end
@@ -46,14 +46,19 @@ class Populater::ComplaintOfficers
       return HARD_CODED_MAPPING[co.name] == off.hr_name
     end
 
-    # 2001-2011 data have badge numbers
-    if co.badge
-      return false if !off.badge
-      return false if off.badge.to_i != co.badge.to_i
-      regexp(co.name) =~ off.hr_name || regexp(off.hr_name) =~ co.name
-    else # 2014 data just have names
-      regexp(reverse_name(off.hr_name)) =~ co.name
-    end
+    # Officer.hr_name is in the format "Kirk,James T"
+    # 2014 IA data has names like "Ptl James T T Kirk"
+    # so, turn hr_name into /.*James.*T.*Kirk.*/ and see if it matches
+    return true if regexp(reverse_name(off.hr_name)) =~ co.name
+
+    # 2001-2011 IA data has names like "Kirk,James T" (very similar to hr_name),
+    # so try matching against /.*Kirk.*James.*T.*/
+    return true if regexp(off.hr_name) =~ co.name
+
+    # also try in reverse (matching ComplaintOfficer.name regexp against hr_name)
+    return true if regexp(co.name) =~ off.hr_name
+
+    return false
   end
 
   def self.regexp(name)

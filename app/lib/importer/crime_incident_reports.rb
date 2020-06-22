@@ -4,7 +4,7 @@ class Importer::CrimeIncidentReports < Importer::Importer
 
   def self.import_all
     parser = Parser::CrimeIncidentReports.new(
-      "data/crime_incidents_reports_20200611.csv"
+      "data/crime_incidents_reports_20200621.csv"
     )
     new(parser).import
   end

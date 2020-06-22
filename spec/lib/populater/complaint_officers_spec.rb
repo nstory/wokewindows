@@ -43,15 +43,6 @@ describe Populater::ComplaintOfficers do
     expect(complaint_officer_2.reload.officer).to eql(officer)
   end
 
-  it "requires a badge" do
-    officer.badge = nil
-    officer.save
-    complaint_officer_2.badge = nil
-    complaint_officer_2.save
-    Populater::ComplaintOfficers.populate
-    expect(complaint_officer_2.reload.officer).to eql(nil)
-  end
-
   it "matches a 2014 data name" do
     complaint_officer_2.name = "Ptl James T T Kirk"
     complaint_officer_2.badge = nil

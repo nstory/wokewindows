@@ -21,9 +21,9 @@
             <dt class="col-lg-4">Street</dt>
             <dd class="col-lg-8"><%= format_text(@incident.street) %></dd>
             <dt class="col-lg-4">Location</dt>
-            <dd class="col-lg-8"><%= safe_join(@incident.location_of_occurrence, ", ") %></dd>
+            <dd class="col-lg-8"><%= format_array(@incident.location_of_occurrence) %></dd>
             <dt class="col-lg-4">Nature of Incident</dt>
-            <dd class="col-lg-8"><%= safe_join(@incident.nature_of_incident, ", ") %></dd>
+            <dd class="col-lg-8"><%= format_array(@incident.nature_of_incident) %></dd>
             <dt class="col-lg-4">Lat/Long</dt>
             <dd class="col-lg-8"><%= format_lat_long(@incident.latitude, @incident.longitude) %></dd>
             <dt class="col-lg-4">Officer(s)</dt>

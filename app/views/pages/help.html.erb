@@ -218,8 +218,46 @@
       </table>
 
       <h3 id="district_journal">Public Journal</h3>
-      <p>On an almost daily basis, The Boston Police Department posts a public journal of incidents officers repsonded to on its official website <a href="https://bpdnews.com/">bpdnews.com</a></p>
+      <p>On an almost daily basis, The Boston Police Department posts a public journal of the incident reports filed by officers on <a href="https://bpdnews.com/">bpdnews.com</a></p>
       <p>This data is similar to and overlaps with that provided by the <a href="#crime_incident_reports">Crime Incident Reports</a>. However, the journals provide some additional information: the officer who responded, and any arrests that were made.</p>
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Report Date &amp; Time</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Complaint #</td>
+            <td>this can be joined with the <code>INCIDENT_NUMBER</code> field from the <a href="#crime_incident_reports">Crime Incident Reports</a>; the number may be prefixed with the letter <i>I</i> or have a trailing <i>-00</i> I remove these leaving just a nine-digit number</td>
+          </tr>
+          <tr>
+            <td>Occurrence Date &amp; Time</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Officer</td>
+            <td>the employee id of a police officer and name; I believe this is the "Reporting Officer" &mdash; sometimes the employee id and the officer name are mismatched, possibly due to human errors in transcription</td>
+          </tr>
+          <tr>
+            <td>Location of Occurrence</td>
+            <td>this is similar to the <code>STREET</code> field in the <a href="#crime_incident_reports">Crime Incident Reports</a>, but is sometimes more specific</td>
+          </tr>
+          <tr>
+            <td>Nature of Incident</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Arrests</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
 
       <h3 id="field_contact">FIO Records FieldContact Table</h3>
       <p><a href="https://data.boston.gov/dataset/boston-police-department-fio">https://data.boston.gov/dataset/boston-police-department-fio</a></p>
