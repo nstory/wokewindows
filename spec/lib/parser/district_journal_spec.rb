@@ -108,4 +108,20 @@ describe Parser::DistrictJournal do
       expect(record_100[:location_of_occurrence]).to eql("1415 HYDE PARK AVE")
     end
   end
+
+  describe "#likely_journal?" do
+    it "is true for a district journal" do
+      p = Parser::DistrictJournal.new(
+        file_fixture("district_journal.pdf")
+      )
+      expect(p.likely_journal?).to eql(true)
+    end
+
+    it "is false for a random file" do
+      p = Parser::DistrictJournal.new(
+        file_fixture("sample_zipcode.csv")
+      )
+      expect(p.likely_journal?).to eql(false)
+    end
+  end
 end

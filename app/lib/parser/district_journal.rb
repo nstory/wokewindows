@@ -9,6 +9,11 @@ class Parser::DistrictJournal < Parser::Parser
     "https://bpdnews.com/s/#{pathname.basename.to_s}"
   end
 
+  def likely_journal?
+    contents = IO.read(@filename, mode: "rb")
+    contents.include?("Microsoft Reporting Services")
+  end
+
   # the number of records the document claims to contain
   def record_count
     pair = text_blocks.each_cons(2)
