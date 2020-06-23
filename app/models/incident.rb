@@ -1,6 +1,7 @@
 class Incident < ApplicationRecord
   include Attributable
   include Offenses
+  include BagOfText
 
   belongs_to :officer, optional: true
 
@@ -9,6 +10,10 @@ class Incident < ApplicationRecord
   serialize :arrests_json, Array
 
   counter_culture :officer
+
+  def bag_of_text_content
+    [district, location_of_occurrence, street, nature_of_incident, officer_journal_name, offenses.map(&:description).join(" ")]
+  end
 
   def arrests=(arr)
     self.arrests_json = arr.map(&:as_json)

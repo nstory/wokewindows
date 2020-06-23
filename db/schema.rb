@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_131846) do
+ActiveRecord::Schema.define(version: 2020_06_23_155715) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "compensations", force: :cascade do |t|
@@ -143,6 +144,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_131846) do
     t.bigint "officer_id"
     t.string "officer_journal_name"
     t.jsonb "offenses", default: []
+    t.text "bag_of_text"
+    t.index ["bag_of_text"], name: "incidents_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
     t.index ["occurred_on_date"], name: "index_incidents_on_occurred_on_date"
     t.index ["officer_id"], name: "index_incidents_on_officer_id"

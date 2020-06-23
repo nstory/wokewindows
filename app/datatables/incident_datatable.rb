@@ -3,18 +3,15 @@ class IncidentDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       incident_number: {source: "Incident.incident_number", cond: :eq},
-      occurred_on_date: {source: "Incident.occurred_on_date"},
-      district: {source: "Incident.district"},
+      occurred_on_date: {source: "Incident.occurred_on_date", searchable: false},
+      district: {source: "Incident.district", searchable: false},
       shooting: {source: "Incident.shooting", searchable: false},
-      location_of_occurrence: {source: "Incident.location_of_occurrence"},
-      street: {source: "Incident.street"},
-      nature_of_incident: {source: "Incident.nature_of_incident"},
+      location_of_occurrence: {source: "Incident.location_of_occurrence", searchable: false},
+      street: {source: "Incident.street", searchable: false},
+      nature_of_incident: {source: "Incident.nature_of_incident", searchable: false},
       offenses: {source: "Incident.offenses", searchable: false, orderable: false},
-      officer_journal_name: {source: "Incident.officer_journal_name"}
-      # officers: {searchable: false, orderable: false}
-
-      # id: { source: "User.id", cond: :eq },
-      # name: { source: "User.name", cond: :like }
+      officer_journal_name: {source: "Incident.officer_journal_name", searchable: false},
+      bag_of_text: {source: "Incident.bag_of_text", searchable: true, orderable: false}
     }
   end
 

@@ -42,4 +42,12 @@ describe Incident do
       expect(incident.offenses).to eql([offense])
     end
   end
+
+  describe ".bag_of_text" do
+    let(:incident) { Incident.new(incident_number: 123, street: "XYZZY") }
+    it "puts the street in the bag of text" do
+      incident.save
+      expect(incident.bag_of_text).to match(/XYZZY/)
+    end
+  end
 end
