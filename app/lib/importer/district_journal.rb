@@ -34,7 +34,6 @@ class Importer::DistrictJournal < Importer::Importer
       record[:arrests].each do |arrest|
         add_to_array(inc, :arrests_json, parse_arrest(arrest))
       end
-      add_officer(inc, record[:officer])
       inc.add_attribution(attribution)
     end
 
@@ -45,7 +44,8 @@ class Importer::DistrictJournal < Importer::Importer
     {
       incident_number: parse_incident_number(record[:complaint_number]),
       occurred_on_date: parse_date(record[:occurrence_date_time]),
-      report_date: parse_date(record[:report_date_time])
+      report_date: parse_date(record[:report_date_time]),
+      officer_journal_name: parse_string(record[:officer])
     }
   end
 
@@ -54,13 +54,6 @@ class Importer::DistrictJournal < Importer::Importer
     current = (incident.send(field) || [])
     return if current.include?(item)
     incident.attributes = {field => (current + [item])}
-  end
-
-  def add_officer(incident, journal_name)
-    return if journal_name.blank?
-    current = incident.incident_officers.map(&:journal_officer)
-    return if current.include?(journal_name)
-    incident.incident_officers << IncidentOfficer.new(journal_officer: journal_name)
   end
 
   def parse_arrest(arrest)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_163745) do
+ActiveRecord::Schema.define(version: 2020_06_22_231325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -123,16 +123,6 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
     t.index ["supervisor_id"], name: "index_field_contacts_on_supervisor_id"
   end
 
-  create_table "incident_officers", force: :cascade do |t|
-    t.bigint "incident_id"
-    t.bigint "officer_id"
-    t.string "journal_officer"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["incident_id"], name: "index_incident_officers_on_incident_id"
-    t.index ["officer_id"], name: "index_incident_officers_on_officer_id"
-  end
-
   create_table "incidents", force: :cascade do |t|
     t.string "district"
     t.integer "reporting_area"
@@ -150,8 +140,11 @@ ActiveRecord::Schema.define(version: 2020_06_20_163745) do
     t.text "arrests_json"
     t.integer "incident_number"
     t.text "attributions"
+    t.bigint "officer_id"
+    t.string "officer_journal_name"
     t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
     t.index ["occurred_on_date"], name: "index_incidents_on_occurred_on_date"
+    t.index ["officer_id"], name: "index_incidents_on_officer_id"
   end
 
   create_table "offenses", force: :cascade do |t|

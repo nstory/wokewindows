@@ -25,12 +25,11 @@ describe Importer::DistrictJournal do
     expect(inc.report_date).to eql("2018-01-04 00:21:00")
     expect(inc.location_of_occurrence).to eql(["A1 - 101 BROAD ST"])
     expect(inc.nature_of_incident).to eql(["ASSAULT SIMPLE - BATTERY"])
-    expect(inc.incident_officers.count).to eql(1)
-    expect(inc.incident_officers.first.journal_officer).to eql("042  JAMES KIRK")
     expect(inc.arrests.count).to eql(1)
     expect(inc.arrests.first.name).to eql("MXXXX, BXXXX")
     expect(inc.arrests.first.charge).to eql("Assault - Assault & Battery")
     expect(inc.attributions).to eql([attribution])
+    expect(inc.officer_journal_name).to eql("042  JAMES KIRK")
   end
 
   it "updates existing record" do
@@ -47,7 +46,7 @@ describe Importer::DistrictJournal do
     expect(Incident.count).to eql(1)
   end
 
-  it "doesn't dup location_of_occurrence or nature_of_incident or incident_officers or arrests or attributions" do
+  it "doesn't dup location_of_occurrence or nature_of_incident or arrests or attributions" do
     importer.import
     records.push(record)
     importer.import
@@ -55,7 +54,6 @@ describe Importer::DistrictJournal do
     inc = Incident.last
     expect(inc.location_of_occurrence).to eql(["A1 - 101 BROAD ST"])
     expect(inc.nature_of_incident).to eql(["ASSAULT SIMPLE - BATTERY"])
-    expect(inc.incident_officers.count).to eql(1)
     expect(inc.arrests.count).to eql(1)
     expect(inc.attributions).to eql([attribution])
   end
@@ -73,7 +71,7 @@ describe Importer::DistrictJournal do
   it "doesn't add blank officer" do
     record[:officer] = ""
     importer.import
-    expect(Incident.first.incident_officers.count).to eql(0)
+    expect(Incident.first.officer_journal_name).to eql(nil)
   end
 
   it "doesn't add an arrest where name starts with a number" do

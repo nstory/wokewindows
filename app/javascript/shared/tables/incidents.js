@@ -15,7 +15,7 @@ initDataTable("table.incidents-table", function($table, options) {
       {data: "street", render: text_renderer},
       {data: "nature_of_incident", render: see_more_renderer},
       {data: "offenses", render: see_more_renderer},
-      {data: "incident_officers", render: see_more_renderer}
+      {data: "officer_journal_name", render: text_renderer}
     ],
     order: [[1, 'desc']]
   });

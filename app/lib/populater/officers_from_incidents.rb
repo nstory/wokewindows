@@ -1,4 +1,4 @@
-class Populater::OfficersFromIncidentOfficers
+class Populater::OfficersFromIncidents
 
   def self.populate
     id_to_name = employee_id_to_employee_name
@@ -19,7 +19,7 @@ class Populater::OfficersFromIncidentOfficers
 
   private
 
-  # generated from incident_officers table. the table contains mistakes
+  # generated from incidents table. the table contains mistakes
   # where the wrong id is used for an officer (I guess it's manually
   # entered by someone?). we assume the name that's used most often
   # with an id is correct
@@ -27,10 +27,10 @@ class Populater::OfficersFromIncidentOfficers
     # create a hash with count of names with each id:
     # hash[employee_id][employee_name] = count
     hash = Hash.new { |h,k| h[k] = Hash.new(0) }
-    IncidentOfficer.find_each
-      .select(&:employee_id)
-      .each do |io|
-      hash[io.employee_id][io.employee_name] += 1
+    Incident.find_each
+      .select(&:officer_journal_name_id)
+      .each do |o|
+      hash[o.officer_journal_name_id][o.officer_journal_name_name] += 1
     end
 
     # create a new hash with the most popular name for each id:

@@ -25,7 +25,7 @@ class ComplaintDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    q = Complaint.includes(:complaint_officers).references(:incident_officers).distinct
+    q = Complaint.includes(:complaint_officers).references(:complaint_officers).distinct
     if params[:officer_id]
       q = q.where("complaint_officers.officer_id" => params[:officer_id])
     end

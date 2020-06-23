@@ -27,4 +27,21 @@ describe Incident do
       ).to eql(nil)
     end
   end
+
+  describe ".officer_journal_name_id and .officer_journal_name_name" do
+    let(:valid) { Incident.new(officer_journal_name: "1234  FOO BAR") }
+    let(:invalid) { Incident.new(officer_journal_name: "3  FOO BAR") }
+    let(:zi_zou) { Incident.new(officer_journal_name: "148321   ZI ZOU") }
+
+    it "parses valid" do
+      expect(valid.officer_journal_name_id).to eql(1234)
+      expect(valid.officer_journal_name_name).to eql("FOO BAR")
+      expect(zi_zou.officer_journal_name_name).to eql("ZI ZOU")
+    end
+
+    it "returns nil if id is invalid" do
+      expect(invalid.officer_journal_name_id).to eql(nil)
+      expect(invalid.officer_journal_name_name).to eql(nil)
+    end
+  end
 end

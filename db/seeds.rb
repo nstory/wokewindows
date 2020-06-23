@@ -16,16 +16,16 @@ Importer::EmployeeEarnings.import_all
 # Load BPD employee lists (these include empl_id field)
 Importer::EmployeeListing.import_all
 
-# Discover more BPD employees from incident_officers table, which was
+# Discover more BPD employees from incidents table, which was
 # created by Importer::DistrictJournal above
-Populater::OfficersFromIncidentOfficers.populate
+Populater::OfficersFromIncidents.populate
 
 # use fuzzy matching to populate hr_name for officers where we
 # just have a journal_name (necessary so we can associate compensation
 # with each officer later)
 Populater::OfficerHrNames.populate
 
-# set officer field on each IncidentOfficer object
+# set officer field on each Incident object
 Populater::IncidentOfficers.populate
 
 # set officer field on each Compensation object
@@ -46,7 +46,7 @@ Importer::Zip.import_all
 
 # update caches
 FieldContact.counter_culture_fix_counts
-IncidentOfficer.counter_culture_fix_counts
 FieldContactName.counter_culture_fix_counts
+Incident.counter_culture_fix_counts
 Populater::Officers.populate
 Populater::FieldContacts.populate

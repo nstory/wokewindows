@@ -6,16 +6,13 @@ module IncidentsHelper
     "(#{lat}, #{long})"
   end
 
-  def format_incident_officers(ios)
-    return format_unknown if ios.empty?
-    items = ios.map do |io|
-      if io.officer
-        link_to(io.journal_officer, officer_path(io.officer))
-      else
-        io.journal_officer
-      end
+  def format_incident_officer(incident)
+    return format_unknown if incident.officer_journal_name.blank?
+    if incident.officer
+      link_to(incident.officer_journal_name, officer_path(incident.officer))
+    else
+      incident.officer_journal_name
     end
-    safe_join(items, ", ")
   end
 
   def format_shooting(bool)

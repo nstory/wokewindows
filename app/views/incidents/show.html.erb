@@ -26,8 +26,8 @@
             <dd class="col-lg-8"><%= format_array(@incident.nature_of_incident) %></dd>
             <dt class="col-lg-4">Lat/Long</dt>
             <dd class="col-lg-8"><%= format_lat_long(@incident.latitude, @incident.longitude) %></dd>
-            <dt class="col-lg-4">Officer(s)</dt>
-            <dd class="col-lg-8"><%= format_incident_officers(@incident.incident_officers) %></dd>
+            <dt class="col-lg-4">Officer</dt>
+            <dd class="col-lg-8"><%= format_incident_officer(@incident) %></dd>
           </dl>
         </div>
         <div class="col-md-6">

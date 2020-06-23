@@ -1,31 +1,22 @@
 describe Populater::IncidentOfficers do
-  def create_incident_officer(journal_officer, number)
-    Incident.create!({
-      incident_number: number,
-      incident_officers: [
-        IncidentOfficer.new({
-          journal_officer: journal_officer
-        })
-      ]
-    })
-  end
+  let!(:incident) { Incident.create(incident_number: 1, officer_journal_name: "4242  LOL ROFL") }
+  let!(:officer) { Officer.create(employee_id: 4242, journal_name: "LOL ROFL") }
 
   it "associates" do
-    inc = create_incident_officer("4242  LOL ROFL", 1)
-    off = Officer.create(employee_id: 4242, journal_name: "LOL ROFL")
     Populater::IncidentOfficers.populate
-    expect(off.incidents.to_a).to eql([inc])
+    expect(officer.incidents.to_a).to eql([incident])
+    expect(incident.reload.officer).to eql(officer)
   end
 
   it "doesn't associate if wrong" do
-    create_incident_officer("4242  XOX ROFL", 1)
-    off = Officer.create(employee_id: 4242, journal_name: "LOL ROFL")
+    incident.officer_journal_name = "4242  XOX ROFL"
+    incident.save
     Populater::IncidentOfficers.populate
-    expect(off.incidents.to_a).to eql([])
+    expect(officer.incidents.to_a).to eql([])
   end
 
   it "is okay if officer doesn't exist" do
-    create_incident_officer("4242  LOL ROFL", 1)
+    officer.delete
     Populater::IncidentOfficers.populate
   end
 end
