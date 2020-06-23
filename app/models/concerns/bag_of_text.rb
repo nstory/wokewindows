@@ -10,6 +10,7 @@ module BagOfText
   end
 
   def update_bag_of_text
-    self.bag_of_text = bag_of_text_content.join(" ## ")
+    self.bag_of_text = bag_of_text_content.flatten
+      .join(" ").split(/\s+/).uniq.join(" ")
   end
 end

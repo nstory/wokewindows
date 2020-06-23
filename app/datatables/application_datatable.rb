@@ -24,7 +24,12 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
       end.reduce(:or)
       bag_of_text_class = get_bag_of_text_class
       if bag_of_text_class
-        disjunction = disjunction.or(bag_of_text_class.arel_table[:bag_of_text].matches("%#{atom}%"))
+        bag_of_text_query = bag_of_text_class.arel_table[:bag_of_text].matches("%#{atom}%")
+        if disjunction
+          disjunction = disjunction.or(bag_of_text_query)
+        else
+          disjunction = bag_of_text_query
+        end
       end
       crit << disjunction
     end.compact.reduce(:and)

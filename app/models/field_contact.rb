@@ -1,5 +1,6 @@
 class FieldContact < ApplicationRecord
   include Attributable
+  include BagOfText
 
   serialize :key_situations, JSON
 
@@ -8,6 +9,10 @@ class FieldContact < ApplicationRecord
   has_many :field_contact_names, dependent: :delete_all
 
   counter_culture :contact_officer
+
+  def bag_of_text_content
+    [contact_officer_name, supervisor_name, street, city, state, frisked_searched, stop_duration, circumstance, basis, vehicle_state, vehicle_make, vehicle_model, vehicle_color, vehicle_style, vehicle_type, key_situations, narrative, weather]
+  end
 
   # use fc_num for resource urls
   def to_param

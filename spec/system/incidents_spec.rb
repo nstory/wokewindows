@@ -1,4 +1,4 @@
-describe "Incidents", type: :system do
+describe "Incidents" do
   describe "index" do
     let(:offense) { Offense.new(code: 123, description: "chicanery") }
     let!(:incident) { Incident.create(incident_number: 123, street: "sesame", offenses: [offense]) }

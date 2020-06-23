@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_155715) do
+ActiveRecord::Schema.define(version: 2020_06_23_183945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_155715) do
     t.string "occurred_date"
     t.string "summary"
     t.text "attributions"
+    t.text "bag_of_text"
+    t.index ["bag_of_text"], name: "complaints_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["ia_number"], name: "index_complaints_on_ia_number", unique: true
   end
 
@@ -118,6 +120,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_155715) do
     t.bigint "supervisor_id"
     t.integer "field_contact_names_count", default: 0, null: false
     t.text "attributions"
+    t.text "bag_of_text"
+    t.index ["bag_of_text"], name: "field_contacts_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["contact_date"], name: "index_field_contacts_on_contact_date"
     t.index ["contact_officer_id"], name: "index_field_contacts_on_contact_officer_id"
     t.index ["fc_num"], name: "index_field_contacts_on_fc_num", unique: true
@@ -173,6 +177,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_155715) do
     t.integer "postal"
     t.integer "complaints_count", default: 0, null: false
     t.text "attributions"
+    t.text "bag_of_text"
+    t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
   end
 

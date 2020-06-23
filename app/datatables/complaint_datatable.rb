@@ -1,12 +1,13 @@
 class ComplaintDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
-      ia_number: {source: "Complaint.ia_number"},
-      case_number: {source: "Complaint.case_number"},
-      incident_type: {source: "Complaint.incident_type"},
-      received_date: {source: "Complaint.received_date"},
-      occurred_date: {source: "Complaint.occurred_date"},
-      complaint_officers: {source: "ComplaintOfficer.name"}
+      ia_number: {source: "Complaint.ia_number", searchable: false},
+      case_number: {source: "Complaint.case_number", searchable: false},
+      incident_type: {source: "Complaint.incident_type", searchable: false},
+      received_date: {source: "Complaint.received_date", searchable: false},
+      occurred_date: {source: "Complaint.occurred_date", searchable: false},
+      complaint_officers: {source: "ComplaintOfficer.name", searchable: false},
+      bag_of_text: {source: "Complaint.bag_of_text", searchable: false, orderable: false}
     }
   end
 
