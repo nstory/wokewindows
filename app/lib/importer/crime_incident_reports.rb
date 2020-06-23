@@ -28,7 +28,7 @@ class Importer::CrimeIncidentReports < Importer::Importer
       if attr[:incident_number]
         incident = by_number[attr[:incident_number]]
         incident.attributes = attr
-        add_offense(incident, record)
+        incident.add_offense(map_offense(record))
         incident.add_attribution(attribution)
       end
     end
@@ -50,24 +50,11 @@ class Importer::CrimeIncidentReports < Importer::Importer
     }
   end
 
-  def add_offense(incident, record)
-    mapped = map_offense(record)
-    present = incident.offenses.to_a.any? do |o|
-      o.code == mapped[:code] &&
-        o.code_group == mapped[:code_group] &&
-        o.description == mapped[:description]
-    end
-
-    if !present
-      incident.offenses << Offense.new(mapped)
-    end
-  end
-
   def map_offense(record)
-    {
+    Offense.new(
       code: record[:offense_code].to_i,
       code_group: parse_string(record[:offense_code_group]),
       description: parse_string(record[:offense_description])
-    }
+    )
   end
 end

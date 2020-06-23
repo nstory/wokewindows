@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_22_231325) do
+ActiveRecord::Schema.define(version: 2020_06_23_131846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,19 +142,10 @@ ActiveRecord::Schema.define(version: 2020_06_22_231325) do
     t.text "attributions"
     t.bigint "officer_id"
     t.string "officer_journal_name"
+    t.jsonb "offenses", default: []
     t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
     t.index ["occurred_on_date"], name: "index_incidents_on_occurred_on_date"
     t.index ["officer_id"], name: "index_incidents_on_officer_id"
-  end
-
-  create_table "offenses", force: :cascade do |t|
-    t.bigint "incident_id"
-    t.integer "code"
-    t.string "code_group"
-    t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["incident_id"], name: "index_offenses_on_incident_id"
   end
 
   create_table "officers", force: :cascade do |t|

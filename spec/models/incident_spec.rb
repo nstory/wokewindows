@@ -8,26 +8,6 @@ describe Incident do
     end
   end
 
-  describe ".location" do
-    it "prefers location_of_occurrence" do
-      expect(
-        Incident.new(street: "XX", location_of_occurrence: ["AA", "BB"]).location
-      ).to eql("AA")
-    end
-
-    it "uses street otherwise if no location_of_occurrence" do
-      expect(
-        Incident.new(street: "XX", location_of_occurrence: []).location
-      ).to eql("XX")
-    end
-
-    it "is nil otherwise" do
-      expect(
-        Incident.new(street: nil, location_of_occurrence: []).location
-      ).to eql(nil)
-    end
-  end
-
   describe ".officer_journal_name_id and .officer_journal_name_name" do
     let(:valid) { Incident.new(officer_journal_name: "1234  FOO BAR") }
     let(:invalid) { Incident.new(officer_journal_name: "3  FOO BAR") }
@@ -42,6 +22,24 @@ describe Incident do
     it "returns nil if id is invalid" do
       expect(invalid.officer_journal_name_id).to eql(nil)
       expect(invalid.officer_journal_name_name).to eql(nil)
+    end
+  end
+
+  describe ".add_offense" do
+    let(:incident) { Incident.new(incident_number: 123) }
+    let(:offense) { Offense.new(code: 123, code_group: "abc", description: "xyz") }
+
+    it "adds an offense" do
+      incident.add_offense(offense)
+      expect(incident.offenses).to eql([offense])
+      incident.save
+      expect(incident.reload.offenses).to eql([offense])
+    end
+
+    it "doesn't duplicate offenses" do
+      incident.add_offense(offense)
+      incident.add_offense(offense)
+      expect(incident.offenses).to eql([offense])
     end
   end
 end

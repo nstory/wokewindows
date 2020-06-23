@@ -11,9 +11,7 @@ class Importer::Importer
   def incidents_by_number(numbers)
     by_number = Hash.new { |h,k| h[k] = Incident.new }
     by_number.merge!(
-      Incident.includes(:offenses)
-        .where(incident_number: numbers)
-        .index_by(&:incident_number)
+      Incident.where(incident_number: numbers).index_by(&:incident_number)
     )
     by_number
   end

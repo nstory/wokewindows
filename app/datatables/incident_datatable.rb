@@ -9,7 +9,7 @@ class IncidentDatatable < ApplicationDatatable
       location_of_occurrence: {source: "Incident.location_of_occurrence"},
       street: {source: "Incident.street"},
       nature_of_incident: {source: "Incident.nature_of_incident"},
-      offenses: {source: "Offense.description"},
+      offenses: {source: "Incident.offenses", searchable: false, orderable: false},
       officer_journal_name: {source: "Incident.officer_journal_name"}
       # officers: {searchable: false, orderable: false}
 
@@ -36,7 +36,7 @@ class IncidentDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    q = Incident.includes(:offenses).references(:offenses).distinct
+    q = Incident.all
     if params[:officer_id]
       q = q.where("officer_id" => params[:officer_id])
     end

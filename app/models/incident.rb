@@ -1,7 +1,7 @@
 class Incident < ApplicationRecord
   include Attributable
+  include Offenses
 
-  has_many :offenses
   belongs_to :officer, optional: true
 
   serialize :location_of_occurrence, Array
@@ -16,14 +16,6 @@ class Incident < ApplicationRecord
 
   def arrests
     (arrests_json || []).map { |o| a = Arrest.new; a.attributes = o; a }
-  end
-
-  def location
-    if !location_of_occurrence.blank?
-      location_of_occurrence.first
-    else
-      street
-    end
   end
 
   # use incident_number for resource urls

@@ -44,8 +44,12 @@ describe Importer::CrimeIncidentReports do
     expect(inc.street).to eql("DAY ST")
     expect(inc.latitude).to eql(42.325122)
     expect(inc.longitude).to eql(-71.107779)
-    expect(inc.offenses.count).to eql(2)
     expect(inc.attributions).to eql([attribution])
+    expect(inc.offenses.count).to eql(2)
+    offense = inc.offenses.find { |o| o.code == 42 }
+    expect(offense.code).to eql(42)
+    expect(offense.code_group).to eql("lol")
+    expect(offense.description).to eql("ROFL")
   end
 
   it "updates an existing record" do
@@ -59,7 +63,7 @@ describe Importer::CrimeIncidentReports do
     records.push(record)
     importer.import
     expect(Incident.count).to eql(1)
-    expect(Offense.count).to eql(1)
+    expect(Incident.first.offenses.count).to eql(1)
   end
 
   it "rejects bizarre incident number" do
@@ -74,9 +78,10 @@ describe Importer::CrimeIncidentReports do
     record[:lat] = ""
     record[:offense_code_group] = ""
     importer.import
-    expect(Incident.last.ucr_part).to eql(nil)
-    expect(Incident.last.reporting_area).to eql(nil)
-    expect(Incident.last.latitude).to eql(nil)
-    expect(Offense.first.code_group).to eql(nil)
+    inc = Incident.last
+    expect(inc.ucr_part).to eql(nil)
+    expect(inc.reporting_area).to eql(nil)
+    expect(inc.latitude).to eql(nil)
+    expect(inc.offenses.first.code_group).to eql(nil)
   end
 end
