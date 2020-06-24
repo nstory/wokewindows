@@ -5,7 +5,7 @@ class Complaint < ApplicationRecord
   has_many :complaint_officers, dependent: :delete_all
 
   def bag_of_text_content
-    [ia_number, summary, incident_type, complaint_officers.map(&:name)]
+    [ia_number, summary, incident_type, complaint_officers.map(&:name), finding]
   end
 
   # use ia_number for resource urls
@@ -13,7 +13,15 @@ class Complaint < ApplicationRecord
     ia_number
   end
 
+  def finding
+    findings = complaint_officers.map(&:finding)
+    return nil if findings.empty?
+    uniq = findings.uniq
+    return uniq.first if uniq.count == 1
+    "Mixed"
+  end
+
   def self.by_ia_number(numbers)
-    Complaint.where(ia_number: numbers).index_by(&:ia_number)
+    Complaint.includes(:complaint_officers).where(ia_number: numbers).index_by(&:ia_number)
   end
 end

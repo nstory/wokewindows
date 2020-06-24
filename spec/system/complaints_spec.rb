@@ -1,6 +1,6 @@
 describe "Complaints" do
   describe "index" do
-    let(:complaint_officer) { ComplaintOfficer.new(name: "Ptl James Kirk") }
+    let(:complaint_officer) { ComplaintOfficer.new(name: "Ptl James Kirk", finding: "Sustained") }
     let!(:complaint) { Complaint.create(ia_number: "123", summary: "foobar", complaint_officers: [complaint_officer]) }
     describe "searching" do
       before do
@@ -23,6 +23,11 @@ describe "Complaints" do
       it "searches officer name" do
         fill_in "Search", with: "kirk"
         expect(page).to have_selector("td", text: "123")
+      end
+
+      it "searches finding" do
+        fill_in "Search", with: "sustained"
+        expect(page).to have_selector("td", text: "Sustained")
       end
     end
   end

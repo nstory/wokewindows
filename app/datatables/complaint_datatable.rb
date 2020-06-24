@@ -4,8 +4,8 @@ class ComplaintDatatable < ApplicationDatatable
       ia_number: {source: "Complaint.ia_number", searchable: false},
       case_number: {source: "Complaint.case_number", searchable: false},
       incident_type: {source: "Complaint.incident_type", searchable: false},
-      received_date: {source: "Complaint.received_date", searchable: false},
-      occurred_date: {source: "Complaint.occurred_date", searchable: false},
+      received_date: {source: "Complaint.received_date", searchable: false, nulls_last: true},
+      occurred_date: {source: "Complaint.occurred_date", searchable: false, nulls_last: true},
       complaint_officers: {source: "ComplaintOfficer.name", searchable: false},
       bag_of_text: {source: "Complaint.bag_of_text", searchable: false, orderable: false}
     }
@@ -20,7 +20,8 @@ class ComplaintDatatable < ApplicationDatatable
         incident_type: record.incident_type,
         received_date: record.received_date,
         occurred_date: record.occurred_date,
-        complaint_officers: record.complaint_officers.map(&:name)
+        finding: record.finding,
+        complaint_officers: record.complaint_officers.map(&:name).uniq
       }
     end
   end

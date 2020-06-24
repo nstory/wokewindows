@@ -50,4 +50,13 @@ describe Populater::ComplaintOfficers do
     Populater::ComplaintOfficers.populate
     expect(complaint_officer_2.reload.officer).to eql(officer)
   end
+
+  it "matches a name" do
+    complaint_officer_2.name = "Sullivan-Venezia,James Michael"
+    complaint_officer_2.save
+    officer.hr_name = "Sullivan-Venezia,James Michael"
+    officer.save
+    Populater::ComplaintOfficers.populate
+    expect(complaint_officer_2.reload.officer).to eql(officer)
+  end
 end

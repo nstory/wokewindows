@@ -3,7 +3,7 @@ class IncidentDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       incident_number: {source: "Incident.incident_number", cond: :eq},
-      occurred_on_date: {source: "Incident.occurred_on_date", searchable: false},
+      occurred_on_date: {source: "Incident.occurred_on_date", searchable: false, nulls_last: true},
       district: {source: "Incident.district", searchable: false},
       shooting: {source: "Incident.shooting", searchable: false},
       location_of_occurrence: {source: "Incident.location_of_occurrence", searchable: false},

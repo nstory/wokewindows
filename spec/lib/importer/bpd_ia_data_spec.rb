@@ -35,11 +35,21 @@ describe Importer::BpdIaData do
     expect(co.finding_date).to eql("2004-06-29")
   end
 
-  it "updates a record" do
+  it "does not update a record that existing before import" do
     c = Complaint.create({ia_number: "401"})
     importer.import
-    expect(c.reload.case_number).to eql(4192)
-    expect(c.attributions).to eql([attribution])
+    expect(c.reload.case_number).to eql(nil)
+    expect(c.complaint_officers.size).to eql(0)
+  end
+
+  it "does add two complaint officers to a record" do
+    record_b = record.dup
+    record_b[:first_name] = "Bones"
+    record_b[:last_name] = "McCoy"
+    records.push(record_b)
+    importer.import
+    c = Complaint.first
+    expect(c.complaint_officers.count).to eql(2)
   end
 
   describe "dup records" do

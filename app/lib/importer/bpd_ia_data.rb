@@ -1,25 +1,36 @@
 # imports the 2001-2011 data parsed by Parser::BpdIaData
+# also imports the 2010_to_2020 data parsed by Parser::Allegations
 class Importer::BpdIaData < Importer::Importer
   SLICE = 500
 
   def self.import_all
-    parser = Parser::BpdIaData.new("data/bpd_ia_data_2001_2011.txt")
-    new(parser).import
+    parsers = [
+      Parser::Allegations.new("data/2010_to_2020_allegations.csv"),
+      Parser::BpdIaData.new("data/bpd_ia_data_2001_2011.txt")
+    ]
+    parsers.each do |parser|
+      new(parser).import
+    end
   end
 
   def import
+    present_ia_numbers = Complaint.pluck(:ia_number).map { |n| [n, true] }.to_h
     records.each_slice(SLICE) do |slice|
       Complaint.transaction do
-        import_slice(slice)
+        import_slice(slice, present_ia_numbers)
       end
     end
   end
 
-  def import_slice(slice)
-    by_ia_number = Hash.new { |h,k| h[k] = Complaint.new }
-    by_ia_number.merge!(Complaint.by_ia_number(slice.pluck(:ia_no)))
+  def import_slice(slice, present_ia_numbers)
+    by_ia_number = complaints_by_number(slice.pluck(:ia_no))
 
     slice.each do |record|
+      # if a record existed from a previous import, skip it. we do the
+      # most recent/accuract imports first. if it's previously been
+      # created in this import, however, we may need to update it e.g.
+      # with additional complaint_officers
+      next if present_ia_numbers[record[:ia_no]]
       complaint = by_ia_number[record[:ia_no]]
       complaint.attributes = {
         ia_number: record[:ia_no],

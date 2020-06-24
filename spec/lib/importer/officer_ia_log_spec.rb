@@ -40,6 +40,18 @@ describe Importer::OfficerIaLog do
     expect(Complaint.first.incident_type).to eql(nil)
   end
 
+  it "updates an existing complaint, but only summary and attribution" do
+    c = Complaint.create!(ia_number: "IAD2014-0004")
+    importer.import
+    c.reload
+    expect(c.received_date).to eql(nil)
+    expect(c.occurred_date).to eql(nil)
+    expect(c.incident_type).to eql(nil)
+    expect(c.complaint_officers.count).to eql(0)
+    expect(c.summary).to match(/^Complain.*and a$/)
+    expect(c.attributions).to eql([attribution])
+  end
+
   it "ignores dups" do
     importer.import
     importer.import

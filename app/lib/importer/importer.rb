@@ -16,6 +16,12 @@ class Importer::Importer
     by_number
   end
 
+  def complaints_by_number(numbers)
+    by_number = Hash.new { |h,k| h[k] = Complaint.new }
+    by_number.merge!(Complaint.by_ia_number(numbers))
+    by_number
+  end
+
   def parse_date(date)
     time = Chronic.parse(date)
     time ? time.strftime("%F") : nil

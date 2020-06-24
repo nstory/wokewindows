@@ -13,6 +13,7 @@ initDataTable("table.complaints-table", function($table, options) {
       {data: "received_date", render: date_renderer},
       {data: "occurred_date", render: date_renderer},
       {data: "complaint_officers", render: see_more_renderer},
+      {data: "finding", render: text_renderer, orderable: false}
     ],
     order: [[3, 'desc']]
   });

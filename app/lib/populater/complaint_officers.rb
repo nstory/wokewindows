@@ -27,8 +27,12 @@ class Populater::ComplaintOfficers
   def self.populate_group(group, officers)
     group.each do |co|
       # this is some ugly quadratic bull****
-      matching = officers.select do |off|
-        match(co, off)
+      matching = exact_match(co, officers)
+
+      if matching.count != 1
+        matching = officers.select do |off|
+          match(co, off)
+        end
       end
 
       if matching.count == 1
@@ -36,6 +40,10 @@ class Populater::ComplaintOfficers
         co.save
       end
     end
+  end
+
+  def self.exact_match(co, officers)
+    officers.select { |o| o.hr_name && co.name && o.hr_name.downcase == co.name.downcase }
   end
 
   def self.match(co, off)

@@ -1,5 +1,5 @@
 # imports data from data/2014_Officer__IA_Log_redacted.csv
-# records already in the database are skipped
+# if a record is already in the database, this will only add the summary
 class Importer::OfficerIaLog < Importer::Importer
   def self.import_all
     parser = Parser::OfficerIaLog.new(
@@ -9,13 +9,20 @@ class Importer::OfficerIaLog < Importer::Importer
   end
 
   def import
+    by_ia_number = complaints_by_number(records.pluck(:ia_no))
+
     records.each do |record|
       attr = map_complaint(record)
-      begin
-        Complaint.create(attr)
-      rescue ActiveRecord::RecordNotUnique
-        # ignore
+      complaint = by_ia_number[record[:ia_no]]
+      if complaint.persisted?
+        # update existing record
+        complaint.summary = attr[:summary]
+        complaint.add_attribution(attribution)
+      else
+        # new record
+        complaint.attributes = attr
       end
+      complaint.save
     end
   end
 

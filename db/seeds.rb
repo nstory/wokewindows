@@ -38,7 +38,7 @@ Populater::FieldContactOfficers.populate
 
 # bring in internal affairs complaints
 Importer::BpdIaData.import_all
-Importer::OfficerIaLog.import_all
+Importer::OfficerIaLog.import_all # run 2nd to update summaries
 Populater::ComplaintOfficers.populate
 
 # import zip data
