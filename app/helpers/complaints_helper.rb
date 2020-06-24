@@ -6,4 +6,9 @@ module ComplaintsHelper
       format_text(co.name)
     end
   end
+
+  def format_summary(summary)
+    return format_unknown if !summary
+    simple_format(summary)
+  end
 end

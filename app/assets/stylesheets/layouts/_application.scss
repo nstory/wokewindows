@@ -1,5 +1,15 @@
+.navbar-brand__text {
+  font-size: 13px;
+  font-size: 16px;
+  padding-left: 8px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .footer {
-  font-size: 12px;
+  font-size: 13px;
   margin-top: 24px;
   padding: 24px 0;
   background-color: #f8f9fa;
