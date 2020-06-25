@@ -12,6 +12,9 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "postal", render: zip_renderer},
       {data: "state", render: text_renderer},
       {data: "city", render: text_renderer},
+      {data: "complaints_count", render: int_renderer},
+      {data: "field_contacts_count", render: int_renderer},
+      {data: "incidents_count", render: int_renderer},
       {data: "total", render: earnings_renderer},
       {data: "regular", render: earnings_renderer},
       {data: "retro", render: earnings_renderer},
@@ -20,11 +23,8 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "injured", render: earnings_renderer},
       {data: "detail", render: earnings_renderer},
       {data: "quinn", render: earnings_renderer},
-      {data: "complaints_count", render: int_renderer},
-      {data: "field_contacts_count", render: int_renderer},
-      {data: "incidents_count", render: int_renderer}
     ],
-    order: [[7, 'desc']]
+    order: [[10, 'desc']]
   });
 });
 
