@@ -1,0 +1,11 @@
+<% json = compensations.map(&:as_json).to_json %>
+<% id = "compensations#{json.hash.abs}" %>
+
+<script>
+  var <%= raw(id) %> = <%= raw(json) %>;
+</script>
+
+<div class="compensations-chart__container">
+  <canvas class="compensations-chart" data-id="<%= id %>"></canvas>
+</div>
+

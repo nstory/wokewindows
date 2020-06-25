@@ -13,7 +13,7 @@ export function initDataTable(selector, callback) {
         searchDelay: 1000,
         serverSide: true,
         scrollX: true,
-        scrollY: 500,
+        scrollY: 300,
         deferRender: true,
         scroller: {
           displayBuffer: 20
