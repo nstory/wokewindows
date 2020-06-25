@@ -16,35 +16,9 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <% if @layout_application_fullscreen %>
-        <%= render "shared/navbar_content" %>
-      <% else %>
-        <div class="container">
-          <%= render "shared/navbar_content" %>
-        </div>
-      <% end %>
-    </nav>
-    <%= yield %>
-    <%= yield :javascript %>
-
-    <% if !@layout_application_fullscreen %>
-      <div class="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <a href="<%= page_path('about') %>">About</a>
-              <span class="text-muted">|</span>
-              <a href="<%= page_path('help') %>">Help</a>
-              <span class="text-muted">|</span>
-              <a href="#">Contribute on GitHub</a>
-            </div>
-            <div class="col-md-6">
-              &ldquo;Sunlight is said to be the best of disinfectants; electric light the most efficient policeman.&rdquo;<br><span class="text-muted">&mdash; Louis Brandeis</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <% layout = @layout_application_fullscreen ? "shared/layouts/fullscreen" : "shared/layouts/normal" %>
+    <%= render layout do %>
+      <%= yield %>
     <% end %>
   </body>
 </html>

@@ -1,6 +1,10 @@
 <% @layout_application_fullscreen = true %>
 
-<div class="table-fullscreen-container">
-  <h1>Field Contacts (FIO)</h1>
-  <%= render "shared/tables/field_contacts" %>
+<div class="table-fullscreen__container">
+  <div class="table-fullscreen__description">
+    <h1>Field Contacts <small>Field Interrogation and Observation (FIO) reports <%= link_to "Learn more", page_path("help", anchor: "field_contacts") %></small></h1>
+  </div>
+  <div class="table-fullscreen__table">
+    <%= render "shared/tables/field_contacts" %>
+  </div>
 </div>
