@@ -1,15 +1,23 @@
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-md-8 js-toc-content">
       <h1>Help and Information</h1>
+      <p><i>The Woke Windows Project</i> consists of many data tables and types. This data is pulled from multiple sources.</p>
 
-      <h2>Data Tables</h2>
+      <h2 id="data_tables">Data Tables</h2>
+
+      <h3 id="earnings">Earnings</h3>
+      <p>On the page for each police officer (see the page for <%= link_to "Commissioner Gross", officer_path("9018") %> as an example) the officer's annual earnings are broken down by category. The data for this report is sourced from the <a href="#employee_earnings">Employee Earnings Reports</a> produced by the City of Boston Office of Human Resources. The HR office supplies <a href="https://data.boston.gov/dataset/employee-earnings-report/resource/609a6014-5ab0-49d9-8c38-1389e7bf0d41">this explanation</a> of the different categories.</p>
+
       <h3 id="complaints">Complaints (Internal Affairs)</h3>
+
       <h3 id="field_contacts">Field Contacts (FIO)</h3>
       <h3 id="incidents">Incident Journals</h3>
-      <h3 id="officers">Officers</h3>
 
-      <h2>Data Sources</h2>
+      <h3 id="officers">Officers</h3>
+      <p>The zip code where the officer lives is derived from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appear. The state and city fields are calculated based on the zip code.</p>
+
+      <h2 id="data_sources">Data Sources</h2>
       <h3 id="alpha_listing">BPD Alpha Listing with Badges</h3>
       <p><a href="https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/">https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/</a></p>
       <p>This is a listing of Boston Police officers from July 2016. Civilian employees are not included on this list.</p>
@@ -435,6 +443,9 @@
         </tbody>
       </table>
 
+    </div>
+    <div class="col-md-4 d-none d-md-block">
+      <div class="toc"></div>
     </div>
   </div>
 </div>

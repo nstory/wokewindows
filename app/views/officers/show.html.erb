@@ -14,26 +14,26 @@
       </dl>
 
       <h2>Earnings</h2>
-      <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston.</p>
+      <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn more", page_path("help", anchor: "earnings") %></p>
       <%= render "shared/charts/compensations", compensations: @officer.compensations %>
       <div class="officer__earnings-table">
         <%= render "shared/tables/compensations", compensations: @officer.compensations %>
       </div>
 
       <h2 class="mt-5">Incident Journal</h2>
-      <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to.</p>
+      <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to. <%= link_to "Learn more", page_path("help", anchor: "incidents") %></p>
       <div class="officer__table">
         <%= render "shared/tables/incidents", params: {officer_id: @officer.id}, options: {} %>
       </div>
 
       <h2 class="mt-5">Field Contacts</h2>
-      <p>Field Interrogation and Observation (FIO) reports filed by this officer.</p>
+      <p>Field Interrogation and Observation (FIO) reports filed by this officer. <%= link_to "Learn more", page_path("help", anchor: "field_contacts") %></p>
       <div class="officer__table">
         <%= render "shared/tables/field_contacts", params: {officer_id: @officer.id}, options: {} %>
       </div>
 
       <h2 class="mt-5">Complaints (IA Cases)</h2>
-      <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete.</p>
+      <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "complaints") %></p>
       <div class="officer__table">
         <%= render "shared/tables/complaints", params: {officer_id: @officer.id}, options: {} %>
       </div>
@@ -41,6 +41,9 @@
       <div class="mt-5">
         <%= render "shared/source_materials", attributions: @attributions %>
       </div>
+
+      <h2 class="mt-5">Additional Source Materials</h2>
+      <p>For the incident journal, field contacts, and complaints listed above, the source materials for each record are listed on the page for that record. Click through each record to see from where it was sourced.</p>
     </div>
   </div>
 </div>

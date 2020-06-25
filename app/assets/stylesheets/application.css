@@ -14,5 +14,6 @@
  *= require datatables.net-buttons-dt/css/buttons.dataTables.css
  *= require datatables.net-scroller-dt/css/scroller.dataTables.css
  *= require leaflet/dist/leaflet.css
+ *= require tocbot/dist/tocbot.css
  *= require main
  */
