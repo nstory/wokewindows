@@ -6,6 +6,14 @@ class Parser::BpdIaData < Parser::Parser
   end
 
   def records
+    page = by_page
+    (0 ... page[0].count).map do |i|
+      parse_first(page[0][i]).merge(parse_second(page[1][i])).merge(parse_third(page[2][i]))
+    end
+  end
+
+  private
+  def by_page
     page = []
     lines.each do |line|
       if /^(IA No.*First name|Last name.*number|Allega.*taken)$/ =~ line
@@ -14,13 +22,9 @@ class Parser::BpdIaData < Parser::Parser
         page.last << line
       end
     end
-
-    (0 ... page[0].count).map do |i|
-      parse_first(page[0][i]).merge(parse_second(page[1][i])).merge(parse_third(page[2][i]))
-    end
+    page
   end
 
-  private
   def parse_first(line)
     %r{^([^\s]+)\s+(\d+)?\s+(.+) (\d+/\d+/\d+)(.*)$}.match(line)
     {

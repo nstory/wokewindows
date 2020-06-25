@@ -3,19 +3,21 @@
     <div class="col-md-8 js-toc-content">
       <h1>Help and Information</h1>
       <p><i>The Woke Windows Project</i> consists of many data tables and types. This data is pulled from multiple sources.</p>
+      <p>When you are viewing any type of record, e.g. an incident report or an employee, there will be a section <i>Source Materials</i>. This section lists the data sources from which this record was derived and provides links to them. You can use these original sources to confirm any information from the Woke Windows Project.</p>
 
       <h2 id="data_tables">Data Tables</h2>
-
-      <h3 id="earnings">Earnings</h3>
-      <p>On the page for each police officer (see the page for <%= link_to "Commissioner Gross", officer_path("9018") %> as an example) the officer's annual earnings are broken down by category. The data for this report is sourced from the <a href="#employee_earnings">Employee Earnings Reports</a> produced by the City of Boston Office of Human Resources. The HR office supplies <a href="https://data.boston.gov/dataset/employee-earnings-report/resource/609a6014-5ab0-49d9-8c38-1389e7bf0d41">this explanation</a> of the different categories.</p>
 
       <h3 id="complaints">Complaints (Internal Affairs)</h3>
 
       <h3 id="field_contacts">Field Contacts (FIO)</h3>
-      <h3 id="incidents">Incident Journals</h3>
+      <h3 id="incidents">Incident Journal</h3>
 
-      <h3 id="officers">Officers</h3>
-      <p>The zip code where the officer lives is derived from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appear. The state and city fields are calculated based on the zip code.</p>
+      <h3 id="officers">Officers &amp; Employees</h3>
+      <p>Our goal is to present information regarding every sworn officer of the Boston Police department. We also include some data on civilian employees of the department, but this is a lower priority. In order to link the data together effectively across multiple data sources, and to ensure we do not have duplicate entries, we only create records for those persons where we have the six-digit City of Boston employee id number.</p>
+      <p>We currently harvest the employee id number from multiple sources: <a href="#alpha_listing">BPD Alpha Listing with Badges</a>, <a href="#crime_incident_reports">Crime Incident Reports</a>, <a href="#district_journal">Public Journal</a>, and <a href="#field_contact">FIO Records FieldContact Table</a>. If a particular employee does not exist in any of these sources, they will not be listed on this site.</p>
+      <p>On the page for each employee (see the page for <%= link_to "Commissioner Gross", officer_path("9018") %> as an example) the officer's annual earnings are broken down by category. The data for this report is sourced from the <a href="#employee_earnings">Employee Earnings Reports</a> produced by the City of Boston Office of Human Resources. The HR office supplies <a href="https://data.boston.gov/dataset/employee-earnings-report/resource/609a6014-5ab0-49d9-8c38-1389e7bf0d41">this explanation</a> of the different categories.</p>
+      <p>Detail pay deserves special mention. This is pay earned by working paid details under the procedures described in <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/52af60cfe4b007c7c2257da2/1387225295091/Rule+325.pdf">Rule 325</a>. The city should be receiving compensation from the private business that requested the detail.</p>
+      <p>The zip code where the officer lives is derived from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appears. The state and city fields are calculated based on the zip code.</p>
 
       <h2 id="data_sources">Data Sources</h2>
       <h3 id="alpha_listing">BPD Alpha Listing with Badges</h3>
@@ -40,6 +42,10 @@
           <tr>
             <td>RANK</td>
             <td>Capt, Lieut, etc.</td>
+          </tr>
+          <tr>
+            <td>BADGE</td>
+            <td></td>
           </tr>
           <tr>
             <td>DOA</td>
@@ -276,7 +282,7 @@
       <h3 id="field_contact">FIO Records FieldContact Table</h3>
       <p><a href="https://data.boston.gov/dataset/boston-police-department-fio">https://data.boston.gov/dataset/boston-police-department-fio</a></p>
       <p>Per <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/56a2569205caa7ee9f29e6a2/1453479570208/rule323.pdf">Rule 323</a>: "An FIOE Report shall be submitted subsequent to a field interaction/stop, a frisk, an observation, or an encounter".</p>
-      <p>These fields are from the Mark43 file, which applies to records from 9/29/2019 onwards.</p>
+      <p>These fields are from the Mark43 file, which applies to records from Sep 29, 2019 onwards.</p>
 
       <table class="table help__definitions">
         <thead>
@@ -443,6 +449,189 @@
         </tbody>
       </table>
 
+      <h3 id="allegations_2010_to_2020">2010 to 2020 Allegations</h3>
+      <a href="https://twitter.com/wutrain/status/1275784386110242817">https://twitter.com/wutrain/status/1275784386110242817</a>
+      <p>This spreadsheet was released as part of a dataset requested by <a href="https://www.boston.gov/departments/city-council/michelle-wu">City Council President Michelle Wu</a>. See the directory <i>17F Request #9</i> in the Google Drive linked to from that tweet.</p>
+
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IA No</td>
+            <td>A particular number may appear multiple times in the spreadsheet, once for each allegation against a particular officer</td>
+          </tr>
+          <tr>
+            <td>Incident type</td>
+            <td>Either <i>Citizen complaint</i> or <i>Internal investigation</i></td>
+          </tr>
+          <tr>
+            <td>Received date</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Title/rank (snap)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>First name</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Last name</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Allegation</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Disposition</td>
+            <td>e.g. <i>Sustained</i> or <i>Exonerated</i></td>
+          </tr>
+          <tr>
+            <td>Completed date</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="bpd_ia_data_2001_2011">2001 to 2011 IA Data</h3>
+      <a href="http://vault.blackstonian.org/">http://vault.blackstonian.org/</a>
+      <p>This is a PDF document showing Internal Affairs cases over a ten year period. It is formatted in a manner which makes the document almost impossible to use as is; the values for each row are split across three pages. To get the complete first row, for example, you need to combine the data on pages 1, 168, and 335.</p>
+      <p>We've already done the work to create a file combining each row onto a single line. You can download that file here: <a href="/downloads/bpd_ia_data_2001_2011.zip">bpd_ia_data_2001_2011.zip</a></p>
+
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IA No</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Case No</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Incident type</td>
+            <td>
+              <i>Internal investigation</i><br>
+              <i>Citizen complaint</i><br>
+              <i>Inquiry</i><br>
+              <i>Preliminary Investigation</i><br>
+              <i>General Inquiry</i>
+            </td>
+          </tr>
+          <tr>
+            <td>Received date</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>First name</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Last name</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Title</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Badge/ID number</td>
+            <td>this is <i>not</i> the six-digit employee id number. It sometimes matches the <code>badge</code> field in the <a href="#alpha_listing">BPD Alpha Listing with Badges</a> file, but it seems like badge numbers are sometimes re-assigned, and, so, are not a useful identifier.</td>
+          </tr>
+          <tr>
+            <td>Allegation</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Finding</td>
+            <td>e.g. <i>Sustained</i> or <i>Exonerated</i></td>
+          </tr>
+          <tr>
+            <td>Finding date</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Action taken</td>
+            <td>always blank</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="2014_officer_ia_log">2014 Officer IA Log</h3>
+      <a href="https://www.muckrock.com/foi/boston-3/police-officer-performance-survey-boston-police-department-22240/">https://www.muckrock.com/foi/boston-3/police-officer-performance-survey-boston-police-department-22240/</a>
+      <p>This document does not list which allegations apply to which officer. It does provide a summary of each case, which the other data sources do not provide.</p>
+      <table class="table help__definitions">
+        <thead>
+          <tr>
+            <th>Field Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>IA No</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Date Received</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Date Occurred</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Involved Officer(s)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Allegation(s)/Force Type(s)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Summary</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Incident type</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Completed Date</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 id="potential_data_sources">Potential Data Sources</h2>
+      <p>
+        <a href="https://www.muckrock.com/foi/boston-3/2019-paid-detail-cards-95919/">2019 Paid Detail Cards</a>
+      </p>
+      <p>
+        <a href="https://www.muckrock.com/foi/massachusetts-1/2019-motor-vehicle-violation-citations-95815/">2019 Motor Vehicle Violation Citations</a>
+      </p>
+      <p>
+        <a href="https://www.muckrock.com/foi/massachusetts-1/police-career-incentive-pay-program-applications-95899/">Police Career Incentive Pay Program Applications</a>
+      </p>
+
+
+      <h2 id="links">Links and Resources</h2>
+      <p>
+        <a href="https://bpdnews.com/rules-and-procedures">https://bpdnews.com/rules-and-procedures</a>
+      </p>
     </div>
     <div class="col-md-4 d-none d-md-block">
       <div class="toc"></div>
