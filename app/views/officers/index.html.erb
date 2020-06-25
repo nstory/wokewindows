@@ -1,10 +1,3 @@
-<% @layout_application_fullscreen = true %>
-
-<div class="table-fullscreen__container">
-  <div class="table-fullscreen__description">
-    <h1>Officers &amp; Employees <small>Boston Police Department officers with annual earnings <%= link_to "Learn more", page_path("help", anchor: "officers") %></small></h1>
-  </div>
-  <div class="table-fullscreen__table">
-    <%= render "shared/tables/officers" %>
-  </div>
-</div>
+<%= render "shared/index", table_partial: "shared/tables/officers" do %>
+  <h1>Officers &amp; Employees <small>Boston Police Department officers with 2019 earnings <%= link_to "Learn more", page_path("help", anchor: "officers") %></small></h1>
+<% end %>

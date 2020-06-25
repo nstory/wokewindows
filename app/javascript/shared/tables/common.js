@@ -10,7 +10,7 @@ export function initDataTable(selector, callback) {
           url: url,
           type: "POST"
         },
-        searchDelay: 1000,
+        searchDelay: 0,
         serverSide: true,
         scrollX: true,
         scrollY: 300,

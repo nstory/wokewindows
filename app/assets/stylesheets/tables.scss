@@ -2,7 +2,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+
   .dataTables_filter {
+    display: none;
     padding-right: 12px;
   }
 
@@ -11,12 +13,27 @@
   }
 }
 
+.table-fullscreen__head {
+  display: flex;
+}
+
 .table-fullscreen__description {
+  flex: 1 1 auto;
   margin-top: 8px;
   padding: 0 0 0 12px;
   h1 {
     font-size: 18px;
+    padding-left: 4px;
   }
+}
+
+.table-fullscreen__search {
+  flex: 0 1 auto;
+  max-width: 200px;
+  min-width: 200px;
+  width: 200px;
+  margin-top: 8px;
+  padding-right: 12px;
 }
 
 .table-fullscreen__table {
@@ -34,7 +51,7 @@
   top: 36px;
   z-index: 2;
 
-  .loading & {
+  .loading &, .search-queued & {
     display: flex;
   }
 

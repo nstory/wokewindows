@@ -1,0 +1,15 @@
+<% @layout_application_fullscreen = true %>
+
+<div class="table-fullscreen__container">
+  <div class="table-fullscreen__head">
+    <div class="table-fullscreen__description">
+      <%= yield %>
+    </div>
+    <div class="table-fullscreen__search">
+      <input type="text" class="form-control" placeholder="Search" data-controller="table-search" data-action="input->table-search#search"/>
+    </div>
+  </div>
+  <div class="table-fullscreen__table">
+    <%= render table_partial %>
+  </div>
+</div>

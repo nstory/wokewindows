@@ -14,7 +14,7 @@
       </dl>
 
       <h2>Earnings</h2>
-      <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn more", page_path("help", anchor: "earnings") %></p>
+      <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn more", page_path("help", anchor: "officers") %></p>
       <%= render "shared/charts/compensations", compensations: @officer.compensations %>
       <div class="officer__earnings-table">
         <%= render "shared/tables/compensations", compensations: @officer.compensations %>

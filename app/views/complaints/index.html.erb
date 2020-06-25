@@ -1,10 +1,3 @@
-<% @layout_application_fullscreen = true %>
-
-<div class="table-fullscreen__container">
-  <div class="table-fullscreen__description">
+<%= render "shared/index", table_partial: "shared/tables/complaints" do %>
     <h1>Complaints (Internal Affairs) <small>Citizen complaints and internal investigations regarding Boston Police Department employees <%= link_to "Learn more", page_path("help", anchor: "complaints") %></small></h1>
-  </div>
-  <div class="table-fullscreen__table">
-    <%= render "shared/tables/complaints" %>
-  </div>
-</div>
+<% end %>
