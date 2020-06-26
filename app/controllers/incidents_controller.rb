@@ -1,6 +1,8 @@
 class IncidentsController < ApplicationController
-  def datatable
-    render json: IncidentDatatable.new(params, view_context: view_context)
+  include Datatableable
+
+  def datatable_class
+    IncidentDatatable
   end
 
   def index

@@ -1,6 +1,8 @@
 class FieldContactsController < ApplicationController
-  def datatable
-    render json: FieldContactDatatable.new(params, view_context: view_context)
+  include Datatableable
+
+  def datatable_class
+    FieldContactDatatable
   end
 
   def index

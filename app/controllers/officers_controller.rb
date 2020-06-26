@@ -1,8 +1,8 @@
 class OfficersController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:datatable]
+  include Datatableable
 
-  def datatable
-    render json: OfficerDatatable.new(params, view_context: view_context)
+  def datatable_class
+    OfficerDatatable
   end
 
   def index
