@@ -11,7 +11,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "doa", render: date_renderer},
       {data: "postal", render: zip_renderer},
       {data: "state", render: text_renderer},
-      {data: "city", render: text_renderer},
+      {data: "neighborhood", render: text_renderer, orderable: false},
       {data: "complaints_count", render: int_renderer},
       {data: "field_contacts_count", render: int_renderer},
       {data: "incidents_count", render: int_renderer},

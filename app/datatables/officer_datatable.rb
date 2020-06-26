@@ -20,7 +20,7 @@ class OfficerDatatable < ApplicationDatatable
       incidents_count: {source: "Officer.incidents_count", searchable: false},
       postal: {source: "Officer.postal", cond: :eq},
       state: {source: "ZipCode.state", searchable: false},
-      city: {source: "ZipCode.city", searchable: false},
+      neighborhood: {source: "ZipCode.city", searchable: false, orderable: false},
       bag_of_text: {source: "Officer.bag_of_text", searchable: true, orderable: false}
     }
   end
@@ -46,7 +46,7 @@ class OfficerDatatable < ApplicationDatatable
         incidents_count: record.incidents_count,
         postal: record.postal,
         state: record.zip_code && record.zip_code.state,
-        city: record.zip_code && record.zip_code.city
+        neighborhood: record.zip_code && record.zip_code.neighborhood
       }
     end
   end

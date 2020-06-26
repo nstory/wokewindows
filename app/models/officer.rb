@@ -11,7 +11,7 @@ class Officer < ApplicationRecord
   belongs_to :zip_code, foreign_key: :postal, primary_key: :zip, optional: true
 
   def bag_of_text_content
-    [name, title, zip_code && zip_code.state, zip_code && zip_code.city]
+    [name, title, postal, zip_code && zip_code.state, zip_code && zip_code.neighborhood]
   end
 
   def name
