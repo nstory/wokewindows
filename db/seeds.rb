@@ -10,6 +10,11 @@
 Importer::CrimeIncidentReports.import_all
 Importer::DistrictJournal.import_all
 
+
+# load field contacts
+Importer::FieldContact.import_all
+Importer::FieldContactName.import_all
+
 # Load annual earnings report (from HR department)
 Importer::EmployeeEarnings.import_all
 
@@ -31,9 +36,7 @@ Populater::IncidentOfficers.populate
 # set officer field on each Compensation object
 Populater::Compensations.populate
 
-# bring in field contacts
-Importer::FieldContact.import_all
-Importer::FieldContactName.import_all
+# set officer field on each FieldContact object
 Populater::FieldContactOfficers.populate
 
 # bring in internal affairs complaints
