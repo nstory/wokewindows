@@ -28,13 +28,3 @@ function ia_number_renderer(data, type, row) {
   }
   return `<div class="text-center"><a href="${row.url}">${escape(data)}</a></div>`;
 }
-
-function complaint_officers_renderer(data, type, row) {
-  if (type != "display") {
-    return data;
-  }
-  if (data == null) {
-    return unknown();
-  }
-  return uniq(data).map((v) => escape(v)).join("; ");
-}
