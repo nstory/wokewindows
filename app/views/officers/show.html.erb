@@ -1,8 +1,12 @@
+<% @layout_application_title = "#{@officer.name} (BPD)" %>
+
 <div class="container">
   <div class="row">
     <div class="col">
       <h1><%= @officer.name %> <small class="d-none d-md-inline"><%= @officer.title %></small></h1>
       <dl class="row">
+        <dt class="officer__dt">Department:</dt>
+        <dd class="officer__dd">Boston Police Department</dt>
         <dt class="officer__dt">Title:</dt>
         <dd class="officer__dd"><%= @officer.title %></dt>
         <dt class="officer__dt" title="Employee #">Emp #:</dt>

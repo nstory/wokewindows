@@ -1,3 +1,11 @@
-// Place all the styles related to the Root controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.root-piece {
+  margin-bottom: 4px;
+
+  h2 a {
+    @extend .text-body;
+  }
+
+  .root-piece__description {
+    min-height: 96px;
+  }
+}

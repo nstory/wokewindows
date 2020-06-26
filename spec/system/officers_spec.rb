@@ -8,6 +8,8 @@ describe "Officers" do
       o = Officer.create({employee_id: 1234, hr_name: "Foo,Bar"})
       visit officer_path(o)
       expect(page).to have_text("Foo, Bar")
+      expect(page).to have_text("Boston Police Department")
+      expect(page).to have_title("Foo, Bar")
     end
   end
 

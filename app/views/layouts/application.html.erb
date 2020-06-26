@@ -7,7 +7,12 @@
     <%# disable caching b/c restoration visits mess up datatables.net  %>
     <meta name="turbolinks-cache-control" content="no-cache">
 
-    <title>Woke Windows Project</title>
+    <% if @layout_application_title %>
+      <title><%= @layout_application_title %> &mdash; The Woke Windows Project</title>
+    <% else %>
+      <title>The Woke Windows Project</title>
+    <% end %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
