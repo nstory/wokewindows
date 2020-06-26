@@ -10,9 +10,20 @@
       <h2 id="data_tables">Data Tables</h2>
 
       <h3 id="complaints">Complaints (Internal Affairs)</h3>
+      <p>Internal Affairs cases include both citizen complaints, where a member of the community files a complaint regarding the conduct of an officer or a civilian employee of the BPD, and internal investigations. We source this data from a number of sources: <a href="#bpd_ia_data_2001_2011">2001 to 2011 IA data</a>, <a href="#allegations_2010_to_2020">2010 to 2020 Allegations</a>, and <a href="#2014_officer_ia_log">2014 Officer IA Log</a>.</p>
+      <p>A case is identified by a unique number e.g. <i>IAD2019-0412</i>. An individual case may involve one-or-more officers, each with one-or-more allegations. A finding is made for each allegation against each officer.</p>
+      <p>For the vast majority of cases, we only have the general nature of the allegations e.g. <i>Neg.Duty/Unreasonable Judge</i>. For a subset of the cases from 2014, we also have prose (redacted) summaries.</p>
 
       <h3 id="field_contacts">Field Contacts (FIO)</h3>
+      <p>Field Interrogation and Observation (FIO) reports are how the BPD records the department's stop-and-frisk encounters (and other encouters, many of which do not involve a search).</p>
+      <p>We ingest this data from the <a href="#field_contact">FieldContact Table</a> and <a href="#field_contact_name">FieldContact_Name</a> table exports distributed on the Analyze Boston website</p>
+      <p>These reports are especially interesting because they 1. contain redacted prose narratives of the encounter and 2. contain a breakdown of the race and ethnicity of the individuals involved.</p>
+
       <h3 id="incidents">Incident Journal</h3>
+      <p>When an officer responds to a call, carries out a search warrant, or otherwise performs a significant action, they fill out an incident report (sometimes referred to as Form 1.1). The BPD makes available a selection of fields from these reports through two public data sources: <a href="#crime_incident_reports">Crime Incident Reports</a> and <a href="#district_journal">Public Journal</a>. We combine those data sources to create the list of incidents on this site.</p>
+      <p>It's not clear if all incident reports are included in these public data sources, or if some sensitive categories are being filtered out. In addition, the routinely published information only captures a subset of the fields an officer enters when they submit these reports.</p>
+      <p>A full incident report contains information about the people involved and a written narrative of events. Due to privacy concerns and the need to protect ongoing investigations, the full text of a report cannot be released without first applying redcations.</p>
+      <p>To see the difference between a full report and what's available on this site, contrast the <a href="/downloads/172068118_PkvQylJ.pdf">full (redacted) report</a> for incident #172068118 and <a href="<%= incident_path('172068118') %>">our record</a> for that same incident.</p>
 
       <h3 id="officers">Officers &amp; Employees</h3>
       <p>Our goal is to present information regarding every sworn officer of the Boston Police Department. We also include some data on civilian employees of the department, but this is a lower priority. In order to link the data together effectively across multiple data sources, and to ensure we do not have duplicate entries, we only create records for those persons where we have the six-digit City of Boston employee id number.</p>
