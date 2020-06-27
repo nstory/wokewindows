@@ -1,3 +1,0 @@
-# these packages are installed by the buildpack:
-# https://github.com/heroku/heroku-buildpack-apt
-awscli
