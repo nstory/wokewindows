@@ -1,6 +1,6 @@
 class Importer::DistrictJournal < Importer::Importer
 
-  JOURNALS = "pdfs/*.pdf"
+  JOURNALS = "data/pdfs/*.pdf"
   SLICE_SIZE = 500
 
   def self.import_all
