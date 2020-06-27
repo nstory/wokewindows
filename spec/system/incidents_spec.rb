@@ -32,6 +32,11 @@ describe "Incidents" do
         fill_in "Search", with: "chicanery"
         expect(page).to have_selector("td", text: "123")
       end
+
+      it "normalizes incident number" do
+        fill_in "Search", with: "I123-00"
+        expect(page).to have_selector("td", text: "123")
+      end
     end
   end
 end
