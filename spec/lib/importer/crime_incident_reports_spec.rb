@@ -122,6 +122,8 @@ describe Importer::CrimeIncidentReports do
       expect(inc.longitude).to eql(-71.07458456)
       expect(inc.shooting).to eql(true)
       offense = inc.offenses.first
+      expect(offense.code).to eql(nil)
+      expect(offense.code_group).to eql(nil)
       expect(offense.description).to eql("AGGRAVATED ASSAULT")
     end
 

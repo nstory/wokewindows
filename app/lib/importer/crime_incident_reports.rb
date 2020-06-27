@@ -55,7 +55,7 @@ class Importer::CrimeIncidentReports < Importer::Importer
 
   def map_offense(record)
     Offense.new(
-      code: record[:offense_code].to_i,
+      code: parse_int(record[:offense_code]),
       code_group: parse_string(record[:offense_code_group]),
       description: parse_string(record[:offense_description])
     )
