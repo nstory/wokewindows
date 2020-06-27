@@ -2,7 +2,7 @@ class Importer::Zip < Importer::Importer
   SLICE = 1000
 
   def self.import_all
-    parser = Parser::Zip.new("data/zipcode.csv")
+    parser = Parser::Zip.new("data/zipcode.csv.gz")
     new(parser).import
   end
 

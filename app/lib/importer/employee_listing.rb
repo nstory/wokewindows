@@ -6,8 +6,8 @@ class Importer::EmployeeListing < Importer::Importer
 
   def self.import_all
     parsers = [
-      Parser::Cy2015AnnualEarnings.new("data/CY2015_Annual_Earnings_BPD.csv"),
-      Parser::AlphaListing.new("data/ALPHa_LISTING_BPD_with_badges_1.csv")
+      Parser::Cy2015AnnualEarnings.new("data/CY2015_Annual_Earnings_BPD.csv.gz"),
+      Parser::AlphaListing.new("data/ALPHa_LISTING_BPD_with_badges_1.csv.gz")
     ]
 
     parsers.each do |parser|

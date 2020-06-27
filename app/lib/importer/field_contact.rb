@@ -19,12 +19,12 @@ class Importer::FieldContact < Importer::Importer
   }
 
   FILES = [
-    "data/mark43_fieldcontacts_for_public_20192.csv",
-    "data/rms_fieldcontacts_for_public_2019.csv",
-    "data/rms_fieldcontacts_for_public_2018_202003111433.csv",
-    "data/rms_fieldcontacts_for_public_2017_202003111424.csv",
-    "data/fieldcontactforpublic2016.csv",
-    "data/fieldcontactforpublic2015.csv"
+    "data/mark43_fieldcontacts_for_public_20192.csv.gz",
+    "data/rms_fieldcontacts_for_public_2019.csv.gz",
+    "data/rms_fieldcontacts_for_public_2018_202003111433.csv.gz",
+    "data/rms_fieldcontacts_for_public_2017_202003111424.csv.gz",
+    "data/fieldcontactforpublic2016.csv.gz",
+    "data/fieldcontactforpublic2015.csv.gz"
   ]
 
   def self.import_all

@@ -7,12 +7,12 @@
 class Importer::FieldContactName < Importer::Importer
 
   FILES = [
-    "data/mark43_fieldcontacts_name_for_public_2019.csv",
-    "data/rms_fieldcontacts_name_for_public_2019.csv",
-    "data/rms_fieldcontacts_name_for_public_2018_202003111443.csv",
-    "data/rms_fieldcontacts_name_for_public_2017_202003111442.csv",
-    "data/fieldcontactnameforpublic2016.csv",
-    "data/fieldcontactnameforpublic2015.csv"
+    "data/mark43_fieldcontacts_name_for_public_2019.csv.gz",
+    "data/rms_fieldcontacts_name_for_public_2019.csv.gz",
+    "data/rms_fieldcontacts_name_for_public_2018_202003111443.csv.gz",
+    "data/rms_fieldcontacts_name_for_public_2017_202003111442.csv.gz",
+    "data/fieldcontactnameforpublic2016.csv.gz",
+    "data/fieldcontactnameforpublic2015.csv.gz"
   ]
 
   def self.import_all

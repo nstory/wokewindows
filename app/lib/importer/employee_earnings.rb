@@ -1,15 +1,15 @@
 class Importer::EmployeeEarnings < Importer::Importer
   SLICE = 1000
   FILE_BY_YEAR = {
-    2019 => "data/allemployeescy2019_feb19_20final-all.csv",
-    2011 => "data/employee-earnings-report-2011.csv",
-    2012 => "data/employee-earnings-report-2012.csv",
-    2013 => "data/employee-earnings-report-2013.csv",
-    2014 => "data/employee-earnings-report-2014.csv",
-    2015 => "data/employee-earnings-report-2015.csv",
-    2016 => "data/employee-earnings-report-2016.csv",
-    2017 => "data/employee-earnings-report-2017.csv",
-    2018 => "data/employeeearningscy18full.csv"
+    2019 => "data/allemployeescy2019_feb19_20final-all.csv.gz",
+    2011 => "data/employee-earnings-report-2011.csv.gz",
+    2012 => "data/employee-earnings-report-2012.csv.gz",
+    2013 => "data/employee-earnings-report-2013.csv.gz",
+    2014 => "data/employee-earnings-report-2014.csv.gz",
+    2015 => "data/employee-earnings-report-2015.csv.gz",
+    2016 => "data/employee-earnings-report-2016.csv.gz",
+    2017 => "data/employee-earnings-report-2017.csv.gz",
+    2018 => "data/employeeearningscy18full.csv.gz"
   }
 
   def self.import_all

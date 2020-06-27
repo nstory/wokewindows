@@ -5,7 +5,7 @@ class Parser::Parser
   end
 
   def attribution
-    Attribution.new(filename: pathname.basename.to_s, category: category, url: url)
+    Attribution.new(filename: pathname.basename.to_s.sub(/\.gz$/, ""), category: category, url: url)
   end
 
   def pathname

@@ -5,7 +5,7 @@ class Importer::BpdIaData < Importer::Importer
 
   def self.import_all
     parsers = [
-      Parser::Allegations.new("data/2010_to_2020_allegations.csv"),
+      Parser::Allegations.new("data/2010_to_2020_allegations.csv.gz"),
       Parser::BpdIaData.new("data/bpd_ia_data_2001_2011.txt")
     ]
     parsers.each do |parser|

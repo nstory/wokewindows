@@ -4,7 +4,7 @@ describe Parser::FieldContact do
   let(:records) { parser.records }
 
   describe "mark43 record" do
-    let(:file) { file_fixture("mark43_sample.csv") }
+    let(:file) { file_fixture("mark43_sample.csv.gz") }
     it "parses a record" do
       r = records.first
       expect(r[:fc_num]).to eql("FC19000622")

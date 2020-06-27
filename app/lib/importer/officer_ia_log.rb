@@ -3,7 +3,7 @@
 class Importer::OfficerIaLog < Importer::Importer
   def self.import_all
     parser = Parser::OfficerIaLog.new(
-      "data/2014_Officer__IA_Log_redacted.csv"
+      "data/2014_Officer__IA_Log_redacted.csv.gz"
     )
     new(parser).import
   end
