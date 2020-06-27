@@ -3,13 +3,15 @@ import { Controller } from "stimulus";
 
 const DEBOUNCE_TIME_MS = 500;
 
-export default class TableSearchController extends Controller {
+export default class TableController extends Controller {
+  static targets = ["searchInput"];
+
   initialize() {
     this._performSearch = debounce(this._performSearch, DEBOUNCE_TIME_MS);
   }
 
   search(ev) {
-    const query = $(this.element).val();
+    const query = this.searchInputTarget.value;
     this.$wrapper().addClass("search-queued");
     this._performSearch(query);
   }
@@ -25,7 +27,7 @@ export default class TableSearchController extends Controller {
   }
 
   $table() {
-    return $("table");
+    return $(this.element).find("table");
   }
 
   $wrapper() {
