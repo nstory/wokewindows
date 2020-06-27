@@ -57,7 +57,7 @@ function incident_num_renderer(data, type, row) {
   if (!data) {
     return "";
   }
-  return `<div class="text-center"><a href="${row.url}">${escape(data)}</a></div>`;
+  return `<a href="${row.url}">${escape(data)}</a>`;
 }
 
 function shooting_renderer(data, type, row) {
