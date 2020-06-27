@@ -21,21 +21,6 @@ initDataTable("table.incidents-table", function($table, options) {
   });
 });
 
-const districts = {
-  "A1": "Downtown",
-  "A15": "Charlestown",
-  "A7": "East Boston",
-  "B2": "Roxbury",
-  "B3": "Mattapan",
-  "C6": "South Boston",
-  "C11": "Dorchester",
-  "D4": "South End",
-  "D14": "Brighton",
-  "E5": "West Roxbury",
-  "E13": "Jamaica Plain",
-  "E18": "Hyde Park"
-};
-
 function district_renderer(data, type, row) {
   if (type != "display") {
     return data;
@@ -43,7 +28,7 @@ function district_renderer(data, type, row) {
   if (!data) {
     return unknown();
   }
-  const friendly = districts[data];
+  const friendly = row.district_name;
   if (friendly) {
     return `<span class="text-monospace">${padEnd(data, 3, "\u00a0")}</span> ${friendly}`;
   }

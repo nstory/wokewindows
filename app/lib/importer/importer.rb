@@ -27,7 +27,13 @@ class Importer::Importer
     time ? time.strftime("%F") : nil
   end
 
+  def parse_date_time(date)
+    time = Chronic.parse(date)
+    time ? time.strftime("%F %T") : nil
+  end
+
   def parse_incident_number(str)
+    byebug if !str
     subbed = str.sub(/^I/, "").sub(/-\d\d$/, "")
     if /^\d{7,}$/ =~ subbed
       subbed.to_i

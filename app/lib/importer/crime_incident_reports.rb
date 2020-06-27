@@ -3,10 +3,13 @@ class Importer::CrimeIncidentReports < Importer::Importer
   SLICE_SIZE = 500
 
   def self.import_all
-    parser = Parser::CrimeIncidentReports.new(
-      "data/crime_incidents_reports_20200621.csv.gz"
-    )
-    new(parser).import
+    parsers = [
+      Parser::LegacyCrimeIncidentReports.new("data/crime-incident-reports-july-2012-august-2015-source-legacy-system.csv.gz"),
+      Parser::CrimeIncidentReports.new("data/crime_incidents_reports_20200621.csv.gz"),
+    ]
+    parsers.each do |parser|
+      new(parser).import
+    end
   end
 
   def import
@@ -41,12 +44,12 @@ class Importer::CrimeIncidentReports < Importer::Importer
       incident_number: parse_incident_number(record[:incident_number]),
       district: parse_string(record[:district]),
       reporting_area: record[:reporting_area],
-      shooting: ["Y", "1"].include?(record[:shooting]),
-      occurred_on_date: record[:occurred_on_date],
+      shooting: parse_boolean(record[:shooting]),
+      occurred_on_date: parse_date_time(record[:occurred_on_date]),
       ucr_part: parse_string(record[:ucr_part]),
       street: parse_string(record[:street]),
-      latitude: record[:lat],
-      longitude: record[:long]
+      latitude: parse_location(record[:location])[:latitude],
+      longitude: parse_location(record[:location])[:longitude]
     }
   end
 
@@ -56,5 +59,19 @@ class Importer::CrimeIncidentReports < Importer::Importer
       code_group: parse_string(record[:offense_code_group]),
       description: parse_string(record[:offense_description])
     )
+  end
+
+  private
+  def parse_boolean(b)
+    ["1", "Y", "Yes"].include?(b)
+  end
+
+  def parse_location(location)
+    matches = /^\(([\d.-]+), ([\d.-]+)\)$/.match(location) || []
+    h = { latitude: matches[1].to_f, longitude: matches[2].to_f }
+    if h[:latitude] == 0 || h[:longitude] == 0
+      return({ latitude: nil, longitude: nil })
+    end
+    h
   end
 end

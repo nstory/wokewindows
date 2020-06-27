@@ -1,7 +1,7 @@
 describe "Incidents" do
   describe "index" do
     let(:offense) { Offense.new(code: 123, description: "chicanery") }
-    let!(:incident) { Incident.create(incident_number: 123, street: "sesame", offenses: [offense]) }
+    let!(:incident) { Incident.create(incident_number: 123, district: "D14", street: "sesame", offenses: [offense]) }
 
     it "displays an incident" do
       visit incidents_path
@@ -35,6 +35,11 @@ describe "Incidents" do
 
       it "normalizes incident number" do
         fill_in "Search", with: "I123-00"
+        expect(page).to have_selector("td", text: "123")
+      end
+
+      it "searches district name" do
+        fill_in "Search", with: "Brighton"
         expect(page).to have_selector("td", text: "123")
       end
     end

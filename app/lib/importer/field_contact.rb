@@ -95,9 +95,4 @@ class Importer::FieldContact < Importer::Importer
     return nil if value == "NULL" || value.blank?
     STOP_DURATION_MAPPING.fetch(value, value.to_i)
   end
-
-  def parse_date_time(date)
-    time = Chronic.parse(date)
-    time ? time.strftime("%F %T") : nil
-  end
 end

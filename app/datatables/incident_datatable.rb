@@ -22,6 +22,7 @@ class IncidentDatatable < ApplicationDatatable
         incident_number: record.incident_number,
         occurred_on_date: record.occurred_on_date,
         district: record.district,
+        district_name: record.district_name,
         shooting: record.shooting,
         location_of_occurrence: record.location_of_occurrence,
         street: record.street,

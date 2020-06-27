@@ -1,5 +1,8 @@
+// don't show errors in an alert()
+$.fn.dataTable.ext.errMode = 'throw';
+
 // clean up any old datatables before rendering a new page, otherwise
-// datatables will try to revive old tables which could fail or be funny
+// datatables stores the old tables which is a memory leak
 $(document).on("turbolinks:before-render", function() {
   $.fn.dataTable.tables().forEach((e) => {
     $(e).dataTable().api().destroy();

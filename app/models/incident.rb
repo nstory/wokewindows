@@ -3,6 +3,21 @@ class Incident < ApplicationRecord
   include Offenses
   include BagOfText
 
+  DISTRICT_TO_NAME_MAPPING = {
+    "A1" => "Downtown",
+    "A15" => "Charlestown",
+    "A7" => "East Boston",
+    "B2" => "Roxbury",
+    "B3" => "Mattapan",
+    "C6" => "South Boston",
+    "C11" => "Dorchester",
+    "D4" => "South End",
+    "D14" => "Brighton",
+    "E5" => "West Roxbury",
+    "E13" => "Jamaica Plain",
+    "E18" => "Hyde Park"
+  }
+
   belongs_to :officer, optional: true
 
   serialize :location_of_occurrence, Array
@@ -12,7 +27,7 @@ class Incident < ApplicationRecord
   counter_culture :officer
 
   def bag_of_text_content
-    [district, location_of_occurrence, street, nature_of_incident, officer_journal_name, offenses.map(&:description).join(" ")]
+    [district, district_name, location_of_occurrence, street, nature_of_incident, officer_journal_name, offenses.map(&:description).join(" ")]
   end
 
   def arrests=(arr)
@@ -21,6 +36,10 @@ class Incident < ApplicationRecord
 
   def arrests
     (arrests_json || []).map { |o| a = Arrest.new; a.attributes = o; a }
+  end
+
+  def district_name
+    DISTRICT_TO_NAME_MAPPING[district]
   end
 
   # use incident_number for resource urls

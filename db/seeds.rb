@@ -10,7 +10,6 @@
 Importer::CrimeIncidentReports.import_all
 Importer::DistrictJournal.import_all
 
-
 # load field contacts
 Importer::FieldContact.import_all
 Importer::FieldContactName.import_all
