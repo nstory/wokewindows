@@ -1,3 +1,11 @@
+// clean up any old datatables before rendering a new page, otherwise
+// datatables will try to revive old tables which could fail or be funny
+$(document).on("turbolinks:before-render", function() {
+  $.fn.dataTable.tables().forEach((e) => {
+    $(e).dataTable().api().destroy();
+  });
+});
+
 export function initDataTable(selector, callback) {
   $(document).on("turbolinks:load", function() {
     $(selector).each(function() {
