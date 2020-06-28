@@ -35,6 +35,7 @@ gem 'high_voltage', '~> 3.1.2'
 gem 'metainspector', '~> 5.10.0'
 gem 'pg', '~> 1.2.3'
 gem 'actionview-encoded_mail_to', '1.0.9'
+gem 'aws-sdk-s3', '~> 1.72'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
