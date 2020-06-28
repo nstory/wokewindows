@@ -36,11 +36,11 @@ gem 'metainspector', '~> 5.10.0'
 gem 'pg', '~> 1.2.3'
 gem 'actionview-encoded_mail_to', '1.0.9'
 gem 'aws-sdk-s3', '~> 1.72'
+gem 'pry-rails', '~> 0.3.9' # yes, I want pry available in production too
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'pry-rails'
 end
 
 group :development do

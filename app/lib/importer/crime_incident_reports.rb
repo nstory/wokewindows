@@ -3,13 +3,18 @@ class Importer::CrimeIncidentReports < Importer::Importer
   SLICE_SIZE = 500
 
   def self.import_all
-    parsers = [
-      Parser::LegacyCrimeIncidentReports.new("data/crime-incident-reports-july-2012-august-2015-source-legacy-system.csv.gz"),
-      Parser::CrimeIncidentReports.new("data/crime_incidents_reports_20200621.csv.gz"),
-    ]
-    parsers.each do |parser|
+    import_legacy
+    import_non_legacy
+  end
+
+  def self.import_legacy
+      parser = Parser::LegacyCrimeIncidentReports.new("data/crime-incident-reports-july-2012-august-2015-source-legacy-system.csv.gz"),
       new(parser).import
-    end
+  end
+
+  def self.import_non_legacy
+    parser = Parser::CrimeIncidentReports.new("data/crime_incident_reports.csv.gz")
+    new(parser).import
   end
 
   def import

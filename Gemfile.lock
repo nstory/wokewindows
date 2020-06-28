@@ -310,7 +310,7 @@ DEPENDENCIES
   metainspector (~> 5.10.0)
   origami (~> 2.1.0)
   pg (~> 1.2.3)
-  pry-rails
+  pry-rails (~> 0.3.9)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.1)
   rspec-rails (~> 4.0.0)
