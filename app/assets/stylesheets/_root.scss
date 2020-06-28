@@ -1,11 +1,7 @@
-.root-piece {
-  margin-bottom: 4px;
+.root-card {
+  min-height: 252px;
 
-  h2 a {
-    @extend .text-body;
-  }
-
-  .root-piece__description {
-    min-height: 96px;
+  img {
+    max-height: 250px;
   }
 }

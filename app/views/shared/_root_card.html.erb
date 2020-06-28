@@ -1,0 +1,14 @@
+<div class="card root-card mb-3">
+  <div class="row no-gutters">
+    <div class="col-4 root-card__image">
+      <a href="<%= link %>">
+        <img src="<%= asset_url image %>" class="card-img" alt="...">
+      </a>
+    </div>
+    <div class="col-8">
+      <div class="card-body">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</div>

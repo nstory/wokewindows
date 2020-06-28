@@ -1,35 +1,37 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h1>The Woke Windows Project</h1>
-      <p class="lead">Providing a view into the Boston Police Department (BPD)</p>
-      <p>We've collected information and records from a <a href="<%= page_path('help', anchor: 'data_sources') %>">variety of data sources</a> and created a database you can sort, search, and download. Select one of the tables below to get started:</p>
+      <div class="mt-5 mb-5">
+        <h1>The Woke Windows Project</h1>
+        <p class="lead">Providing a view into the Boston Police Department (BPD)</p>
+        <p>We've collected information and records from a <a href="<%= page_path('help', anchor: 'data_sources') %>">variety of data sources</a> and created a database you can sort, search, and download. Select one of the tables below to get started:</p>
+      </div>
+
 
       <div class="row">
-        <div class="col-md-4 root-piece">
-          <h2><a href="<%= officers_path %>">Officers &amp; Employees</a></h2>
-          <p class="root-piece__description">View a listing of the police officers and civilian employees who work at the BPD. See their annual earnings, the # of internal affairs cases opened against them, and more.</p>
-          <p><a class="btn btn-info" href="<%= officers_path %>">View Table &raquo;</a></p>
+        <div class="col-lg-6">
+          <%= render "shared/root_card", image: 'police-15.svg', link: officers_path do %>
+            <h5 class="card-title"><a href="<%= officers_path %>">Officers &amp; Employees</a></h5>
+            <p class="card-text">Listing of police officers and civilian employees who work at the BPD. See their annual earnings, the number of internal affairs cases opened against them, and more.</p>
+          <% end %>
         </div>
-        <div class="col-md-4 root-piece">
-          <h2><a href="<%= incidents_path %>">Incident Reports</a></h2>
-          <p class="root-piece__description">View incident reports filed by police officers, including the nature of the incident and the location where it happened.</p>
-          <p><a class="btn btn-info" href="<%= incidents_path %>">View Table &raquo;</a></p>
+        <div class="col-lg-6">
+          <%= render "shared/root_card", image: 'incident.png', link: incidents_path do %>
+            <h5 class="card-title"><a href="<%= incidents_path %>">Incident Reports</a></h5>
+            <p class="card-text">Incident reports filed by police officers, including the nature of the incident and the location where it happened.</p>
+          <% end %>
         </div>
-        <div class="col-md-4 root-piece">
-          <h2><a href="<%= field_contacts_path %>">Field Contacts (FIO)</a></h2>
-          <p class="root-piece__description">View Field Interrogation and Observation reports filed by Boston police officers, including summaries.</p>
-          <p><a class="btn btn-info" href="<%= field_contacts_path %>">View Table &raquo;</a></p>
+        <div class="col-lg-6">
+          <%= render "shared/root_card", image: 'fio_form.png', link: field_contacts_path do %>
+            <h5 class="card-title"><a href="<%= field_contacts_path %>">Field Contacts (FIO)</a></h5>
+            <p class="card-text">Field Interrogation and Observation reports filed by Boston police officers; includes prose summaries (redacted).</p>
+          <% end %>
         </div>
-        <div class="col-md-4 root-piece">
-          <h2><a href="<%= complaints_path %>">Internal Affairs</a></h2>
-          <p class="root-piece__description">View a listing of the internal investigations and citizen complaints that have been lodged against Boston Police Department officers and employees.</p>
-          <p><a class="btn btn-info" href="<%= complaints_path %>">View Table &raquo;</a></p>
-        </div>
-        <div class="col-md-4 root-piece">
-          <h2><a href="<%= page_path('help') %>">Help</a></h2>
-          <p class="root-piece__description">Want to see more information about how this data is compiled? Do you want to inspect the original sources of information yourself?</p>
-          <p><a class="btn btn-info" href="<%= page_path("help") %>">View Help &raquo;</a></p>
+        <div class="col-lg-6">
+          <%= render "shared/root_card", image: 'complaint_form.png', link: complaints_path do %>
+            <h5 class="card-title"><a href="<%= complaints_path %>">Internal Affairs</a></h5>
+            <p class="card-text">Internal investigations and citizen complaints that have been lodged against Boston Police Department officers and employees.</p>
+          <% end %>
         </div>
       </div>
 

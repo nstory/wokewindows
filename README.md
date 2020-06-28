@@ -1,4 +1,6 @@
-# README
+# The Woke Windows Project
+
+This is the code base for the [Woke Windows Project](https://www.wokewindows.org) website.
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
