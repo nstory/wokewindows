@@ -14,7 +14,7 @@ class BpdNews
       end
     end
   end
-  
+
   private
    def get_links(url)
      Rails.logger.info "get_links #{url}"
