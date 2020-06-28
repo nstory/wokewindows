@@ -1,5 +1,7 @@
 .root-card {
-  min-height: 252px;
+  @include media-breakpoint-up(sm) {
+    min-height: 252px;
+  }
 
   img {
     max-height: 250px;
