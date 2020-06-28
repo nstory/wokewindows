@@ -12,7 +12,9 @@
       <h3 id="complaints">Complaints (Internal Affairs)</h3>
       <p>Internal Affairs cases include both citizen complaints, where a member of the community files a complaint regarding the conduct of an officer or a civilian employee of the BPD, and internal investigations. We source this data from a number of sources: <a href="#bpd_ia_data_2001_2011">2001 to 2011 IA data</a>, <a href="#allegations_2010_to_2020">2010 to 2020 Allegations</a>, and <a href="#2014_officer_ia_log">2014 Officer IA Log</a>.</p>
       <p>A case is identified by a unique number e.g. <i>IAD2019-0412</i>. An individual case may involve one-or-more employees, each with one-or-more allegations. A finding is made for each allegation against each officer.</p>
-      <p>For the vast majority of cases, we only have the general nature of the allegations e.g. <i>Neg.Duty/Unreasonable Judge</i>. For a subset of the cases from 2014, we also have prose (redacted) summaries.</p>
+      <p>For the vast majority of cases, we only have the general nature of the allegations e.g. <i>Neg.Duty/Unreasonable Judge</i>. For a subset of the cases from 2014, we also have prose summaries (redacted).</p>
+      <p>The list of complaints that appears on the officer page (see the <%= link_to "Commissioner Gross", officer_path("9018") %> page for an example of an officer's page) is linked based on matching the name of the officer to that listed in the complaint. We make efforts to not link ambiguous cases where two officers have very similar names (or the exact same name!) but it's possible a mislink could happen. It's wise to look to the original source data to confirm.</p>
+      <p>Conversely, the listing of complaints on the officer page may not be comprehensive; there may be cases we failed to link the officer to. To find these, try searching the <%= link_to "complaints table", complaints_path %> for variations of the officer's name.</p>
 
       <h3 id="field_contacts">Field Contacts (FIO)</h3>
       <p>Field Interrogation and Observation (FIO) reports are how the BPD records the department's stop-and-frisk encounters (and other encouters, many of which do not involve a search).</p>
