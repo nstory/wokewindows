@@ -10,8 +10,17 @@ namespace :importers do
     # import the latest crime_incident_reports.csv.gz file
     Importer::CrimeIncidentReports.import_non_legacy
 
-    # import all the journal pdf files (this is overkill, but easier than figuring
-    # out what the newest ones are)
+    # import all the journal pdf files (this is overkill, but I don't feel like
+    # figuring out what the newest ones are)
     Importer::DistrictJournal.import_all
+
+    # create any new officers found in the district journals
+    Populater::OfficersFromIncidents.populate
+
+    # set the officer field on each Incident
+    Populater::IncidentOfficers.populate
+
+    # update incident counter cache on officers
+    Incident.counter_culture_fix_counts
   end
 end
