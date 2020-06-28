@@ -52,7 +52,7 @@ class OfficerDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    Officer.includes(:compensations, :complaints, :zip_code).references(:zip_code).distinct
+    Officer.includes(:zip_code).references(:zip_code).distinct
   end
 
 end
