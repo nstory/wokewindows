@@ -25,30 +25,28 @@ class OfficerDatatable < ApplicationDatatable
     }
   end
 
-  def data
-    records.map do |record|
-      {
-        url: officer_path(record),
-        employee_id: record.employee_id,
-        name: record.name,
-        title: record.title,
-        doa: record.doa,
-        total: record.total,
-        regular: record.regular,
-        retro: record.retro,
-        other: record.other,
-        overtime: record.overtime,
-        injured: record.injured,
-        detail: record.detail,
-        quinn: record.quinn,
-        complaints_count: record.complaints_count,
-        field_contacts_count: record.field_contacts_count,
-        incidents_count: record.incidents_count,
-        postal: record.postal,
-        state: record.zip_code && record.zip_code.state,
-        neighborhood: record.zip_code && record.zip_code.neighborhood
-      }
-    end
+  def data_record(record)
+    {
+      url: officer_url(record),
+      employee_id: record.employee_id,
+      name: record.name,
+      title: record.title,
+      doa: record.doa,
+      total: record.total,
+      regular: record.regular,
+      retro: record.retro,
+      other: record.other,
+      overtime: record.overtime,
+      injured: record.injured,
+      detail: record.detail,
+      quinn: record.quinn,
+      complaints_count: record.complaints_count,
+      field_contacts_count: record.field_contacts_count,
+      incidents_count: record.incidents_count,
+      postal: record.postal,
+      state: record.zip_code && record.zip_code.state,
+      neighborhood: record.zip_code && record.zip_code.neighborhood
+    }
   end
 
   def get_raw_records

@@ -9,7 +9,7 @@ class OfficersController < ApplicationController
   end
 
   def show
-    @officer = Officer.includes(:compensations).find_by(employee_id: params[:id])
+    @officer = Officer.includes(:compensations).find_by!(employee_id: params[:id])
     @attributions = [
       @officer.compensations.flat_map(&:attributions),
       @officer.attributions

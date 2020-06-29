@@ -29,35 +29,33 @@ class FieldContactDatatable < ApplicationDatatable
     }
   end
 
-  def data
-    records.map do |record|
-      {
-        url: field_contact_path(record),
-        fc_num: record.fc_num,
-        contact_date: record.contact_date,
-        contact_officer_name: record.contact_officer_name,
-        supervisor_name: record.supervisor_name,
-        street: record.street,
-        city: record.city,
-        state: record.state,
-        zip: record.zip,
-        frisked_searched: record.frisked_searched,
-        stop_duration: record.stop_duration,
-        circumstance: record.circumstance,
-        basis: record.basis,
-        vehicle_year: record.vehicle_year,
-        vehicle_state: record.vehicle_state,
-        vehicle_make: record.vehicle_make,
-        vehicle_model: record.vehicle_model,
-        vehicle_color: record.vehicle_color,
-        vehicle_style: record.vehicle_style,
-        vehicle_type: record.vehicle_type,
-        key_situations: record.key_situations,
-        narrative: record.narrative,
-        weather: record.weather,
-        field_contact_names_count: record.field_contact_names_count
-      }
-    end
+  def data_record(record)
+    {
+      url: field_contact_url(record),
+      fc_num: record.fc_num,
+      contact_date: record.contact_date,
+      contact_officer_name: record.contact_officer_name,
+      supervisor_name: record.supervisor_name,
+      street: record.street,
+      city: record.city,
+      state: record.state,
+      zip: record.zip,
+      frisked_searched: record.frisked_searched,
+      stop_duration: record.stop_duration,
+      circumstance: record.circumstance,
+      basis: record.basis,
+      vehicle_year: record.vehicle_year,
+      vehicle_state: record.vehicle_state,
+      vehicle_make: record.vehicle_make,
+      vehicle_model: record.vehicle_model,
+      vehicle_color: record.vehicle_color,
+      vehicle_style: record.vehicle_style,
+      vehicle_type: record.vehicle_type,
+      key_situations: record.key_situations,
+      narrative: record.narrative,
+      weather: record.weather,
+      field_contact_names_count: record.field_contact_names_count
+    }
   end
 
   def get_raw_records

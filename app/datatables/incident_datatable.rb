@@ -15,22 +15,20 @@ class IncidentDatatable < ApplicationDatatable
     }
   end
 
-  def data
-    records.map do |record|
-      {
-        url: incident_path(record),
-        incident_number: record.incident_number,
-        occurred_on_date: record.occurred_on_date,
-        district: record.district,
-        district_name: record.district_name,
-        shooting: record.shooting,
-        location_of_occurrence: record.location_of_occurrence,
-        street: record.street,
-        nature_of_incident: record.nature_of_incident,
-        officer_journal_name: record.officer_journal_name,
-        offenses: record.offenses.map(&:description)
-      }
-    end
+  def data_record(record)
+    {
+      url: incident_url(record),
+      incident_number: record.incident_number,
+      occurred_on_date: record.occurred_on_date,
+      district: record.district,
+      district_name: record.district_name,
+      shooting: record.shooting,
+      location_of_occurrence: record.location_of_occurrence,
+      street: record.street,
+      nature_of_incident: record.nature_of_incident,
+      officer_journal_name: record.officer_journal_name,
+      offenses: record.offenses.map(&:description)
+    }
   end
 
   def get_raw_records

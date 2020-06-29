@@ -1,7 +1,9 @@
+require "csv"
+
 class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
 
-  def_delegators :@view, :officer_path, :incident_path, :field_contact_path, :complaint_path
+  def_delegators :@view, :officer_url, :incident_url, :field_contact_url, :complaint_url
 
   def initialize(params, opts = {})
     @view = opts[:view_context]
@@ -11,6 +13,11 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   # by default ajax-datatable-rails html encodes values; don't do that
   def sanitize_data(data)
     data
+  end
+
+  # my subclasses implement data_record instead of data
+  def data
+    records.map { |record| data_record(record) }
   end
 
   # this is mostly copy-and-pasted from the superclass; I added logic for
@@ -36,6 +43,25 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
     criteria
   end
 
+  def write_csv(yielder)
+    wrote_headers = false
+    retrieve_records_for_csv.limit(10000).find_each do |record|
+      data = data_record(record)
+      if !wrote_headers
+        wrote_headers = true
+        yielder << CSV.generate_line(data.keys)
+      end
+      yielder << CSV.generate_line(map_csv_row(data.values))
+    end
+  end
+
+  def map_csv_row(values)
+    values.map do |v|
+      v = v.join("; ") if v.respond_to?(:join)
+      v
+    end
+  end
+
   private
   def get_bag_of_text_class
     source = view_columns.dig(:bag_of_text, :source)
@@ -44,5 +70,14 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
     else
       nil
     end
+  end
+
+  # this is retrieve_records copy-and-pasted from the superclass, but I
+  # removed pagination b/c we don't want that for csv files
+  def retrieve_records_for_csv
+    records = fetch_records
+    records = filter_records(records)
+    records = sort_records(records)     if datatable.orderable?
+    records
   end
 end

@@ -11,19 +11,17 @@ class ComplaintDatatable < ApplicationDatatable
     }
   end
 
-  def data
-    records.map do |record|
-      {
-        url: complaint_path(record),
-        ia_number: record.ia_number,
-        case_number: record.case_number,
-        incident_type: record.incident_type,
-        received_date: record.received_date,
-        occurred_date: record.occurred_date,
-        finding: record.finding,
-        complaint_officers: record.complaint_officers.map(&:name).uniq
-      }
-    end
+  def data_record(record)
+    {
+      url: complaint_url(record),
+      ia_number: record.ia_number,
+      case_number: record.case_number,
+      incident_type: record.incident_type,
+      received_date: record.received_date,
+      occurred_date: record.occurred_date,
+      finding: record.finding,
+      complaint_officers: record.complaint_officers.map(&:name).uniq
+    }
   end
 
   def get_raw_records
