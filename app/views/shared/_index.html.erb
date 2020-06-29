@@ -3,10 +3,15 @@
 <div class="table-fullscreen__container" data-controller="table">
   <div class="table-fullscreen__head container-fluid">
     <div class="row">
-      <div class="table-fullscreen__description col-md-9 col-lg-9">
+      <div class="table-fullscreen__description col-md-7 col-lg-8 col-xl-9">
         <%= yield %>
       </div>
-      <div class="table-fullscreen__search col-md-3 col-lg-3">
+      <div class="table-fullscreen__search col-md-2 col-lg-2 col-xl-1">
+        <button class="btn btn-info btn-block" title="Download up to 10,000 rows as CSV" data-action="click->table#download" data-target="table.downloadButton">
+          <%= render "shared/icons/download" %>
+        </button>
+      </div>
+      <div class="table-fullscreen__search col-md-3 col-lg-2 col-xl-2">
         <input type="text" class="form-control" placeholder="Search" data-action="input->table#search" data-target="table.searchInput" />
       </div>
     </div>

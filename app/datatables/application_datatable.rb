@@ -45,7 +45,7 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
 
   def write_csv(yielder)
     wrote_headers = false
-    retrieve_records_for_csv.limit(10000).find_each do |record|
+    retrieve_records_for_csv.limit(10000).each do |record|
       data = data_record(record)
       if !wrote_headers
         wrote_headers = true
@@ -77,7 +77,7 @@ class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   def retrieve_records_for_csv
     records = fetch_records
     records = filter_records(records)
-    records = sort_records(records)     if datatable.orderable?
+    records = sort_records(records) if datatable.orderable?
     records
   end
 end

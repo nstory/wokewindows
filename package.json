@@ -19,6 +19,7 @@
     "datatables.net-scroller-dt": "^2.0.2",
     "jquery": "^3.5.1",
     "jquery-ujs": "^1.2.2",
+    "jquery.redirect": "^1.1.4",
     "leaflet": "^1.6.0",
     "lodash": "^4.17.15",
     "popper.js": "^1.16.0",

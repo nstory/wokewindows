@@ -10,27 +10,33 @@ export default class TableController extends Controller {
     this._performSearch = debounce(this._performSearch, DEBOUNCE_TIME_MS);
   }
 
+  download(ev) {
+    const url = this._dataTable().ajax.url().replace(/\.json$/, ".csv")
+    const params = this._dataTable().ajax.params();
+    $.redirect(url, params, "POST");
+  }
+
   search(ev) {
     const query = this.searchInputTarget.value;
-    this.$wrapper().addClass("search-queued");
+    this._$wrapper().addClass("search-queued");
     this._performSearch(query);
   }
 
   _performSearch(query) {
-    this.$wrapper().removeClass("search-queued");
+    this._$wrapper().removeClass("search-queued");
     this._dataTable().search(query);
     this._dataTable().draw();
   }
 
   _dataTable() {
-    return this.$table().dataTable().api();
+    return this._$table().dataTable().api();
   }
 
-  $table() {
+  _$table() {
     return $(this.element).find("table");
   }
 
-  $wrapper() {
-    return this.$table().closest(".dataTables_wrapper");
+  _$wrapper() {
+    return this._$table().closest(".dataTables_wrapper");
   }
 }

@@ -13,6 +13,9 @@ module Datatableable
       response.headers["Cache-Control"] = "no-cache"
       response.headers["Last-Modified"] = Time.now.httpdate.to_s
       response.headers["X-Accel-Buffering"] = "no"
+      response.headers["Content-Disposition"] = ActionDispatch::Http::ContentDisposition.format(
+        disposition: "attachment", filename: "download.csv"
+      )
       self.response_body = Enumerator.new do |y|
         datatable.write_csv(y)
       end
