@@ -11,7 +11,7 @@ $(document).on("turbolinks:load", function() {
   const longitude = $e.data("longitude");
 
   const map = Leaflet.map($e[0], {
-    center: [42.325, -71.0762],
+    center: [latitude, longitude],
     zoom: 12
   });
   Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
