@@ -37,6 +37,7 @@ gem 'pg', '~> 1.2.3'
 gem 'actionview-encoded_mail_to', '1.0.9'
 gem 'aws-sdk-s3', '~> 1.72'
 gem 'pry-rails', '~> 0.3.9' # yes, I want pry available in production too
+gem 'rack-canonical-host', '~> 1.0.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
