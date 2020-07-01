@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_232909) do
+ActiveRecord::Schema.define(version: 2020_06_30_212637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -126,6 +126,25 @@ ActiveRecord::Schema.define(version: 2020_06_25_232909) do
     t.index ["contact_officer_id"], name: "index_field_contacts_on_contact_officer_id"
     t.index ["fc_num"], name: "index_field_contacts_on_fc_num", unique: true
     t.index ["supervisor_id"], name: "index_field_contacts_on_supervisor_id"
+  end
+
+  create_table "forfeitures", force: :cascade do |t|
+    t.string "sucv"
+    t.decimal "amount"
+    t.string "date"
+    t.string "motor_vehicle"
+    t.text "attributions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sucv"], name: "index_forfeitures_on_sucv", unique: true
+  end
+
+  create_table "forfeitures_incidents", force: :cascade do |t|
+    t.string "incident_number"
+    t.integer "forfeiture_id", null: false
+    t.integer "incident_id"
+    t.index ["forfeiture_id", "incident_id"], name: "index_forfeitures_incidents_on_forfeiture_id_and_incident_id"
+    t.index ["incident_id", "forfeiture_id"], name: "index_forfeitures_incidents_on_incident_id_and_forfeiture_id"
   end
 
   create_table "incidents", force: :cascade do |t|

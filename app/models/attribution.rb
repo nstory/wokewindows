@@ -12,7 +12,8 @@ class Attribution
     "cy2015_annual_earnings" => "BPD CY2015 Annual Earnings File",
     "alpha_listing" => "BPD Alpha Listing with Badges",
     "2014_officer_ia_log" => "2014 Officer IA Log",
-    "bpd_ia_data_2001_2011" => "BPD IA Data 2001 - 2011"
+    "bpd_ia_data_2001_2011" => "BPD IA Data 2001 - 2011",
+    "forfeitures_over_1000" => "Asset Forfeiture by Suffolk County District Attorney"
   }
 
   attr_accessor :filename, :category, :url

@@ -49,4 +49,15 @@ module ApplicationHelper
     return format_unknown if b == nil
     b ? "Yes" : "No"
   end
+
+  def format_currency(amount)
+    return format_unknown if amount == nil
+    number_to_currency(amount)
+  end
+
+  def format_forfeitures(fs)
+    return format_unknown if fs.empty?
+    links = fs.map { |f| link_to f.sucv, forfeiture_path(f) }
+    safe_join links, ", "
+  end
 end

@@ -3,7 +3,7 @@ require "csv"
 class ApplicationDatatable < AjaxDatatablesRails::ActiveRecord
   extend Forwardable
 
-  def_delegators :@view, :officer_url, :incident_url, :field_contact_url, :complaint_url
+  def_delegators :@view, :officer_url, :incident_url, :field_contact_url, :complaint_url, :forfeiture_url
 
   def initialize(params, opts = {})
     @view = opts[:view_context]

@@ -33,7 +33,6 @@ class Importer::Importer
   end
 
   def parse_incident_number(str)
-    byebug if !str
     subbed = str.sub(/^I/, "").sub(/-\d\d$/, "")
     if /^\d{7,}$/ =~ subbed
       subbed.to_i
@@ -56,6 +55,15 @@ class Importer::Importer
 
   def parse_nullable_string(value)
     (value == "NULL" || value.blank?) ? nil : value
+  end
+
+  def parse_money(money)
+    money = money.gsub(/[^\d.]/, "")
+    if /^\d+\.\d\d$/ =~ money
+      money.to_f
+    else
+      0
+    end
   end
 
   def records

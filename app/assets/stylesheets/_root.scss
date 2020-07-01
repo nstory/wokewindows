@@ -1,6 +1,14 @@
 .root-card {
   @include media-breakpoint-up(sm) {
     min-height: 252px;
+    .root-card__image {
+      display: flex;
+      align-items: center;
+      min-height: 252px;
+      a, img {
+        width: 100%;
+      }
+    }
   }
 
   img {

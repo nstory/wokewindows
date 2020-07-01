@@ -53,13 +53,4 @@ class Importer::EmployeeEarnings < Importer::Importer
       attributions: [attribution]
     })
   end
-
-  def parse_money(money)
-    money = money.gsub(/[^\d.]/, "")
-    if /^\d+\.\d\d$/ =~ money
-      money.to_f
-    else
-      0
-    end
-  end
 end

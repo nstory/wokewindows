@@ -1,8 +1,8 @@
 describe "Incidents" do
-  describe "index" do
-    let(:offense) { Offense.new(code: 123, description: "chicanery") }
-    let!(:incident) { Incident.create(incident_number: 123, district: "D14", street: "sesame", offenses: [offense]) }
+  let(:offense) { Offense.new(code: 123, description: "chicanery") }
+  let!(:incident) { Incident.create(incident_number: 123, district: "D14", street: "sesame", offenses: [offense]) }
 
+  describe "index" do
     it "displays an incident" do
       visit incidents_path
       expect(page).to have_selector("td", text: "123")
@@ -41,6 +41,17 @@ describe "Incidents" do
       it "searches district name" do
         fill_in "Search", with: "Brighton"
         expect(page).to have_selector("td", text: "123")
+      end
+    end
+  end
+
+  describe "show" do
+    before { driven_by(:rack_test) }
+    describe "incident with related forfeiture" do
+      let!(:forfeiture) { Forfeiture.create!(sucv: "123-ABC", forfeitures_incidents: [ForfeituresIncident.new(incident: incident)]) }
+      it "links to related forfeiture" do
+        visit incident_path(incident)
+        expect(page).to have_link("123-ABC", href: forfeiture_path(forfeiture))
       end
     end
   end

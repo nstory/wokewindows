@@ -35,6 +35,10 @@
       <p>Detail pay deserves special mention. This is pay earned by working paid details under the procedures described in <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/52af60cfe4b007c7c2257da2/1387225295091/Rule+325.pdf">Rule 325</a>. The city should be receiving compensation from the private business that requested the detail.</p>
       <p>The zip code where the officer lives is derived from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appears. The state and neighborhood fields are calculated based on the zip code. The mapping of zip codes to neighborhoods was taken from the <a href="http://www.bostonplans.org/getattachment/8d4b1dc5-ce11-45b4-9bf5-370444b49b68">Boston Business Patterns 2016</a> report.</p>
 
+      <h3 id="forfeitures">Asset Forfeitures</h3>
+      <p>This information is currently imported from a single source: <a href="#forfeitures_over_1000">Forfeitures by Suffolk District Attorney.</p>
+
+
       <h2 id="data_sources">Data Sources</h2>
       <h3 id="alpha_listing">BPD Alpha Listing with Badges</h3>
       <p><a href="https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/">https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/</a></p>
@@ -726,6 +730,12 @@
           </tr>
         </tbody>
       </table>
+
+      <h3 id="forfeitures_over_1000">Forfeitures by Suffolk District Attorney</h3>
+      <a href="https://data.aclum.org/public-records/asset-forfeiture-by-suffolk-county-district-attorney/">https://data.aclum.org/public-records/asset-forfeiture-by-suffolk-county-district-attorney/</a>
+      <p>The three PDFs <i>2013/2014/2015 Superior Court Over $1,000</i> contain tables listing assets seized by the Suffolk County District Attorney under <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94C/Section47">Mass. Gen. L. c. 94C, § 47</a>.</p>
+      <p>We only import the <code>SUCV#</code>, <code>AMT.</code>, <code>M/V</code>, <code>police report #</code>, and <code>Seizure Date</code> fields. To see other fields, you must refer to the original source documents linked to above.</p>
+      <p>This data is incomplete. It only covers the years 2013 - 2015 and the file name suggests it only covers seizures over $1,000.</p>
 
       <h2 id="potential_data_sources">Potential Data Sources</h2>
       <p>

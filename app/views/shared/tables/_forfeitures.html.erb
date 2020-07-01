@@ -1,0 +1,12 @@
+<%= render "shared/tables/common", {
+  class_name: "forfeitures-table",
+  path: ->(params) { datatable_forfeitures_path(params) }
+}.merge(local_assigns) do %>
+<tr>
+  <th scope="col">SUCV#</th>
+  <th scope="col">Date</th>
+  <th scope="col">Amount</th>
+  <th scope="col">Motor Vehicle</th>
+  <th scope="col">Incident Reports</th>
+</tr>
+<% end %>
