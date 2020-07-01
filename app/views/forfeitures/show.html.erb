@@ -8,6 +8,8 @@
       <dl class="row">
         <dt class="forfeiture__dt">SUCV #</dt>
         <dd class="forfeiture__dd"><%= @forfeiture.sucv %></dd>
+        <dt class="forfeiture__dt">Case #</dt>
+        <dd class="forfeiture__dd"><%= format_text(@forfeiture.new_style_case_number) %></dd>
         <dt class="forfeiture__dt">Date</dt>
         <dd class="forfeiture__dd"><%= format_date @forfeiture.date %></dd>
         <dt class="forfeiture__dt">Amount</dt>
@@ -17,6 +19,16 @@
         <dt class="forfeiture__dt">Incident Reports</dt>
         <dd class="forfeiture__dd"><%= format_forfeitures_incidents @forfeiture.forfeitures_incidents %></dd>
       </dl>
+
+      <p>To view the publicly available case record for this forfeiture, do the following:</p>
+      <ol>
+        <li>Visit <a href="https://www.masscourts.org/">https://www.masscourts.org/</a></li>
+        <li>Click the "Click Here" button to open the search form</li>
+        <li>Select Court Department "The Superior Court" and Court Division "Suffolk County Civil"</li>
+        <li>Click Case Number</li>
+        <li>Enter the new-style case number <code><%= format_text(@forfeiture.new_style_case_number) %></code></li>
+        <li>Click on the case number in the search results</li>
+      </ol>
 
       <p>More fields are available in the source material for this record. Note: it's possible this forfeiture was subject to litigation or was otherwise stopped. Refer to the original source material for details.</p>
 
