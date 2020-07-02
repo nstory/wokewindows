@@ -1,0 +1,5 @@
+<% @layout_application_title = "Forfeiture Cases" %>
+
+<%= render "shared/index", table_partial: "shared/tables/cases" do %>
+    <h1>Forfeiture Cases <small>Court cases associated with asset forfeitures by the Boston Police Department and the Suffolk County District Attorney <%= link_to "Learn\u00a0more", page_path("help", anchor: "cases") %></small></h1>
+<% end %>

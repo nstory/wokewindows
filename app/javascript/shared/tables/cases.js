@@ -2,20 +2,22 @@ import escape from "lodash/escape";
 import {date_renderer, earnings_renderer, text_renderer} from "renderers";
 import {initDataTable} from "shared/tables/common";
 
-initDataTable("table.forfeitures-table", function($table, options) {
+initDataTable("table.cases-table", function($table, options) {
   $table.DataTable({
     ...options,
     columns: [
-      {data: "sucv", render: sucv_renderer},
+      {data: "case_number", render: case_number_renderer},
+      {data: "court_name", render: text_renderer},
       {data: "date", render: date_renderer},
       {data: "amount", render: earnings_renderer},
       {data: "motor_vehicle", render: text_renderer},
-      {data: "forfeitures_incidents", render: forfeitures_incidents_renderer}
-    ]
+      {data: "cases_incidents", render: cases_incidents_renderer, orderable: false}
+    ],
+    order: [[2, 'desc']]
   });
 });
 
-function sucv_renderer(data, type, row) {
+function case_number_renderer(data, type, row) {
   if (type != "display") {
     return data;
   }
@@ -25,7 +27,7 @@ function sucv_renderer(data, type, row) {
   return `<a href="${row.url}">${escape(data)}</a>`;
 }
 
-function forfeitures_incidents_renderer(data, type, row) {
+function cases_incidents_renderer(data, type, row) {
   if (type != "display") {
     return data;
   }

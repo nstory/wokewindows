@@ -13,7 +13,8 @@ class Parser::Over1000 < Parser::Parser
   private
   def parse_line(line)
     record = {}
-    record[:sucv] = match(line, /^([\w-]+)/)
+    # 2012 file has a crazy unicode hyphen wtf
+    record[:sucv] = match(line.sub("\u2010", "-"), /^([\w\-]+)/)
     record[:amount] = match(line, /(\$[\d,.]+)/)
     record[:police_report_number] = line.scan(/\d{9}/) # match(line, /(\[[\d, -]+)/)
     record[:date] = match(line, %r[(\d{1,2}/\d{1,2}/\d{2,4})])

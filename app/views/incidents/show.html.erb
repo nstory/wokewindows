@@ -31,9 +31,9 @@
             <dd class="col-lg-8"><%= format_lat_long(@incident.latitude, @incident.longitude) %></dd>
             <dt class="col-lg-4">Officer</dt>
             <dd class="col-lg-8"><%= format_incident_officer(@incident) %></dd>
-            <% if !@incident.forfeitures.empty? %>
-              <dt class="col-lg-4">Forfeiture</dt>
-              <dd class="col-lg-8"><%= format_forfeitures(@incident.forfeitures) %></dd>
+            <% if !@incident.cases.empty? %>
+              <dt class="col-lg-4">Case</dt>
+              <dd class="col-lg-8"><%= format_cases(@incident.cases) %></dd>
             <% end %>
           </dl>
         </div>

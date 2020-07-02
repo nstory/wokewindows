@@ -19,8 +19,8 @@ class Incident < ApplicationRecord
   }
 
   belongs_to :officer, optional: true
-  has_many :forfeitures_incidents
-  has_many :forfeitures, through: :forfeitures_incidents
+  has_many :cases_incidents
+  has_many :cases, through: :cases_incidents
 
   serialize :location_of_occurrence, Array
   serialize :nature_of_incident, Array

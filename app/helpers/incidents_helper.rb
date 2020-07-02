@@ -1,4 +1,10 @@
 module IncidentsHelper
+  def format_cases(cases)
+    return format_unknown if cases.empty?
+    links = cases.map { |f| link_to f.case_number, case_path(f) }
+    safe_join links, ", "
+  end
+
   def format_lat_long(lat, long)
     if !lat || !long
       return format_unknown

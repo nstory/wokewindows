@@ -10,11 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_30_212637) do
+ActiveRecord::Schema.define(version: 2020_07_02_114237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "cases", force: :cascade do |t|
+    t.string "case_number"
+    t.string "court"
+    t.string "date"
+    t.decimal "amount"
+    t.string "motor_vehicle"
+    t.text "attributions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "bag_of_text"
+    t.index ["amount"], name: "index_cases_on_amount"
+    t.index ["bag_of_text"], name: "cases_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
+    t.index ["case_number"], name: "index_cases_on_case_number"
+    t.index ["court", "case_number"], name: "index_cases_on_court_and_case_number", unique: true
+    t.index ["date"], name: "index_cases_on_date"
+  end
+
+  create_table "cases_incidents", force: :cascade do |t|
+    t.integer "case_id", null: false
+    t.integer "incident_id"
+    t.string "incident_number"
+    t.index ["case_id"], name: "index_cases_incidents_on_case_id"
+  end
 
   create_table "compensations", force: :cascade do |t|
     t.bigint "officer_id"
@@ -129,14 +153,12 @@ ActiveRecord::Schema.define(version: 2020_06_30_212637) do
   end
 
   create_table "forfeitures", force: :cascade do |t|
-    t.string "sucv"
     t.decimal "amount"
     t.string "date"
     t.string "motor_vehicle"
     t.text "attributions"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["sucv"], name: "index_forfeitures_on_sucv", unique: true
   end
 
   create_table "forfeitures_incidents", force: :cascade do |t|

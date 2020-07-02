@@ -14,26 +14,27 @@ describe Importer::Over1000 do
 
   it "imports a record" do
     importer.import
-    f = Forfeiture.first
-    expect(f.sucv).to eql("2013-0807E")
-    expect(f.amount).to eql(4316.00)
-    expect(f.date).to eql("2013-02-01")
-    expect(f.motor_vehicle).to eql("2004 Dodge Neon")
-    expect(f.attributions).to eql([attribution])
-    expect(f.forfeitures_incidents.map(&:incident_number)).to eql(["130065512"])
-    expect(f.incidents.to_a).to eql([incident])
-    expect(incident.forfeitures.to_a).to eql([f])
+    c = Case.first
+    expect(c.case_number).to eql("1384CV00807")
+    expect(c.court).to eql("superior")
+    expect(c.amount).to eql(4316.00)
+    expect(c.date).to eql("2013-02-01")
+    expect(c.motor_vehicle).to eql("2004 Dodge Neon")
+    expect(c.attributions).to eql([attribution])
+    expect(c.cases_incidents.map(&:incident_number)).to eql(["130065512"])
+    expect(c.incidents.to_a).to eql([incident])
+    expect(incident.cases.to_a).to eql([c])
   end
 
   it "doesn't import duplicate record" do
     importer.import
     importer.import
-    expect(Forfeiture.count).to eql(1)
+    expect(Case.count).to eql(1)
   end
 
   it "doesn't import record with null sucv" do
     record[:sucv] = ""
     importer.import
-    expect(Forfeiture.count).to eql(0)
+    expect(Case.count).to eql(0)
   end
 end

@@ -1,0 +1,38 @@
+<% @layout_application_title = "Case #{ @case.case_number }" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Case <%= @case.case_number %></h1>
+      <p>This is a Superior Court case regarding an asset seized under <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94C/Section47">Mass. Gen. L. c. 94C, § 47</a> by the Suffolk County District Attorney's office. <%= link_to "Learn\u00a0more", page_path("help", anchor: "cases") %></p>
+      <dl class="row">
+        <dt class="case__dt">Court</dt>
+        <dd class="case__dd"><%= format_text(@case.court_name) %></dd>
+        <dt class="case__dt">Case #</dt>
+        <dd class="case__dd"><%= format_text(@case.case_number) %></dd>
+        <dt class="case__dt">Date</dt>
+        <dd class="case__dd"><%= format_date @case.date %></dd>
+        <dt class="case__dt">Amount</dt>
+        <dd class="case__dd"><%= format_currency @case.amount %></dd>
+        <dt class="case__dt">Motor Vehicle</dt>
+        <dd class="case__dd"><%= format_text @case.motor_vehicle %></dd>
+        <dt class="case__dt">Incident Reports</dt>
+        <dd class="case__dd"><%= format_cases_incidents @case.cases_incidents %></dd>
+      </dl>
+
+      <p>To view the publicly available case record for this forfeiture, do the following:</p>
+      <ol>
+        <li>Visit <a href="https://www.masscourts.org/">https://www.masscourts.org/</a></li>
+        <li>Click the "Click Here" button to open the search form</li>
+        <li>Select Court Department "The Superior Court" and Court Division "Suffolk County Civil"</li>
+        <li>Click Case Number</li>
+        <li>Enter the new-style case number <code><%= format_text(@case.case_number) %></code></li>
+        <li>Click on the case number in the search results</li>
+      </ol>
+
+      <p>More fields may be available in the source material for this record. Note: it's possible this case was subject to litigation or was otherwise stopped. Refer to the original source material or the <a href="https://www.masscourts.org">MassCourts site</a> for details.</p>
+
+      <%= render "shared/source_materials", attributions: @case.attributions %>
+    </div>
+  </div>
+</div>

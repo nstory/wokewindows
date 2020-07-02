@@ -47,11 +47,11 @@ describe "Incidents" do
 
   describe "show" do
     before { driven_by(:rack_test) }
-    describe "incident with related forfeiture" do
-      let!(:forfeiture) { Forfeiture.create!(sucv: "123-ABC", forfeitures_incidents: [ForfeituresIncident.new(incident: incident)]) }
-      it "links to related forfeiture" do
+    describe "incident with related case" do
+      let!(:caze) { Case.create!(case_number: "123ABC", cases_incidents: [CasesIncident.new(incident: incident)]) }
+      it "links to related case" do
         visit incident_path(incident)
-        expect(page).to have_link("123-ABC", href: forfeiture_path(forfeiture))
+        expect(page).to have_link("123ABC", href: case_path(caze))
       end
     end
   end
