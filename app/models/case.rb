@@ -10,8 +10,38 @@ class Case < ApplicationRecord
   end
 
   def court_name
-    return "Superior Court" if court == "superior"
-    court
+    case(court)
+    when "superior"
+      "Superior Court"
+    when /^bmc/
+      "BMC " + court.sub(/^bmc_/, "").titleize
+    else
+      court
+    end
+  end
+
+  # for drop-down on masscourts.org
+  def court_department
+    case(court)
+    when "superior"
+      "Superior Court"
+    when /^bmc/
+      "BMC"
+    else
+      "N/A"
+    end
+  end
+
+  # for drop-down on masscourts.org
+  def court_division
+    case(court)
+    when "superior"
+      "Suffolk County Civil"
+    when /^bmc/
+      court_name
+    else
+      "N/A"
+    end
   end
 
   def to_param

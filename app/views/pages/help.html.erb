@@ -36,7 +36,7 @@
       <p>The zip code where the officer lives is taken from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appears. The state and neighborhood fields are calculated based on the zip code. The mapping of zip codes to neighborhoods was taken from the <a href="http://www.bostonplans.org/getattachment/8d4b1dc5-ce11-45b4-9bf5-370444b49b68">Boston Business Patterns 2016</a> report.</p>
 
       <h3 id="cases">Forfeiture Cases</h3>
-      <p>This information is currently imported from a single source: <a href="#forfeitures_over_1000">Forfeitures by Suffolk District Attorney.</a></p>
+      <p>This information is currently imported from a single source: <a href="#da_forfeitures">Forfeitures by Suffolk District Attorney.</a></p>
 
 
       <h2 id="data_sources">Data Sources</h2>
@@ -731,13 +731,30 @@
         </tbody>
       </table>
 
-      <h3 id="forfeitures_over_1000">Forfeitures by Suffolk District Attorney</h3>
-      <a href="https://www.muckrock.com/foi/suffolk-county-11/suffolk-county-seized-asset-logbook-13587/files/">https://www.muckrock.com/foi/suffolk-county-11/suffolk-county-seized-asset-logbook-13587/files/</a><br>
-      <a href="https://data.aclum.org/public-records/asset-forfeiture-by-suffolk-county-district-attorney/">https://data.aclum.org/public-records/asset-forfeiture-by-suffolk-county-district-attorney/</a>
-      <p>The PDFs <i>2010 - 2015 Superior Court Over $1,000</i> contain tables listing assets seized by the Suffolk County District Attorney under <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94C/Section47">Mass. Gen. L. c. 94C, § 47</a>.</p>
+      <h3 id="da_forfeitures">Forfeitures by Suffolk District Attorney</h3>
+      <p>
+        <a href="https://www.muckrock.com/foi/suffolk-county-11/suffolk-county-seized-asset-logbook-13587/files/">https://www.muckrock.com/foi/suffolk-county-11/suffolk-county-seized-asset-logbook-13587/files/</a><br>
+        <a href="https://data.aclum.org/public-records/asset-forfeiture-by-suffolk-county-district-attorney/">https://data.aclum.org/public-records/asset-forfeiture-by-suffolk-county-district-attorney/</a>
+      </p>
+      <p>These PDFs contain tables listing assets seized by the Suffolk County District Attorney under <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXV/Chapter94C/Section47">Mass. Gen. L. c. 94C, § 47</a>.</p>
+      <p>We currently import the following files:</p>
+      <ul class="list-unstyled">
+        <li>2012 Superior Court Over $1,000_Redacted.pdf</li>
+        <li>2013 Superior Court Over $1,000_Redacted.pdf</li>
+        <li>2014 Superior Court Over $1,000_Redacted.pdf</li>
+        <li>2015 Superior Court Over $1,000_Redacted.pdf</li>
+        <li>DC_Dorchester_Redacted.pdf</li>
+        <li>DC_Roxbury_Redacted.pdf</li>
+        <li>DC_Boston_Municipal_Court_Redacted.pdf</li>
+        <li>DC_West_Roxbury_Redacted.pdf</li>
+        <li>DC_East_Boston_Redacted.pdf</li>
+        <li>DC_Brighton_Redacted.pdf</li>
+        <li>DC_Charlestown_Redacted.pdf</li>
+      </ul>
       <p>We only import the <code>SUCV#</code>, <code>AMT.</code>, <code>M/V</code>, <code>police report #</code>, and <code>Seizure Date</code> fields. To see other fields, you must refer to the original source documents linked to above.</p>
-      <p>This data is incomplete. It only covers the years 2010 - 2015 and the file name suggests it only covers seizures over $1,000 (I believe because the Superior Court does not hear seizure cases under that amount).</p>
-      <p>We are not currently importing the 2010 and 2011 files because some of the tables in these files need to be OCR'd.</p>
+      <p>We are not currently importing the 2010 and 2011 Superior Court files because some of the tables in these files need to be OCR'd.</p>
+      <p>We only import records where there is a docket number for the case, this means we are not importing nearly half of the records in these files.</p>
+      <p>We convert the docket numbers to the new formats described on <a href="https://www.mass.gov/search-court-dockets-calendars-and-case-information">this page</a> under the <i>Case numbering formats</i> heading.</p>
 
       <h2 id="potential_data_sources">Potential Data Sources</h2>
       <p>

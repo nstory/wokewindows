@@ -3,7 +3,7 @@ class CaseDatatable < ApplicationDatatable
     @view_columns ||= {
       case_number: {source: "Case.case_number", searchable: false},
       court_name: {source: "Case.court", searchable: false},
-      date: {source: "Case.date", searchable: false},
+      date: {source: "Case.date", searchable: false, nulls_last: true},
       amount: {source: "Case.amount", searchable: false},
       motor_vehicle: {source: "Case.motor_vehicle", searchable: false},
       cases_incidents: {source: "Case.cases_incidents", searchable: false, orderable: false},
