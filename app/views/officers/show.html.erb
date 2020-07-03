@@ -2,8 +2,8 @@
 
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h1><%= @officer.name %> <small class="d-none d-md-inline"><%= @officer.title %></small></h1>
+    <div class="col-lg-9">
+      <h1><%= @officer.name %></h1>
       <dl class="row">
         <dt class="officer__dt">Department:</dt>
         <dd class="officer__dd">Boston Police Department</dt>
@@ -16,33 +16,47 @@
         <dt class="officer__dt">Home:</dt>
         <dd class="officer__dd"><%= format_zip(@officer.postal) %> <%= format_neighborhood(@officer.zip_code) %></dt>
       </dl>
-
-      <h2>Earnings</h2>
+    </div>
+    <div class="col-lg-3">
+      <ul class="list-unstyled mt-2">
+        <li><strong>Table of Contents</strong></li>
+        <li><a href="#earnings">Earnings</a></li>
+        <li><a href="#incidents">Incident Journal <span class="text-muted"><%= @officer.incidents_count %></span></a></li>
+        <li><a href="#field_contacts">Field Contacts <span class="text-muted"><%= @officer.field_contacts_count %></span></a></li>
+        <li><a href="#complaints">Complaints (IA Cases) <span class="text-muted"><%= @officer.complaints_count %></span></a></li>
+        <li><a href="#swats">SWAT Reports <span class="text-muted"><%= @officer.swats_count %></span></a></li>
+        <li><a href="#source_materials">Source Materials</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2 id="earnings">Earnings</h2>
       <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn more", page_path("help", anchor: "officers") %></p>
       <%= render "shared/charts/compensations", compensations: @officer.compensations %>
       <div class="officer__earnings-table">
         <%= render "shared/tables/compensations", compensations: @officer.compensations %>
       </div>
 
-      <h2 class="mt-5">Incident Journal</h2>
+      <h2 id="incidents" class="mt-5">Incident Journal</h2>
       <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to. <%= link_to "Learn more", page_path("help", anchor: "incidents") %></p>
       <div class="officer__table">
         <%= render "shared/tables/incidents", params: {officer_id: @officer.id}, options: {searching: false} %>
       </div>
 
-      <h2 class="mt-5">Field Contacts</h2>
+      <h2 id="field_contacts" class="mt-5">Field Contacts</h2>
       <p>Field Interrogation and Observation (FIO) reports filed by this officer. <%= link_to "Learn more", page_path("help", anchor: "field_contacts") %></p>
       <div class="officer__table">
         <%= render "shared/tables/field_contacts", params: {officer_id: @officer.id}, options: {searching: false} %>
       </div>
 
-      <h2 class="mt-5">Complaints (IA Cases)</h2>
+      <h2 id="complaints" class="mt-5">Complaints (IA Cases)</h2>
       <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "complaints") %></p>
       <div class="officer__table">
         <%= render "shared/tables/complaints", params: {officer_id: @officer.id}, options: {searching: false} %>
       </div>
 
-      <h2 class="mt-5">SWAT Reports</h2>
+      <h2 id="swats" class="mt-5">SWAT Reports</h2>
       <p>SWAT operations in which this officer participated. Reports currently cover 2010-2014, and, due to transcription errors, may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "swats") %></p>
       <div class="officer__table">
         <%= render "shared/tables/swats", params: {officer_id: @officer.id}, options: {searching: false} %>

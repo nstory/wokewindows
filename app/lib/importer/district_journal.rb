@@ -6,8 +6,10 @@ class Importer::DistrictJournal < Importer::Importer
   def self.import_all
     files = Dir.glob(JOURNALS)
     files.each do |f|
-      parser = Parser::DistrictJournal.new(f)
-      new(parser).import if parser.likely_journal?
+      Import.import_once(f) do
+        parser = Parser::DistrictJournal.new(f)
+        new(parser).import if parser.likely_journal?
+      end
     end
   end
 
