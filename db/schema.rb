@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_114237) do
+ActiveRecord::Schema.define(version: 2020_07_03_140602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -219,9 +219,39 @@ ActiveRecord::Schema.define(version: 2020_07_02_114237) do
     t.integer "complaints_count", default: 0, null: false
     t.text "attributions"
     t.text "bag_of_text"
+    t.integer "swats_count", default: 0, null: false
     t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
     t.index ["total"], name: "index_officers_on_total"
+  end
+
+  create_table "swats", force: :cascade do |t|
+    t.string "swat_number"
+    t.string "date"
+    t.text "attributions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["swat_number"], name: "index_swats_on_swat_number", unique: true
+  end
+
+  create_table "swats_incidents", force: :cascade do |t|
+    t.integer "swat_id"
+    t.integer "incident_id"
+    t.string "incident_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["incident_id", "swat_id"], name: "index_swats_incidents_on_incident_id_and_swat_id"
+    t.index ["swat_id", "incident_id"], name: "index_swats_incidents_on_swat_id_and_incident_id"
+  end
+
+  create_table "swats_officers", force: :cascade do |t|
+    t.integer "swat_id"
+    t.integer "officer_id"
+    t.string "officer_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["officer_id", "swat_id"], name: "index_swats_officers_on_officer_id_and_swat_id"
+    t.index ["swat_id", "officer_id"], name: "index_swats_officers_on_swat_id_and_officer_id"
   end
 
   create_table "zip_codes", force: :cascade do |t|

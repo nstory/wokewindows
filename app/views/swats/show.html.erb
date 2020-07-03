@@ -1,0 +1,26 @@
+<% @layout_application_title = "SWAT Report #{ @swat.swat_number }" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>SWAT Report <%= @swat.swat_number %></h1>
+      <p>This is an after-action report for a deployment of the Boston Police Special Operations Division. <%= link_to "Learn\u00a0more", page_path("help", anchor: "swats") %></p>
+      <dl class="row">
+        <dt class="swat__dt">Swat #</dt>
+        <dd class="swat__dd"><%= format_text(@swat.swat_number) %></dd>
+        <dt class="swat__dt">Date</dt>
+        <dd class="swat__dd"><%= format_date(@swat.date) %></dd>
+        <dt class="swat__dt">PDF</dt>
+        <dd class="swat__dd"><%= link_to "Click here to view", @swat.pdf_url  %></dd>
+        <dt class="swat__dt">Incident #'s</dt>
+        <dd class="swat__dd"><%= format_swats_incidents(@swat.swats_incidents) %></dd>
+        <dt class="swat__dt">Officers</dt>
+        <dd class="swat__dd"><%= format_swats_officers(@swat.swats_officers) %></dd>
+      </dl>
+
+      <p>We use <a href="https://en.wikipedia.org/wiki/Optical_character_recognition">OCR</a> to parse these reports, therefore it's very possible there will be errors and/or omissions in the data on this page. Please refer to the <%= link_to "original PDF document", @swat.pdf_url %> for full details regarding this incident.
+
+      <%= render "shared/source_materials", attributions: @swat.attributions %>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,7 @@ class OfficerDatatable < ApplicationDatatable
       complaints_count: {source: "Officer.complaints_count", searchable: false},
       field_contacts_count: {source: "Officer.field_contacts_count", searchable: false},
       incidents_count: {source: "Officer.incidents_count", searchable: false},
+      swats_count: {source: "Officer.swats_count", searchable: false},
       postal: {source: "Officer.postal", cond: :eq},
       state: {source: "ZipCode.state", searchable: false},
       neighborhood: {source: "ZipCode.city", searchable: false, orderable: false},
@@ -43,6 +44,7 @@ class OfficerDatatable < ApplicationDatatable
       complaints_count: record.complaints_count,
       field_contacts_count: record.field_contacts_count,
       incidents_count: record.incidents_count,
+      swats_count: record.swats_count,
       postal: record.postal,
       state: record.zip_code && record.zip_code.state,
       neighborhood: record.zip_code && record.zip_code.neighborhood

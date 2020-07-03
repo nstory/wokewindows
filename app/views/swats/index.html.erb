@@ -1,0 +1,5 @@
+<% @layout_application_title = "SWAT Reports" %>
+
+<%= render "shared/index", table_partial: "shared/tables/swats" do %>
+    <h1>SWAT Reports <small>After action reports of incidents where the Boston Police Special Operations Division deployed <%= link_to "Learn\u00a0more", page_path("help", anchor: "swats") %></small></h1>
+<% end %>

@@ -26,6 +26,7 @@ require("shared/tables/field_contacts");
 require("shared/tables/cases");
 require("shared/tables/incidents");
 require("shared/tables/officers");
+require("shared/tables/swats");
 require("shared/maps/incident");
 require("shared/charts/compensations");
 require("toc");

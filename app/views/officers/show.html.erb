@@ -42,6 +42,12 @@
         <%= render "shared/tables/complaints", params: {officer_id: @officer.id}, options: {searching: false} %>
       </div>
 
+      <h2 class="mt-5">SWAT Reports</h2>
+      <p>SWAT operations in which this officer participated. Reports currently cover 2010-2014, and, due to transcription errors, may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "swats") %></p>
+      <div class="officer__table">
+        <%= render "shared/tables/swats", params: {officer_id: @officer.id}, options: {searching: false} %>
+      </div>
+
       <div class="mt-5">
         <%= render "shared/source_materials", attributions: @attributions %>
       </div>

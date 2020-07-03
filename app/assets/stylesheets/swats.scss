@@ -1,0 +1,9 @@
+.swat__dt {
+  @extend .col-sm-4;
+  @extend .col-md-2;
+}
+
+.swat__dd {
+  @extend .col-sm-8;
+  @extend .col-md-10;
+}

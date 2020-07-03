@@ -15,6 +15,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "complaints_count", render: int_renderer},
       {data: "field_contacts_count", render: int_renderer},
       {data: "incidents_count", render: int_renderer},
+      {data: "swats_count", render: int_renderer},
       {data: "total", render: earnings_renderer},
       {data: "regular", render: earnings_renderer},
       {data: "retro", render: earnings_renderer},
@@ -24,7 +25,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "detail", render: earnings_renderer},
       {data: "quinn", render: earnings_renderer},
     ],
-    order: [[10, 'desc']]
+    order: [[11, 'desc']]
   });
 });
 
