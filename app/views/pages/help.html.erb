@@ -38,6 +38,9 @@
       <h3 id="cases">Forfeiture Cases</h3>
       <p>This information is currently imported from a single source: <a href="#da_forfeitures">Forfeitures by Suffolk District Attorney.</a></p>
 
+      <h3 id="swats">SWAT Reports</h3>
+      <p>We have redacted SWAT incident reports covering 2010 - 2014 from <a href="#swat">17F SWAT After-Action Reports</a>. These reports were provided as several-hundred page PDF documents, each spanning an entire year. We've broken each incident out into an individual file, and we've run <a href="https://github.com/jbarlow83/OCRmyPDF">OCRmyPDF</a> on those individual files.</p>
+      <p>We automatically discover the officers involved in each action based on their names and employee ids. Because the OCR process is not 100% reliable, there may be errors and/or omissions in the data we parse out.</p>
 
       <h2 id="data_sources">Data Sources</h2>
       <h3 id="alpha_listing">BPD Alpha Listing with Badges</h3>
@@ -566,7 +569,7 @@
 
       <h3 id="allegations_2010_to_2020">2010 to 2020 Allegations</h3>
       <a href="https://twitter.com/wutrain/status/1275784386110242817">https://twitter.com/wutrain/status/1275784386110242817</a>
-      <p>This spreadsheet was released as part of a dataset requested by <a href="https://www.boston.gov/departments/city-council/michelle-wu">City Council President Michelle Wu</a>. See the directory <i>17F Request #9</i> in the Google Drive linked to from that tweet.</p>
+      <p>This spreadsheet was released as part of a dataset requested by the city council under Section 17F of the <a href="https://en.wikipedia.org/wiki/Boston_City_Charter">Boston City Charter</a>. See the directory <i>17F Request #9</i> in the Google Drive linked to from that tweet.</p>
 
       <table class="table help__definitions">
         <thead>
@@ -755,6 +758,12 @@
       <p>We are not currently importing the 2010 and 2011 Superior Court files because some of the tables in these files need to be OCR'd.</p>
       <p>We only import records where there is a docket number for the case, this means we are not importing nearly half of the records in these files.</p>
       <p>We convert the docket numbers to the new formats described on <a href="https://www.mass.gov/search-court-dockets-calendars-and-case-information">this page</a> under the <i>Case numbering formats</i> heading.</p>
+
+      <h3 id="swat">17F SWAT After-Action Reports</h3>
+      <a href="https://twitter.com/wutrain/status/1275784386110242817">https://twitter.com/wutrain/status/1275784386110242817</a>
+      <p>Five PDF documents covering the years 2010 - 2015 contain after-action reports. These were released as part of the same 17F request as <a href="#allegations_2010_to_2020">2010 to 2020 Allegations</a>.</p>
+      <p>These are scans of printed reports, and even include some hand-written information.</p>
+
 
       <h2 id="potential_data_sources">Potential Data Sources</h2>
       <p>
