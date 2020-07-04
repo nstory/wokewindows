@@ -25,5 +25,10 @@ describe Complaint do
       complaint = Complaint.new(complaint_officers: [ComplaintOfficer.new(finding: "YYY"), ComplaintOfficer.new(finding: "XXX")])
       expect(complaint.finding).to eql("Mixed")
     end
+
+    it "returns Partially Sustained if at least one is sustained" do
+      complaint = Complaint.new(complaint_officers: [ComplaintOfficer.new(finding: "Sustained"), ComplaintOfficer.new(finding: "XXX")])
+      expect(complaint.finding).to eql("Partially Sustained")
+    end
   end
 end

@@ -18,6 +18,7 @@ class Complaint < ApplicationRecord
     return nil if findings.empty?
     uniq = findings.uniq
     return uniq.first if uniq.count == 1
+    return "Partially Sustained" if uniq.include?("Sustained")
     "Mixed"
   end
 
