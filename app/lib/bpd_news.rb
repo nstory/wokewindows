@@ -3,6 +3,15 @@ class BpdNews
     @base_url = base_url
   end
 
+  def articles
+    Enumerator.new do |y|
+      get_pages.each do |page|
+        articles = page.parsed.xpath("//article")
+        articles.each { |a| y << a }
+      end
+    end
+  end
+
   def pdfs
     url = @base_url
     Enumerator.new do |y|
@@ -16,14 +25,35 @@ class BpdNews
   end
 
   private
-   def get_links(url)
-     Rails.logger.info "get_links #{url}"
-     page = nil
-     retry_it { page = get_page(url) }
-     page.links.all.map do |l|
-       URI.join(@base_url, l).to_s
-     end
-   end
+  def get_articles(url)
+    Rails.logger.info "get_articles #{url}"
+    page = nil
+    retry_it { page = get_page(url) }
+    page.parsed.xpath("//article")
+  end
+
+  def get_links(url)
+    Rails.logger.info "get_links #{url}"
+    page = nil
+    retry_it { page = get_page(url) }
+    page.links.all.map do |l|
+      URI.join(@base_url, l).to_s
+    end
+  end
+
+  def get_pages
+    url = @base_url
+    Enumerator.new do |y|
+      while url
+        page = get_page(url)
+        y << page
+        links = page.links.all.map do |l|
+          URI.join(@base_url, l).to_s
+        end
+        url = next_url(links)
+      end
+    end
+  end
 
   def get_page(url)
     page = MetaInspector.new(url, download_images: false)
