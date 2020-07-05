@@ -32,32 +32,32 @@
   <div class="row">
     <div class="col">
       <h2 id="earnings">Earnings</h2>
-      <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn more", page_path("help", anchor: "officers") %></p>
+      <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn\u00a0more", page_path("help", anchor: "officers") %></p>
       <%= render "shared/charts/compensations", compensations: @officer.compensations %>
       <div class="officer__earnings-table">
         <%= render "shared/tables/compensations", compensations: @officer.compensations %>
       </div>
 
       <h2 id="incidents" class="mt-5">Incident Journal</h2>
-      <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to. <%= link_to "Learn more", page_path("help", anchor: "incidents") %></p>
+      <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to. <%= link_to "Learn\u00a0more", page_path("help", anchor: "incidents") %></p>
       <div class="officer__table">
         <%= render "shared/tables/incidents", id: "officer-incidents-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="field_contacts" class="mt-5">Field Contacts</h2>
-      <p>Field Interrogation and Observation (FIO) reports filed by this officer. <%= link_to "Learn more", page_path("help", anchor: "field_contacts") %></p>
+      <p>Field Interrogation and Observation (FIO) reports filed by this officer. <%= link_to "Learn\u00a0more", page_path("help", anchor: "field_contacts") %></p>
       <div class="officer__table">
         <%= render "shared/tables/field_contacts", id: "officer-field-contacts-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="complaints" class="mt-5">Complaints (IA Cases)</h2>
-      <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "complaints") %></p>
+      <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn\u00a0more", page_path("help", anchor: "complaints") %></p>
       <div class="officer__table">
         <%= render "shared/tables/complaints", id: "officer-complaints-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="swats" class="mt-5">SWAT Reports</h2>
-      <p>SWAT operations in which this officer participated. Reports currently cover 2010-2014, and, due to transcription errors, may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "swats") %></p>
+      <p>SWAT operations in which this officer participated. Reports currently cover 2010-2014. Due to transcription errors, this list may be incomplete. <%= link_to "Learn\u00a0more", page_path("help", anchor: "swats") %></p>
       <div class="officer__table">
         <%= render "shared/tables/swats", id: "officer-swats-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
