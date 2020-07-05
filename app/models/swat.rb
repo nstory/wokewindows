@@ -6,8 +6,6 @@ class Swat < ApplicationRecord
   has_many :swats_officers
   has_many :officers, through: :swats_officers
 
-  # counter_culture [:swats_officers, :officer]
-
   def pdf_url
     "https://wokewindows-data.s3.amazonaws.com/swats/#{swat_number}.pdf"
   end

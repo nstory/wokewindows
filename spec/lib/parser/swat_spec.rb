@@ -10,7 +10,16 @@ describe Parser::Swat do
       employee_id: "093825",
       name: "Ashman, Steven"
     })
-    expect(record[:date]).to eql("10/2/2014")
+    expect(record[:date]).to eql("2014-10-02")
+  end
+
+  it "prefers date from name of file" do
+    Tempfile.create("14-42JUNE29.txt") do |tmpfile|
+      tmpfile.write(file.read)
+      tmpfile.flush
+      r = Parser::Swat.new(tmpfile).records.first
+      expect(r[:date]).to eql("2014-06-29")
+    end
   end
 
   it "doesn't return a record if name doesn't match" do

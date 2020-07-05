@@ -1,4 +1,10 @@
 class Parser::Swat < Parser::Parser
+  DATE_MAPPING = {
+    "12-10-120229050-APR23.txt" => "2012-04-23",
+    "11-21-xxxx-aug18.txt" => "2011-08-18",
+    "588206.txt" => "2013-09-06"
+  }
+
   def category
     "swat"
   end
@@ -24,6 +30,14 @@ class Parser::Swat < Parser::Parser
 
   # grab the first date-looking thing
   def parse_date
+    bn = pathname.basename.to_s
+    if DATE_MAPPING[bn]
+      return DATE_MAPPING[bn]
+    end
+    if (/^(1\d)-\d+([a-z]+)(\d+)/i).match(bn)
+      d = Chronic.parse("#{$2} #{$3}, #{$1}")
+      return d.strftime("%F") if d
+    end
     match = IO.read(@filename).match(%r{\b\d{1,2}/\d{1,2}/20[01]\d\b})
     return match ? match[0] : ""
   end
