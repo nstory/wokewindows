@@ -22,30 +22,32 @@
       </dl>
 
       <h2>Officers and Allegations</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Title</th>
-            <th>Badge #</th>
-            <th>Allegation</th>
-            <th>Finding</th>
-            <th>Finding Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @complaint.complaint_officers.each do |co| %>
+      <div class="table-responsive">
+        <table class="table table-nowrap">
+          <thead>
             <tr>
-              <td><%= format_complaint_officer(co) %></td>
-              <td><%= format_text(co.title) %></td>
-              <td><%= format_text(co.badge) %></td>
-              <td><%= format_text(co.allegation) %></td>
-              <td><%= format_text(co.finding) %></td>
-              <td><%= format_date(co.finding_date) %></td>
+              <th>Name</th>
+              <th>Title</th>
+              <th>Badge #</th>
+              <th>Allegation</th>
+              <th>Finding</th>
+              <th>Finding Date</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @complaint.complaint_officers.each do |co| %>
+              <tr>
+                <td><%= format_complaint_officer(co) %></td>
+                <td><%= format_text(co.title) %></td>
+                <td><%= format_text(co.badge) %></td>
+                <td><%= format_text(co.allegation) %></td>
+                <td><%= format_text(co.finding) %></td>
+                <td><%= format_date(co.finding_date) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
 
       <%= render "shared/source_materials", attributions: @complaint.attributions %>
     </div>

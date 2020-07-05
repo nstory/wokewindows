@@ -2,19 +2,21 @@
 <p>
   This page contains data ingested from the following sources:
 </p>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Data Source</th>
-      <th>Filename</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% attributions.each do |at| %>
+<div class="table-responsive">
+  <table class="table table-nowrap">
+    <thead>
       <tr>
-        <td><%= link_to at.friendly_category, page_path('help', anchor: at.category) %></td>
-        <td><%= at.url ? link_to(at.filename, at.url) : at.filename %></td>
+        <th>Data Source</th>
+        <th>Filename</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% attributions.each do |at| %>
+        <tr>
+          <td><%= link_to at.friendly_category, page_path('help', anchor: at.category) %></td>
+          <td><%= at.url ? link_to(at.filename, at.url) : at.filename %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
