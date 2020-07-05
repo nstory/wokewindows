@@ -41,7 +41,7 @@ class Importer::Forfeiture::Forfeiture < Importer::Importer
       case_number: parse_case_number(record[:case_number]),
       court: court,
       amount: parse_money(record[:amount]),
-      date: parse_date(record[:date]),
+      date: parse_forfeiture_date(record[:date]),
       motor_vehicle: parse_string(record[:motor_vehicle]),
       cases_incidents: parse_incidents(record[:police_report_number])
     }
@@ -54,5 +54,13 @@ class Importer::Forfeiture::Forfeiture < Importer::Importer
         incident: Incident.find_by(incident_number: n)
       )
     end
+  end
+
+  def parse_forfeiture_date(date)
+    time = Chronic.parse(date)
+    return nil if !time
+    # we only have data for 2001-2015
+    return nil if time.year < 2001 || time.year > 2015
+    time ? time.strftime("%F") : nil
   end
 end

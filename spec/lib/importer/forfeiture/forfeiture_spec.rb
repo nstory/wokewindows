@@ -38,6 +38,18 @@ describe Importer::Forfeiture::Forfeiture do
       importer.import
       expect(Case.count).to eql(0)
     end
+
+    it "rejects too recent dates" do
+      record[:date] = "3/18/2019"
+      importer.import
+      expect(Case.first.date).to eql(nil)
+    end
+
+    it "rejects really old dates" do
+      record[:date] = "3/18/1999"
+      importer.import
+      expect(Case.first.date).to eql(nil)
+    end
   end
 
   describe Importer::Forfeiture::BmcDorchester do
