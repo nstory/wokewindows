@@ -40,6 +40,7 @@
         <div class="col-md-6">
           <% if @incident.latitude && @incident.longitude %>
             <div style="height:350px" id="incident-map" data-latitude="<%= @incident.latitude %>" data-longitude="<%= @incident.longitude %>"></div>
+            <p class="text-muted font-italic">Map location is sometimes inaccurate; trust Street & Location if there is a discrepancy.</p>
           <% else %>
             <p class="text-center text-muted font-italic">No latitude/longitude data for this incident</p>
           <% end %>
