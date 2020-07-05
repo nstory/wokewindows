@@ -10,6 +10,14 @@ export default class TableController extends Controller {
     this._performSearch = debounce(this._performSearch, DEBOUNCE_TIME_MS);
   }
 
+  connect() {
+    // this dataTable may have a search that was saved in state and re-applied
+    // when the user came back to this page. reflect that in our search box.
+    this._$table().on('init.dt', (e, settings, data) => {
+      this.searchInputTarget.value = this._dataTable().search();
+    });
+  }
+
   download(ev) {
     // get CSV url and params from the datatable
     const url = this._dataTable().ajax.url().replace(/\.json$/, ".csv")

@@ -23,9 +23,17 @@ describe "Incidents" do
         expect(page).to have_content("No matching records found")
       end
 
-      it "searches street" do
+      it "searches street and saves search" do
         fill_in "Search", with: "sesame"
         expect(page).to have_selector("td", text: "123")
+
+        # visit the show page
+        click_link "123"
+        expect(page).to have_selector("h1", text: "123")
+
+        # go back to index page; search should be applied
+        page.evaluate_script('window.history.back()')
+        expect(page).to have_field("shared-index-search", with: "sesame")
       end
 
       it "searches offense" do

@@ -1,4 +1,5 @@
 <%= render "shared/tables/common", {
+  id: id,
   class_name: "swats-table",
   path: ->(params) { datatable_swats_path(params) }
 }.merge(local_assigns) do %>

@@ -2,6 +2,7 @@
   params = {format: :json}.merge(local_assigns.fetch(:params, {}))
 %>
 <table
+        id="<%= id %>"
         class="<%= class_name %> display compact table-nowrap table-common"
         style="width:100%"
         data-source="<%= path.call(params) %>"

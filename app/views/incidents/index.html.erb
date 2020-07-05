@@ -1,5 +1,5 @@
 <% @layout_application_title = "Incident Journal" %>
 
-<%= render "shared/index", table_partial: "shared/tables/incidents" do %>
+<%= render "shared/index", table_partial: "shared/tables/incidents", table_id: "incidents-table" do %>
     <h1>Incident Journal <small>Incident reports submitted by officers <%= link_to "Learn\u00a0more", page_path("help", anchor: "incidents") %></small></h1>
 <% end %>

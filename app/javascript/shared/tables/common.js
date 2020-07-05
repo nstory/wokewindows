@@ -1,3 +1,5 @@
+import get from "lodash/get";
+
 // don't show errors in an alert()
 $.fn.dataTable.ext.errMode = 'throw';
 
@@ -5,6 +7,7 @@ $.fn.dataTable.ext.errMode = 'throw';
 // datatables stores the old tables which is a memory leak
 $(document).on("turbolinks:before-render", function() {
   $.fn.dataTable.tables().forEach((e) => {
+    $(e).dataTable().api().state.save();
     $(e).dataTable().api().destroy();
   });
 });
@@ -33,6 +36,17 @@ export function initDataTable(selector, callback) {
         scrollResize: true,
         language: {
           info: "Showing _TOTAL_ entries"
+        },
+        stateSave: true,
+        stateDuration: -1, // use SessionStorage
+        stateLoadParams: function(settings, data) {
+          // only load saved state if this is a restoration visit i.e. user got
+          // here via the back button
+          const action = get(Turbolinks, "controller.currentVisit.action")
+          if (action != "restore") {
+            return false;
+          }
+          return undefined;
         },
         ...tableOptions
       };

@@ -41,25 +41,25 @@
       <h2 id="incidents" class="mt-5">Incident Journal</h2>
       <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to. <%= link_to "Learn more", page_path("help", anchor: "incidents") %></p>
       <div class="officer__table">
-        <%= render "shared/tables/incidents", params: {officer_id: @officer.id}, options: {searching: false} %>
+        <%= render "shared/tables/incidents", id: "officer-incidents-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="field_contacts" class="mt-5">Field Contacts</h2>
       <p>Field Interrogation and Observation (FIO) reports filed by this officer. <%= link_to "Learn more", page_path("help", anchor: "field_contacts") %></p>
       <div class="officer__table">
-        <%= render "shared/tables/field_contacts", params: {officer_id: @officer.id}, options: {searching: false} %>
+        <%= render "shared/tables/field_contacts", id: "officer-field-contacts-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="complaints" class="mt-5">Complaints (IA Cases)</h2>
       <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "complaints") %></p>
       <div class="officer__table">
-        <%= render "shared/tables/complaints", params: {officer_id: @officer.id}, options: {searching: false} %>
+        <%= render "shared/tables/complaints", id: "officer-complaints-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="swats" class="mt-5">SWAT Reports</h2>
       <p>SWAT operations in which this officer participated. Reports currently cover 2010-2014, and, due to transcription errors, may be incomplete. <%= link_to "Learn more", page_path("help", anchor: "swats") %></p>
       <div class="officer__table">
-        <%= render "shared/tables/swats", params: {officer_id: @officer.id}, options: {searching: false} %>
+        <%= render "shared/tables/swats", id: "officer-swats-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <div class="mt-5">

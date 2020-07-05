@@ -1,4 +1,5 @@
 <%= render "shared/tables/common", {
+  id: id,
   class_name: "cases-table",
   path: ->(params) { datatable_cases_path(params) }
 }.merge(local_assigns) do %>

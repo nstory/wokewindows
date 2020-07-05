@@ -1,4 +1,5 @@
 <%= render "shared/tables/common", {
+  id: id,
   class_name: "field-contacts-table",
   path: ->(params) { datatable_field_contacts_path(params) }
 }.merge(local_assigns) do %>

@@ -1,5 +1,5 @@
 <% @layout_application_title = "Complaints (Internal Affairs)" %>
 
-<%= render "shared/index", table_partial: "shared/tables/complaints" do %>
+<%= render "shared/index", table_partial: "shared/tables/complaints", table_id: "complaints-table" do %>
     <h1>Complaints (Internal Affairs) <small>Citizen complaints and internal investigations regarding Boston Police Department employees <%= link_to "Learn more", page_path("help", anchor: "complaints") %></small></h1>
 <% end %>
