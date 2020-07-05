@@ -19,8 +19,10 @@
 
       <h3 id="field_contacts">Field Contacts (FIO)</h3>
       <p>Field Interrogation and Observation (FIO) reports are how the BPD records the department's stop-and-frisk encounters (and other encouters, many of which do not involve a search).</p>
-      <p>We ingest this data from the <a href="#field_contact">FieldContact Table</a> and <a href="#field_contact_name">FieldContact_Name</a> table exports distributed on the Analyze Boston website</p>
+      <p>Per <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/56a2569205caa7ee9f29e6a2/1453479570208/rule323.pdf">Rule 323</a>: "An FIOE Report shall be submitted subsequent to a field interaction/stop, a frisk, an observation, or an encounter".</p>
+      <p>We ingest this data from the <a href="#field_contact">FieldContact Table</a> and <a href="#field_contact_name">FieldContact_Name</a> table exports distributed on the <a href="https://data.boston.gov/">Analyze Boston website</a></p>
       <p>These reports are especially interesting because they 1. contain redacted prose narratives of the encounter and 2. contain a breakdown of the race and ethnicity of the individuals involved.</p>
+      <p>If the <i>Frisked / Searched?</i> flag is <i>Yes</i>, this indicates that at least one of the stopped persons was searched. Beginning in September 2019, the search flag is also marked for each individual.</p>
 
       <h3 id="incidents">Incident Journal</h3>
       <p>When an officer responds to a call, carries out a search warrant, or otherwise performs a significant action, they fill out an incident report (sometimes referred to as Form 1.1). The BPD makes available a selection of fields from these reports through two public data sources: <a href="#crime_incident_reports">Crime Incident Reports</a> and <a href="#district_journal">Public Journal</a>. In addition, reports from 2012 - 2015 are available in the <a href="#legacy_crime_incident_reports">Legacy Crime Incident Reports</a>.  We combine these data sources to create the list of incidents on this site.</p>
@@ -399,7 +401,6 @@
 
       <h3 id="field_contact">FIO Records FieldContact Table</h3>
       <p><a href="https://data.boston.gov/dataset/boston-police-department-fio">https://data.boston.gov/dataset/boston-police-department-fio</a></p>
-      <p>Per <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/56a2569205caa7ee9f29e6a2/1453479570208/rule323.pdf">Rule 323</a>: "An FIOE Report shall be submitted subsequent to a field interaction/stop, a frisk, an observation, or an encounter".</p>
       <p>These fields are from the Mark43 file, which applies to records from Sep 29, 2019 onwards.</p>
 
       <table class="table help__definitions">
@@ -754,6 +755,7 @@
         <li>DC_Brighton_Redacted.pdf</li>
         <li>DC_Charlestown_Redacted.pdf</li>
       </ul>
+      <p>The DC_ files are for each of the <a href="https://www.mass.gov/orgs/boston-municipal-court">Boston Municipal Courts</a>, and seem to cover the years 2001 through part of 2015.</p>
       <p>We only import the <code>SUCV#</code>, <code>AMT.</code>, <code>M/V</code>, <code>police report #</code>, and <code>Seizure Date</code> fields. To see other fields, you must refer to the original source documents.</p>
       <p>We are not currently importing the 2010 and 2011 Superior Court files because some of the tables in these files need to be OCR'd.</p>
       <p>We only import records where there is a docket number for the case, this means we are not importing nearly half of the records in these files.</p>
