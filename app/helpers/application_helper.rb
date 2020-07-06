@@ -54,4 +54,10 @@ module ApplicationHelper
     return format_unknown if amount == nil
     number_to_currency(amount)
   end
+
+  def contact_us(text = nil)
+    email = "n"+"s"+"t"+"ory@wokewindows.org"
+    text ||= email
+    mail_to email, text, encode: "javascript"
+  end
 end
