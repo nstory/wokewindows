@@ -1,6 +1,6 @@
 describe "Incidents" do
   let(:offense) { Offense.new(code: 123, description: "chicanery") }
-  let!(:incident) { Incident.create(incident_number: 123, district: "D14", street: "sesame", offenses: [offense]) }
+  let!(:incident) { Incident.create(incident_number: 123, occurred_on_date: "2019-12-20 03:08:00", district: "D14", street: "sesame", offenses: [offense]) }
 
   describe "index" do
     it "displays an incident" do
@@ -48,6 +48,11 @@ describe "Incidents" do
 
       it "searches district name" do
         fill_in "Search", with: "Brighton"
+        expect(page).to have_selector("td", text: "123")
+      end
+
+      it "searches date" do
+        fill_in "Search", with: "Dec"
         expect(page).to have_selector("td", text: "123")
       end
     end
