@@ -27,7 +27,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "detail", render: earnings_renderer},
       {data: "quinn", render: earnings_renderer},
     ],
-    order: [[11, 'desc']]
+    order: [[12, 'desc']]
   });
 });
 
