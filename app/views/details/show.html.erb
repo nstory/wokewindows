@@ -1,0 +1,47 @@
+<% @layout_application_title = "Paid Detail #{ @detail.tracking_no }" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Paid Detail <%= @detail.tracking_no %></h1>
+      <p>This is a paid detail worked by an officer of the Boston Police Department. <%= link_to "Learn\u00a0more", page_path("help", anchor: "details") %></p>
+
+      <dl class="row">
+        <dt class="detail__dt">Tracking #</dt>
+        <dd class="detail__dd"><%= format_text(@detail.tracking_no) %></dd>
+        <dt class="detail__dt">Employee #</dt>
+        <dd class="detail__dd"><%= format_detail_employee_number(@detail) %></dd>
+        <dt class="detail__dt">Employee Name</dt>
+        <dd class="detail__dd"><%= format_detail_employee_name(@detail) %></dd>
+        <dt class="detail__dt">Employee Rank</dt>
+        <dd class="detail__dd"><%= format_text(@detail.employee_rank) %></dd>
+        <dt class="detail__dt">Customer #</dt>
+        <dd class="detail__dd"><%= format_text(@detail.customer_number) %></dd>
+        <dt class="detail__dt">Customer</dt>
+        <dd class="detail__dd"><%= format_text(@detail.customer_name) %></dd>
+        <dt class="detail__dt">Street #</dt>
+        <dd class="detail__dd"><%= format_text(@detail.street_no) %></dd>
+        <dt class="detail__dt">Street</dt>
+        <dd class="detail__dd"><%= format_text(@detail.street) %></dd>
+        <dt class="detail__dt">Cross Street</dt>
+        <dd class="detail__dd"><%= format_text(@detail.xstreet) %></dd>
+        <dt class="detail__dt">Detail Type</dt>
+        <dd class="detail__dd"><%= format_text(@detail.detail_type) %></dd>
+        <dt class="detail__dt">Start Date/Time</dt>
+        <dd class="detail__dd"><%= format_date_time(@detail.start_date_time) %></dd>
+        <dt class="detail__dt">End Date/Time</dt>
+        <dd class="detail__dd"><%= format_date_time(@detail.end_date_time) %></dd>
+        <dt class="detail__dt">Hours Worked</dt>
+        <dd class="detail__dd"><%= format_minutes(@detail.minutes_worked) %></dd>
+        <dt class="detail__dt">Pay Hours</dt>
+        <dd class="detail__dd"><%= format_minutes(@detail.pay_hours ? @detail.pay_hours*60 : nil) %></dd>
+        <dt class="detail__dt">Pay</dt>
+        <dd class="detail__dd"><%= format_currency(@detail.pay_amount) %></dd>
+        <dt class="detail__dt">Pay Rate</dt>
+        <dd class="detail__dd"><%= format_currency(@detail.pay_rate) %></dd>
+      </dl>
+
+      <%= render "shared/source_materials", attributions: @detail.attributions %>
+    </div>
+  </div>
+</div>

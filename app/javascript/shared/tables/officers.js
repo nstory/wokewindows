@@ -14,6 +14,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "state", render: text_renderer},
       {data: "neighborhood", render: text_renderer, orderable: false},
       {data: "complaints_count", render: int_with_link_renderer("complaints")},
+      {data: "details_count", render: int_with_link_renderer("details")},
       {data: "field_contacts_count", render: int_with_link_renderer("field_contacts")},
       {data: "incidents_count", render: int_with_link_renderer("incidents")},
       {data: "swats_count", render: int_with_link_renderer("swats")},

@@ -20,10 +20,11 @@ require("datatables.net-buttons/js/buttons.html5.js");
 require("datatables.net-scroller-dt");
 require("datatables.net-plugins/features/scrollResize/dataTables.scrollResize.js");
 
+require("shared/tables/cases");
 require("shared/tables/compensations");
 require("shared/tables/complaints");
+require("shared/tables/details");
 require("shared/tables/field_contacts");
-require("shared/tables/cases");
 require("shared/tables/incidents");
 require("shared/tables/officers");
 require("shared/tables/swats");

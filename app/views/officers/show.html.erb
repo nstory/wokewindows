@@ -22,6 +22,7 @@
         <li><strong>Table of Contents</strong></li>
         <li><a href="#earnings">Earnings</a></li>
         <li><a href="#incidents">Incident Journal <span class="text-muted"><%= @officer.incidents_count %></span></a></li>
+        <li><a href="#details">Paid Details <span class="text-muted"><%= @officer.details_count %></span></a></li>
         <li><a href="#field_contacts">Field Contacts <span class="text-muted"><%= @officer.field_contacts_count %></span></a></li>
         <li><a href="#complaints">Complaints (IA Cases) <span class="text-muted"><%= @officer.complaints_count %></span></a></li>
         <li><a href="#swats">SWAT Reports <span class="text-muted"><%= @officer.swats_count %></span></a></li>
@@ -42,6 +43,12 @@
       <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to. <%= link_to "Learn\u00a0more", page_path("help", anchor: "incidents") %></p>
       <div class="officer__table">
         <%= render "shared/tables/incidents", id: "officer-incidents-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
+      </div>
+
+      <h2 id="details" class="mt-5">Paid Details</h2>
+      <p>Paid details worked by this officer in 2019. <%= link_to "Learn\u00a0more", page_path("help", anchor: "details") %></p>
+      <div class="officer__table">
+        <%= render "shared/tables/details", id: "officer-details-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="field_contacts" class="mt-5">Field Contacts</h2>

@@ -60,4 +60,11 @@ module ApplicationHelper
     text ||= email
     mail_to email, text, encode: "javascript"
   end
+
+  def format_minutes(value)
+    return format_unknown if value == nil
+    hours = (value / 60).floor
+    minutes = value % 60
+    "#{hours}:#{'%02d' % minutes}"
+  end
 end

@@ -4,5 +4,6 @@ namespace :counters do
     FieldContactName.counter_culture_fix_counts
     Incident.counter_culture_fix_counts
     SwatsOfficer.counter_culture_fix_counts
+    Detail.counter_culture_fix_counts
   end
 end

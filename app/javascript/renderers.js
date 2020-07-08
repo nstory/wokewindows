@@ -119,3 +119,15 @@ export function yes_no_renderer(data, type, row) {
   }
   return `<div class="text-center">${data ? 'Y' : '<span class="text-muted">N</span>'}</div>`;
 }
+
+export function url_renderer(r) {
+  return (data, type, row) => {
+    if (type != "display") {
+      return data;
+    }
+    if (data == null) {
+      return  `<div class="text-center">${unknown()}</div>`;
+    }
+    return `<a href="${row.url}">${r(data, type, row)}</a>`;
+  };
+}

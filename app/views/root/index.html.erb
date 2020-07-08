@@ -45,6 +45,12 @@
             <p class="card-text">Reports from incidents where the BPD Special Operations Division was deployed.</p>
           <% end %>
         </div>
+        <div class="col-lg-6">
+          <%= render "shared/root_card", image: 'traffic-control.svg', link: details_path do %>
+            <h5 class="card-title"><a href="<%= details_path %>">Paid Details</a></h5>
+            <p class="card-text">Paid details (e.g. directing traffic) worked by BPD officers for private companies.</p>
+          <% end %>
+        </div>
       </div>
 
       <p>Not sure where to get started? The <a href="<%= officers_path %>">Officers &amp; Employees Table</a> is sorted by total earnings for the year 2019, and provides links from each officer to their associated incident reports, complaints, etc.</p>

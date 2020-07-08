@@ -1,0 +1,5 @@
+<% @layout_application_title = "Paid Details" %>
+
+<%= render "shared/index", table_partial: "shared/tables/details", table_id: "details-table" do %>
+    <h1>Paid Details <small>Details worked by Boston Police Department officers in 2019. <%= link_to "Learn\u00a0more", page_path("help", anchor: "details") %></small></h1>
+<% end %>

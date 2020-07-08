@@ -14,7 +14,8 @@ class Attribution
     "2014_officer_ia_log" => "2014 Officer IA Log",
     "bpd_ia_data_2001_2011" => "BPD IA Data 2001 - 2011",
     "da_forfeitures" => "Forfeitures by Suffolk District Attorney",
-    "swat" => "SWAT Reports"
+    "swat" => "SWAT Reports",
+    "detail_records" => "Detail Records 2019"
   }
 
   attr_accessor :filename, :category, :url

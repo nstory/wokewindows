@@ -1,0 +1,11 @@
+.detail__dt {
+  @extend .col-sm-5;
+  @extend .col-md-3;
+  @extend .col-lg-2;
+}
+
+.detail__dd {
+  @extend .col-sm-7;
+  @extend .col-md-9;
+  @extend .col-lg-10;
+}

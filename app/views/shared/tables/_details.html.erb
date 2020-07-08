@@ -1,0 +1,15 @@
+<%= render "shared/tables/common", {
+  id: id,
+  class_name: "details-table",
+  path: ->(params) { datatable_details_path(params) }
+}.merge(local_assigns) do %>
+<tr>
+  <th scope="col" title="Tracking Number">#</th>
+  <th scope="col">Officer</th>
+  <th scope="col">Customer</th>
+  <th scope="col">Address</th>
+  <th scope="col">Start</th>
+  <th scope="col" title="# of hours worked">Worked</th>
+  <th scope="col">Pay</th>
+</tr>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_03_192958) do
+ActiveRecord::Schema.define(version: 2020_07_07_135654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -89,6 +89,33 @@ ActiveRecord::Schema.define(version: 2020_07_03_192958) do
     t.text "bag_of_text"
     t.index ["bag_of_text"], name: "complaints_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["ia_number"], name: "index_complaints_on_ia_number", unique: true
+  end
+
+  create_table "details", force: :cascade do |t|
+    t.integer "officer_id"
+    t.integer "tracking_no"
+    t.integer "employee_number"
+    t.string "employee_name"
+    t.integer "employee_rank"
+    t.integer "customer_number"
+    t.string "customer_name"
+    t.string "street_no"
+    t.string "street"
+    t.string "xstreet"
+    t.string "start_date_time"
+    t.string "end_date_time"
+    t.integer "minutes_worked"
+    t.string "detail_type"
+    t.integer "pay_hours"
+    t.integer "pay_amount"
+    t.integer "pay_rate"
+    t.text "attributions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "bag_of_text"
+    t.index ["bag_of_text"], name: "details_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
+    t.index ["start_date_time"], name: "index_details_on_start_date_time"
+    t.index ["tracking_no"], name: "index_details_on_tracking_no", unique: true
   end
 
   create_table "field_contact_names", force: :cascade do |t|
@@ -227,6 +254,7 @@ ActiveRecord::Schema.define(version: 2020_07_03_192958) do
     t.text "attributions"
     t.text "bag_of_text"
     t.integer "swats_count", default: 0, null: false
+    t.integer "details_count", default: 0, null: false
     t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
     t.index ["total"], name: "index_officers_on_total"

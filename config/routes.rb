@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :complaints, concerns: [:with_datatable]
   resources :cases, concerns: [:with_datatable]
   resources :swats, concerns: [:with_datatable]
+  resources :details, concerns: [:with_datatable]
 
   root "root#index"
 end
