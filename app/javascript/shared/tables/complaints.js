@@ -10,8 +10,8 @@ initDataTable("table.complaints-table", function($table, options) {
       {data: "ia_number", render: ia_number_renderer},
       {data: "incident_type", render: text_renderer},
       {data: "received_date", render: date_renderer},
-      {data: "occurred_date", render: date_renderer},
-      {data: "complaint_officers", render: see_more_renderer},
+      {data: "complaint_officers", render: see_more_renderer, orderable: false},
+      {data: "complaint_allegations", render: see_more_renderer, orderable: false},
       {data: "finding", render: text_renderer, orderable: false}
     ],
     order: [[2, 'desc']]

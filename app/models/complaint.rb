@@ -5,7 +5,7 @@ class Complaint < ApplicationRecord
   has_many :complaint_officers, dependent: :delete_all
 
   def bag_of_text_content
-    [ia_number, summary, incident_type, complaint_officers.map(&:name), finding]
+    [ia_number, summary, incident_type, complaint_officers.map(&:name), complaint_officers.map(&:allegation), finding]
   end
 
   # use ia_number for resource urls
