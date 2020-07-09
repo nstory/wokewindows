@@ -2,7 +2,6 @@ class ComplaintDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       ia_number: {source: "Complaint.ia_number", searchable: false},
-      case_number: {source: "Complaint.case_number", searchable: false},
       incident_type: {source: "Complaint.incident_type", searchable: false},
       received_date: {source: "Complaint.received_date", searchable: false, nulls_last: true},
       occurred_date: {source: "Complaint.occurred_date", searchable: false, nulls_last: true},
@@ -15,7 +14,6 @@ class ComplaintDatatable < ApplicationDatatable
     {
       url: complaint_url(record),
       ia_number: record.ia_number,
-      case_number: record.case_number,
       incident_type: record.incident_type,
       received_date: record.received_date,
       occurred_date: record.occurred_date,

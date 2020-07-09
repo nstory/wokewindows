@@ -8,14 +8,13 @@ initDataTable("table.complaints-table", function($table, options) {
     ...options,
     columns: [
       {data: "ia_number", render: ia_number_renderer},
-      {data: "case_number", render: int_renderer},
       {data: "incident_type", render: text_renderer},
       {data: "received_date", render: date_renderer},
       {data: "occurred_date", render: date_renderer},
       {data: "complaint_officers", render: see_more_renderer},
       {data: "finding", render: text_renderer, orderable: false}
     ],
-    order: [[3, 'desc']]
+    order: [[2, 'desc']]
   });
 });
 

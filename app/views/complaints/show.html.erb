@@ -21,6 +21,10 @@
         <dd><%= format_summary(@complaint.summary) %></dd>
       </dl>
 
+      <% if @complaint.is_preliminary? %>
+        <p>This is a preliminary investigation. If this case was converted into a full investigation, there will be a separate record.</p>
+      <% end %>
+
       <h2>Officers and Allegations</h2>
       <div class="table-responsive">
         <table class="table table-nowrap">
