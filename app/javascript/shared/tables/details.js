@@ -9,6 +9,7 @@ initDataTable("table.details-table", function($table, options) {
     columns: [
       {data: "tracking_no", render: url_renderer(text_renderer)},
       {data: "employee_name", render: text_renderer},
+      {data: "detail_type", render: text_renderer},
       {data: "customer_name", render: text_renderer},
       {data: "address", render: text_renderer},
       {data: "start_date_time", render: date_time_renderer},

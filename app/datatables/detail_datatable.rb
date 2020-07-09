@@ -8,6 +8,7 @@ class DetailDatatable < ApplicationDatatable
       start_date_time: {source: "Detail.start_date_time", searchable: false},
       minutes_worked: {source: "Detail.minutes_worked", searchable: false},
       pay_amount: {source: "Detail.pay_amount", searchable: false},
+      detail_type: {source: "Detail.detail_type", searchable: false},
       bag_of_text: {source: "Detail.bag_of_text", searchable: true, orderable: false}
     }
   end
@@ -21,6 +22,7 @@ class DetailDatatable < ApplicationDatatable
       address: record.address,
       start_date_time: record.start_date_time,
       minutes_worked: record.minutes_worked,
+      detail_type: record.detail_type_friendly,
       pay_amount: record.pay_amount
     }
   end
