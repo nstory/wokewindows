@@ -17,9 +17,6 @@
   }
 }
 
-.table-fullscreen__head {
-}
-
 .table-fullscreen__description {
   margin-top: 8px;
   padding: 0 0 0 12px;
@@ -38,23 +35,3 @@
   flex: 1 1 auto;
 }
 
-.table-loading {
-  align-items: center;
-  bottom: 0;
-  display: none;
-  justify-content: center;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 36px;
-  z-index: 2;
-
-  .loading &, .search-queued & {
-    display: flex;
-  }
-
-  .spinner-border {
-    width: 64px;
-    height: 64px;
-  }
-}
