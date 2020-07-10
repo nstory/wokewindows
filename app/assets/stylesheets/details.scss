@@ -1,11 +1,24 @@
 .detail__dt {
   @extend .col-sm-5;
-  @extend .col-md-3;
-  @extend .col-lg-2;
+  @extend .col-md-5;
+  @extend .col-lg-4;
 }
 
 .detail__dd {
   @extend .col-sm-7;
-  @extend .col-md-9;
-  @extend .col-lg-10;
+  @extend .col-md-7;
+  @extend .col-lg-8;
+}
+
+.detail__map {
+  height: 300px;
+  @include media-breakpoint-up(md) {
+    height: 400px;
+  }
+  @include media-breakpoint-up(lg) {
+    height: 500px;
+  }
+  // @include media-breakpoint-up(xl) {
+  //   height: 400px;
+  // }
 }
