@@ -38,12 +38,10 @@
           </dl>
         </div>
         <div class="col-md-6">
-          <% if @incident.latitude && @incident.longitude %>
-            <div style="height:350px" id="incident-map" data-latitude="<%= @incident.latitude %>" data-longitude="<%= @incident.longitude %>"></div>
-            <p class="text-muted font-italic">Map location is sometimes inaccurate; trust Street & Location fields if there is a discrepancy.</p>
-          <% else %>
-            <p class="text-center text-muted font-italic">No latitude/longitude data for this incident</p>
-          <% end %>
+            <div style="height:350px" id="incident-map" data-controller="map" data-map-latitude="<%= @incident.latitude %>" data-map-longitude="<%= @incident.longitude %>">
+              <p class="text-center text-muted font-italic">No latitude/longitude data for this incident</p>
+            </div>
+            <p class="text-muted font-italic">Map location is sometimes inaccurate; trust the Street &amp; Location fields if there is a discrepancy.</p>
         </div>
       </div>
 

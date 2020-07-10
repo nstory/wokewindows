@@ -10,7 +10,7 @@ export default class MapController extends Controller {
       return;
     }
 
-    // place map in the <div> this controller was initialized one
+    // place map in the <div> this controller was initialized on
     const map = Leaflet.map(this.element, {
       center: [latitude, longitude],
       zoom: 14
@@ -34,6 +34,28 @@ export default class MapController extends Controller {
       popupAnchor: [1, -34],
       tooltipAnchor: [16, -28],
       shadowSize:  [41, 41]
+    });
+  }
+
+  _districts(map) {
+    const colors = ["#800000", "#ff0000", "#800080", "#ff00ff", "#008000", "#ff7f50", "#808000", "#00008b", "#000080", "#0000ff", "#008080", "#00ffff"];
+    let colorIndex = 0;
+
+    $.getJSON("/districts_geojson.json", function(data) {
+      const geoJson = Leaflet.geoJSON(
+        data, {
+          style: function(feature) {
+            const color = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length;
+            return {color, fill: false, dashArray: `${colorIndex+5} ${colorIndex+6}`};
+          }
+        }
+      );
+      geoJson.addTo(map);
+      geoJson.getLayers().forEach((layer) => {
+        const district = layer.feature.properties.DISTRICT;
+        layer.bindTooltip(district, {permanent: true}).openTooltip();
+      });
     });
   }
 }
