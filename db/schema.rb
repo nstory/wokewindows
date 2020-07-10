@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_135654) do
+ActiveRecord::Schema.define(version: 2020_07_10_163549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -113,6 +113,8 @@ ActiveRecord::Schema.define(version: 2020_07_07_135654) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "bag_of_text"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["bag_of_text"], name: "details_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["start_date_time"], name: "index_details_on_start_date_time"
     t.index ["tracking_no"], name: "index_details_on_tracking_no", unique: true
@@ -194,6 +196,16 @@ ActiveRecord::Schema.define(version: 2020_07_07_135654) do
     t.integer "incident_id"
     t.index ["forfeiture_id", "incident_id"], name: "index_forfeitures_incidents_on_forfeiture_id_and_incident_id"
     t.index ["incident_id", "forfeiture_id"], name: "index_forfeitures_incidents_on_incident_id_and_forfeiture_id"
+  end
+
+  create_table "geocodes", force: :cascade do |t|
+    t.string "provider", null: false
+    t.string "query", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["query", "provider"], name: "index_geocodes_on_query_and_provider", unique: true
   end
 
   create_table "imports", force: :cascade do |t|

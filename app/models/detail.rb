@@ -27,6 +27,18 @@ class Detail < ApplicationRecord
     end
   end
 
+  def geocode!
+    if street && street_no
+      gc = Geocode.geocode_address(street, street_no)
+      self.latitude = gc.latitude
+      self.longitude = gc.longitude
+    elsif street && xstreet
+      gc = Geocode.geocode_intersection(street, xstreet)
+      self.latitude = gc.latitude
+      self.longitude = gc.longitude
+    end
+  end
+
   def to_param
     tracking_no.to_s
   end
