@@ -5,7 +5,7 @@
   var <%= raw(id) %> = <%= raw(json) %>;
 </script>
 
-<div class="compensations-chart__container">
-  <canvas class="compensations-chart" data-id="<%= id %>"></canvas>
+<div class="compensations-chart__container" data-controller="compensations-chart" data-compensations-chart-data="<%= json %>">
+  <canvas class="compensations-chart" data-target="compensations-chart.canvas"></canvas>
 </div>
 
