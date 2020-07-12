@@ -15,7 +15,8 @@ class Attribution
     "bpd_ia_data_2001_2011" => "BPD IA Data 2001 - 2011",
     "da_forfeitures" => "Forfeitures by Suffolk District Attorney",
     "swat" => "SWAT Reports",
-    "detail_records" => "Detail Records 2019"
+    "detail_records" => "Detail Records 2019",
+    "2019_tickets" => "2019 Traffic Tickets"
   }
 
   attr_accessor :filename, :category, :url

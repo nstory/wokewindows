@@ -17,6 +17,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "details_count", render: int_with_link_renderer("details")},
       {data: "field_contacts_count", render: int_with_link_renderer("field_contacts")},
       {data: "incidents_count", render: int_with_link_renderer("incidents")},
+      {data: "citations_count", render: int_with_link_renderer("citations")},
       {data: "swats_count", render: int_with_link_renderer("swats")},
       {data: "total", render: earnings_renderer},
       {data: "regular", render: earnings_renderer},
@@ -27,7 +28,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "detail", render: earnings_renderer},
       {data: "quinn", render: earnings_renderer},
     ],
-    order: [[12, 'desc']]
+    order: [[13, 'desc']]
   });
 });
 

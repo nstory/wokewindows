@@ -23,6 +23,7 @@
         <li><a href="#earnings">Earnings</a></li>
         <li><a href="#incidents">Incident Journal <span class="text-muted"><%= @officer.incidents_count %></span></a></li>
         <li><a href="#details">Paid Details <span class="text-muted"><%= @officer.details_count %></span></a></li>
+        <li><a href="#citations">Traffic Citations <span class="text-muted"><%= @officer.citations_count %></span></a></li>
         <li><a href="#field_contacts">Field Contacts <span class="text-muted"><%= @officer.field_contacts_count %></span></a></li>
         <li><a href="#complaints">Complaints (IA Cases) <span class="text-muted"><%= @officer.complaints_count %></span></a></li>
         <li><a href="#swats">SWAT Reports <span class="text-muted"><%= @officer.swats_count %></span></a></li>
@@ -49,6 +50,12 @@
       <p>Paid details worked by this officer in 2019. <%= link_to "Learn\u00a0more", page_path("help", anchor: "details") %></p>
       <div class="officer__table">
         <%= render "shared/tables/details", id: "officer-details-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
+      </div>
+
+      <h2 id="citations" class="mt-5">Traffic Citations</h2>
+      <p>Traffic citations issued by this officer in 2019. <%= link_to "Learn\u00a0more", page_path("help", anchor: "citations") %></p>
+      <div class="officer__table">
+        <%= render "shared/tables/citations", id: "officer-citations-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
       <h2 id="field_contacts" class="mt-5">Field Contacts</h2>

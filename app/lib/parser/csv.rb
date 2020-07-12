@@ -3,7 +3,7 @@ require "csv"
 class Parser::Csv < Parser::Parser
   def records
     Enumerator.new do |y|
-      csv = CSV.new(io_from_file, headers: true)
+      csv = CSV.new(io_from_file, headers: headers)
       csv.each do |row|
         record = row.map { |k,v| [k.downcase.strip.gsub(/[^a-z0-9]+/, "_").to_sym, (v || "").gsub(/[^[[:ascii:]]]/, "").strip] }.to_h
         record = record.map { |k,v| [map_key(k), v] }.to_h
@@ -20,6 +20,10 @@ class Parser::Csv < Parser::Parser
   # override to change key names, etc.
   def map_key(key)
     key
+  end
+
+  def headers
+    true
   end
 
   private

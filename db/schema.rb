@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_163549) do
+ActiveRecord::Schema.define(version: 2020_07_11_194052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -38,6 +38,48 @@ ActiveRecord::Schema.define(version: 2020_07_10_163549) do
     t.integer "incident_id"
     t.string "incident_number"
     t.index ["case_id"], name: "index_cases_incidents_on_case_id"
+  end
+
+  create_table "citations", force: :cascade do |t|
+    t.integer "officer_id"
+    t.string "issuing_agency"
+    t.string "ticket_number"
+    t.integer "officer_number"
+    t.string "ticket_type"
+    t.string "source"
+    t.string "violator_type"
+    t.boolean "cdl"
+    t.string "license_class"
+    t.string "event_date"
+    t.integer "location_id"
+    t.string "location_name"
+    t.integer "posted_speed"
+    t.integer "violation_speed"
+    t.boolean "posted"
+    t.string "radar"
+    t.string "clocked"
+    t.string "race"
+    t.string "sex"
+    t.string "vehicle_color"
+    t.string "make"
+    t.integer "model_year"
+    t.boolean "sixteen_pass"
+    t.boolean "haz_mat"
+    t.decimal "amount"
+    t.boolean "paid"
+    t.boolean "hearing_requested"
+    t.string "court_code"
+    t.integer "age"
+    t.boolean "searched"
+    t.text "offenses"
+    t.text "attributions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "bag_of_text"
+    t.index ["bag_of_text"], name: "citations_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
+    t.index ["event_date"], name: "index_citations_on_event_date"
+    t.index ["officer_id"], name: "index_citations_on_officer_id"
+    t.index ["ticket_number"], name: "index_citations_on_ticket_number", unique: true
   end
 
   create_table "compensations", force: :cascade do |t|
@@ -267,6 +309,7 @@ ActiveRecord::Schema.define(version: 2020_07_10_163549) do
     t.text "bag_of_text"
     t.integer "swats_count", default: 0, null: false
     t.integer "details_count", default: 0, null: false
+    t.integer "citations_count", default: 0, null: false
     t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
     t.index ["total"], name: "index_officers_on_total"

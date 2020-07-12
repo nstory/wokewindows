@@ -1,0 +1,5 @@
+<% @layout_application_title = "Traffic Citations" %>
+
+<%= render "shared/index", table_partial: "shared/tables/citations", table_id: "citations-table" do %>
+    <h1>Traffic Citations <small>Motor vehicle citations written by Boston Police Department officers and submitted to MassDOT in 2019. <%= link_to "Learn\u00a0more", page_path("help", anchor: "citations") %></small></h1>
+<% end %>

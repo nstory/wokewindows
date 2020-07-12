@@ -21,6 +21,7 @@ require("datatables.net-scroller-dt");
 require("datatables.net-plugins/features/scrollResize/dataTables.scrollResize.js");
 
 require("shared/tables/cases");
+require("shared/tables/citations");
 require("shared/tables/compensations");
 require("shared/tables/complaints");
 require("shared/tables/details");

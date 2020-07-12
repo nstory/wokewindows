@@ -52,6 +52,10 @@
       <p>We have redacted SWAT incident reports covering 2010 - 2014 from <a href="#swat">17F SWAT After-Action Reports</a>. These reports were provided as several-hundred page PDF documents, each spanning an entire year. We've broken each incident out into an individual file, and we've run <a href="https://github.com/jbarlow83/OCRmyPDF">OCRmyPDF</a> on those individual files.</p>
       <p>We automatically discover the officers involved in each action based on their names and employee ids. Because the OCR process is not 100% reliable, there may be errors and/or omissions in the fields we parse out.</p>
 
+      <h3 id="citations">Traffic Citations</h3>
+      <p>These records are for when Boston Police Department officers wrote tickets using the Massachusetts Uniform Citation form. These tickets are submitted to the Massachusetts Department of Transportation (MassDOT) either electronically or on paper (where they are scanned and the data is entered).</p>
+      <p>This data comes from the <a href="#2019_tickets">2019 Traffic Tickets Data Source</a>.</p>
+
       <h2 id="data_sources">Data Sources</h2>
       <h3 id="alpha_listing">BPD Alpha Listing with Badges</h3>
       <p><a href="https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/">https://www.muckrock.com/foi/boston-3/boston-police-department-personnel-roster-20433/</a></p>
@@ -865,10 +869,11 @@
         </tbody>
       </table>
 
+      <h3 id="2019_tickets">2019 Traffic Tickets</h3>
+      <a href="https://www.muckrock.com/foi/massachusetts-1/2019-motor-vehicle-violation-citations-95815/">2019 Motor Vehicle Violation Citations</a>
+      <p>MassDOT provided two data files, each with mostly the same fields. One file provides the ID of the officer who wrote a ticket, and the other provides the ticket number. We join these two files to derive the data available on The Woke Windows Project.</p>
+
       <h2 id="potential_data_sources">Potential Data Sources</h2>
-      <p>
-        <a href="https://www.muckrock.com/foi/massachusetts-1/2019-motor-vehicle-violation-citations-95815/">2019 Motor Vehicle Violation Citations</a>
-      </p>
       <p>
         <a href="https://www.muckrock.com/foi/massachusetts-1/police-career-incentive-pay-program-applications-95899/">Police Career Incentive Pay Program Applications</a>
       </p>

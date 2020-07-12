@@ -1,0 +1,37 @@
+<%= render "shared/tables/common", {
+  id: id,
+  class_name: "citations-table",
+  path: ->(params) { datatable_citations_path(params) }
+}.merge(local_assigns) do %>
+<tr>
+  <th scope="col" title="Ticket Number">#</th>
+  <th scope="col">Date</th>
+  <th scope="col">Officer</th>
+  <th scope="col">Agency</th>
+  <th scope="col">Location</th>
+  <th scope="col">Amount</th>
+  <th scope="col">Type</th>
+  <th scope="col">Source</th>
+  <th scope="col">Violator</th>
+  <th scope="col" title="Commercial Driver's License">CDL</th>
+  <th scope="col" title="License Class">Class</th>
+  <th scope="col" title="Posted Speed">Posted</th>
+  <th scope="col" title="Violation Speed">Violation</th>
+  <th scope="col" title="Speed Posted?">Posted</th>
+  <th scope="col">Radar</th>
+  <th scope="col">Clocked</th>
+  <th scope="col">Race</th>
+  <th scope="col">Sex</th>
+  <th scope="col" title="Vehicle Make">Make</th>
+  <th scope="col" title="Vehicle Year">Year</th>
+  <th scope="col" title="Vehicle Color">Color</th>
+  <th scope="col" title="16+ passenger vehicle">16+</th>
+  <th scope="col">Haz Mat</th>
+  <th scope="col">Paid</th>
+  <th scope="col" title="Hearing Requested">Hear Req</th>
+  <th scope="col">Court</th>
+  <th scope="col">Age</th>
+  <th scope="col">Searched</th>
+  <th scope="col">Offenses</th>
+</tr>
+<% end %>

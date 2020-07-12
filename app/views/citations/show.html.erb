@@ -1,0 +1,115 @@
+<% @layout_application_title = "Traffic Citation #{@citation.ticket_number}" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Traffic Citation <%= @citation.ticket_number %></h1>
+      <p>This is a traffic citation issued by an officer of the Boston Police Department and submitted to MassDOT. <%= link_to "Learn\u00a0more", page_path("help", anchor: "citations") %></p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <dl class="row">
+            <dt class="citation__dt">Ticket #</dt>
+            <dd class="citation__dd"><%= format_text(@citation.ticket_number) %></dd>
+            <dt class="citation__dt">Officer</dt>
+            <dd class="citation__dd"><%= format_citation_officer(@citation) %></dd>
+            <dt class="citation__dt">Date &amp; Time</dt>
+            <dd class="citation__dd"><%= format_date_time(@citation.event_date) %></dd>
+            <dt class="citation__dt">Agency</dt>
+            <dd class="citation__dd"><%= format_text(@citation.issuing_agency) %></dd>
+            <dt class="citation__dt">Location</dt>
+            <dd class="citation__dd"><%= format_text(@citation.location_name) %></dd>
+            <dt class="citation__dt">Amount</dt>
+            <dd class="citation__dd"><%= format_currency(@citation.amount) %></dd>
+            <dt class="citation__dt">Type</dt>
+            <dd class="citation__dd"><%= format_text(@citation.ticket_type) %></dd>
+            <dt class="citation__dt">Source</dt>
+            <dd class="citation__dd"><%= format_text(@citation.source) %></dd>
+            <dt class="citation__dt" title="Commercial Driver's License">CDL</dt>
+            <dd class="citation__dd"><%= format_yes_no(@citation.cdl) %></dd>
+            <dt class="citation__dt">Class</dt>
+            <dd class="citation__dd"><%= format_text(@citation.license_class) %></dd>
+            <dt class="citation__dt">Posted</dt>
+            <dd class="citation__dd"><%= format_yes_no(@citation.posted) %></dd>
+            <dt class="citation__dt">Radar</dt>
+            <dd class="citation__dd"><%= format_text(@citation.radar) %></dd>
+            <dt class="citation__dt">Clocked</dt>
+            <dd class="citation__dd"><%= format_text(@citation.clocked) %></dd>
+            <dt class="citation__dt">Searched</dt>
+            <dd class="citation__dd"><%= format_yes_no(@citation.searched) %></dd>
+          </dl>
+        </div>
+        <div class="col-md-6">
+          <dl class="row">
+            <dt class="citation__dt">Posted Speed</dt>
+            <dd class="citation__dd"><%= format_text(@citation.posted_speed) %></dd>
+            <dt class="citation__dt">Violation Speed</dt>
+            <dd class="citation__dd"><%= format_text(@citation.violation_speed) %></dd>
+            <dt class="citation__dt">Violator</dt>
+            <dd class="citation__dd"><%= format_text(@citation.violator_type) %></dd>
+            <dt class="citation__dt">Race</dt>
+            <dd class="citation__dd"><%= format_text(@citation.race) %></dd>
+            <dt class="citation__dt">Sex</dt>
+            <dd class="citation__dd"><%= format_text(@citation.sex) %></dd>
+            <dt class="citation__dt">Make</dt>
+            <dd class="citation__dd"><%= format_text(@citation.make) %></dd>
+            <dt class="citation__dt">Model Year</dt>
+            <dd class="citation__dd"><%= format_text(@citation.model_year) %></dd>
+            <dt class="citation__dt">Vehicle Color</dt>
+            <dd class="citation__dd"><%= format_text(@citation.vehicle_color) %></dd>
+            <dt class="citation__dt">16+ Pass Vehicle</dt>
+            <dd class="citation__dd"><%= format_yes_no(@citation.sixteen_pass) %></dd>
+            <dt class="citation__dt">Hazmat</dt>
+            <dd class="citation__dd"><%= format_yes_no(@citation.haz_mat) %></dd>
+            <dt class="citation__dt">Paid</dt>
+            <dd class="citation__dd"><%= format_yes_no(@citation.paid) %></dd>
+            <dt class="citation__dt">Hearing Requested</dt>
+            <dd class="citation__dd"><%= format_yes_no(@citation.hearing_requested) %></dd>
+            <dt class="citation__dt">Court</dt>
+            <dd class="citation__dd"><%= format_text(@citation.court_name) %></dd>
+            <dt class="citation__dt">Age</dt>
+            <dd class="citation__dd"><%= format_text(@citation.age) %></dd>
+          </dl>
+        </div>
+      </div>
+
+      <h2>Offenses</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover table-nowrap">
+          <thead>
+            <tr>
+              <th>Offense</th>
+              <th>Description</th>
+              <th>Assessment</th>
+              <th>Display Assessment</th>
+              <th>Expected Assessment</th>
+              <th>Major Incident</th>
+              <th>SDIP Points</th>
+              <th>Surchargeable</th>
+              <th title="Disposition">Disp.</th>
+              <th title="Disposition">Disposition Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @citation.offenses.each do |offense| %>
+              <tr>
+                <td><%= format_text(offense.offense) %></td>
+                <td><%= format_text(offense.description) %></td>
+                <td><%= format_currency(offense.assessment) %></td>
+                <td><%= format_currency(offense.display_assessment) %></td>
+                <td><%= format_currency(offense.expected_assessment) %></td>
+                <td><%= format_yes_no(offense.major_incident) %></td>
+                <td><%= format_text(offense.sdip_points) %></td>
+                <td><%= format_yes_no(offense.surchargeable) %></td>
+                <td><%= format_text(offense.disposition) %></td>
+                <td><%= format_text(offense.disposition_description) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <%= render "shared/source_materials", attributions: @citation.attributions %>
+    </div>
+  </div>
+</div>
