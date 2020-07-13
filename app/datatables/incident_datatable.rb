@@ -3,6 +3,7 @@ class IncidentDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       incident_number: {source: "Incident.incident_number", searchable: false},
+      links: {searchable: false, orderable: false},
       occurred_on_date: {source: "Incident.occurred_on_date", searchable: false, nulls_last: true},
       district: {source: "Incident.district", searchable: false},
       shooting: {source: "Incident.shooting", searchable: false},
@@ -19,6 +20,7 @@ class IncidentDatatable < ApplicationDatatable
     {
       url: incident_url(record),
       incident_number: record.incident_number,
+      links: record.links?,
       occurred_on_date: record.occurred_on_date,
       district: record.district,
       district_name: record.district_name,
@@ -32,7 +34,7 @@ class IncidentDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    q = Incident.all
+    q = Incident.includes(:field_contacts, :cases).all
     if params[:officer_id]
       q = q.where("officer_id" => params[:officer_id])
     end

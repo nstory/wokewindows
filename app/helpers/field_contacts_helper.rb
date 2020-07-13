@@ -13,9 +13,18 @@ module FieldContactsHelper
     )
   end
 
-  def format_narrative(narrative)
-    return format_unknown if narrative.blank?
-    simple_format(narrative)
+  def format_narrative(field_contact)
+    return format_unknown if field_contact.narrative.blank?
+    incidents = field_contact.incidents.to_a
+    raw(simple_format(field_contact.narrative).gsub(/I?(\d{9})/i) do |text|
+      inc_num = $1.to_i
+      incident = incidents.find { |i| i.incident_number == inc_num }
+      if incident
+        link_to text, incident_path(incident)
+      else
+        text
+      end
+    end)
   end
 
   private

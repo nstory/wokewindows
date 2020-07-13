@@ -2,7 +2,7 @@ class FieldContactDatatable < ApplicationDatatable
 
   def view_columns
     @view_columns ||= {
-      fc_num: {source: "FieldContact.fc_num", cond: :eq},
+      fc_num: {source: "FieldContact.fc_num", searchable: false},
       contact_date: {source: "FieldContact.contact_date", searchable: false},
       contact_officer_name: {source: "FieldContact.contact_officer_name", searchable: false},
       supervisor_name: {source: "FieldContact.supervisor_name", searchable: false},

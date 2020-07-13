@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_11_194052) do
+ActiveRecord::Schema.define(version: 2020_07_13_125555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -221,6 +221,13 @@ ActiveRecord::Schema.define(version: 2020_07_11_194052) do
     t.index ["contact_officer_id"], name: "index_field_contacts_on_contact_officer_id"
     t.index ["fc_num"], name: "index_field_contacts_on_fc_num", unique: true
     t.index ["supervisor_id"], name: "index_field_contacts_on_supervisor_id"
+  end
+
+  create_table "field_contacts_incidents", id: false, force: :cascade do |t|
+    t.bigint "field_contact_id", null: false
+    t.bigint "incident_id", null: false
+    t.index ["field_contact_id", "incident_id"], name: "index_fc_incidents_on_field_contact_id_and_incident_id"
+    t.index ["incident_id", "field_contact_id"], name: "index_fc_incidents_on_incident_id_and_field_contact_id", unique: true
   end
 
   create_table "forfeitures", force: :cascade do |t|

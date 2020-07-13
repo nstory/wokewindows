@@ -5,6 +5,12 @@ module IncidentsHelper
     safe_join links, ", "
   end
 
+  def format_field_contacts(field_contacts)
+    return format_unknown if field_contacts.empty?
+    links = field_contacts.map { |fc| link_to fc.fc_num, field_contact_path(fc) }
+    safe_join links, ", "
+  end
+
   def format_lat_long(lat, long)
     if !lat || !long
       return format_unknown

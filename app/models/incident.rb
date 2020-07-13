@@ -23,6 +23,7 @@ class Incident < ApplicationRecord
   has_many :cases, through: :cases_incidents
   has_many :swats_incidents
   has_many :swats, through: :swats_incidents
+  has_and_belongs_to_many :field_contacts
 
   serialize :location_of_occurrence, Array
   serialize :nature_of_incident, Array
@@ -67,6 +68,11 @@ class Incident < ApplicationRecord
     else
       nil
     end
+  end
+
+  # true if incident is linked to one-or-more cases or field_contacts
+  def links?
+    !cases.empty? || !field_contacts.empty?
   end
 
   def self.by_incident_number(numbers)

@@ -62,5 +62,13 @@ describe "Incidents" do
         expect(page).to have_link("123ABC", href: case_path(caze))
       end
     end
+
+    describe "incident with related field_contact" do
+      let!(:field_contact) { FieldContact.create!(fc_num: "FC123", incidents: [incident]) }
+      it "links to related field_contact" do
+        visit incident_path(incident)
+        expect(page).to have_link("FC123", href: field_contact_path(field_contact))
+      end
+    end
   end
 end

@@ -35,6 +35,10 @@
               <dt class="col-lg-4">Case</dt>
               <dd class="col-lg-8"><%= format_cases(@incident.cases) %></dd>
             <% end %>
+            <% if !@incident.field_contacts.empty? %>
+              <dt class="col-lg-4">Field Contact</dt>
+              <dd class="col-lg-8"><%= format_field_contacts(@incident.field_contacts) %></dd>
+            <% end %>
           </dl>
         </div>
         <div class="col-md-6">

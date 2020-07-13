@@ -1,6 +1,6 @@
 import escape from "lodash/escape";
 import padEnd from "lodash/padEnd";
-import {int_renderer, date_time_renderer, text_renderer, see_more_renderer, unknown} from "renderers";
+import {int_renderer, date_time_renderer, text_renderer, see_more_renderer, yes_no_renderer, unknown} from "renderers";
 import {initDataTable} from "shared/tables/common";
 
 initDataTable("table.incidents-table", function($table, options) {
@@ -8,6 +8,7 @@ initDataTable("table.incidents-table", function($table, options) {
     ...options,
     columns: [
       {data: "incident_number", render: incident_num_renderer},
+      {data: "links", render: yes_no_renderer, orderable: false},
       {data: "occurred_on_date", render: date_time_renderer},
       {data: "district", render: district_renderer},
       {data: "shooting", render: shooting_renderer},
@@ -17,7 +18,7 @@ initDataTable("table.incidents-table", function($table, options) {
       {data: "offenses", render: see_more_renderer},
       {data: "officer_journal_name", render: text_renderer}
     ],
-    order: [[1, 'desc']]
+    order: [[2, 'desc']]
   });
 });
 
