@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_125555) do
+ActiveRecord::Schema.define(version: 2020_07_13_163847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -80,6 +80,13 @@ ActiveRecord::Schema.define(version: 2020_07_13_125555) do
     t.index ["event_date"], name: "index_citations_on_event_date"
     t.index ["officer_id"], name: "index_citations_on_officer_id"
     t.index ["ticket_number"], name: "index_citations_on_ticket_number", unique: true
+  end
+
+  create_table "citations_field_contacts", id: false, force: :cascade do |t|
+    t.bigint "field_contact_id", null: false
+    t.bigint "citation_id", null: false
+    t.index ["citation_id", "field_contact_id"], name: "index_cfc_on_citation_id_and_field_contact_id", unique: true
+    t.index ["field_contact_id", "citation_id"], name: "index_cfc_on_field_contact_id_and_citation_id"
   end
 
   create_table "compensations", force: :cascade do |t|

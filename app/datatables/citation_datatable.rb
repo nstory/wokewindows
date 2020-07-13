@@ -2,6 +2,7 @@ class CitationDatatable < ApplicationDatatable
   def view_columns
     @view_columns ||= {
       ticket_number: {source: "Citation.ticket_number", searchable: false},
+      links: {searchable: false, orderable: false},
       location_name: {source: "Citation.location_name", searchable: false},
       event_date: {source: "Citation.event_date", searchable: false, nulls_last: true},
       amount: {source: "Citation.amount", searchable: false},
@@ -36,6 +37,7 @@ class CitationDatatable < ApplicationDatatable
   def data_record(record)
     {
       url: citation_url(record),
+      links: record.links?,
       ticket_number: record.ticket_number,
       location_name: record.location_name,
       event_date: record.event_date,
@@ -71,7 +73,7 @@ class CitationDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    q = Citation.includes(:officer).all
+    q = Citation.includes(:officer, :field_contacts).all
     if params[:officer_id]
       q = q.where("officer_id" => params[:officer_id])
     end

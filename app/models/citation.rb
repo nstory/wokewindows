@@ -4,6 +4,7 @@ class Citation < ApplicationRecord
   include BagOfText
 
   belongs_to :officer, optional: true
+  has_and_belongs_to_many :field_contacts
 
   counter_culture :officer
 
@@ -13,6 +14,10 @@ class Citation < ApplicationRecord
 
   def court_name
     COURT_MAPPING.fetch(court_code, court_code)
+  end
+
+  def links?
+    !field_contacts.empty?
   end
 
   def to_param

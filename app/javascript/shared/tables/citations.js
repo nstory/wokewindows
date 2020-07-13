@@ -7,6 +7,7 @@ initDataTable("table.citations-table", function($table, options) {
     ...options,
     columns: [
       {data: "ticket_number", render: url_renderer(text_renderer)},
+      {data: "links", render: yes_no_renderer, orderable: false},
       {data: "event_date", render: date_time_renderer},
       {data: "officer_number", render: officer_renderer, orderable: false},
       {data: "issuing_agency", render: agency_renderer},
@@ -36,7 +37,7 @@ initDataTable("table.citations-table", function($table, options) {
       {data: "searched", render: yes_no_renderer},
       {data: "offenses", render: see_more_renderer, orderable: false},
     ],
-    order: [[1, 'desc']]
+    order: [[2, 'desc']]
   });
 });
 

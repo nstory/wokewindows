@@ -15,16 +15,26 @@ module FieldContactsHelper
 
   def format_narrative(field_contact)
     return format_unknown if field_contact.narrative.blank?
-    incidents = field_contact.incidents.to_a
-    raw(simple_format(field_contact.narrative).gsub(/I?(\d{9})/i) do |text|
-      inc_num = $1.to_i
-      incident = incidents.find { |i| i.incident_number == inc_num }
-      if incident
-        link_to text, incident_path(incident)
-      else
-        text
-      end
-    end)
+
+    # mapping from text to link
+    mapping = field_contact.incidents.inject({}) do |h,inc|
+      h[inc.incident_number.to_s] = incident_path(inc)
+      h["I#{inc.incident_number}"] = incident_path(inc)
+      h
+    end
+    mapping = field_contact.citations.inject(mapping) do |h,cit|
+      h[cit.ticket_number] = citation_path(cit)
+      h
+    end
+
+    # this is suspicious, it's possible we could substitute the same text
+    # twice and mess up a link we just created or something
+    html = simple_format(field_contact.narrative)
+    mapping.each do |text, url|
+      html.gsub!(Regexp.new('\b' + text + '\b'), link_to(text, url))
+    end
+
+    raw(html)
   end
 
   private

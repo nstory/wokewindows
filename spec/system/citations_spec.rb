@@ -8,6 +8,7 @@ describe "Citations" do
       court_code: "CT_006"
     )
   end
+  let!(:field_contact) { FieldContact.create(fc_num: "FC123", citations: [citation]) }
 
   describe "index" do
     it "should display the citation" do
@@ -52,6 +53,7 @@ describe "Citations" do
       expect(page).to have_selector("dd", text: "Feb 15, 2019 5:10:00 AM")
       expect(page).to have_selector("dd", text: "$150.00")
       expect(page).to have_selector("dd", text: "West Roxbury BMC")
+      expect(page).to have_link("FC123", href: field_contact_path(field_contact))
     end
   end
 end

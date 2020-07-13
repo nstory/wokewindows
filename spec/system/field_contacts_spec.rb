@@ -1,6 +1,7 @@
 describe "FieldContacts" do
+  let!(:citation) { Citation.create!(ticket_number: "T1234567") }
   let!(:incident) { Incident.create!(incident_number: "123456789") }
-  let!(:field_contact) { FieldContact.create!(fc_num: "FC123", contact_officer_name: "KIRK, JAMES", zip: 2131, incidents: [incident], narrative: "foo bar\n\nlol I123456789\n\nbar") }
+  let!(:field_contact) { FieldContact.create!(fc_num: "FC123", contact_officer_name: "KIRK, JAMES", zip: 2131, incidents: [incident], citations: [citation], narrative: "foo bar\n\nlol I123456789\n\nbar T1234567") }
 
   describe "index" do
     describe "searching" do
@@ -42,6 +43,7 @@ describe "FieldContacts" do
       expect(page).to have_selector("dd", text: "KIRK, JAMES")
       expect(page).to have_selector("dd", text: "02131")
       expect(page).to have_link("I123456789", href: incident_path(incident))
+      expect(page).to have_link("T1234567", href: citation_path(citation))
     end
   end
 end

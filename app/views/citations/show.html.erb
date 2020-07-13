@@ -37,6 +37,10 @@
             <dd class="citation__dd"><%= format_text(@citation.clocked) %></dd>
             <dt class="citation__dt">Searched</dt>
             <dd class="citation__dd"><%= format_yes_no(@citation.searched) %></dd>
+            <% if !@citation.field_contacts.empty? %>
+              <dt class="citation__dt">FIO</dt>
+              <dd class="citation__dd"><%= format_field_contacts(@citation.field_contacts) %></dd>
+            <% end %>
           </dl>
         </div>
         <div class="col-md-6">
