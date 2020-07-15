@@ -34,5 +34,11 @@ class Ckan
     def last_modified
       @json["last_modified"]
     end
+
+    def name
+      name = @json["name"]
+      name = @json.dig("name_translated", "en") if name.blank?
+      name
+    end
   end
 end
