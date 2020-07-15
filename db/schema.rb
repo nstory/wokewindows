@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_13_163847) do
+ActiveRecord::Schema.define(version: 2020_07_15_205333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "title"
+    t.text "admin_note"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["url"], name: "index_articles_on_url", unique: true
+  end
 
   create_table "cases", force: :cascade do |t|
     t.string "case_number"
