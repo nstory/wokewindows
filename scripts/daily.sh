@@ -9,3 +9,4 @@ rails 'ckan:archive[crime-incident-reports-august-2015-to-date-source-new-system
 rails 'ckan:archive[public-works-active-work-zones,Public Works Active Work Zones,public_works_active_work_zones]'
 rails 'journals:download'
 rails 'importers:run'
+rails 'counters:fix'
