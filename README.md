@@ -1,31 +1,22 @@
 # The Woke Windows Project
 
-This is the code base for the [Woke Windows Project](https://www.wokewindows.org) website.
+This is the code base for the [Woke Windows Project](https://www.wokewindows.org). Pull requests are most definitely welcome!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setting Up for Development
+I suggest using [rbenv](https://github.com/rbenv/rbenv) to download and run the correct ruby version for the project based on the `.ruby-version` file.
 
-Things you may want to cover:
+I use [nvm](https://github.com/nvm-sh/nvm) to download and run the correct node.js version for the project based on the `.nvmrc` file.
 
-* Ruby version
+Install dependencies by running `bundle` and `yarn`
 
-* System dependencies
+You will need a local [PostgeSQL Server](https://www.postgresql.org/) to run the application.
 
-* Configuration
+... TODO: all the other steps
 
-* Database creation
+Start the app in the standard rails way: `bundle exec rails s`
 
-* Database initialization
+## Production Environment
+Heroku.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-## REBUILD ALL DATABASES
-```
-bundle exec rails db:drop && bundle exec rails db:create && bundle exec rails db:migrate && RAILS_ENV=test bundle exec rails db:migrate && bundle exec rails db:seed:replant
-```
+## LICENSE
+This project is released under the MIT License.
