@@ -6,7 +6,7 @@ class Importer::BpdNewsArticles
   end
 
   def self.import_all
-    new("articles").import
+    new("data/bpd_news_articles").import
   end
 
   def import
