@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :swats, concerns: [:with_datatable]
   resources :details, concerns: [:with_datatable]
   resources :citations, concerns: [:with_datatable]
+  resources :articles, concerns: [:with_datatable]
 
   root "root#index"
 end

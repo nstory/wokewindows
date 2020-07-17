@@ -27,6 +27,7 @@
         <li><a href="#field_contacts">Field Contacts <span class="text-muted"><%= @officer.field_contacts_count %></span></a></li>
         <li><a href="#complaints">Complaints (IA Cases) <span class="text-muted"><%= @officer.complaints_count %></span></a></li>
         <li><a href="#swats">SWAT Reports <span class="text-muted"><%= @officer.swats_count %></span></a></li>
+        <li><a href="#articles">Articles <span class="text-muted"><%= @officer.articles_officers_count %></span></a></li>
         <li><a href="#source_materials">Source Materials</a></li>
       </ul>
     </div>
@@ -75,6 +76,13 @@
       <div class="officer__table">
         <%= render "shared/tables/swats", id: "officer-swats-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
+
+      <h2 id="articles" class="mt-5">Articles</h2>
+      <p>Articles published on <a href="https://bpdnews.com/">bpdnews.com</a> referencing this officer. Populated by an automated process, which may not be 100% accurate.</p>
+      <div class="officer__table">
+        <%= render "shared/tables/articles", id: "officer-articles-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
+      </div>
+
 
       <div class="mt-5">
         <%= render "shared/source_materials", attributions: @attributions %>

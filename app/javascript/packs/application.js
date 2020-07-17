@@ -20,6 +20,7 @@ require("datatables.net-buttons/js/buttons.html5.js");
 require("datatables.net-scroller-dt");
 require("datatables.net-plugins/features/scrollResize/dataTables.scrollResize.js");
 
+require("shared/tables/articles");
 require("shared/tables/cases");
 require("shared/tables/citations");
 require("shared/tables/compensations");

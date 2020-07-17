@@ -13,6 +13,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "postal", render: zip_renderer},
       {data: "state", render: text_renderer},
       {data: "neighborhood", render: text_renderer, orderable: false},
+      {data: "articles_officers_count", render: int_with_link_renderer("articles")},
       {data: "complaints_count", render: int_with_link_renderer("complaints")},
       {data: "details_count", render: int_with_link_renderer("details")},
       {data: "field_contacts_count", render: int_with_link_renderer("field_contacts")},
@@ -28,7 +29,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "detail", render: earnings_renderer},
       {data: "quinn", render: earnings_renderer},
     ],
-    order: [[13, 'desc']]
+    order: [[14, 'desc']]
   });
 });
 

@@ -13,6 +13,7 @@ class Officer < ApplicationRecord
   has_many :swats, through: :swats_officers
   has_many :details
   has_many :citations
+  has_many :articles_officers
 
   def bag_of_text_content
     [name, title, postal, zip_code && zip_code.state, zip_code && zip_code.neighborhood]

@@ -30,7 +30,8 @@ class Importer::BpdNewsArticles
       article.attributes = {
         url: map_url(doc),
         title: map_title(doc),
-        body: map_body(doc)
+        body: map_body(doc),
+        date_published: map_date_published(doc)
       }
       article.save
     end
@@ -43,6 +44,10 @@ class Importer::BpdNewsArticles
 
   def map_body(doc)
     doc.css("div.body").first.text.gsub(/\n[\n\s]+/m, "\n\n").strip
+  end
+
+  def map_date_published(doc)
+    doc.css("time.published").attr("datetime")
   end
 
   def map_url(doc)

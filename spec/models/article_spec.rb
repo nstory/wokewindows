@@ -1,5 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Article, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Article do
+  describe "#source" do
+    it "returns bpdnews" do
+      expect(
+        Article.new(url: "https://bpdnews.com/xyzzy").source
+      ).to eql("bpdnews.com")
+    end
+  end
 end

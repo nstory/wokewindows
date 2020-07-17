@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_205333) do
+ActiveRecord::Schema.define(version: 2020_07_17_140239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -23,7 +23,18 @@ ActiveRecord::Schema.define(version: 2020_07_15_205333) do
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "date_published"
     t.index ["url"], name: "index_articles_on_url", unique: true
+  end
+
+  create_table "articles_officers", force: :cascade do |t|
+    t.integer "officer_id"
+    t.integer "article_id"
+    t.string "status", default: "added", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id", "officer_id"], name: "index_articles_officers_on_article_id_and_officer_id", unique: true
+    t.index ["officer_id", "status", "article_id"], name: "index_articles_officers_on_officer_id_and_status_and_article_id"
   end
 
   create_table "cases", force: :cascade do |t|
@@ -334,6 +345,7 @@ ActiveRecord::Schema.define(version: 2020_07_15_205333) do
     t.integer "swats_count", default: 0, null: false
     t.integer "details_count", default: 0, null: false
     t.integer "citations_count", default: 0, null: false
+    t.integer "articles_officers_count", default: 0, null: false
     t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
     t.index ["total"], name: "index_officers_on_total"
