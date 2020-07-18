@@ -1,5 +1,7 @@
 class Article < ApplicationRecord
   def source
-    URI(url).host
+    host = URI(url).host
+    return "Boston Globe" if /bostonglobe.com/ =~ host
+    host
   end
 end
