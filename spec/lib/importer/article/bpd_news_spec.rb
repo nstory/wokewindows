@@ -1,6 +1,8 @@
-describe Importer::BpdNewsArticles do
-  let(:file) { file_fixture("bpd_news_articles") }
-  let(:importer) { Importer::BpdNewsArticles.new(file) }
+describe Importer::Article::BpdNews do
+  include_context "tmpdir"
+
+  let(:files) {{ "article.html" => file_fixture("bpd_news_article.html").read }}
+  let(:importer) { Importer::Article::BpdNews.new(@tmpdir) }
 
   it "imports a file" do
     importer.import

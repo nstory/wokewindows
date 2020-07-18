@@ -23,6 +23,18 @@ class Officer < ApplicationRecord
     Regexp.new(hr_name.sub(/,.*/, "").gsub(/[^a-z]/i, ".?"), Regexp::IGNORECASE)
   end
 
+  # regexp good for checking if an officer is referenced in an article
+  def article_regexp
+    return nil unless hr_name
+
+    last_name, first_name = hr_name.split(",", 2)
+
+    # middle initial is optional
+    first_name.sub!(/ .*/) { |m| ".?" * m.length }
+
+    Regexp.new("#{first_name}\\s+#{last_name}")
+  end
+
   def name
     if hr_name
       hr_name.sub(/,/, ", ")

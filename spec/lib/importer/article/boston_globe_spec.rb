@@ -1,14 +1,8 @@
-describe Importer::BostonGlobeArticles do
-  let(:content) { file_fixture("globe.html").read }
-  let(:importer) { Importer::BostonGlobeArticles.new(@tmpdir) }
+describe Importer::Article::BostonGlobe do
+  include_context "tmpdir"
 
-  around(:each) do |example|
-    Dir.mktmpdir do |dir|
-      @tmpdir = dir
-      IO.write("#{dir}/globe.html", content)
-      example.run
-    end
-  end
+  let(:files) {{ "globe.html" => file_fixture("globe.html").read }}
+  let(:importer) { Importer::Article::BostonGlobe.new(@tmpdir) }
 
   it "imports a file" do
     importer.import
@@ -26,7 +20,7 @@ describe Importer::BostonGlobeArticles do
   end
 
   describe "file does not reference BPD" do
-    let(:content) { file_fixture("globe.html").read.gsub(/boston police/i, "xxx") }
+    let(:files) {{ "globe.html" => file_fixture("globe.html").read.gsub(/boston police/i, "xxx") }}
     it "does not import" do
       importer.import
       expect(Article.count).to eql(0)
@@ -34,7 +28,7 @@ describe Importer::BostonGlobeArticles do
   end
 
   describe "file with <article> tag" do
-    let(:content) { file_fixture("globe2.html").read }
+    let(:files) {{ "globe.html" => file_fixture("globe2.html").read }}
     it "imports" do
       importer.import
       a = Article.first

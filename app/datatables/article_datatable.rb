@@ -3,7 +3,8 @@ class ArticleDatatable < ApplicationDatatable
     @view_columns ||= {
       date_published: {source: "Article.date_published"},
       title: {source: "Article.title"},
-      source: {orderable: false, searchable: false}
+      source: {source: "Article.url", searchable: false},
+      excerpt: {orderable: false, searchable: false}
     }
   end
 
@@ -12,11 +13,12 @@ class ArticleDatatable < ApplicationDatatable
       date_published: record.article.date_published,
       title: record.article.title,
       url: record.article.url,
-      source: record.article.source
+      source: record.article.source,
+      excerpt: record.excerpt
     }
   end
 
   def get_raw_records
-    ArticlesOfficer.includes(:article).references(:article).where(officer_id: params["officer_id"])
+    ArticlesOfficer.added.includes(:article).references(:article).where(officer_id: params["officer_id"])
   end
 end

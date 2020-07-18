@@ -1,12 +1,11 @@
-class Importer::BpdNewsArticles
-  SLICE = 1000
+# base class for article importers
+class Importer::Article::Article
+  SLICE = 200
 
+  # path is a directory containing html files (possibly in nested
+  # sub-directories)
   def initialize(path)
     @path = path
-  end
-
-  def self.import_all
-    new("data/bpd_news_articles").import
   end
 
   def import
@@ -17,6 +16,7 @@ class Importer::BpdNewsArticles
     end
   end
 
+  private
   def import_slice(slice)
     docs = slice.map { |r| Nokogiri::HTML(r) }
     urls = docs.map { |r| map_url(r) }
@@ -26,9 +26,11 @@ class Importer::BpdNewsArticles
     )
 
     docs.each do |doc|
-      article = by_url[map_url(doc)]
+      next unless filter(doc)
+      url = map_url(doc)
+      article = by_url[url]
       article.attributes = {
-        url: map_url(doc),
+        url: url,
         title: map_title(doc),
         body: map_body(doc),
         date_published: map_date_published(doc)
@@ -37,25 +39,27 @@ class Importer::BpdNewsArticles
     end
   end
 
-  private
   def records
-    Dir.glob("#{@path}/*.html").lazy.map { |f| IO.read(f) }
+    Dir.glob("#{@path}/**/*").lazy
+      .select { |f| File.file?(f) }
+      .map { |f| IO.read(f) }
   end
 
-  def map_body(doc)
-    doc.css("div.body").first.text.gsub(/\n[\n\s]+/m, "\n\n").strip
+  def filter(doc)
+    true
   end
 
   def map_date_published(doc)
-    doc.css("time.published").attr("datetime")
-  end
-
-  def map_url(doc)
-    href = doc.css("h1.entry-title a").attr("href").value
-    URI.join("https://bpdnews.com", href).to_s
+    url = map_url(doc)
+    %r{(\d{4})/(\d{2})/(\d{2})}.match(url)
+    return "#{$1}-#{$2}-#{$3}"
   end
 
   def map_title(doc)
-    doc.css("h1.entry-title").first.text
+    doc.css("title").text
+  end
+
+  def map_url(doc)
+    doc.css('link[rel=canonical]').attr("href").to_s
   end
 end
