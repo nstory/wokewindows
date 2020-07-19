@@ -2,16 +2,15 @@ require 'rails_helper'
 
 describe Article do
   describe "#source" do
-    it "returns bpdnews" do
-      expect(
-        Article.new(url: "https://bpdnews.com/xyzzy").source
-      ).to eql("bpdnews.com")
-    end
-
-    it "return boston globe" do
-      expect(
-        Article.new(url: "https://www.bostonglobe.com/sdfdf").source
-      ).to eql("Boston Globe")
+    {
+      "https://bpdnews.com/xyzzy" => "bpdnews.com",
+       "https://www.bostonglobe.com/sdfdf" => "Boston Globe",
+       "https://npaper-wehaa.com/baystatebanner/xx" => "Bay State Banner",
+       "https://www.wgbh.org/xyzzy" => "WGBH"
+    }.each do |url, source|
+      it "returns #{source}" do
+        expect(Article.new(url: url).source).to eql(source)
+      end
     end
   end
 end

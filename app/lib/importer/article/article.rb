@@ -56,7 +56,7 @@ class Importer::Article::Article
   end
 
   def map_title(doc)
-    doc.css("title").text
+    doc.css("title").first.text
   end
 
   def map_url(doc)
