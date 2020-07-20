@@ -7,7 +7,7 @@ class ArticlesOfficer < ApplicationRecord
   belongs_to :article
   belongs_to :officer
 
-  counter_culture :officer, column_name: proc { |ao| ao.added? ? 'articles_officers_count' : nil }
+  counter_culture :officer, column_name: proc { |ao| ao.added? ? 'articles_officers_count' : nil }, column_names: {["status = 'added'"] => 'articles_officers_count'}
 
   def excerpt(size = 40)
     re = officer.article_regexp
