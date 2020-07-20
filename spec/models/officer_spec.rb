@@ -13,6 +13,57 @@ describe Officer do
     end
   end
 
+  describe "#calculate_ia_score" do
+    let!(:officer) { Officer.create!(employee_id: 123) }
+
+    def complaint(*args)
+      Complaint.create!(
+        ia_number: SecureRandom.uuid,
+        complaint_officers: args.each_slice(2).map do |allegation, finding|
+          ComplaintOfficer.new(officer: officer, allegation: allegation, finding: finding)
+        end
+      )
+    end
+
+    it "is 5 for a sustained serious allegation" do
+      complaint("Violation of Criminal Law", "Sustained")
+      expect(officer.calculate_ia_score).to eql(5)
+      Officer.fix_ia_score
+      expect(officer.reload.ia_score).to eql(5)
+    end
+
+    it "is 4 for 2 sustained concerning cases" do
+      2.times {
+        complaint("Respectful Treatment", "Sustained")
+      }
+      expect(officer.calculate_ia_score).to eql(4)
+    end
+
+    it "is 3 for 1 sustained concerning cases" do
+      complaint("Respectful Treatment", "Sustained")
+      expect(officer.calculate_ia_score).to eql(3)
+    end
+
+    it "is 2 for 1 sustained less-concerning case" do
+      complaint("Xyzzy", "Sustained")
+      expect(officer.calculate_ia_score).to eql(2)
+    end
+
+    it "is 2 for 5 cases regardless of outcome" do
+      5.times {
+        complaint("Xyzzy", "Unfounded")
+      }
+      expect(officer.calculate_ia_score).to eql(2)
+    end
+
+    it "is 1 for 2 cases regardless of outcome" do
+      2.times {
+        complaint("Xyzzy", "Unfounded")
+      }
+      expect(officer.calculate_ia_score).to eql(1)
+    end
+  end
+
   describe ".by_employee_id" do
     it "returns a hash of officers" do
       o1 = Officer.create({employee_id: 1234})

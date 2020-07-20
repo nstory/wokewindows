@@ -1,5 +1,5 @@
 import escape from "lodash/escape";
-import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer, text_renderer} from "renderers";
+import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer, text_renderer, unknown} from "renderers";
 import {initDataTable} from "shared/tables/common";
 
 initDataTable("table.officers-table", function($table, options) {
@@ -14,7 +14,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "state", render: text_renderer},
       {data: "neighborhood", render: text_renderer, orderable: false},
       {data: "articles_officers_count", render: int_with_link_renderer("articles")},
-      {data: "complaints_count", render: int_with_link_renderer("complaints")},
+      {data: "ia_score", render: ia_score_renderer},
       {data: "details_count", render: int_with_link_renderer("details")},
       {data: "field_contacts_count", render: int_with_link_renderer("field_contacts")},
       {data: "incidents_count", render: int_with_link_renderer("incidents")},
@@ -32,6 +32,16 @@ initDataTable("table.officers-table", function($table, options) {
     order: [[14, 'desc']]
   });
 });
+
+function ia_score_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return `<div class="text-center">${unknown()}</div>`;
+  }
+  return `<div class="text-center"><a class="officer__ia-score-${data}" href="${escape(row['url'])}#complaints">${escape(data)}</a></div>`;
+}
 
 function int_with_link_renderer(fragment) {
   return (data, type, row) => {

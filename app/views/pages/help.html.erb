@@ -45,6 +45,68 @@
       <p>Detail pay deserves special mention. This is pay earned by working paid details under the procedures described in <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/52af60cfe4b007c7c2257da2/1387225295091/Rule+325.pdf">Rule 325</a>. The city should be receiving compensation from the private business that requested the detail.</p>
       <p>The zip code where the officer lives is taken from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appears. The state and neighborhood fields are calculated based on the zip code. The mapping of zip codes to neighborhoods was taken from the <a href="http://www.bostonplans.org/getattachment/8d4b1dc5-ce11-45b4-9bf5-370444b49b68">Boston Business Patterns 2016</a> report.</p>
 
+      <h4 id="ia_score">IA Score</h4>
+      <p>We calculate a score from 0 - 5 that indicates the severity of the Internal Affairs cases opened against an officer. This score is defined and calculated by The Woke Windows Project. The algorithm which calculates the score and the classification of allegations was invented by us.</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>IA&nbsp;Score</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5</td>
+            <td>One serious allegation sustained or five concerning allegations sustained across unique cases</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Two concerning allegations sustained across unique cases</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>One concerning allegation sustained</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>One less-concerning allegation sustained or five-or-more cases regardless of finding</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Two-or-more cases regardless of finding</td>
+          </tr>
+          <tr>
+            <td>0</td>
+            <td>One or zero cases, none with a sustained finding</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2">Classification of Allegations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Serious</th>
+            <td>Violation of Criminal Law, Conformance to Laws</td>
+          </tr>
+          <tr>
+            <th>Concerning</th>
+            <td>
+              Neg.Duty/Unreasonable Judge, Respectful Treatment, Conduct Unbecoming, Use of Force, Untruthfulness, Drug Test, Dir./Orders, Self Identification, Directives/Orders, Abuse of Process, Securing and Maintenance of Firearm, Untruthfulness in Department Report, Investigation of Use Of Force
+            </td>
+          </tr>
+          <tr>
+            <th>Less Concerning</th>
+            <td><i>All other allegations</i></td>
+          </tr>
+        </tbody>
+      </table>
+
       <h3 id="cases">Forfeiture Cases</h3>
       <p>This information is currently imported from a single source: <a href="#da_forfeitures">Forfeitures by Suffolk District Attorney.</a></p>
 

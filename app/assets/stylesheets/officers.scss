@@ -15,3 +15,8 @@
 .officer__earnings-table {
   height: 414px;
 }
+
+.officer__ia-score-5, .officer__ia-score-4 {
+  @extend .text-danger;
+  font-weight: bold;
+}

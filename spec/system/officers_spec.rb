@@ -28,7 +28,7 @@ describe "Officers" do
   end
 
   describe "index" do
-    let!(:officer) { Officer.create(employee_id: 42, hr_name: "Kirk,James T", zip_code: ZipCode.new(zip: 2228)) }
+    let!(:officer) { Officer.create!(employee_id: 42, hr_name: "Kirk,James T", zip_code: ZipCode.new(zip: 2228)) }
     describe "searching" do
       before do
         visit officers_path

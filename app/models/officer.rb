@@ -50,7 +50,46 @@ class Officer < ApplicationRecord
     employee_id.to_s
   end
 
+  def calculate_ia_score
+    sustained_concerning = complaint_officers.select do |co|
+      co.sustained? && co.concerning?
+    end
+    sustained_concerning_uniq_case = sustained_concerning.uniq(&:complaint)
+    sustained_less_concerning = complaint_officers.select do |co|
+      co.sustained? && co.less_concerning?
+    end
+
+    # 5 if 1 severe case or 5 concerning cases
+    return 5 if complaint_officers.any? do |c|
+      c.sustained? && c.severe?
+    end
+    return 5 if sustained_concerning_uniq_case.count >= 5
+
+    # 4 if 2 concerning cases
+    return 4 if sustained_concerning_uniq_case.count >= 2
+
+    # 3 if one concerning case
+    return 3 if sustained_concerning_uniq_case.count >= 1
+
+    # 2 if one sustained less-concerning case or 5 cases regardless of finding
+    return 2 if sustained_less_concerning.count >= 1
+    return 2 if complaint_officers.uniq(&:complaint).count >= 5
+
+    # 1 if >= 2 cases regardless of finding
+    return 1 if complaint_officers.uniq(&:complaint).count >= 2
+
+    # 0 if <= 1 cases and no sustained finding
+    return 0
+  end
+
   def self.by_employee_id
     Officer.find_each.index_by(&:employee_id)
+  end
+
+  def self.fix_ia_score
+    Officer.includes(complaint_officers: [:complaint]).find_each do |o|
+      o.ia_score = o.calculate_ia_score
+      o.save
+    end
   end
 end

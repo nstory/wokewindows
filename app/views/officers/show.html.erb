@@ -71,7 +71,7 @@
         <%= render "shared/tables/swats", id: "officer-swats-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
 
-      <h2 id="complaints" class="mt-5">Complaints (IA Cases)</h2>
+      <h2 id="complaints" class="mt-5">Complaints (IA Cases) <span class="text-muted">&mdash;</span> IA Score: <%= format_ia_score(@officer.ia_score) %> <sup><a href="<%= page_path('help', anchor: 'ia_score') %>">?</a></h2>
       <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn\u00a0more", page_path("help", anchor: "complaints") %></p>
       <div class="officer__table">
         <%= render "shared/tables/complaints", id: "officer-complaints-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
