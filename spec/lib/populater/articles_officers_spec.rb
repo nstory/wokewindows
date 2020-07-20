@@ -1,9 +1,11 @@
 describe Populater::ArticlesOfficers do
+  let(:date_published) { nil }
   let(:body) { "foo bar\n\nCaptain James T Kirk\n\n" }
   let!(:article) do
     Article.create!(
       url: "http://example.com/foo/bar",
-      body: body
+      body: body,
+      date_published: date_published
     )
   end
 
@@ -11,7 +13,8 @@ describe Populater::ArticlesOfficers do
   let!(:officer) do
     Officer.create!(
       employee_id: 42,
-      hr_name: hr_name
+      hr_name: hr_name,
+      doa: "2015-06-29"
     )
   end
 
@@ -34,6 +37,39 @@ describe Populater::ArticlesOfficers do
     it "populates" do
       Populater::ArticlesOfficers.populate
       expect(ArticlesOfficer.first.officer).to eql(officer)
+    end
+  end
+
+  describe "article from 2015-02-01" do
+    let(:date_published) { "2015-02-01" }
+    it "doesn't populate if officer start date after article date" do
+      Populater::ArticlesOfficers.populate
+      expect(ArticlesOfficer.count).to eql(0)
+    end
+
+    it "does populate if officer start date before article date" do
+      officer.doa = "2015-01-14"
+      officer.save
+      Populater::ArticlesOfficers.populate
+      expect(ArticlesOfficer.count).to eql(1)
+    end
+
+    it "does not populate officer with nil doa" do
+      officer.doa = nil
+      officer.save
+      Populater::ArticlesOfficers.populate
+      expect(ArticlesOfficer.count).to eql(0)
+    end
+  end
+
+  describe "article from 2015-12-16" do
+    let(:date_published) { "2015-12-16" }
+
+    it "does populate officer with nil doa" do
+      officer.doa = nil
+      officer.save
+      Populater::ArticlesOfficers.populate
+      expect(ArticlesOfficer.count).to eql(1)
     end
   end
 end
