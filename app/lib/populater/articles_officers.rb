@@ -1,6 +1,6 @@
 class Populater::ArticlesOfficers
   def self.populate
-    regexp_to_officer = Officer.where("hr_name IS NOT NULL").map { |o| [o.article_regexp, o] }.to_h
+    regexp_to_officer = Officer.where("hr_name IS NOT NULL").map { |o| [o.article_regexp, o] }
     Article.find_each do |article|
       regexp_to_officer.each do |regexp,officer|
         next if article_precedes_officer?(article, officer)
