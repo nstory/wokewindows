@@ -7,6 +7,9 @@ describe "Officers" do
       expect(page).to have_text("Foo, Bar")
       expect(page).to have_text("Boston Police Department")
       expect(page).to have_title("Foo, Bar")
+      assert_meta_description(/Bar Foo/)
+      assert_meta_description(/Boston Police Department/)
+      assert_canonical_link(officer_path(officer))
     end
 
     describe "officer with an article" do

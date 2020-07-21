@@ -45,6 +45,14 @@ class Officer < ApplicationRecord
     end
   end
 
+  def first_name_last
+    n = name
+    if /^(.+),(.+)$/.match(n)
+      return "#{$2.strip} #{$1.strip}"
+    end
+    n
+  end
+
   # use employee_id for resource urls
   def to_param
     employee_id.to_s

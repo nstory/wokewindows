@@ -7,10 +7,23 @@
     <%# disable caching b/c restoration visits are complicated %>
     <meta name="turbolinks-cache-control" content="no-cache">
 
-    <% if @layout_application_title %>
-      <title><%= @layout_application_title %> &mdash; The Woke Windows Project</title>
-    <% else %>
-      <title>The Woke Windows Project</title>
+    <% title = "#{@layout_application_title ? @layout_application_title +' — ' : ''}The Woke Windows Project" %>
+    <title><%= title %></title>
+
+    <% if @layout_application_description %>
+      <meta name="description" content="<%= @layout_application_description %>">
+    <% end %>
+
+    <% if @layout_application_canonical %>
+      <link rel="canonical" href="<%= @layout_application_canonical %>">
+    <% end %>
+
+    <% if @layout_application_description && @layout_application_canonical %>
+      <meta name="twitter:card" content="summary" />
+      <meta property="og:url" content="<%= @layout_application_canonical %>" />
+      <meta property="og:title" content="<%= title %>" />
+      <meta property="og:description" content="<%= @layout_application_description %>" />
+      <meta property="og:image" content="<%= image_url('brand-128.png') %>" />
     <% end %>
 
     <%= csrf_meta_tags %>

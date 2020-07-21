@@ -13,6 +13,16 @@ describe Officer do
     end
   end
 
+  describe "#first_name_last" do
+    it "returns hr_name" do
+      expect(Officer.new({hr_name: "Foo,Bar P"}).first_name_last).to eql("Bar P Foo")
+    end
+
+    it "returns journal_name" do
+      expect(Officer.new({journal_name: "FOO BAR"}).first_name_last).to eql("Foo Bar")
+    end
+  end
+
   describe "#calculate_ia_score" do
     let!(:officer) { Officer.create!(employee_id: 123) }
 
