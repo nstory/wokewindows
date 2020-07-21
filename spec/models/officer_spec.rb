@@ -1,4 +1,10 @@
 describe Officer do
+  describe "#article_regexp" do
+    it "matches jack for john" do
+      expect("Jack Bean").to match(Officer.new({hr_name: "Bean,John M"}).article_regexp)
+    end
+  end
+
   describe "#name" do
     it "returns hr_name" do
       expect(Officer.new({hr_name: "Foo,Bar P"}).name).to eql("Foo, Bar P")

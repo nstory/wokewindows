@@ -30,9 +30,13 @@ class Officer < ApplicationRecord
     last_name, first_name = hr_name.split(",", 2)
 
     # middle initial is optional
-    first_name.sub!(/ .*/) { |m| ".?" * m.length }
+    first_name.sub!(/ .*/, "") # { |m| ".?" * m.length }
 
-    Regexp.new("#{first_name}\\s+#{last_name}")
+    # a couple nicknames
+    first_name = "jack|john" if first_name =~ /^john$/i
+    first_name = "jim|james" if first_name =~ /^james$/i
+
+    Regexp.new("(#{first_name}).{0,10}(#{last_name})", Regexp::IGNORECASE)
   end
 
   def name
