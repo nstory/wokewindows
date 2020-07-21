@@ -1,7 +1,23 @@
 describe Officer do
   describe "#article_regexp" do
+    def article_regexp(name)
+      Officer.new({hr_name: name}).article_regexp
+    end
+
     it "matches jack for john" do
-      expect("Jack Bean").to match(Officer.new({hr_name: "Bean,John M"}).article_regexp)
+      expect("Jack Bean").to match(article_regexp("Bean,John M"))
+    end
+
+    it "matches funny middle name" do
+      expect("Lark Hooper").to match(article_regexp("Hooper,D. Lark"))
+    end
+
+    it "doesn't match part of word" do
+      expect("to Johns Hopkins").to_not match(article_regexp("Ho, John C"))
+    end
+
+    it "doesn't match another part of word" do
+      expect("in John Fish who, through").to_not match(article_regexp("Ho, John C"))
     end
   end
 

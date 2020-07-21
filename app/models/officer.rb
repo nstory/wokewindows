@@ -29,14 +29,23 @@ class Officer < ApplicationRecord
 
     last_name, first_name = hr_name.split(",", 2)
 
-    # middle initial is optional
-    first_name.sub!(/ .*/, "") # { |m| ".?" * m.length }
+    # remove middle initial at end
+    first_name.sub!(/\b[a-z]$/i, "")
+
+    # remove middle initial with period
+    first_name.sub!(/\b[a-z]\./i, "")
+
+    first_name.strip!
+
+    # remove middle name if present
+    first_name.sub!(/ .*/, "")
+    first_name.strip!
 
     # a couple nicknames
     first_name = "jack|john" if first_name =~ /^john$/i
     first_name = "jim|james" if first_name =~ /^james$/i
 
-    Regexp.new("(#{first_name}).{0,10}(#{last_name})", Regexp::IGNORECASE)
+    Regexp.new("\\b(#{first_name})\\b.{0,5}\\b(#{last_name})\\b", Regexp::IGNORECASE)
   end
 
   def name
