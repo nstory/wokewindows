@@ -60,6 +60,14 @@ describe Populater::ArticlesOfficers do
       Populater::ArticlesOfficers.populate
       expect(ArticlesOfficer.count).to eql(0)
     end
+
+    it "does populate officer with nil doa and 2014 earnings" do
+      officer.doa = nil
+      officer.save
+      officer.compensations << Compensation.new(year: 2014)
+      Populater::ArticlesOfficers.populate
+      expect(ArticlesOfficer.count).to eql(1)
+    end
   end
 
   describe "article from 2015-12-16" do

@@ -23,9 +23,17 @@ class Populater::ArticlesOfficers
   def self.article_precedes_officer?(article, officer)
     return false if article.date_published.blank?
 
-    # officers hired after 12/14/2015 don't have start date data, so
-    # assume the earliest possible date
-    start_date = officer.doa || "2015-12-15"
+    start_date = officer.doa
+
+    if !start_date
+      if officer.compensations.any? { |c| c.year <= 2014 }
+        # officer left in 2015 or before
+        start_date = "1980-01-01"
+      else
+        # officer hired after 2015
+        start_date = "2015-12-15"
+      end
+    end
 
     return article.date_published < start_date
   end

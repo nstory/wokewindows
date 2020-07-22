@@ -30,7 +30,11 @@ class Populater::OfficersFromIncidents
     Incident.find_each
       .select(&:officer_journal_name_id)
       .each do |o|
-      hash[o.officer_journal_name_id][o.officer_journal_name_name] += 1
+      # employee ids below 14,000 we should have from the spreadsheet,
+      # if we're seeing a new one in a journal, probably an error
+      if o.officer_journal_name_id >= 14000
+        hash[o.officer_journal_name_id][o.officer_journal_name_name] += 1
+      end
     end
 
     # create a new hash with the most popular name for each id:

@@ -17,34 +17,6 @@
       <p>The list of complaints that appears on the officer page (see the <%= link_to "Commissioner Gross", officer_path("9018") %> page for an example of an officer's page) is linked based on matching the name of the officer to that listed in the complaint. We make efforts to not link ambiguous cases where two officers have very similar names (or the exact same name!) but it's possible a mislink could happen. It's wise to look to the original source data to confirm.</p>
       <p>Conversely, the listing of complaints on the officer page may not be comprehensive; there may be cases we failed to link the officer to. To find these, try searching the <%= link_to "complaints table", complaints_path %> for variations of the officer's name.</p>
 
-      <h3 id="field_contacts">Field Contacts (FIO)</h3>
-      <p>Field Interrogation and Observation (FIO) reports are how the BPD records the department's stop-and-frisk encounters (and other encouters, many of which do not involve a search).</p>
-      <p>Per <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/56a2569205caa7ee9f29e6a2/1453479570208/rule323.pdf">Rule 323</a>: "An FIOE Report shall be submitted subsequent to a field interaction/stop, a frisk, an observation, or an encounter".</p>
-      <p>We ingest this data from the <a href="#field_contact">FieldContact Table</a> and <a href="#field_contact_name">FieldContact_Name</a> table exports distributed on the <a href="https://data.boston.gov/">Analyze Boston website</a></p>
-      <p>These reports are especially interesting because they 1. contain redacted prose narratives of the encounter and 2. contain a breakdown of the race and ethnicity of the individuals involved.</p>
-      <p>If the <i>Frisked / Searched?</i> flag is <i>Yes</i>, this indicates that at least one of the stopped persons was searched. Beginning in September 2019, the search flag is also marked for each individual.</p>
-
-      <h3 id="incidents">Incident Journal</h3>
-      <p>When an officer responds to a call, carries out a search warrant, or otherwise performs a significant action, they fill out an incident report (sometimes referred to as Form 1.1). The BPD makes available a selection of fields from these reports through two public data sources: <a href="#crime_incident_reports">Crime Incident Reports</a> and <a href="#district_journal">Public Journal</a>. In addition, reports from 2012 - 2015 are taken from the <a href="#legacy_crime_incident_reports">Legacy Crime Incident Reports</a>.  We combine these data sources to create the list of incidents on this site.</p>
-      <p>We automatically import new incident reports from these data sources on a daily basis.</p>
-      <p>It's not clear if all incident reports are included in these public data sources, or if some sensitive categories are being filtered out. In addition, the routinely published information only captures a subset of the fields an officer enters when they submit these reports.</p>
-      <p>A full incident report contains information about the people involved and a written narrative of events. Due to privacy concerns, the department will not release a full report without first applying redactions.</p>
-      <p>To see the difference between a full report and what's available on this site, contrast the <a href="/downloads/172068118_PkvQylJ.pdf">full (redacted) report</a> for incident #172068118 and <a href="<%= incident_path('172068118') %>">our record</a> for that same incident.</p>
-
-      <h3 id="details">Paid Details</h3>
-      <p>A paid detail is when an officer is paid by a private company to direct traffic (e.g. around roadwork by a utility company) or to provide security. These companies put in a request for a police detail with the department, and then officers sign up for these shifts in addition to their regular hours.</p>
-      <p>We currently only have records for the year 2019. This data is sourced from <a href="#detail_records">Detail Records 2019</a>.</p>
-      <p>The contract between the department and the police unions stipulates that an officer is paid for a minimum of four hours of work, regardless of the number of hours actually worked. This rule among others explains the discrepancy between <i>Hours Worked</i> and <i>Pay Hours</i> you will see when browsing these records.</p>
-      <p>For more information regarding department policies for paid details, see <a href="https://bpdnews.com/s/Rule-325.pdf">Rule 325</a> and <a href="https://bpdnews.com/s/Rule-326.pdf">Rule 326</a>.</p>
-
-
-      <h3 id="officers">Officers &amp; Employees</h3>
-      <p>Our goal is to present information regarding every sworn officer of the Boston Police Department. We also include some data on civilian employees of the department, but this is a lower priority. In order to link the data together effectively across multiple data sources, and to ensure we do not have duplicate entries, we only create records for those persons where we have the six-digit City of Boston employee id number.</p>
-      <p>We currently harvest the employee id number from two sources: <a href="#alpha_listing">BPD Alpha Listing with Badges</a> and <a href="#district_journal">Public Journal</a>. If a particular employee does not exist in any of these sources, they will not be listed on this site.</p>
-      <p>On the page for each employee (see the page for <%= link_to "Commissioner Gross", officer_path("9018") %> as an example) the officer's annual earnings are broken down by category. The data for this report is sourced from the <a href="#employee_earnings">Employee Earnings Reports</a> produced by the City of Boston Office of Human Resources. The HR office supplies <a href="https://data.boston.gov/dataset/employee-earnings-report/resource/609a6014-5ab0-49d9-8c38-1389e7bf0d41">this explanation</a> of the different categories.</p>
-      <p>Detail pay deserves special mention. This is pay earned by working paid details under the procedures described in <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/52af60cfe4b007c7c2257da2/1387225295091/Rule+325.pdf">Rule 325</a>. The city should be receiving compensation from the private business that requested the detail.</p>
-      <p>The zip code where the officer lives is taken from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appears. The state and neighborhood fields are calculated based on the zip code. The mapping of zip codes to neighborhoods was taken from the <a href="http://www.bostonplans.org/getattachment/8d4b1dc5-ce11-45b4-9bf5-370444b49b68">Boston Business Patterns 2016</a> report.</p>
-
       <h4 id="ia_score">IA Score</h4>
       <p>We calculate a score from 0 - 5 that indicates the severity of the Internal Affairs cases opened against an officer. This score is defined and calculated by The Woke Windows Project. The algorithm which calculates the score and the classification of allegations was invented by us.</p>
 
@@ -106,6 +78,34 @@
           </tr>
         </tbody>
       </table>
+
+      <h3 id="field_contacts">Field Contacts (FIO)</h3>
+      <p>Field Interrogation and Observation (FIO) reports are how the BPD records the department's stop-and-frisk encounters (and other encouters, many of which do not involve a search).</p>
+      <p>Per <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/56a2569205caa7ee9f29e6a2/1453479570208/rule323.pdf">Rule 323</a>: "An FIOE Report shall be submitted subsequent to a field interaction/stop, a frisk, an observation, or an encounter".</p>
+      <p>We ingest this data from the <a href="#field_contact">FieldContact Table</a> and <a href="#field_contact_name">FieldContact_Name</a> table exports distributed on the <a href="https://data.boston.gov/">Analyze Boston website</a></p>
+      <p>These reports are especially interesting because they 1. contain redacted prose narratives of the encounter and 2. contain a breakdown of the race and ethnicity of the individuals involved.</p>
+      <p>If the <i>Frisked / Searched?</i> flag is <i>Yes</i>, this indicates that at least one of the stopped persons was searched. Beginning in September 2019, the search flag is also marked for each individual.</p>
+
+      <h3 id="incidents">Incident Journal</h3>
+      <p>When an officer responds to a call, carries out a search warrant, or otherwise performs a significant action, they fill out an incident report (sometimes referred to as Form 1.1). The BPD makes available a selection of fields from these reports through two public data sources: <a href="#crime_incident_reports">Crime Incident Reports</a> and <a href="#district_journal">Public Journal</a>. In addition, reports from 2012 - 2015 are taken from the <a href="#legacy_crime_incident_reports">Legacy Crime Incident Reports</a>.  We combine these data sources to create the list of incidents on this site.</p>
+      <p>We automatically import new incident reports from these data sources on a daily basis.</p>
+      <p>It's not clear if all incident reports are included in these public data sources, or if some sensitive categories are being filtered out. In addition, the routinely published information only captures a subset of the fields an officer enters when they submit these reports.</p>
+      <p>A full incident report contains information about the people involved and a written narrative of events. Due to privacy concerns, the department will not release a full report without first applying redactions.</p>
+      <p>To see the difference between a full report and what's available on this site, contrast the <a href="/downloads/172068118_PkvQylJ.pdf">full (redacted) report</a> for incident #172068118 and <a href="<%= incident_path('172068118') %>">our record</a> for that same incident.</p>
+
+      <h3 id="details">Paid Details</h3>
+      <p>A paid detail is when an officer is paid by a private company to direct traffic (e.g. around roadwork by a utility company) or to provide security. These companies put in a request for a police detail with the department, and then officers sign up for these shifts in addition to their regular hours.</p>
+      <p>We currently only have records for the year 2019. This data is sourced from <a href="#detail_records">Detail Records 2019</a>.</p>
+      <p>The contract between the department and the police unions stipulates that an officer is paid for a minimum of four hours of work, regardless of the number of hours actually worked. This rule among others explains the discrepancy between <i>Hours Worked</i> and <i>Pay Hours</i> you will see when browsing these records.</p>
+      <p>For more information regarding department policies for paid details, see <a href="https://bpdnews.com/s/Rule-325.pdf">Rule 325</a> and <a href="https://bpdnews.com/s/Rule-326.pdf">Rule 326</a>.</p>
+
+
+      <h3 id="officers">Officers &amp; Employees</h3>
+      <p>Our goal is to present information regarding every sworn officer of the Boston Police Department. We also include some data on civilian employees of the department, but this is a lower priority. In order to link the data together effectively across multiple data sources, and to ensure we do not have duplicate entries, we only create records for those persons where we have the six-digit City of Boston employee id number.</p>
+      <p>We currently harvest the employee id number from two sources: <a href="#alpha_listing">BPD Alpha Listing with Badges</a> and <a href="#district_journal">Public Journal</a>. If a particular employee does not exist in any of these sources, they will not be listed on this site.</p>
+      <p>On the page for each employee (see the page for <%= link_to "Commissioner Gross", officer_path("9018") %> as an example) the officer's annual earnings are broken down by category. The data for this report is sourced from the <a href="#employee_earnings">Employee Earnings Reports</a> produced by the City of Boston Office of Human Resources. The HR office supplies <a href="https://data.boston.gov/dataset/employee-earnings-report/resource/609a6014-5ab0-49d9-8c38-1389e7bf0d41">this explanation</a> of the different categories.</p>
+      <p>Detail pay deserves special mention. This is pay earned by working paid details under the procedures described in <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/52af60cfe4b007c7c2257da2/1387225295091/Rule+325.pdf">Rule 325</a>. The city should be receiving compensation from the private business that requested the detail.</p>
+      <p>The zip code where the officer lives is taken from the most recent <a href="#employee_earnings">Employee Earnings Report</a> on which the officer appears. The state and neighborhood fields are calculated based on the zip code. The mapping of zip codes to neighborhoods was taken from the <a href="http://www.bostonplans.org/getattachment/8d4b1dc5-ce11-45b4-9bf5-370444b49b68">Boston Business Patterns 2016</a> report.</p>
 
       <h3 id="cases">Forfeiture Cases</h3>
       <p>This information is currently imported from a single source: <a href="#da_forfeitures">Forfeitures by Suffolk District Attorney.</a></p>
