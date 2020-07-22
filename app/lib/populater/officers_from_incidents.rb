@@ -39,8 +39,14 @@ class Populater::OfficersFromIncidents
 
     # create a new hash with the most popular name for each id:
     # hash[employee_id] = employee_name
+    # but to be considered, name must appear at least twice for the id
     hash.map do |employee_id,names|
-      [employee_id, names.max_by { |name,count| count }.first]
-    end.to_h
+      name, count = names.max_by { |name,count| count }
+      if count > 1
+        [employee_id, name]
+      else
+        nil
+      end
+    end.compact.to_h
   end
 end
