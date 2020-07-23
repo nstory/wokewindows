@@ -7,6 +7,7 @@ namespace :counters do
     Detail.counter_culture_fix_counts
     Citation.counter_culture_fix_counts
     ArticlesOfficer.counter_culture_fix_counts
+    Populater::Officers.populate
     Officer.fix_ia_score
   end
 end

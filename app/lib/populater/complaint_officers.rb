@@ -8,7 +8,9 @@ class Populater::ComplaintOfficers
     "Ptl Jean-Louis G. Jean" => "Jean Louis,Jean G.",
     "Ptl Jimmy Le NGUYEN" => "Nguyen,Jimmy Le",
     "Ptl Quion Tee Riley Jr." => "Riley Jr.,Quion Tee",
-    "Sergt William J J Walsh" => "Walsh,William James"
+    "Sergt William J J Walsh" => "Walsh,William James",
+    "Ciccolo,Stephen" => "Ciccolo,Steven M",
+    "Columbo,Domenic A" => "Columbo,Dominic A"
   }
 
   def self.populate

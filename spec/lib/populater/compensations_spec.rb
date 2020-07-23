@@ -21,4 +21,12 @@ describe Populater::Compensations do
     Populater::Compensations.populate
     expect(o.compensations.to_a).to eql([])
   end
+
+  it "does if hard-coded disambiguation exists" do
+    c = Compensation.create!({year: 2019, name: "Flaherty,Sean", title: "Police Lieutenant"})
+    o1 = Officer.create!({employee_id: 11105, hr_name: "Flaherty,Sean"})
+    o2 = Officer.create!({employee_id: 11830, hr_name: "Flaherty,Sean"})
+    Populater::Compensations.populate
+    expect(o1.compensations.to_a).to eql([c])
+  end
 end
