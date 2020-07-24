@@ -4,6 +4,22 @@
   </div>
 </nav>
 
+<% if !flash.empty? %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div id="flash">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-primary mt-3" role="alert">
+              <%= value %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <%= yield %>
 
 <div class="footer">
@@ -17,6 +33,15 @@
         <a href="https://github.com/nstory/wokewindows">Contribute on GitHub</a>
         <span class="text-muted">|</span>
         <%= contact_us "Contact Us" %>
+        <% if signed_in? %>
+          <br>
+          Signed in as: <%= current_user.email %>
+          <br>
+          <%= link_to 'Sign out', sign_out_path, method: :delete %>
+        <% else %>
+          <span class="text-muted">|</span>
+          <%= link_to 'Sign in', sign_in_path %>
+        <% end %>
 
       </div>
       <div class="col-md-6">

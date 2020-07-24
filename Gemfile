@@ -39,6 +39,7 @@ gem 'aws-sdk-s3', '~> 1.72'
 gem 'pry-rails', '~> 0.3.9' # yes, I want pry available in production too
 gem 'rack-canonical-host', '~> 1.0.0'
 gem 'geocoder', '1.6.3'
+gem 'clearance', '~> 2.2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
