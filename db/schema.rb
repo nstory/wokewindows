@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_145520) do
+ActiveRecord::Schema.define(version: 2020_07_24_162020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -258,25 +258,6 @@ ActiveRecord::Schema.define(version: 2020_07_24_145520) do
     t.bigint "incident_id", null: false
     t.index ["field_contact_id", "incident_id"], name: "index_fc_incidents_on_field_contact_id_and_incident_id"
     t.index ["incident_id", "field_contact_id"], name: "index_fc_incidents_on_incident_id_and_field_contact_id", unique: true
-  end
-
-  create_table "forfeitures", force: :cascade do |t|
-    t.string "sucv"
-    t.decimal "amount"
-    t.string "date"
-    t.string "motor_vehicle"
-    t.text "attributions"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["sucv"], name: "index_forfeitures_on_sucv", unique: true
-  end
-
-  create_table "forfeitures_incidents", force: :cascade do |t|
-    t.string "incident_number"
-    t.integer "forfeiture_id", null: false
-    t.integer "incident_id"
-    t.index ["forfeiture_id", "incident_id"], name: "index_forfeitures_incidents_on_forfeiture_id_and_incident_id"
-    t.index ["incident_id", "forfeiture_id"], name: "index_forfeitures_incidents_on_incident_id_and_forfeiture_id"
   end
 
   create_table "geocodes", force: :cascade do |t|
