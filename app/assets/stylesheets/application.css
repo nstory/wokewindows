@@ -15,5 +15,6 @@
  *= require datatables.net-scroller-dt/css/scroller.dataTables.css
  *= require leaflet/dist/leaflet.css
  *= require tocbot/dist/tocbot.css
+ *= require select2/dist/css/select2.css
  *= require main
  */

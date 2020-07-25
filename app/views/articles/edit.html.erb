@@ -2,24 +2,60 @@
   <div class="row">
     <div class="col">
       <h1>Article #<%= @article.id %></h1>
-      <%= form_with model: @article, local: true do |f| %>
-        <div class="form-group">
-          <%= f.label :url, "URL" %>
-          <%= f.text_field :url, class: "form-control" %>
+      <div class="row">
+        <div class="col-lg">
+          <%= form_with model: @article, local: true do |f| %>
+            <div class="form-group">
+              <%= f.label :url, "URL" %>
+              <%= f.text_field :url, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :text, "Title" %>
+              <%= f.text_field :title, class: "form-control" %>
+            </div>
+            <div class="form-group">
+              <%= f.label :text, "Date Published" %>
+              <%= f.text_field :date_published, class: "form-control" %>
+            </div>
+            <button class="btn btn-info" data-disable-with="Saving...">Save</button>
+            <% @article.errors.full_messages.each do |msg| %>
+              <p class="text-danger"><%= msg %></p>
+            <% end %>
+          <% end %>
         </div>
-        <div class="form-group">
-          <%= f.label :text, "Title" %>
-          <%= f.text_field :title, class: "form-control" %>
+        <div class="col-lg">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>&nbsp;</th>
+                <th>Officer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @article.articles_officers.empty? %>
+                <tr>
+                  <td colspan="2" class="text-muted font-italic">No officers added</td>
+                </tr>
+              <% end %>
+              <% @article.articles_officers.includes(:officer).each do |ao| %>
+                <tr>
+                  <td><%= link_to "Remove", articles_officer_path(ao), method: :delete, class: "btn btn-sm btn-danger" %></td>
+                  <td><%= format_officer(ao.officer) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= form_with model: ArticlesOfficer.new, local: true do |f| %>
+            <%= f.hidden_field(:article_id, value: @article.id) %>
+            <div class="form-group">
+              <%= f.label :officer_id, "Officer" %>
+              <%= f.select(:officer_id, {}, {}, {"data-controller" => "officer-select", class: "form-control", style: "width:100%"}) %>
+              <small class="form-text text-muted">Add officers who appear in the article</small>
+            </div>
+            <button class="btn btn-info" data-disable-with="Adding...">Add</button>
+          <% end %>
         </div>
-        <div class="form-group">
-          <%= f.label :text, "Date Published" %>
-          <%= f.text_field :date_published, class: "form-control" %>
-        </div>
-        <button class="btn btn-info" data-disable-with="Saving...">Save</button>
-        <% @article.errors.full_messages.each do |msg| %>
-          <p class="text-danger"><%= msg %></p>
-        <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

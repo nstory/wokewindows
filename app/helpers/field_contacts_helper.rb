@@ -1,13 +1,13 @@
 module FieldContactsHelper
   def format_contact_officer(field_contact)
-    format_officer(
+    format_field_contact_officer(
       field_contact.contact_officer_name,
       field_contact.contact_officer
     )
   end
 
   def format_supervisor(field_contact)
-    format_officer(
+    format_field_contact_officer(
       field_contact.supervisor_name,
       field_contact.supervisor
     )
@@ -38,7 +38,7 @@ module FieldContactsHelper
   end
 
   private
-  def format_officer(name, officer)
+  def format_field_contact_officer(name, officer)
     if officer
       link_to(name, officer_path(officer))
     else

@@ -73,4 +73,9 @@ module ApplicationHelper
     links = field_contacts.map { |fc| link_to fc.fc_num, field_contact_path(fc) }
     safe_join links, ", "
   end
+
+  def format_officer(officer)
+    return format_unknown if !officer
+    link_to officer.name, officer_path(officer)
+  end
 end

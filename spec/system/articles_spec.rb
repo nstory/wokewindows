@@ -1,4 +1,5 @@
 describe "Articles" do
+  let!(:officer) { Officer.create! employee_id: 42, hr_name: "Foo,Bar" }
   let!(:user) { User.create!(email: "foo@wokewindows.org", password: "foo") }
   let(:article) { Article.new(url: "http://example.com", title: "foo") }
 
@@ -60,6 +61,32 @@ describe "Articles" do
       fill_in "article_url", with: ""
       click_button "Save"
       expect(page).to have_content("can't be blank")
+    end
+
+    describe "article officers" do
+      before { driven_by :selenium_chrome_headless }
+
+      it "adds officer" do
+        visit edit_article_path(article, as: user)
+
+        # wait for select2 to initialize
+        expect(page).to have_selector(".select2", visible: false)
+
+        # clicking the select isn't working :shrug:
+        execute_script('$("select").select2("open")')
+
+        # select the first and only option
+        page.find(".select2-results__option").click
+        click_button "Add"
+
+        # confirm the new connection is displayed and saved
+        expect(page).to have_content("Foo, Bar")
+        expect(article.officers.to_a).to eql([officer])
+
+        # now delete the officer
+        click_link "Remove"
+        expect(page).to have_no_content("Foo, Bar")
+      end
     end
   end
 end
