@@ -81,4 +81,13 @@ describe Populater::ArticlesOfficers do
       expect(ArticlesOfficer.count).to eql(1)
     end
   end
+
+  describe "second officer with same name" do
+    let!(:officer2) { o = officer.dup; o.employee_id += 1; o.save!; o }
+
+    it "does not populate ambiguous officer" do
+      Populater::ArticlesOfficers.populate
+      expect(ArticlesOfficer.count).to eql(0)
+    end
+  end
 end

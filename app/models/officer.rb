@@ -14,6 +14,7 @@ class Officer < ApplicationRecord
   has_many :details, dependent: :nullify
   has_many :citations, dependent: :nullify
   has_many :articles_officers, dependent: :delete_all
+  has_many :articles, through: :articles_officers
 
   def bag_of_text_content
     [name, title, postal, zip_code && zip_code.state, zip_code && zip_code.neighborhood]

@@ -13,7 +13,9 @@ class Article < ApplicationRecord
     return "Bay State Banner" if /npaper-wehaa.com/ =~ host
     return "WGBH" if /wgbh.org/ =~ host
     return "Pax Centurion" if /pax_centurion/ =~ url
-    return "Boston Magazine" if /bostonmagazine.com/ =~ url
+    return "Boston Magazine" if /bostonmagazine.com/ =~ host
+    return "WBUR" if /wbur\.org/ =~ host
+    return "Harvard Crimson" if /thecrimson\.com/ =~ host
     host.sub(/^www\./, "")
   end
 end
