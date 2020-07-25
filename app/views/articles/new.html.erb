@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Create New Article</h1>
+      <%= form_with model: @article, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :url, "URL" %>
+          <%= f.text_field :url, class: "form-control" %>
+          <% if @error %>
+            <small class="form-text text-danger">Error fetching URL. Please enter a different URL.</small>
+          <% else %>
+            <small class="form-text text-muted">The URL will automatically be retrieved and parsed to determine the title, etc.</small>
+          <% end %>
+        </div>
+        <button class="btn btn-info" data-disable-with="Submitting...">Submit</button>
+      <% end %>
+    </div>
+  </div>
+</div>

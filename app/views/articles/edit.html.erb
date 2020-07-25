@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Article #<%= @article.id %></h1>
+      <%= form_with model: @article, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :url, "URL" %>
+          <%= f.text_field :url, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :text, "Title" %>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :text, "Date Published" %>
+          <%= f.text_field :date_published, class: "form-control" %>
+        </div>
+        <button class="btn btn-info" data-disable-with="Saving...">Save</button>
+        <% @article.errors.full_messages.each do |msg| %>
+          <p class="text-danger"><%= msg %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

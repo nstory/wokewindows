@@ -3,6 +3,7 @@ describe Populater::ArticlesOfficers do
   let(:body) { "foo bar\n\nCaptain James T Kirk\n\n" }
   let!(:article) do
     Article.create!(
+      title: "foo",
       url: "http://example.com/foo/bar",
       body: body,
       date_published: date_published
