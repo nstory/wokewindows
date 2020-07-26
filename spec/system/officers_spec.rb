@@ -1,4 +1,6 @@
 describe "Officers" do
+  let!(:user) { User.create!(email: "foo@wokewindows.org", password: "foo") }
+
   describe "show" do
     let!(:officer) { Officer.create!({employee_id: 1234, hr_name: "Foo,Bar"}) }
 
@@ -26,6 +28,17 @@ describe "Officers" do
         articles_officer.save
         visit officer_path(officer)
         expect(page).to_not have_selector("td", text: "LOL456")
+      end
+
+      it "does not link to article edit page" do
+        visit officer_path(officer)
+        expect(page).to have_selector("td", text: "LOL456")
+        expect(page).to have_no_link(href: Regexp.new(edit_article_path(article)))
+      end
+
+      it "does link to article edit page if user logged in"do
+        visit officer_path(officer, as: user)
+        expect(page).to have_link(href: Regexp.new(edit_article_path(article)))
       end
     end
   end
