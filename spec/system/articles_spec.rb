@@ -91,8 +91,14 @@ describe "Articles" do
         page.uncheck("articles_officer[confirmed]")
         wait_for { ao.reload.confirmed }.to eql(false)
 
+        # change status
+        page.select("Rejected", from: "articles_officer[status]")
+        wait_for { ao.reload.status }.to eql("rejected")
+
         # now delete the officer
-        click_link "Remove"
+        accept_confirm do
+          click_link "Delete"
+        end
         expect(page).to have_no_content("Foo, Bar")
       end
     end
