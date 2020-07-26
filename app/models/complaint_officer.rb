@@ -46,4 +46,8 @@ class ComplaintOfficer < ApplicationRecord
   def sustained?
     finding == "Sustained"
   end
+
+  def use_of_force?
+    /Use of Force/i =~ allegation
+  end
 end

@@ -71,6 +71,11 @@ describe Officer do
       expect(officer.calculate_ia_score).to eql(4)
     end
 
+    it "is 4 for 1 sustained use of force case" do
+      complaint("Use of Force", "Sustained")
+      expect(officer.calculate_ia_score).to eql(4)
+    end
+
     it "is 3 for 1 sustained concerning cases" do
       complaint("Respectful Treatment", "Sustained")
       expect(officer.calculate_ia_score).to eql(3)

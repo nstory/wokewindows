@@ -92,8 +92,9 @@ class Officer < ApplicationRecord
     end
     return 5 if sustained_concerning_uniq_case.count >= 5
 
-    # 4 if 2 concerning cases
+    # 4 if 2 concerning cases or 1 use of force
     return 4 if sustained_concerning_uniq_case.count >= 2
+    return 4 if sustained_concerning.any? { |co| co.use_of_force? }
 
     # 3 if one concerning case
     return 3 if sustained_concerning_uniq_case.count >= 1
