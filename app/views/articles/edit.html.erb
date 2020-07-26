@@ -8,6 +8,7 @@
             <div class="form-group">
               <%= f.label :url, "URL" %>
               <%= f.text_field :url, class: "form-control" %>
+              <small class="form-text"><a href="<%= @article.url %>" target="_blank">Open</a></small>
             </div>
             <div class="form-group">
               <%= f.label :text, "Title" %>
@@ -29,6 +30,7 @@
               <tr>
                 <th>&nbsp;</th>
                 <th>Officer</th>
+                <th>Confirmed</th>
               </tr>
             </thead>
             <tbody>
@@ -41,12 +43,18 @@
                 <tr>
                   <td><%= link_to "Remove", articles_officer_path(ao), method: :delete, class: "btn btn-sm btn-danger" %></td>
                   <td><%= format_officer(ao.officer) %></td>
+                  <td>
+                    <%= form_with model: ao, local: true do |f| %>
+                      <%= f.check_box :confirmed, onchange: "this.form.submit()" %>
+                    <% end %>
+                  </td>
                 </tr>
               <% end %>
             </tbody>
           </table>
           <%= form_with model: ArticlesOfficer.new, local: true do |f| %>
             <%= f.hidden_field(:article_id, value: @article.id) %>
+            <%= f.hidden_field(:confirmed, value: true) %>
             <div class="form-group">
               <%= f.label :officer_id, "Officer" %>
               <%= f.select(:officer_id, {}, {}, {"data-controller" => "officer-select", class: "form-control", style: "width:100%"}) %>

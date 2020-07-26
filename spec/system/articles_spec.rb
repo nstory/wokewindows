@@ -81,7 +81,15 @@ describe "Articles" do
 
         # confirm the new connection is displayed and saved
         expect(page).to have_content("Foo, Bar")
-        expect(article.officers.to_a).to eql([officer])
+        ao = ArticlesOfficer.first
+        expect(ao.officer).to eql(officer)
+        expect(ao.article).to eql(article)
+        expect(ao.confirmed).to eql(true)
+        expect(ao.status).to eql("added")
+
+        # un-confirm the officer
+        page.uncheck("articles_officer[confirmed]")
+        wait_for { ao.reload.confirmed }.to eql(false)
 
         # now delete the officer
         click_link "Remove"

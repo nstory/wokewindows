@@ -16,7 +16,8 @@ class ArticleDatatable < ApplicationDatatable
       title: record.article.title,
       url: record.article.url,
       source: record.article.source,
-      excerpt: record.excerpt
+      excerpt: record.excerpt,
+      confirmed: record.confirmed
     }
   end
 

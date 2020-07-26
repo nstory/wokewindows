@@ -36,9 +36,24 @@ describe "Officers" do
         expect(page).to have_no_link(href: Regexp.new(edit_article_path(article)))
       end
 
-      it "does link to article edit page if user logged in"do
+      it "does link to article edit page if user logged in" do
         visit officer_path(officer, as: user)
         expect(page).to have_link(href: Regexp.new(edit_article_path(article)))
+      end
+
+      it "does not display confirm all link for non-logged-in user" do
+        visit officer_path(officer)
+        # wait until page is loaded
+        expect(page).to have_selector("td", text: "LOL456")
+        expect(page).to have_no_link("Confirm All")
+      end
+
+      it "confirm all articles" do
+        visit officer_path(officer, as: user)
+        accept_confirm do
+          click_link "Confirm All"
+        end
+        wait_for { articles_officer.reload.confirmed }.to eql(true)
       end
     end
   end

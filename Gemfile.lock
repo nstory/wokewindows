@@ -247,6 +247,10 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     regexp_parser (1.7.1)
+    rspec (3.9.0)
+      rspec-core (~> 3.9.0)
+      rspec-expectations (~> 3.9.0)
+      rspec-mocks (~> 3.9.0)
     rspec-core (3.9.2)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.2)
@@ -264,6 +268,8 @@ GEM
       rspec-mocks (~> 3.9)
       rspec-support (~> 3.9)
     rspec-support (3.9.3)
+    rspec-wait (0.0.9)
+      rspec (>= 3, < 4)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -347,6 +353,7 @@ DEPENDENCIES
   rack-canonical-host (~> 1.0.0)
   rails (~> 6.0.3, >= 6.0.3.1)
   rspec-rails (~> 4.0.0)
+  rspec-wait (~> 0.0.9)
   sass-rails (>= 6)
   selenium-webdriver
   spring

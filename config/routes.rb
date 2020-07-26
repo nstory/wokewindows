@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :incidents, concerns: [:with_datatable]
   resources :officers, concerns: [:with_datatable] do
     get 'select2', on: :collection
+    post 'confirm_all_articles', on: :member
   end
   resources :complaints, concerns: [:with_datatable]
   resources :cases, concerns: [:with_datatable]

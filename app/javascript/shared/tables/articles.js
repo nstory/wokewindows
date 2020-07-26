@@ -21,10 +21,12 @@ export function date_published_renderer(data, type, row) {
   }
   const date = date_renderer(data, type, row)
   const article_url = row.article_url;
+  const confirmed = row.confirmed ? '<span class="text-success" title="This connection was reviewed by a human">&check;</span>' : '<span class="text-muted" title="This connection has not been reviewed by a human">?</span>';
   let ret = `<a href="${escape(row.url)}">${date}</a>`;
   if (article_url) {
     ret = `<a href="${escape(row.article_url)}">Edit</a> <span class="text-muted">|</span> ` + ret;
   }
+  ret = ` ${confirmed} <span class="text-muted">|</span> ${ret}`;
   return ret;
 }
 

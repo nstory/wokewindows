@@ -81,6 +81,11 @@
 
       <h2 id="articles" class="mt-5">Articles</h2>
       <p>Articles referencing this officer. Populated by an automated process, which may not be 100% accurate.</p>
+      <% if signed_in? %>
+        <div>
+          <%= link_to "Confirm All", confirm_all_articles_officer_path(@officer), class: "btn btn-info", method: :post, data: {confirm: "Are you sure you wish to confirm all these articles?"} %>
+        </div>
+      <% end %>
       <div class="officer__table">
         <%= render "shared/tables/articles", id: "officer-articles-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
