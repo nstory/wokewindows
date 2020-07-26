@@ -11,7 +11,7 @@ initDataTable("table.articles-table", function($table, options) {
       {data: "source", render: url_renderer(text_renderer)},
       {data: "title", render: article_renderer},
     ],
-    order: [[1, 'desc']]
+    order: [[0, 'desc']]
   });
 });
 
