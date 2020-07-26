@@ -16,6 +16,7 @@ class Article < ApplicationRecord
     return "Boston Magazine" if /bostonmagazine.com/ =~ host
     return "WBUR" if /wbur\.org/ =~ host
     return "Harvard Crimson" if /thecrimson\.com/ =~ host
+    return "Universal Hub" if /universalhub\.com/ =~ host
     host.sub(/^www\./, "")
   end
 end

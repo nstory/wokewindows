@@ -51,8 +51,11 @@ class Importer::Article::Article
 
   def map_date_published(doc)
     url = map_url(doc)
-    %r{/(\d{4})/(\d{1,2})/(\d{1,2})/}.match(url)
-    "%d-%02d-%02d" % [$1.to_i, $2.to_i, $3.to_i]
+    if %r{/(\d{4})/(\d{1,2})/(\d{1,2})/}.match(url)
+      "%d-%02d-%02d" % [$1.to_i, $2.to_i, $3.to_i]
+    else
+      nil
+    end
   end
 
   def map_title(doc)
