@@ -284,6 +284,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sitemap_generator (6.1.2)
+      builder (~> 3.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -356,6 +358,7 @@ DEPENDENCIES
   rspec-wait (~> 0.0.9)
   sass-rails (>= 6)
   selenium-webdriver
+  sitemap_generator (= 6.1.2)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

@@ -45,6 +45,24 @@ describe Officer do
     end
   end
 
+  describe "#name_with_title" do
+    it "police officer" do
+      expect(Officer.new({hr_name: "Foo,Bar", title: "Police Officer"}).name_with_title).to eql("Officer Bar Foo")
+    end
+
+    it "police detective" do
+      expect(Officer.new({hr_name: "Foo,Bar", title: "Police Detective"}).name_with_title).to eql("Detective Bar Foo")
+    end
+
+    it "nil title" do
+      expect(Officer.new({hr_name: "Foo,Bar"}).name_with_title).to eql("Bar Foo")
+    end
+
+    it "other title" do
+      expect(Officer.new({hr_name: "Foo,Bar", title: "dsf"}).name_with_title).to eql("Bar Foo")
+    end
+  end
+
   describe "#calculate_ia_score" do
     let!(:officer) { Officer.create!(employee_id: 123) }
 

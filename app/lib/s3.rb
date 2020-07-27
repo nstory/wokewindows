@@ -9,6 +9,10 @@ class S3
     IO.copy_stream(out.body, path)
   end
 
+  def get_body(key)
+    @bucket.object(key).get.body
+  end
+
   def object_exists?(key)
     @bucket.object(key).exists?
   end

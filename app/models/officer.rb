@@ -72,6 +72,33 @@ class Officer < ApplicationRecord
     n
   end
 
+  def name_with_title
+    t = case(title)
+        when /^Police Officer/
+          "Officer"
+        when /^Police Detectiv/
+          "Detective"
+        when /^Police Sergeant \(Det/
+          "Sgt. Det."
+        when /^Police Sergeant/
+          "Sergeant"
+        when /^Police Offc/
+          "Officer"
+        when /^Police Lieutenant \(Det/
+          "Lt. Det."
+        when /^Police Lieutenant/
+          "Lieutenant"
+        when /^Police Captain/
+          "Captain"
+        when /^Dep Supn/
+          "Deputy Superintendent"
+        else
+          nil
+        end
+    n = first_name_last
+    if t then "#{t} #{n}" else n end
+  end
+
   # use employee_id for resource urls
   def to_param
     employee_id.to_s

@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   resources :articles, concerns: [:with_datatable]
   resources :articles_officers
 
+  get ':id', to: 'sitemaps#show', constraints: { id: /sitemap[a-z0-9.]+/ }
+
   root "root#index"
 end

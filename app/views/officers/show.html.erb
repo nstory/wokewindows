@@ -1,5 +1,5 @@
 <% @layout_application_title = "#{@officer.name} (BPD)" %>
-<% @layout_application_description = "#{@officer.first_name_last}, #{@officer.title} in the Boston Police Department.#{@officer.total ? ' 2019 earnings were ' + format_currency(@officer.total) : ''}" %>
+<% @layout_application_description = "#{@officer.name_with_title} of the Boston Police Department. Public records including salary, internal affairs cases, and citations issued." %>
 <% @layout_application_canonical = officer_url(@officer) %>
 
 <div class="container">
