@@ -18,3 +18,5 @@ rails 'articles:download'
 rails r 'Importer::BpdNewsArticles.import_all'
 
 rails 'counters:fix'
+
+rails sitemap:refresh:no_ping

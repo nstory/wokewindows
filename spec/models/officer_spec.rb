@@ -63,6 +63,14 @@ describe Officer do
     end
   end
 
+  describe ".articles_officers_to_review_count" do
+    let!(:officer) { Officer.create(hr_name: "Foo,Bar") }
+
+    it "is zero for officer with no articles" do
+      expect(officer.articles_officers_to_review_count).to eql(0)
+    end
+  end
+
   describe "#calculate_ia_score" do
     let!(:officer) { Officer.create!(employee_id: 123) }
 

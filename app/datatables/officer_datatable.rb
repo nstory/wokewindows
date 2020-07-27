@@ -46,6 +46,7 @@ class OfficerDatatable < ApplicationDatatable
       quinn: record.quinn,
       details_count: record.details_count,
       articles_officers_count: record.articles_officers_count,
+      articles_officers_to_review_count: signed_in? && record.articles_officers_to_review_count,
       ia_score: record.ia_score,
       field_contacts_count: record.field_contacts_count,
       incidents_count: record.incidents_count,
@@ -58,7 +59,7 @@ class OfficerDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    Officer.includes(:zip_code).references(:zip_code).distinct
+    Officer.includes(:zip_code, :articles_officers).references(:zip_code).distinct
   end
 
 end

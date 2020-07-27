@@ -137,6 +137,10 @@ class Officer < ApplicationRecord
     return 0
   end
 
+  def articles_officers_to_review_count
+    articles_officers.count { |ao| ao.status == "added" && !ao.confirmed }
+  end
+
   def self.by_employee_id
     Officer.find_each.index_by(&:employee_id)
   end

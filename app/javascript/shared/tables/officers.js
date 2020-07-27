@@ -13,7 +13,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "postal", render: zip_renderer},
       {data: "state", render: text_renderer},
       {data: "neighborhood", render: text_renderer, orderable: false},
-      {data: "articles_officers_count", render: int_with_link_renderer("articles")},
+      {data: "articles_officers_count", render: articles_officers_count_renderer},
       {data: "ia_score", render: ia_score_renderer},
       {data: "details_count", render: int_with_link_renderer("details")},
       {data: "field_contacts_count", render: int_with_link_renderer("field_contacts")},
@@ -41,6 +41,15 @@ function ia_score_renderer(data, type, row) {
     return `<div class="text-center">${unknown()}</div>`;
   }
   return `<div class="text-center"><a class="officer__ia-score-${data}" href="${escape(row['url'])}#complaints">${escape(data)}</a></div>`;
+}
+
+function articles_officers_count_renderer(data, type, row) {
+  let ret =  `<a href="${escape(row['url'])}#articles">${escape(data)}</a>`;
+  if (row.articles_officers_to_review_count) {
+    ret = `${ret} <span class="text-muted"> / ${row.articles_officers_to_review_count}</span>`;
+  }
+  ret = `<div class="text-center">${ret}</div>`;
+  return ret;
 }
 
 function int_with_link_renderer(fragment) {
