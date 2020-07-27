@@ -37,7 +37,8 @@ export function article_renderer(data, type, row) {
   if (data == null) {
     return unknown();
   }
-  return `<a href="${escape(row.url)}">${escape(data)}</a><br><span class="text-muted">${escape(row.excerpt)}</span>`;
+  const excerpt = row.excerpt ? escape(row.excerpt) : '&nbsp;';
+  return `<a href="${escape(row.url)}">${escape(data)}</a><br><span class="text-muted">${excerpt}</span>`;
 }
 
 export function article_url_renderer(data, type, row) {
