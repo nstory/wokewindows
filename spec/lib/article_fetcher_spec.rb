@@ -32,6 +32,14 @@ describe ArticleFetcher do
         expect(a.date_published).to eql("2019-05-06")
       end
     end
+
+    describe "patriot ledger" do
+      let(:body) { file_fixture("patriotledger.html").read }
+      it "returns article" do
+        a = article_fetcher.fetch
+        expect(a.title).to match(/Boston police detective/)
+      end
+    end
   end
 
   describe "exception thrown by http request" do

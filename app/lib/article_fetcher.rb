@@ -21,7 +21,7 @@ class ArticleFetcher
 
   def parse_body(doc)
     e = doc.css("body").first
-    e ? e.text.gsub(/\s+/, " ").strip : nil
+    e ? e.text.scrub("").gsub(/\s+/, " ").strip : nil
   end
 
   def parse_title(doc)
