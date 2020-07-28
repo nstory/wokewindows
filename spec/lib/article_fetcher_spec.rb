@@ -10,12 +10,15 @@ describe ArticleFetcher do
 
     describe "globe article" do
       let(:body) { file_fixture("globe.html").read }
+      let!(:officer) { Officer.create!(hr_name: "Merricks, Kirk D.", employee_id: 42) }
 
       it "returns article" do
         a = article_fetcher.fetch
         expect(a.title).to match(/stealing military grade explosives/)
         expect(a.url).to eql("https://www.bostonglobe.com/2013/07/12/boston-police-officer-arrested-charges-stealing-military-grade-explosives-arrested-plymouth-police/wXJ5qTJcOakjtdmtX2aLVN/story.html")
         expect(a.date_published).to eql("2013-07-12")
+        expect(a.body).to match(/four counts of receiving/)
+        expect(a.officers.to_a).to eql([officer])
       end
     end
 
