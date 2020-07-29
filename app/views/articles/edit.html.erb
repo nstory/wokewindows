@@ -31,7 +31,6 @@
             <thead>
               <tr>
                 <th>Officer</th>
-                <th>Confirmed</th>
                 <th>Status</th>
                 <th>&nbsp;</th>
               </tr>
@@ -47,11 +46,6 @@
                   <td><%= format_officer(ao.officer) %></td>
                   <td>
                     <%= form_with model: ao, local: true do |f| %>
-                      <%= f.check_box :confirmed, onchange: "this.form.submit()" %>
-                    <% end %>
-                  </td>
-                  <td>
-                    <%= form_with model: ao, local: true do |f| %>
                       <%= f.select :status, ArticlesOfficer.statuses.map { |k,v| [k.humanize, v] }, {}, {class: "form-control", onchange: "this.form.submit()"} %>
                     <% end %>
                   </td>
@@ -62,7 +56,7 @@
           </table>
           <%= form_with model: ArticlesOfficer.new, local: true do |f| %>
             <%= f.hidden_field(:article_id, value: @article.id) %>
-            <%= f.hidden_field(:confirmed, value: true) %>
+            <%= f.hidden_field(:status, value: :confirmed) %>
             <div class="form-group">
               <%= f.label :officer_id, "Officer" %>
               <%= f.select(:officer_id, {}, {}, {"data-controller" => "officer-select", class: "form-control", style: "width:100%"}) %>

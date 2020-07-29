@@ -32,8 +32,10 @@ class OfficersController < ApplicationController
   def confirm_all_articles
     @officer = Officer.find_by(employee_id: params[:id])
     @officer.articles_officers.each do |ao|
-      ao.confirmed = true
-      ao.save
+      if ao.status == 'added'
+        ao.status = 'confirmed'
+        ao.save
+      end
     end
     redirect_to officer_path(@officer, anchor: "articles")
   end

@@ -21,7 +21,7 @@ export function date_published_renderer(data, type, row) {
   }
   const date = date_renderer(data, type, row)
   const article_url = row.article_url;
-  const confirmed = row.confirmed ? '<span class="text-success" title="This reference was reviewed by a human">&check;</span>' : '<span class="text-muted" title="This reference has not been reviewed by a human">?</span>';
+  const confirmed = row.status == 'confirmed' ? '<span class="text-success" title="This reference was reviewed by a human">&check;</span>' : '<span class="text-muted" title="This reference has not been reviewed by a human">?</span>';
   let ret = `<a href="${escape(row.url)}">${date}</a>`;
   if (article_url) {
     ret = `<a href="${escape(row.article_url)}">Edit</a> <span class="text-muted">|</span> ` + ret;

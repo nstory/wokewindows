@@ -138,7 +138,7 @@ class Officer < ApplicationRecord
   end
 
   def articles_officers_to_review_count
-    articles_officers.count { |ao| ao.status == "added" && !ao.confirmed }
+    articles_officers.count { |ao| ao.status == "added" }
   end
 
   def self.by_employee_id

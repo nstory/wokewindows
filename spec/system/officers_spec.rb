@@ -60,7 +60,7 @@ describe "Officers" do
         accept_confirm do
           click_link "Confirm All"
         end
-        wait_for { articles_officer.reload.confirmed }.to eql(true)
+        wait_for { articles_officer.reload.confirmed? }.to eql(true)
       end
     end
   end

@@ -84,12 +84,7 @@ describe "Articles" do
         ao = ArticlesOfficer.first
         expect(ao.officer).to eql(officer)
         expect(ao.article).to eql(article)
-        expect(ao.confirmed).to eql(true)
-        expect(ao.status).to eql("added")
-
-        # un-confirm the officer
-        page.uncheck("articles_officer[confirmed]")
-        wait_for { ao.reload.confirmed }.to eql(false)
+        expect(ao.status).to eql("confirmed")
 
         # change status
         page.select("Rejected", from: "articles_officer[status]")

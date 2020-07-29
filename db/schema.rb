@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_29_154521) do
+ActiveRecord::Schema.define(version: 2020_07_29_160016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(version: 2020_07_29_154521) do
     t.string "status", default: "added", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "confirmed", default: false, null: false
     t.index ["article_id", "officer_id"], name: "index_articles_officers_on_article_id_and_officer_id", unique: true
     t.index ["officer_id", "status", "article_id"], name: "index_articles_officers_on_officer_id_and_status_and_article_id"
   end
