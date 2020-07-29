@@ -18,12 +18,16 @@
       <link rel="canonical" href="<%= @layout_application_canonical %>">
     <% end %>
 
-    <% if @layout_application_description && @layout_application_canonical %>
-      <meta name="twitter:card" content="summary" />
-      <meta property="og:url" content="<%= @layout_application_canonical %>" />
-      <meta property="og:title" content="<%= title %>" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:title" content="<%= title %>" />
+    <meta property="og:image" content="<%= image_url('brand-128.png') %>" />
+
+    <% if @layout_application_description %>
       <meta property="og:description" content="<%= @layout_application_description %>" />
-      <meta property="og:image" content="<%= image_url('brand-128.png') %>" />
+    <% end %>
+
+    <% if @layout_application_canonical %>
+      <meta property="og:url" content="<%= @layout_application_canonical %>" />
     <% end %>
 
     <%= csrf_meta_tags %>

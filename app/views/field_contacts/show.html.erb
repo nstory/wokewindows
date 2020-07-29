@@ -1,4 +1,5 @@
 <% @layout_application_title = @field_contact.fc_num %>
+<% @layout_application_description = "FIO report #{ @field_contact.fc_num } filed by #{ @field_contact.contact_officer_name } on #{ format_date(@field_contact.contact_date) }" %>
 
 <div class="container">
   <div class="row">
