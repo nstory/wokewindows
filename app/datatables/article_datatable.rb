@@ -22,6 +22,6 @@ class ArticleDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    ArticlesOfficer.added.includes(:article).references(:article).where(officer_id: params["officer_id"])
+    ArticlesOfficer.includes(:article).references(:article).where(officer_id: params["officer_id"]).where(status: ["added", "confirmed"])
   end
 end

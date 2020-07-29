@@ -30,6 +30,13 @@ describe "Officers" do
         expect(page).to_not have_selector("td", text: "LOL456")
       end
 
+      it "does display a confirmed article" do
+        articles_officer.status = "confirmed"
+        articles_officer.save!
+        visit officer_path(officer)
+        expect(page).to have_selector("td", text: "LOL456")
+      end
+
       it "does not link to article edit page" do
         visit officer_path(officer)
         expect(page).to have_selector("td", text: "LOL456")

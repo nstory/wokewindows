@@ -1,7 +1,8 @@
 class ArticlesOfficer < ApplicationRecord
   enum status: {
     added: "added",
-    rejected: "rejected"
+    rejected: "rejected",
+    confirmed: "confirmed"
   }
 
   belongs_to :article
