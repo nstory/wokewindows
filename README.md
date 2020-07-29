@@ -15,6 +15,9 @@ You will need a local [PostgeSQL Server](https://www.postgresql.org/) to run the
 
 Start the app in the standard rails way: `bundle exec rails s`
 
+## Import Production Database into Dev
+Download a production SQL backup (TODO: make these publicly available), and run the script: `./scripts/load_db_backup.sh wokewindows_db_2020-07-29.sql.gz`
+
 ## Production Environment
 Heroku.
 
