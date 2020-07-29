@@ -12,15 +12,23 @@ initDataTable("table.incidents-table", function($table, options) {
       {data: "occurred_on_date", render: date_time_renderer},
       {data: "district", render: district_renderer},
       {data: "shooting", render: shooting_renderer},
-      {data: "location_of_occurrence", render: see_more_renderer},
-      {data: "street", render: text_renderer},
-      {data: "nature_of_incident", render: see_more_renderer},
-      {data: "offenses", render: see_more_renderer},
+      {data: "location_of_occurrence", render: location_renderer, orderable: false},
+      {data: "offenses", render: offenses_renderer, orderable: false},
       {data: "officer_journal_name", render: text_renderer}
     ],
     order: [[2, 'desc']]
   });
 });
+
+function incident_num_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (!data) {
+    return "";
+  }
+  return `<a href="${row.url}">${escape(data)}</a>`;
+}
 
 function district_renderer(data, type, row) {
   if (type != "display") {
@@ -36,16 +44,6 @@ function district_renderer(data, type, row) {
   return data;
 }
 
-function incident_num_renderer(data, type, row) {
-  if (type != "display") {
-    return data;
-  }
-  if (!data) {
-    return "";
-  }
-  return `<a href="${row.url}">${escape(data)}</a>`;
-}
-
 function shooting_renderer(data, type, row) {
   if (type != "display") {
     return data;
@@ -59,4 +57,24 @@ function shooting_renderer(data, type, row) {
     res = '<span class="text-muted">N</span>'
   }
   return `<div class="text-center">${res}</div>`;
+}
+
+function location_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data && data.length > 0) {
+    return see_more_renderer(data, type, row);
+  }
+  return text_renderer(row.street, type, row);
+}
+
+function offenses_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data && data.length > 0) {
+    return see_more_renderer(data, type, row);
+  }
+    return see_more_renderer(row.nature_of_incident, type, row);
 }
