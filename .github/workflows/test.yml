@@ -21,10 +21,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Ruby 2.5.7
+    - name: Set up Ruby 2.5.x
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.5.7
+        ruby-version: 2.5.x
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
