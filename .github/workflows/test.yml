@@ -47,6 +47,7 @@ jobs:
         PGHOST: 127.0.0.1
         PGUSER: postgres
         RAILS_ENV: test
+        DATABASE_PASSWORD: postgres
       run: |
         sudo apt-get -yqq install libpq-dev
         gem install bundler

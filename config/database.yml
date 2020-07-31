@@ -20,6 +20,8 @@ development:
 test:
   <<: *default
   database: cops_test
+  username: <%= ENV['PGUSER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
