@@ -53,14 +53,14 @@
                   <td><%= format_text(ao.officer.title) %></td>
                   <td><%= format_date(ao.officer.doa) %></td>
                   <td>
-                    <%= form_with model: ao, local: true do |f| %>
-                      <%= f.select :status, ArticlesOfficer.statuses.map { |k,v| [k.humanize, v] }, {}, {class: "form-control", onchange: "this.form.submit()"} %>
+                    <%= form_with model: ao do |f| %>
+                      <%= f.select :status, ArticlesOfficer.statuses.map { |k,v| [k.humanize, v] }, {}, {class: "form-control", data: {controller: "submit-on-change"}} %>
                     <% end %>
                   </td>
                   <td><%= link_to "Delete", articles_officer_path(ao), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure you wish to delete this record?"} %></td>
                 </tr>
                 <tr>
-                  <td colspan="5" class="border-top-0 pt-0"><%= format_text(ao.excerpt) %></td>
+                  <td colspan="5" class="border-top-0 pt-0"><%= format_text(ao.excerpt 60) %></td>
                 </tr>
               <% end %>
             </tbody>

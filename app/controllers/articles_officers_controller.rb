@@ -16,7 +16,6 @@ class ArticlesOfficersController < ApplicationController
     @articles_officer = ArticlesOfficer.find(params[:id])
     @articles_officer.attributes = articles_officer_params
     @articles_officer.save!
-    redirect_to edit_article_path(@articles_officer.article)
   end
 
   private
