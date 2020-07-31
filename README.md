@@ -2,21 +2,44 @@
 
 This is the code base for the [Woke Windows Project](https://www.wokewindows.org). Pull requests are most definitely welcome!
 
+This is a [Ruby on Rails](https://rubyonrails.org/) project. For general information regarding Ruby on Rails development, I highly suggest the official [Ruby on Rails Guides](https://guides.rubyonrails.org/).
+
 ## Setting Up for Development
 I suggest using [rbenv](https://github.com/rbenv/rbenv) to download and run the correct ruby version for the project based on the `.ruby-version` file.
 
 I use [nvm](https://github.com/nvm-sh/nvm) to download and run the correct node.js version for the project based on the `.nvmrc` file.
 
-Install dependencies by running `bundle` and `yarn`
-
 You will need a local [PostgeSQL Server](https://www.postgresql.org/) to run the application.
 
-... TODO: all the other steps
+Follow these steps to install interpreters, dependencies, etc.
+
+```
+cd wokewindows
+rbenv install -s    # install ruby version in .ruby-version if not already installed
+gem install bundler # gems are managed with bundle
+bundle              # install gems for project
+nvm use             # use nodejs version specified in .nvmrc
+npm install -g yarn # install yarn using npm (lol)
+yarn                # install JS libs
+```
+
+See "Import Production Database into Dev" section below to create the database table.
 
 Start the app in the standard rails way: `bundle exec rails s`
 
 ## Import Production Database into Dev
-Download a production SQL backup (TODO: make these publicly available), and run the script: `./scripts/load_db_backup.sh wokewindows_db_2020-07-29.sql.gz`
+Download the "dev" backup of the production database (contains all production data except the users table):
+https://wokewindows-data.s3.amazonaws.com/wokewindows_db.sql.gz
+
+Import the data using the load_db_backup.sh script:
+`./scripts/load_db_backup.sh wokewindows_db.sql.gz`
+
+## Test Suite
+Running the test suite should be as simple as: `bundle exec rspec`
+
+You will need to have a test database `cops_test` in your local PostgreSQL database (the load_db_backup.sh scripts will create this when it runs `rails db:reset`).
+
+The system tests use Chrome in headless mode; they should automatically find any Chrome install on your system.
 
 ## Production Environment
 Heroku.
