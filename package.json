@@ -21,7 +21,7 @@
     "jquery-ujs": "^1.2.2",
     "jquery.redirect": "^1.1.4",
     "leaflet": "^1.6.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "popper.js": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
