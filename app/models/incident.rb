@@ -75,6 +75,34 @@ class Incident < ApplicationRecord
     !cases.empty? || !field_contacts.empty?
   end
 
+  def geocode!
+    # location_of_occurrence.find { |l| /^((\w\d+ +)?- +)?(\d[\w-]+) +(.+)$/ =~ l }
+    location = location_of_occurrence.map do |l|
+      # remove district prefix "D4 - 123 XYZZY ST" -> "123 XYZZY ST"
+      l = l.sub(/^[a-z]\d+ +- +/i, "")
+
+      # remove empty district prefix "- 123 XYZZY ST" -> "123 XYZZY ST"
+      l = l.sub(/^-\s+/, "")
+
+      if /^\d.*\s/ =~ l
+        l
+      else
+        nil
+      end
+    end.compact.first
+
+    if location
+      number, street = location.split(/\s+/, 2)
+
+      # "133-A" -> "133"
+      number = number.sub(/[-a-z].*/i, "")
+
+      gc = Geocode.geocode_address(street, number)
+      self.geocode_latitude = gc.latitude
+      self.geocode_longitude = gc.longitude
+    end
+  end
+
   def self.by_incident_number(numbers)
     Incident.where(incident_number: numbers)
       .index_by(&:incident_number)

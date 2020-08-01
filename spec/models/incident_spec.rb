@@ -50,4 +50,26 @@ describe Incident do
       expect(incident.bag_of_text).to match(/XYZZY/)
     end
   end
+
+  describe ".geocode!" do
+    let(:geocode) { Geocode.new(latitude: 12.34, longitude: 23.45) }
+    let(:incident) { Incident.new }
+
+    {
+      "123 XYZZY ST" => ["XYZZY ST", "123"],
+      "D4 - 123 XYZZY ST" => ["XYZZY ST", "123"],
+      "12C XYZZY WAY" => ["XYZZY WAY", "12"],
+      "- 123 XYZZY ST" => ["XYZZY ST", "123"],
+      "13-15 XYZZY SQ" => ["XYZZY SQ", "13"],
+      "133-A XYZZY ST" => ["XYZZY ST", "133"]
+    }.each do |location, params|
+      it "parses #{location}" do
+        incident.location_of_occurrence = [location]
+        expect(Geocode).to receive(:geocode_address).with(*params).and_return(geocode)
+        incident.geocode!
+        expect(incident.geocode_latitude).to eql(12.34)
+        expect(incident.geocode_longitude).to eql(23.45)
+      end
+    end
+  end
 end

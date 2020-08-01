@@ -24,7 +24,7 @@ describe Detail do
     end
   end
 
-  describe "#geocode" do
+  describe "#geocode!" do
     let(:geocode) { Geocode.new(latitude: 12.34, longitude: 23.45) }
     it "looks up address" do
       expect(Geocode).to receive(:geocode_address).with("FOO ST", "12").and_return(geocode)
