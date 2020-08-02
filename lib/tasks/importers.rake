@@ -10,8 +10,8 @@ namespace :importers do
     # import the latest crime_incident_reports.csv.gz file
     Importer::CrimeIncidentReports.import_non_legacy
 
-    # import all the journal pdf files (this is overkill, but I don't feel like
-    # figuring out what the newest ones are)
+    # import the journal pdf files; files that have already been imported won't
+    # be imported again b/c the importer tracks previous imports
     Importer::DistrictJournal.import_all
 
     # create any new officers found in the district journals

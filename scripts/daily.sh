@@ -12,11 +12,18 @@ rails 'ckan:archive[public-works-active-work-zones,Public Works Active Work Zone
 rails 'ckan:archive[crime-incident-reports-august-2015-to-date-source-new-system,Crime Incident Reports (August 2015 - To Date) (Source - New System),crime_incident_reports]'
 rails 'journals:download'
 rails 'importers:run'
+rails r 'Populater::IncidentsGeocode.populate'
 
 # download and import bpd news articles
 rails 'articles:download'
 rails r 'Importer::BpdNewsArticles.import_all'
+rails r 'Populater::ArticlesOfficers.populate'
 
+# update counter_culture counters
 rails 'counters:fix'
+
+# exports
+psql cops -c "\COPY incidents TO STDOUT CSV HEADER" | gzip > incidents.csv.gz
+aws s3 cp incidents.csv.gz 's3://wokewindows-data/incidents.csv.gz' --acl public-read
 
 rails sitemap:refresh:no_ping

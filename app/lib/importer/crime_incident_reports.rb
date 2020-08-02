@@ -53,8 +53,8 @@ class Importer::CrimeIncidentReports < Importer::Importer
       occurred_on_date: parse_date_time(record[:occurred_on_date]),
       ucr_part: parse_string(record[:ucr_part]),
       street: parse_string(record[:street]),
-      latitude: parse_location(record[:location])[:latitude],
-      longitude: parse_location(record[:location])[:longitude]
+      reported_latitude: parse_location(record[:location])[:latitude],
+      reported_longitude: parse_location(record[:location])[:longitude]
     }
   end
 

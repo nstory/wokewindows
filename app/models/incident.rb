@@ -29,6 +29,8 @@ class Incident < ApplicationRecord
   serialize :nature_of_incident, Array
   serialize :arrests_json, Array
 
+  before_save :populate_latitude_longitude
+
   counter_culture :officer
 
   def bag_of_text_content
@@ -111,5 +113,17 @@ class Incident < ApplicationRecord
   private
   def match_journal_name_regexp
     /^(\d{4,})  (.+)+$/.match(officer_journal_name)
+  end
+
+  # populates lat & long before each save; prefers the coordinates geocoded
+  # from the location_of_occurrence
+  def populate_latitude_longitude
+    if geocode_latitude && geocode_longitude
+      self.latitude = geocode_latitude
+      self.longitude = geocode_longitude
+    elsif reported_latitude && reported_longitude
+      self.latitude = reported_latitude
+      self.longitude = reported_longitude
+    end
   end
 end

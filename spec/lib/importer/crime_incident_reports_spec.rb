@@ -64,6 +64,8 @@ describe Importer::CrimeIncidentReports do
     expect(inc.occurred_on_date).to eql("2019-12-20 03:08:00")
     expect(inc.ucr_part).to eql("Xyzzy")
     expect(inc.street).to eql("DAY ST")
+    expect(inc.reported_latitude).to eql(42.325122)
+    expect(inc.reported_longitude).to eql(-71.107779)
     expect(inc.latitude).to eql(42.325122)
     expect(inc.longitude).to eql(-71.107779)
     expect(inc.attributions).to eql([attribution])
@@ -103,6 +105,7 @@ describe Importer::CrimeIncidentReports do
     inc = Incident.last
     expect(inc.ucr_part).to eql(nil)
     expect(inc.reporting_area).to eql(nil)
+    expect(inc.reported_latitude).to eql(nil)
     expect(inc.latitude).to eql(nil)
     expect(inc.offenses.first.code_group).to eql(nil)
   end
@@ -118,6 +121,8 @@ describe Importer::CrimeIncidentReports do
       expect(inc.occurred_on_date).to eql("2012-07-08 06:03:00")
       expect(inc.ucr_part).to eql("Part One")
       expect(inc.street).to eql("HOWARD AV")
+      expect(inc.reported_latitude).to eql(42.31684135)
+      expect(inc.reported_longitude).to eql(-71.07458456)
       expect(inc.latitude).to eql(42.31684135)
       expect(inc.longitude).to eql(-71.07458456)
       expect(inc.shooting).to eql(true)
@@ -137,6 +142,8 @@ describe Importer::CrimeIncidentReports do
       legacy_record[:location] = "(0.0, 0.0)"
       importer.import
       inc = Incident.last
+      expect(inc.reported_latitude).to eql(nil)
+      expect(inc.reported_longitude).to eql(nil)
       expect(inc.latitude).to eql(nil)
       expect(inc.longitude).to eql(nil)
     end

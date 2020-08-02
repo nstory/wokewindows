@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_153352) do
+ActiveRecord::Schema.define(version: 2020_08_01_183904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -300,6 +300,8 @@ ActiveRecord::Schema.define(version: 2020_08_01_153352) do
     t.text "bag_of_text"
     t.float "geocode_latitude"
     t.float "geocode_longitude"
+    t.float "reported_latitude"
+    t.float "reported_longitude"
     t.index ["bag_of_text"], name: "incidents_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
     t.index ["occurred_on_date"], name: "index_incidents_on_occurred_on_date"
