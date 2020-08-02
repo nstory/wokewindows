@@ -233,7 +233,7 @@ TXT.strip.each_line do |line|
   file_name = file_url.sub(%r{/download.*}, "")
   file_name = file_name.sub(%r{.*/}, "") + ".pdf"
   file_path = "data/civil_service_decisions/#{file_name}"
-  body = `pdftotext -layout "#{file_path}" -`
+  body = IO.read(file_path.sub(/pdf$/, "txt"))
   article = Article.new
   article.url = file_url
   article.title = case_name
@@ -241,5 +241,8 @@ TXT.strip.each_line do |line|
   if %r{\d{1,2}/\d{1,2}/\d{2,4}}.match(case_name)
     article.date_published = Chronic.parse($&).strftime("%F")
   end
-  article.save
+  begin
+    article.save
+  rescue ActiveRecord::RecordNotUnique
+  end
 end
