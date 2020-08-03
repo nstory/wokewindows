@@ -23,7 +23,7 @@ rails r 'Populater::ArticlesOfficers.populate'
 rails 'counters:fix'
 
 # exports
-psql cops -c "\COPY incidents TO STDOUT CSV HEADER" | gzip > incidents.csv.gz
+psql "$DATABASE_URL" -c "\COPY incidents TO STDOUT CSV HEADER" | gzip > incidents.csv.gz
 aws s3 cp incidents.csv.gz 's3://wokewindows-data/incidents.csv.gz' --acl public-read
 
 rails sitemap:refresh:no_ping
