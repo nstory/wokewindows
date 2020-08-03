@@ -16,7 +16,7 @@ rails r 'Populater::IncidentsGeocode.populate'
 
 # download and import bpd news articles
 rails 'articles:download'
-rails r 'Importer::BpdNewsArticles.import_all'
+rails r 'Importer::Article::BpdNews.import_all'
 rails r 'Populater::ArticlesOfficers.populate'
 
 # update counter_culture counters
