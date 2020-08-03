@@ -234,7 +234,7 @@ TXT.strip.each_line do |line|
   file_name = file_name.sub(%r{.*/}, "") + ".pdf"
   file_path = "data/civil_service_decisions/#{file_name}"
   body = IO.read(file_path.sub(/pdf$/, "txt"))
-  article = Article.new
+  article = Article.find_by(url: file_url) || Article.new
   article.url = file_url
   article.title = case_name
   article.body = body
