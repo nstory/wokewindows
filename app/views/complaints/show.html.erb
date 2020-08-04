@@ -1,5 +1,5 @@
 <% @layout_application_title = @complaint.ia_number %>
-<% @layout_application_description = "#{ @complaint.incident_type } received #{@complaint.received_date}" %>
+<% @layout_application_description = @complaint.short_description %>
 
 <div class="container">
   <div class="row">

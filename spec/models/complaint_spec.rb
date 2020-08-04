@@ -31,4 +31,33 @@ describe Complaint do
       expect(complaint.finding).to eql("Partially Sustained")
     end
   end
+
+  describe ".short_description" do
+    def build_complaint(co_names)
+      cos = co_names.map { |name| ComplaintOfficer.new(name: name) }
+      Complaint.new(incident_type: "Citizen complaint", received_date: "2001-01-01", complaint_officers: cos)
+    end
+
+    desc_stub = "Citizen complaint received 2001-01-01"
+
+    it "returns a basic message if no complaint_officers" do
+      complaint = build_complaint([])
+      expect(complaint.short_description).to eql(desc_stub)
+    end
+
+    it "returns a message with 'against <name>' if single complaint_officer" do
+      complaint = build_complaint(["Doe,Jon"])
+      expect(complaint.short_description).to eql(desc_stub + " against Doe,Jon")
+    end
+
+    it "returns a message with 'against an unknown officer' if single complaint_officer is unknown" do
+      complaint = build_complaint(["Unknown,"])
+      expect(complaint.short_description).to eql(desc_stub + " against an unknown officer")
+    end
+
+    it "returns a message with 'against multiple officers' if multiple complaint_officers" do
+      complaint = build_complaint([ "Name1", "Name2"])
+      expect(complaint.short_description).to eql(desc_stub + " against multiple officers")
+    end
+  end
 end
