@@ -118,12 +118,15 @@ class Incident < ApplicationRecord
   # populates lat & long before each save; prefers the coordinates geocoded
   # from the location_of_occurrence
   def populate_latitude_longitude
-    if geocode_latitude && geocode_longitude
+    if geocode_latitude && geocode_longitude && Geocode.lat_long_in_boston?(geocode_latitude, geocode_longitude)
       self.latitude = geocode_latitude
       self.longitude = geocode_longitude
-    elsif reported_latitude && reported_longitude
+    elsif reported_latitude && reported_longitude && Geocode.lat_long_in_boston?(reported_latitude, reported_longitude)
       self.latitude = reported_latitude
       self.longitude = reported_longitude
+    else
+      self.latitude = nil
+      self.longitude = nil
     end
   end
 end

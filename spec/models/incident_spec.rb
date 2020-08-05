@@ -72,4 +72,29 @@ describe Incident do
       end
     end
   end
+
+  describe "#populate_latitude_longitude" do
+    let(:incident) { Incident.new(incident_number: 123, reported_latitude: 42.351964, reported_longitude: -71.046112) }
+
+    it "uses reported lat long" do
+      incident.save
+      expect(incident.latitude).to eql(42.351964)
+      expect(incident.longitude).to eql(-71.046112)
+    end
+
+    it "prefers geocoded address" do
+      incident.geocode_latitude = 42.280796
+      incident.geocode_longitude = -71.090397
+      incident.save
+      expect(incident.latitude).to eql(42.280796)
+      expect(incident.longitude).to eql(-71.090397)
+    end
+
+    it "doesn't use -1 -1 lat long" do
+      incident.attributes = {reported_latitude: -1.0, reported_longitude: -1.0}
+      incident.save
+      expect(incident.latitude).to eql(nil)
+      expect(incident.longitude).to eql(nil)
+    end
+  end
 end
