@@ -13,7 +13,7 @@ export default class TocController extends Controller {
       tocSelector: `#${id}`,
       hasInnerContainers: true,
       scrollSmooth: false,
-      collapseDepth: 6
+      collapseDepth: 1
     });
   }
 
