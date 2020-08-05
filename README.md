@@ -11,7 +11,7 @@ I suggest using [rbenv](https://github.com/rbenv/rbenv) to download and run the 
 
 I use [nvm](https://github.com/nvm-sh/nvm) to download and run the correct node.js version for the project based on the `.nvmrc` file.
 
-You will need a local [PostgeSQL Server](https://www.postgresql.org/) to run the application.
+You will need a local [PostgreSQL Server](https://www.postgresql.org/) to run the application.
 
 Follow these steps to install interpreters, dependencies, etc.
 

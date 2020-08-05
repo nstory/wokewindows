@@ -66,6 +66,12 @@ class Importer::Importer
     end
   end
 
+  def parse_boolean(str)
+    return true if /y/i =~ str
+    return false if /n/i =~ str
+    nil
+  end
+
   def records
     @parser.records
   end

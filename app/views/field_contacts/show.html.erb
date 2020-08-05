@@ -23,58 +23,64 @@
         <dd><%= format_supervisor(@field_contact) %></dd>
 
         <dt>Street</dt>
-        <dd><%= format_text(@field_contact.street) %></dd>
+        <dd><%= format_titleize(@field_contact.street) %></dd>
 
         <dt>City</dt>
-        <dd><%= format_text(@field_contact.city) %></dd>
+        <dd><%= format_titleize(@field_contact.city) %></dd>
 
         <dt>State</dt>
-        <dd><%= format_text(@field_contact.state) %></dd>
+        <dd><%= format_upcase(@field_contact.state) %></dd>
 
         <dt>Zip</dt>
         <dd><%= format_zip(@field_contact.zip) %></dd>
 
-        <dt>Frisked / Searched?</dt>
+        <dt title="Was any individual frisked or searched?">Frisked / Searched?</dt>
         <dd><%= format_yes_no(@field_contact.frisked_searched) %></dd>
 
-        <dt>Circumstance</dt>
-        <dd><%= format_text(@field_contact.circumstance) %></dd>
+        <dt>Vehicle Search?</dt>
+        <dd><%= format_yes_no(@field_contact.search_vehicle) %></dd>
 
-        <dt>Basis</dt>
-        <dd><%= format_text(@field_contact.basis) %></dd>
+        <dt>Summons Issued?</dt>
+        <dd><%= format_yes_no(@field_contact.summons_issued) %></dd>
       </dl>
     </div>
     <div class="col">
       <dl class="row field-contacts-dl">
+        <dt>Circumstance</dt>
+        <dd><%= format_titleize(@field_contact.circumstance) %></dd>
+
+        <dt>Basis</dt>
+        <dd><%= format_titleize(@field_contact.basis) %></dd>
+
         <dt>Vehicle Year</dt>
         <dd><%= format_text(@field_contact.vehicle_year) %></dd>
 
         <dt>Vehicle State</dt>
-        <dd><%= format_text(@field_contact.vehicle_state) %></dd>
+        <dd><%= format_upcase(@field_contact.vehicle_state) %></dd>
 
         <dt>Vehicle Make</dt>
-        <dd><%= format_text(@field_contact.vehicle_make) %></dd>
+        <dd><%= format_titleize(@field_contact.vehicle_make) %></dd>
 
         <dt>Vehicle Model</dt>
-        <dd><%= format_text(@field_contact.vehicle_model) %></dd>
+        <dd><%= format_titleize(@field_contact.vehicle_model) %></dd>
 
         <dt>Vehicle Color</dt>
-        <dd><%= format_text(@field_contact.vehicle_color) %></dd>
+        <dd><%= format_titleize(@field_contact.vehicle_color) %></dd>
 
         <dt>Vehicle Style</dt>
-        <dd><%= format_text(@field_contact.vehicle_style) %></dd>
+        <dd><%= format_titleize(@field_contact.vehicle_style) %></dd>
 
         <dt>Vehicle Type</dt>
-        <dd><%= format_text(@field_contact.vehicle_type) %></dd>
+        <dd><%= format_titleize(@field_contact.vehicle_type) %></dd>
 
         <dt>Key Situations</dt>
         <dd><%= format_array(@field_contact.key_situations) %></dd>
 
         <dt>Weather</dt>
-        <dd><%= format_text(@field_contact.weather) %></dd>
+        <dd><%= format_titleize(@field_contact.weather) %></dd>
 
         <dt>Stop Duration</dt>
-        <dd><%= format_text(@field_contact.stop_duration) %></dd>
+        <dd><%= format_field_contact_duration(@field_contact.stop_duration) %></dd>
       </dl>
     </div>
   </div>
@@ -93,7 +99,7 @@
         <table class="table table-bordered table-striped table-hover table-nowrap">
           <thead>
             <tr>
-              <th scope="col">Sex</th>
+              <th scope="col">Gender</th>
               <th scope="col">Race</th>
               <th scope="col">Age</th>
               <th scope="col">Build</th>
@@ -101,7 +107,6 @@
               <th scope="col">Skin Tone</th>
               <th scope="col">Ethnicity</th>
               <th scope="col">Other Clothing</th>
-              <th scope="col">Deceased</th>
               <th scope="col">License State</th>
               <th scope="col">License Type</th>
               <th scope="col">Searched?</th>
@@ -110,17 +115,16 @@
           <tbody>
             <% @field_contact.field_contact_names.each do |fcn| %>
               <tr>
-                <td><%= format_text(fcn.sex) %></td>
-                <td><%= format_text(fcn.race) %></td>
+                <td><%= format_titleize(fcn.gender) %></td>
+                <td><%= format_titleize(fcn.race) %></td>
                 <td><%= format_text(fcn.age) %></td>
-                <td><%= format_text(fcn.build) %></td>
-                <td><%= format_text(fcn.hair_style) %></td>
-                <td><%= format_text(fcn.skin_tone) %></td>
+                <td><%= format_titleize(fcn.build) %></td>
+                <td><%= format_titleize(fcn.hair_style) %></td>
+                <td><%= format_titleize(fcn.skin_tone) %></td>
                 <td><%= format_text(fcn.ethnicity) %></td>
                 <td><%= format_text(fcn.other_clothing) %></td>
-                <td><%= format_yes_no(fcn.deceased) %></td>
-                <td><%= format_text(fcn.license_state) %></td>
-                <td><%= format_text(fcn.license_type) %></td>
+                <td><%= format_upcase(fcn.license_state) %></td>
+                <td><%= format_titleize(fcn.license_type) %></td>
                 <td><%= format_yes_no(fcn.frisked_searched) %></td>
               </tr>
             <% end %>

@@ -12,6 +12,6 @@ class Populater::FieldContactsCitations
   private
   def self.find_ticket_numbers(narrative)
     return [] if !narrative
-    narrative.scan(/\b(T\d{7}|R\d{7}|\d{6}AA)\b/i).map(&:first)
+    narrative.scan(/\b(T\d{7}|R\d{7}|\d{6}AA)\b/i).map(&:first).map(&:upcase)
   end
 end

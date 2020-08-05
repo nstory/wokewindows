@@ -110,7 +110,7 @@
       <h3 id="field_contacts">Field Contacts (FIO)</h3>
       <p>Field Interrogation and Observation (FIO) reports are how the BPD records the department's stop-and-frisk encounters (and other encouters, many of which do not involve a search).</p>
       <p>Per <a href="https://static1.squarespace.com/static/5086f19ce4b0ad16ff15598d/t/56a2569205caa7ee9f29e6a2/1453479570208/rule323.pdf">Rule 323</a>: "An FIOE Report shall be submitted subsequent to a field interaction/stop, a frisk, an observation, or an encounter".</p>
-      <p>We ingest this data from the <a href="#field_contact">FieldContact Table</a> and <a href="#field_contact_name">FieldContact_Name</a> table exports distributed on the <a href="https://data.boston.gov/">Analyze Boston website</a></p>
+      <p>We ingest the cleaned <a href="#bpd_fio_data">BPD FIO Data</a> provided at <a href="https://github.com/jacoblurye/bpd-fio-data">jacoblurye/bpd-fio-data</a> (thanks <a href="https://github.com/jacoblurye">@jacoblurye</a>!) That data was sourced from the <a href="#field_contact">FieldContact Table</a> and <a href="#field_contact_name">FieldContact_Name</a> exports distributed on the <a href="https://data.boston.gov/">Analyze Boston website</a>.</p>
       <p>These reports are especially interesting because they 1. contain redacted prose narratives of the encounter and 2. contain a breakdown of the race and ethnicity of the individuals involved.</p>
       <p>If the <i>Frisked / Searched?</i> flag is <i>Yes</i>, this indicates that at least one of the stopped persons was searched. Beginning in September 2019, the search flag is also marked for each individual.</p>
 
@@ -500,6 +500,10 @@
           </tr>
         </tbody>
       </table>
+
+      <h3 id="bpd_fio_data">BPD FIO Data</h3>
+      <p><a href="https://github.com/jacoblurye/bpd-fio-data">https://github.com/jacoblurye/bpd-fio-data</a></p>
+      <p>Cleaned versions of <a href="#field_contact">FIO Records FieldContact Table</a> and <a href="#field_contact_name">FIO Records FieldContact_Name Table</a>.</p>
 
       <h3 id="field_contact">FIO Records FieldContact Table</h3>
       <p><a href="https://data.boston.gov/dataset/boston-police-department-fio">https://data.boston.gov/dataset/boston-police-department-fio</a></p>

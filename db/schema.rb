@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_01_183904) do
+ActiveRecord::Schema.define(version: 2020_08_04_160339) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(version: 2020_08_01_183904) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "attributions"
+    t.string "gender"
     t.index ["field_contact_id"], name: "index_field_contact_names_on_field_contact_id"
   end
 
@@ -226,7 +227,6 @@ ActiveRecord::Schema.define(version: 2020_08_01_183904) do
     t.string "state"
     t.integer "zip"
     t.boolean "frisked_searched"
-    t.integer "stop_duration"
     t.string "circumstance"
     t.string "basis"
     t.integer "vehicle_year"
@@ -246,6 +246,9 @@ ActiveRecord::Schema.define(version: 2020_08_01_183904) do
     t.integer "field_contact_names_count", default: 0, null: false
     t.text "attributions"
     t.text "bag_of_text"
+    t.string "stop_duration"
+    t.boolean "search_vehicle"
+    t.boolean "summons_issued"
     t.index ["bag_of_text"], name: "field_contacts_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["contact_date"], name: "index_field_contacts_on_contact_date"
     t.index ["contact_officer_id"], name: "index_field_contacts_on_contact_officer_id"

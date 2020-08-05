@@ -4,6 +4,33 @@ class FieldContact < ApplicationRecord
 
   serialize :key_situations, JSON
 
+  enum stop_duration: {
+    fifteen_to_twenty_minutes: "fifteen_to_twenty_minutes",
+    five_to_ten_minutes: "five_to_ten_minutes",
+    forty_five_to_sixty_minutes: "forty_five_to_sixty_minutes",
+    less_than_five_minutes: "less_than_five_minutes",
+    longer_than_two_hours: "longer_than_two_hours",
+    one_to_two_hours: "one_to_two_hours",
+    ten_to_fifteen_minutes: "ten_to_fifteen_minutes",
+    thirty_to_forty_five_minutes: "thirty_to_forty_five_minutes",
+    twenty_to_twenty_five_minutes: "twenty_to_twenty_five_minutes",
+    twenty_five_to_thirty_minutes: "twenty_five_to_thirty_minutes"
+  }
+
+  enum basis: {
+    encounter: "encounter",
+    intel: "intel",
+    probable_cause: "probable_cause",
+    reasonable_suspicion: "reasonable_suspicion"
+  }
+
+  enum circumstance: {
+    circumstance: "circumstance",
+    encountered: "encountered",
+    observed: "observed",
+    stopped: "stopped"
+  }
+
   belongs_to :contact_officer, foreign_key: :contact_officer_id, class_name: "Officer", optional: true, inverse_of: :field_contacts
   belongs_to :supervisor, foreign_key: :supervisor_id, class_name: "Officer", optional: true
   has_many :field_contact_names, dependent: :delete_all

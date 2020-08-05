@@ -45,6 +45,16 @@ module ApplicationHelper
     str
   end
 
+  def format_titleize(str)
+    return format_unknown if str.blank?
+    str.titleize
+  end
+
+  def format_upcase(str)
+    return format_unknown if str.blank?
+    str.upcase
+  end
+
   def format_yes_no(b)
     return format_unknown if b == nil
     b ? "Yes" : "No"

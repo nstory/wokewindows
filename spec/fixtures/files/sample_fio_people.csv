@@ -1,0 +1,11 @@
+fc_num,gender,race,recnum,build,hair_style,otherclothing,age,ethnicity,skin_tone,license_state,person_frisked_or_searched,license_type
+F180037700,man,white,100052854,,,,18.0,hispanic origin,,,,
+F190044360,man,black,100063086,medium,,"black bubble jacket, black jeans.",19.0,hispanic origin,medium,,,
+F180034749,man,white,100048176,thin,short,"blue jacket, blue pants, black sneakers.",26.0,hispanic origin,light brown,,,
+FC19001930,woman,black,,,,,45.0,not of hispanic origin,,ma,n,
+F170023208,man,black,100030045,muscular,braided,"blue jean jacket, grey sweatpants 
+gray sneakers",32.0,not of hispanic origin,dark brown,,,
+F180033701,man,black,100046676,,,"black north face vest, blue jeans brown timberlands",24.0,not of hispanic origin,,,,
+F180040695,woman,white,100057561,,,,33.0,not of hispanic origin,,,,
+F180032955,man,white,100045616,,,,27.0,not of hispanic origin,,,,
+F160018680,man,white,100022825,average,short,"blu jeans, lt t shirt clothing had tile set cement",32.0,not of hispanic origin,light brown,,,
