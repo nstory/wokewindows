@@ -38,6 +38,11 @@
     <div class="col">
       <h2 id="earnings">Earnings</h2>
       <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn\u00a0more", page_path("help", anchor: "officers") %></p>
+      <% if @officer.earnings_rank? %>
+        <p>
+          This employee was the <strong><%= @officer.earnings_rank.ordinalize %> highest earner</strong> in 2019.
+        </p>
+      <% end %>
       <%= render "shared/charts/compensations", compensations: @officer.compensations %>
       <div class="officer__earnings-table">
         <%= render "shared/tables/compensations", compensations: @officer.compensations %>
