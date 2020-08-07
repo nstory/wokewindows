@@ -3,6 +3,18 @@ describe Populater::Officers do
     Officer.create!({ employee_id: 42 })
   }
 
+  let!(:no_rank_officer) {
+    Officer.create!({ employee_id: 43 })
+  }
+
+  let!(:third_rank_officer) {
+    Officer.create!({ employee_id: 44, total: 6 })
+  }
+
+  let!(:first_rank_officer) {
+    Officer.create!({ employee_id: 45, total: 9 })
+  }
+
   let!(:compensation_2017) {
     Compensation.create!({
       "officer" => officer,
@@ -79,5 +91,13 @@ describe Populater::Officers do
     expect(officer.total).to eql(8)
     expect(officer.postal).to eql(12019)
     expect(officer.complaints_count).to eql(1)
+
+    first_rank_officer.reload
+    third_rank_officer.reload
+    no_rank_officer.reload
+    expect(officer.earnings_rank).to eql(2)
+    expect(first_rank_officer.earnings_rank).to eql(1)
+    expect(third_rank_officer.earnings_rank).to eql(3)
+    expect(no_rank_officer.earnings_rank).to be_nil
   end
 end

@@ -2,7 +2,7 @@ describe "Officers" do
   let!(:user) { User.create!(email: "foo@wokewindows.org", password: "foo") }
 
   describe "show" do
-    let!(:officer) { Officer.create!({employee_id: 1234, hr_name: "Foo,Bar"}) }
+    let!(:officer) { Officer.create!({employee_id: 1234, hr_name: "Foo,Bar", earnings_rank: 3}) }
 
     it "displays an officer" do
       visit officer_path(officer)
@@ -12,6 +12,16 @@ describe "Officers" do
       assert_meta_description(/Bar Foo/)
       assert_meta_description(/Boston Police Department/)
       assert_canonical_link(officer_path(officer))
+    end
+
+    let!(:no_rank_officer) { Officer.create!({ employee_id: 1235 }) }
+
+    it "displays an officer's earnings rank, or doesn't if they have no earnings data" do
+      visit officer_path(officer)
+      expect(page).to have_text("3rd highest earner in 2019")
+
+      visit officer_path(no_rank_officer)
+      expect(page).not_to have_text("highest earner in 2019")
     end
 
     describe "officer with an article" do

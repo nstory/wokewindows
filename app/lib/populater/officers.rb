@@ -11,6 +11,8 @@ class Populater::Officers
         end
       end
     end
+
+    populate_earnings_ranks
   end
 
   private
@@ -36,5 +38,18 @@ class Populater::Officers
     officer.complaints_count = officer.complaints.size
 
     officer.save
+  end
+
+  private
+  def self.populate_earnings_ranks
+    query = Officer.where.not(total: nil).order(total: :desc)
+    Officer.transaction do
+      query.each_with_index do |officer, index|
+        if officer.total
+          officer.earnings_rank = index + 1
+          officer.save
+        end
+      end
+    end
   end
 end
