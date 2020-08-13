@@ -36,4 +36,46 @@ describe Importer::EmployeeListing do
     importer.import
     expect(Officer.last.badge).to eql(nil)
   end
+
+  it "doesn't nil field that's already populated" do
+    officer = Officer.create(employee_id: 8511, badge: "LOL")
+    record[:badge] = ""
+    importer.import
+    expect(officer.reload.badge).to eql("LOL")
+  end
+
+  it "removes leading zeros from badge number" do
+    record[:badge] = "0042"
+    importer.import
+    expect(Officer.last.badge).to eql("42")
+  end
+
+  describe "2020 record" do
+    let(:record) {{
+      :empl_id=>"009018",
+      :name=>"Gross,William G.",
+      :percopy_rank=>"00",
+      :rank_rank=>"Comiss",
+      :orgcode=>"10000",
+      :org_description=>"OFFICE OF POLICE COMMISSIONER",
+      :title=>"Commissioner (Bpd)",
+      :badge=>"SUPT",
+      :status=>"A",
+      :asof=>"7/15/20"
+    }}
+
+    it "imports the record" do
+      importer.import
+      officer = Officer.last
+      expect(officer.rank).to eql("comiss")
+      expect(officer.organization).to eql("OFFICE OF POLICE COMMISSIONER")
+      expect(officer.title).to eql("Commissioner (Bpd)")
+    end
+
+    it "doesn't replace existing title" do
+      officer = Officer.create(employee_id: 8511, title: "ROFL")
+      importer.import
+      expect(officer.reload.title).to eql("ROFL")
+    end
+  end
 end

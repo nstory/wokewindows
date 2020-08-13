@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_05_010107) do
+ActiveRecord::Schema.define(version: 2020_08_13_160733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -340,6 +340,8 @@ ActiveRecord::Schema.define(version: 2020_08_05_010107) do
     t.integer "articles_officers_count", default: 0, null: false
     t.integer "ia_score"
     t.integer "earnings_rank"
+    t.string "rank"
+    t.string "organization"
     t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
     t.index ["total"], name: "index_officers_on_total"

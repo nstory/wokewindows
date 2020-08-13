@@ -16,8 +16,22 @@ class Officer < ApplicationRecord
   has_many :articles_officers, dependent: :delete_all
   has_many :articles, through: :articles_officers
 
+  enum rank: {
+    capt: "capt",
+    civili: "civili",
+    comiss: "comiss",
+    depsup: "depsup",
+    det: "det",
+    lieut: "lieut",
+    ltdet: "ltdet",
+    ptl: "ptl",
+    sergt: "sergt",
+    sgtdet: "sgtdet",
+    supt: "supt"
+  }
+
   def bag_of_text_content
-    [name, title, postal, zip_code && zip_code.state, zip_code && zip_code.neighborhood]
+    [name, title, postal, zip_code && zip_code.state, zip_code && zip_code.neighborhood, organization]
   end
 
   def last_name_regexp
