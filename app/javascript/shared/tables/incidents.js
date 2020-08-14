@@ -14,7 +14,11 @@ initDataTable("table.incidents-table", function($table, options) {
       {data: "shooting", render: shooting_renderer},
       {data: "location_of_occurrence", render: location_renderer, orderable: false},
       {data: "offenses", render: offenses_renderer, orderable: false},
-      {data: "officer_journal_name", render: text_renderer}
+      {data: "officer_journal_name", render: text_renderer},
+      {data: "incident_clearance", render: text_renderer},
+      {data: "number_of_victims", render: int_renderer},
+      {data: "number_of_offenders", render: int_renderer},
+      {data: "number_of_arrestees", render: int_renderer},
     ],
     order: [[2, 'desc']]
   });

@@ -34,7 +34,7 @@ class Incident < ApplicationRecord
   counter_culture :officer
 
   def bag_of_text_content
-    [incident_number, district, district_name, location_of_occurrence, street, nature_of_incident, officer_journal_name, offenses.map(&:description).join(" "), ApplicationController.helpers.format_date_time(occurred_on_date)]
+    [incident_number, district, district_name, location_of_occurrence, street, nature_of_incident, officer_journal_name, incident_clearance, offenses.map(&:description).join(" "), nibrs_offenses.map(&:description).join(" "), ApplicationController.helpers.format_date_time(occurred_on_date)]
   end
 
   def arrests=(arr)

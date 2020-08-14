@@ -25,12 +25,24 @@
             <dd class="col-lg-8"><%= format_text(@incident.street) %></dd>
             <dt class="col-lg-4">Location</dt>
             <dd class="col-lg-8"><%= format_array(@incident.location_of_occurrence) %></dd>
+            <dt class="col-lg-4">Location Type</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.location_type) %></dd>
             <dt class="col-lg-4">Nature of Incident</dt>
             <dd class="col-lg-8"><%= format_array(@incident.nature_of_incident) %></dd>
             <dt class="col-lg-4">Lat/Long</dt>
             <dd class="col-lg-8"><%= format_lat_long(@incident.latitude, @incident.longitude) %></dd>
             <dt class="col-lg-4">Officer</dt>
             <dd class="col-lg-8"><%= format_incident_officer(@incident) %></dd>
+            <dt class="col-lg-4">Incident Clearance</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.incident_clearance) %></dd>
+            <dt class="col-lg-4">Exceptional Clearance Date</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.exceptional_clearance_date) %></dd>
+            <dt class="col-lg-4">Number of Victims</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.number_of_victims) %></dd>
+            <dt class="col-lg-4">Number of Offenders</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.number_of_offenders) %></dd>
+            <dt class="col-lg-4">Number of Arrests</dt>
+            <dd class="col-lg-8"><%= format_text(@incident.number_of_arrestees) %></dd>
             <% if !@incident.cases.empty? %>
               <dt class="col-lg-4">Case</dt>
               <dd class="col-lg-8"><%= format_cases(@incident.cases) %></dd>
@@ -42,7 +54,7 @@
           </dl>
         </div>
         <div class="col-md-6">
-            <div style="height:350px" id="incident-map" data-controller="map" data-map-latitude="<%= @incident.latitude %>" data-map-longitude="<%= @incident.longitude %>">
+            <div style="height:450px" id="incident-map" data-controller="map" data-map-latitude="<%= @incident.latitude %>" data-map-longitude="<%= @incident.longitude %>">
               <p class="text-center text-muted font-italic">No latitude/longitude data for this incident</p>
             </div>
             <p class="text-muted font-italic">Map location is sometimes inaccurate; trust the Street &amp; Location fields if there is a discrepancy.</p>
@@ -52,6 +64,7 @@
       <div class="row">
         <div class="col-md">
           <h2>Offenses</h2>
+          <p class="text-muted">As recorded in the BPD's internal record management system.</p>
           <table class="table table-bordered">
             <thead>
               <tr>
@@ -75,6 +88,34 @@
           </table>
         </div>
 
+        <div class="col-md">
+          <h2>NIBRS Offenses</h2>
+          <p class="text-muted">As recorded in the National Incident-Based Reporting System.</p>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>UCR Code</th>
+                <th>Description</th>
+                <th>Completion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @incident.nibrs_offenses.empty? %>
+                <td colspan="3" class="empty-table">NIBRS Offense records not found for this incident.</td>
+              <% end %>
+              <% @incident.nibrs_offenses.each do |offense| %>
+                <tr>
+                  <td><%= format_text(offense.ucr_code) %></td>
+                  <td><%= format_text(offense.description) %></td>
+                  <td><%= format_text(offense.attempted_or_completed) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
         <div class="col-md">
           <h2>Arrests</h2>
           <table class="table table-bordered">

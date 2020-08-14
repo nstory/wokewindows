@@ -6,6 +6,7 @@ class Attribution
   FRIENDLY_MAPPING = {
     "district_journal" => "Public Journal",
     "crime_incident_reports" => "Crime Incident Reports",
+    "nibrs_incident_reports" => "NIBRS Incident Reports",
     "field_contact" => "FIO Records FieldContact Table",
     "field_contact_name" => "FIO Records FieldContact_Name Table",
     "employee_earnings" => "Employee Earnings Report",
