@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_160733) do
+ActiveRecord::Schema.define(version: 2020_08_13_231723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -305,6 +305,13 @@ ActiveRecord::Schema.define(version: 2020_08_13_160733) do
     t.float "geocode_longitude"
     t.float "reported_latitude"
     t.float "reported_longitude"
+    t.jsonb "nibrs_offenses", default: []
+    t.string "location_type"
+    t.string "incident_clearance"
+    t.string "exceptional_clearance_date"
+    t.integer "number_of_victims"
+    t.integer "number_of_offenders"
+    t.integer "number_of_arrestees"
     t.index ["bag_of_text"], name: "incidents_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["incident_number"], name: "index_incidents_on_incident_number", unique: true
     t.index ["occurred_on_date"], name: "index_incidents_on_occurred_on_date"

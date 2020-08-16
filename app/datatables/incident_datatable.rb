@@ -12,6 +12,10 @@ class IncidentDatatable < ApplicationDatatable
       nature_of_incident: {source: "Incident.nature_of_incident", searchable: false},
       offenses: {source: "Incident.offenses", searchable: false, orderable: false},
       officer_journal_name: {source: "Incident.officer_journal_name", searchable: false},
+      incident_clearance: {source: "Incident.incident_clearance", searchable: false},
+      number_of_arrestees: {source: "Incident.number_of_arrestees", searchable: false},
+      number_of_victims: {source: "Incident.number_of_victims", searchable: false},
+      number_of_offenders: {source: "Incident.number_of_offenders", searchable: false},
       bag_of_text: {source: "Incident.bag_of_text", searchable: true, orderable: false}
     }
   end
@@ -29,7 +33,11 @@ class IncidentDatatable < ApplicationDatatable
       street: record.street,
       nature_of_incident: record.nature_of_incident,
       officer_journal_name: record.officer_journal_name,
-      offenses: record.offenses.map(&:description)
+      offenses: record.offenses.map(&:description),
+      incident_clearance: record.incident_clearance,
+      number_of_arrestees: record.number_of_arrestees,
+      number_of_victims: record.number_of_victims,
+      number_of_offenders: record.number_of_offenders
     }
   end
 

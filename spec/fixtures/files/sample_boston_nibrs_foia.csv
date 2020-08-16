@@ -1,0 +1,100 @@
+ORI,Incident Number,Incident Date,Offense Code,Offense Type,Attempted or Completed,Number of Crimes,Number of Victims,Number of Stolen Vehicles,Number of Recovered Vehicles,Location Type,Method of Entry,Number of Premises Entered,Incident Month,Day of Week,Hour of Day,County,Agency Name,Incident Clearance,Exceptional Clearance Date,Number of Offenses in Incident,Number of Victims in Incident,Number of Offenders in Incident,Number of Arrestees in Incident
+MA0130100,192092484,2019-11-15,220,Burglary/Breaking & Entering,Completed,1,3,0,0,Residence/Home,Forced Entry,0,November,Friday,8:00am-8:59am,Suffolk County,Boston,Not Cleared,,1,3,1,0
+MA0130100,192093419,2019-10-30,23F,Theft From Motor Vehicle,Completed,1,1,0,0,Residence/Home,Missing,0,October,Wednesday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192081426,2019-10-04,26C,Impersonation,Completed,1,1,0,0,Residence/Home,Missing,0,October,Friday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,2,1,2,0
+MA0130100,192091264,2019-11-10,23D,Theft From Building,Completed,1,1,0,0,Department/Discount Store,Missing,0,November,Sunday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192083612,2019-10-15,120,Robbery,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Tuesday,9:00pm-9:59pm,Suffolk County,Boston,Not Cleared,,1,1,2,0
+MA0130100,192103097,2019-12-18,23H,All Other Larceny,Completed,1,1,0,0,Residence/Home,Missing,0,December,Wednesday,6:00pm-6:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192084911,2019-10-20,23H,All Other Larceny,Completed,1,1,0,0,Commercial/Office Building,Missing,0,October,Sunday,2:00am-2:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,202014197,2019-11-03,13C,Intimidation,Completed,1,1,0,0,Residence/Home,Missing,0,November,Sunday,12:00n-12:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192082137,2019-10-08,26C,Impersonation,Completed,1,1,0,0,Residence/Home,Missing,0,October,Tuesday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192081595,2019-10-08,520,Weapon Law Violations,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Tuesday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192104577,2019-12-27,23H,All Other Larceny,Completed,1,1,0,0,Residence/Home,Missing,0,December,Friday,3:00am-3:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192101595,2019-12-17,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,December,Tuesday,9:00pm-9:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192096352,2019-11-28,13A,Aggravated Assault,Completed,1,1,0,0,Residence/Home,Missing,0,November,Thursday,9:00pm-9:59pm,Suffolk County,Boston,Cleared by Arrest,,1,1,1,1
+MA0130100,192097342,2019-12-03,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,December,Tuesday,2:00am-2:59am,Suffolk County,Boston,Cleared by Arrest,,1,1,1,1
+MA0130100,192082823,2019-10-13,13B,Simple Assault,Completed,1,1,0,0,Bar/Nightclub,Missing,0,October,Sunday,2:00am-2:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192093997,2019-11-20,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,November,Wednesday,1:00pm-1:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192093388,2019-11-18,35B,Drug Equipment Violations,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,November,Monday,1:00pm-1:59pm,Suffolk County,Boston,Not Cleared,,2,1,3,0
+MA0130100,192092422,2019-11-14,13B,Simple Assault,Completed,2,2,0,0,Restaurant,Missing,0,November,Thursday,11:00pm-11:59pm,Suffolk County,Boston,Not Cleared,,1,2,1,0
+MA0130100,192100185,2019-12-13,13A,Aggravated Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,December,Friday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192093083,2019-11-17,120,Robbery,Completed,1,1,0,0,Residence/Home,Missing,0,November,Sunday,9:00am-9:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192094447,2019-11-21,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,November,Thursday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192092587,2019-11-15,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,November,Friday,1:00pm-1:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,202001776,2019-12-12,13B,Simple Assault,Completed,1,1,0,0,School – Elementary/Secondary,Missing,0,December,Thursday,9:00am-9:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192079712,2019-10-02,26B,Credit Card/Automatic Teller Fraud,Completed,1,1,0,0,Restaurant,Missing,0,October,Wednesday,9:00am-9:59am,Suffolk County,Boston,Not Cleared,,2,1,2,0
+MA0130100,192088528,2019-11-01,13A,Aggravated Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,November,Friday,11:00am-11:59am,Suffolk County,Boston,Cleared by Arrest,,1,1,1,1
+MA0130100,192099213,2019-12-07,23F,Theft From Motor Vehicle,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,December,Saturday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192099736,2019-12-11,13B,Simple Assault,Completed,1,1,0,0,Convenience Store,Missing,0,December,Wednesday,2:00pm-2:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192099460,2019-12-10,26B,Credit Card/Automatic Teller Fraud,Completed,1,1,0,0,Restaurant,Missing,0,December,Tuesday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,2,1,2,0
+MA0130100,192095709,2019-11-26,26B,Credit Card/Automatic Teller Fraud,Completed,1,1,0,0,Residence/Home,Missing,0,November,Tuesday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192101010,2019-12-15,13B,Simple Assault,Completed,3,3,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,December,Sunday,10:00pm-10:59pm,Suffolk County,Boston,Cleared by Arrest,,1,3,1,1
+MA0130100,192102028,2019-11-15,23H,All Other Larceny,Completed,1,1,0,0,Residence/Home,Missing,0,November,Friday,8:00am-8:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192099762,2019-12-11,23H,All Other Larceny,Completed,1,2,0,0,Other/Unknown,Missing,0,December,Wednesday,4:00pm-4:59pm,Suffolk County,Boston,Not Cleared,,2,2,1,0
+MA0130100,192080429,2019-10-04,23H,All Other Larceny,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Friday,6:00pm-6:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192091052,2019-11-10,13A,Aggravated Assault,Completed,1,1,0,0,Bar/Nightclub,Missing,0,November,Sunday,1:00am-1:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192094634,2019-11-20,23D,Theft From Building,Completed,1,1,0,0,Residence/Home,Missing,0,November,Wednesday,2:00pm-2:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192098622,2019-12-07,13C,Intimidation,Completed,1,1,0,0,Residence/Home,Missing,0,December,Saturday,4:00pm-4:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192086286,2019-10-24,290,Destruction/Damage/Vandalism of Property,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Thursday,4:00pm-4:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192083066,2019-10-14,120,Robbery,Attempted,1,1,0,0,Other/Unknown,Missing,0,October,Monday,1:00am-1:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192090594,2019-11-04,23F,Theft From Motor Vehicle,Completed,1,1,0,0,Parking/Drop Lot/Garage,Missing,0,November,Monday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192092055,2019-11-13,23D,Theft From Building,Completed,1,1,0,0,Other/Unknown,Missing,0,November,Wednesday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192089078,2019-11-02,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,November,Saturday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192102502,2019-12-21,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,December,Saturday,1:00am-1:59am,Suffolk County,Boston,Cleared by Arrest,,1,1,1,1
+MA0130100,192100332,2019-12-13,13A,Aggravated Assault,Completed,1,1,0,0,School – Elementary/Secondary,Missing,0,December,Friday,10:00am-10:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192092097,2019-11-13,11D,Fondling,Completed,1,1,0,0,Convenience Store,Missing,0,November,Wednesday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192095011,2019-11-23,13A,Aggravated Assault,Completed,1,1,0,0,Community Center,Missing,0,November,Saturday,10:00pm-10:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192098901,2019-12-08,26A,False Pretenses/Swindle/Confidence Game,Completed,1,1,0,0,Auto Dealership New/Used,Missing,0,December,Sunday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192100721,2019-12-14,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,December,Saturday,5:00pm-5:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192097579,2019-12-04,23C,Shoplifting,Completed,1,1,0,0,Convenience Store,Missing,0,December,Wednesday,2:00am-2:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192092011,2019-11-13,13B,Simple Assault,Completed,1,1,0,0,Department/Discount Store,Missing,0,November,Wednesday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192088726,2019-11-01,13B,Simple Assault,Completed,1,1,0,0,Other/Unknown,Missing,0,November,Friday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192080996,2019-10-07,13A,Aggravated Assault,Completed,1,1,0,0,Residence/Home,Missing,0,October,Monday,5:00am-5:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192091542,2019-11-11,13B,Simple Assault,Completed,1,1,0,0,Restaurant,Missing,0,November,Monday,7:00pm-7:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192095825,2019-11-26,13A,Aggravated Assault,Completed,1,1,0,0,Residence/Home,Missing,0,November,Tuesday,6:00pm-6:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192101944,2019-12-19,23C,Shoplifting,Completed,1,1,0,0,Drug Store/Doctor’s Office/Hospital,Missing,0,December,Thursday,7:00am-7:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192086704,2019-10-26,13B,Simple Assault,Completed,2,2,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Saturday,2:00am-2:59am,Suffolk County,Boston,Not Cleared,,1,2,1,0
+MA0130100,192088569,2019-11-01,11A,Rape,Completed,1,1,0,0,Residence/Home,Missing,0,November,Friday,12:00n-12:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192091525,2019-11-10,26B,Credit Card/Automatic Teller Fraud,Completed,1,1,0,0,Residence/Home,Missing,0,November,Sunday,3:00am-3:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192098279,2019-12-06,13B,Simple Assault,Completed,3,3,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,December,Friday,11:00am-11:59am,Suffolk County,Boston,Not Cleared,,1,3,1,0
+MA0130100,192098340,2019-12-06,23D,Theft From Building,Completed,1,1,0,0,Residence/Home,Missing,0,December,Friday,1:00pm-1:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192091035,2019-11-10,280,Stolen Property Offenses,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,November,Sunday,12:00am-12:59am,Suffolk County,Boston,Cleared by Arrest,,1,1,1,1
+MA0130100,192082749,2019-10-12,23C,Shoplifting,Completed,1,1,0,0,Commercial/Office Building,Missing,0,October,Saturday,7:00pm-7:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192087399,2019-10-26,23F,Theft From Motor Vehicle,Completed,1,2,0,0,Residence/Home,Missing,0,October,Saturday,10:00pm-10:59pm,Suffolk County,Boston,Not Cleared,,1,2,1,0
+MA0130100,192103375,2019-12-24,23A,Pocket-picking,Completed,1,1,0,0,Grocery/Supermarket,Missing,0,December,Tuesday,12:00n-12:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192091315,2019-11-11,220,Burglary/Breaking & Entering,Completed,1,2,0,0,Hotel/Motel/Etc.,Non-Forced Entry,1,November,Monday,3:00am-3:59am,Suffolk County,Boston,Not Cleared,,2,2,1,0
+MA0130100,192104713,2019-12-30,13C,Intimidation,Completed,1,1,0,0,Shelter – Mission/Homeless,Missing,0,December,Monday,10:00am-10:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192092873,2019-10-01,23H,All Other Larceny,Completed,1,1,0,0,Residence/Home,Missing,0,October,Tuesday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,2,0
+MA0130100,192104930,2019-10-16,13C,Intimidation,Completed,1,1,0,0,Residence/Home,Missing,0,October,Wednesday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192093822,2019-11-19,13B,Simple Assault,Completed,1,1,0,0,Residence/Home,Missing,0,November,Tuesday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192093564,2019-11-16,13B,Simple Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,November,Saturday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192084528,2019-10-18,13B,Simple Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Friday,4:00pm-4:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192094776,2019-11-23,13A,Aggravated Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,November,Saturday,1:00am-1:59am,Suffolk County,Boston,Cleared by Arrest,,1,1,1,1
+MA0130100,190556958,2019-10-15,26B,Credit Card/Automatic Teller Fraud,Completed,1,1,0,0,Residence/Home,Missing,0,October,Tuesday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192082413,2019-10-11,23H,All Other Larceny,Completed,1,1,0,0,Residence/Home,Missing,0,October,Friday,3:00am-3:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,202002370,2019-12-31,26E,Wire Fraud,Completed,1,1,0,0,Residence/Home,Missing,0,December,Tuesday,12:00am-12:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192092027,2019-11-13,13B,Simple Assault,Completed,1,1,0,0,Parking/Drop Lot/Garage,Missing,0,November,Wednesday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192082891,2019-10-12,23F,Theft From Motor Vehicle,Completed,1,1,0,0,Other/Unknown,Missing,0,October,Saturday,5:00pm-5:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192091666,2019-11-12,13B,Simple Assault,Completed,1,1,0,0,Grocery/Supermarket,Missing,0,November,Tuesday,11:00am-11:59am,Suffolk County,Boston,Cleared by Arrest,,1,1,1,1
+MA0130100,192085409,2019-10-21,13A,Aggravated Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Monday,9:00pm-9:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192081600,2019-10-08,23C,Shoplifting,Completed,1,1,0,0,Liquor Store,Missing,0,October,Tuesday,8:00pm-8:59pm,Suffolk County,Boston,Not Cleared,,1,1,2,0
+MA0130100,192093690,2019-11-19,26A,False Pretenses/Swindle/Confidence Game,Attempted,1,1,0,0,Shopping Mall,Missing,0,November,Tuesday,2:00pm-2:59pm,Suffolk County,Boston,Cleared by Arrest,,2,2,1,1
+MA0130100,192084506,2019-10-18,35A,Drug/Narcotic Violations,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Friday,2:00pm-2:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192086854,2019-10-26,23D,Theft From Building,Completed,1,1,0,0,Other/Unknown,Missing,0,October,Saturday,2:00pm-2:59pm,Suffolk County,Boston,Not Cleared,,2,1,1,0
+MA0130100,192096515,2019-11-29,13B,Simple Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,November,Friday,4:00am-4:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192099191,2019-12-09,13A,Aggravated Assault,Completed,1,1,0,0,Convenience Store,Missing,0,December,Monday,6:00pm-6:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192100227,2019-12-12,13C,Intimidation,Completed,1,1,0,0,Residence/Home,Missing,0,December,Thursday,4:00pm-4:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192095706,2019-11-16,13C,Intimidation,Completed,2,2,0,0,Rental Storage Facility,Missing,0,November,Saturday,2:00pm-2:59pm,Suffolk County,Boston,Not Cleared,,1,2,1,0
+MA0130100,192092919,2019-11-16,13B,Simple Assault,Completed,1,1,0,0,Government/Public Building,Missing,0,November,Saturday,4:00pm-4:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192098606,2019-12-07,23C,Shoplifting,Completed,1,1,0,0,Department/Discount Store,Missing,0,December,Saturday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192083216,2019-10-12,23D,Theft From Building,Completed,1,1,0,0,Residence/Home,Missing,0,October,Saturday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192091432,2019-11-11,35A,Drug/Narcotic Violations,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,November,Monday,1:00pm-1:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192085267,2019-10-21,13B,Simple Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Monday,12:00n-12:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192104693,2019-12-30,13C,Intimidation,Completed,1,1,0,0,Shopping Mall,Missing,0,December,Monday,9:00am-9:59am,Suffolk County,Boston,Not Cleared,,2,2,1,0
+MA0130100,192085376,2019-10-21,13C,Intimidation,Completed,1,1,0,0,Residence/Home,Missing,0,October,Monday,4:00pm-4:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192097453,2019-12-03,23C,Shoplifting,Attempted,1,1,0,0,Department/Discount Store,Missing,0,December,Tuesday,3:00pm-3:59pm,Suffolk County,Boston,Not Cleared,,2,2,1,0
+MA0130100,202002532,2019-12-14,26E,Wire Fraud,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,December,Saturday,1:00am-1:59am,Suffolk County,Boston,Not Cleared,,2,1,2,0
+MA0130100,192102498,2019-12-21,13B,Simple Assault,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,December,Saturday,1:00am-1:59am,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192084238,2019-10-17,13C,Intimidation,Completed,1,1,0,0,Residence/Home,Missing,0,October,Thursday,9:00pm-9:59pm,Suffolk County,Boston,Cleared by Arrest,,2,2,1,1
+MA0130100,192100091,2019-12-09,23H,All Other Larceny,Completed,1,1,0,0,Residence/Home,Missing,0,December,Monday,2:00pm-2:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0
+MA0130100,192080570,2019-10-01,290,Destruction/Damage/Vandalism of Property,Completed,1,1,0,0,Highway/Road/Alley/Street/Sidewalk,Missing,0,October,Tuesday,11:00pm-11:59pm,Suffolk County,Boston,Not Cleared,,1,1,1,0

@@ -40,6 +40,20 @@ describe Importer::CrimeIncidentReports do
     xstreetname: "",
     location: "(42.31684135, -71.07458456)"
   }}
+  let(:nibrs_record) {{
+    incident_number: "192092484",
+    offense_code: "220",
+    offense_type: "Burglary/Breaking & Entering",
+    attempted_or_completed: "Completed",
+    number_of_victims: 1,
+    method_of_entry: 'Forced Entry',
+    location_type: "Residence/Home",
+    incident_clearance: "Not Cleared",
+    exceptional_clearance_date: "2019-10-30",
+    number_of_victims_in_incident: 1,
+    number_of_offenders_in_incident: 2,
+    number_of_arrestees_in_incident: 0
+  }}
   let(:records) { [record] }
   let(:attribution) { Attribution.new filename: "a", category: "b", url: "c" }
   let(:parser) { mock_parser(records, attribution) }
@@ -152,6 +166,36 @@ describe Importer::CrimeIncidentReports do
       legacy_record[:incident_number] = ""
       importer.import
       expect(Incident.count).to eql(0)
+    end
+  end
+
+  describe "importing an NIBRS record" do
+    let(:records) { [nibrs_record] }
+    let(:attribution) { Attribution.new filename: "a", category: "nibrs_incident_reports", url: "c" }
+    it "imports nibrs records" do
+      record2 = nibrs_record.dup
+      record2.merge!({
+          offense_code: "26C",
+          offense_type: "Impersonation"
+      })
+      records.push(record2)
+
+      importer.import
+
+      inc = Incident.first
+      expect(inc.incident_number).to eql(192092484)
+      expect(inc.location_type).to eql("Residence/Home")
+      expect(inc.incident_clearance).to eql("Not Cleared")
+      expect(inc.number_of_victims).to eql(1)
+      expect(inc.number_of_offenders).to eql(2)
+      expect(inc.number_of_arrestees).to eql(0)
+      expect(inc.nibrs_offenses.count).to eql(2)
+      offense = inc.nibrs_offenses.find { |o| o.ucr_code == "26C"}
+      expect(offense).not_to be_nil
+      expect(offense.description).to eql("Impersonation")
+      expect(offense.attempted_or_completed).to eql("Completed")
+      expect(offense.number_of_victims).to eql(1)
+      expect(offense.method_of_entry).to eql("Forced Entry")
     end
   end
 end
