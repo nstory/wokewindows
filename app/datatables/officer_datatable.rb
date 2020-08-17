@@ -4,8 +4,10 @@ class OfficerDatatable < ApplicationDatatable
     # or in aliased_join_table.column_name format
     @view_columns ||= {
       employee_id: {source: "Officer.employee_id", cond: :eq},
+      badge: {source: "Officer.badge", searchable: false},
       name: {source: "Officer.hr_name", searchable: false},
       title: {source: "Officer.title", searchable: false},
+      organization: {source: "Officer.organization", searchable: false},
       doa: {source: "Officer.doa", searchable: false},
       regular: {source: "Officer.regular", searchable: false, nulls_last: true},
       retro: {source: "Officer.retro", searchable: false, nulls_last: true},
@@ -33,8 +35,10 @@ class OfficerDatatable < ApplicationDatatable
     {
       url: officer_url(record),
       employee_id: record.employee_id,
+      badge: record.badge,
       name: record.name,
       title: record.title,
+      organization: record.organization,
       doa: record.doa,
       total: record.total,
       regular: record.regular,
@@ -61,5 +65,4 @@ class OfficerDatatable < ApplicationDatatable
   def get_raw_records
     Officer.includes(:zip_code, :articles_officers).references(:zip_code).distinct
   end
-
 end

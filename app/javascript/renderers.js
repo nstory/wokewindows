@@ -1,4 +1,5 @@
 import escape from "lodash/escape";
+import startCase from "lodash/startCase";
 import moment from "moment";
 
 export function unknown() {
@@ -131,3 +132,14 @@ export function url_renderer(r) {
     return `<a href="${row.url}">${r(data, type, row)}</a>`;
   };
 }
+
+export function title_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (!data) {
+    return unknown();
+  }
+  return startCase(data.toLowerCase());
+}
+

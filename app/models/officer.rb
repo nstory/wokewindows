@@ -31,7 +31,7 @@ class Officer < ApplicationRecord
   }
 
   def bag_of_text_content
-    [name, title, postal, zip_code && zip_code.state, zip_code && zip_code.neighborhood, organization]
+    [name, title, postal, zip_code && zip_code.state, zip_code && zip_code.neighborhood, organization, badge]
   end
 
   def last_name_regexp
