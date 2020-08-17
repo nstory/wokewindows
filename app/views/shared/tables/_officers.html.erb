@@ -4,14 +4,16 @@
   path: ->(params) { datatable_officers_path(params) }
 }.merge(local_assigns) do %>
 <tr>
-  <th colspan="7">Employee Info</th>
+  <th colspan="9">Employee Info</th>
   <th colspan="7">Activity</th>
   <th colspan="8">Earnings (2019)</th>
 </tr>
 <tr>
   <th scope="col">Emp #</th>
+  <th scope="col">Badge</th>
   <th scope="col">Name</th>
   <th scope="col">Title</th>
+  <th scope="col">Organization</th>
   <th scope="col">Start Date</th>
   <th scope="col">Zip</th>
   <th scope="col">State</th>

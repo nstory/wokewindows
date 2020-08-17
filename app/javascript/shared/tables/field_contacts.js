@@ -1,5 +1,4 @@
-import startCase from "lodash/startCase";
-import {date_time_renderer, int_renderer, see_more_renderer, text_renderer, unknown, yes_no_renderer,  zip_renderer} from "renderers";
+import {date_time_renderer, int_renderer, see_more_renderer, text_renderer, title_renderer, unknown, yes_no_renderer,  zip_renderer} from "renderers";
 import {initDataTable} from "shared/tables/common";
 
 initDataTable("table.field-contacts-table", function($table, options) {
@@ -43,16 +42,6 @@ function fc_num_renderer(data, type, row) {
     return "";
   }
   return `<a href="${row.url}">${escape(data)}</a>`;
-}
-
-function title_renderer(data, type, row) {
-  if (type != "display") {
-    return data;
-  }
-  if (!data) {
-    return unknown();
-  }
-  return startCase(data);
 }
 
 function uppercase_renderer(data, type, row) {

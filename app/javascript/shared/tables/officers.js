@@ -1,5 +1,6 @@
 import escape from "lodash/escape";
-import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer, text_renderer, unknown} from "renderers";
+import padStart from "lodash/padStart";
+import {int_renderer, employee_id_renderer, employee_name_renderer, earnings_renderer, date_renderer, zip_renderer, text_renderer, title_renderer, unknown} from "renderers";
 import {initDataTable} from "shared/tables/common";
 
 initDataTable("table.officers-table", function($table, options) {
@@ -7,8 +8,10 @@ initDataTable("table.officers-table", function($table, options) {
     ...options,
     columns: [
       {data: "employee_id", render: employee_id_renderer},
+      {data: "badge", render: badge_renderer, orderable: false},
       {data: "name", render: employee_name_renderer},
       {data: "title", render: text_renderer},
+      {data: "organization", render: title_renderer},
       {data: "doa", render: date_renderer},
       {data: "postal", render: zip_renderer},
       {data: "state", render: text_renderer},
@@ -29,9 +32,22 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "detail", render: earnings_renderer},
       {data: "quinn", render: earnings_renderer},
     ],
-    order: [[14, 'desc']]
+    order: [[16, 'desc']]
   });
 });
+
+function badge_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return unknown();
+  }
+  if (/^\d+$/.test(data)) {
+    data = padStart(data, 5, "0");
+  }
+  return data;
+}
 
 function ia_score_renderer(data, type, row) {
   if (type != "display") {
