@@ -1,4 +1,5 @@
 <% @layout_application_title = "Paid Detail #{ @detail.tracking_no }" %>
+<% @layout_application_description = "Boston Police Officer #{format_titleize(@detail.employee_name)} worked this paid detail for #{format_titleize(@detail.customer_name)} on #{format_date(@detail.start_date_time)}. View more info about Paid Detail ##{@detail.tracking_no} here." %>
 
 <div class="container">
   <div class="row">
