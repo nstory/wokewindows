@@ -66,6 +66,7 @@ module ApplicationHelper
   end
 
   def format_currency_dollars(amount)
+    return format_unkown if amount == nil
     format_currency(amount)[0...-3]
   end
 
