@@ -65,6 +65,10 @@ module ApplicationHelper
     number_to_currency(amount)
   end
 
+  def format_currency_dollars(amount)
+    format_currency(amount)[0...-3]
+  end
+
   def contact_us(text = nil)
     email = "n"+"s"+"t"+"ory@wokewindows.org"
     text ||= email
