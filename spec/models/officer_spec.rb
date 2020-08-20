@@ -137,4 +137,11 @@ describe Officer do
       })
     end
   end
+
+  describe "#to_param" do
+    it "returns a URL slug based on an officer's employee_id and name" do
+      o = Officer.create({employee_id: 1234, hr_name: 'Bar,Foo P'})
+      expect(o.to_param).to eql('1234-foo-p-bar')
+    end
+  end
 end
