@@ -5,7 +5,7 @@ describe "Officers" do
     let!(:officer) { create(:officer) }
     let!(:officer_kirk) { create(:officer_kirk) }
 
-    it "redirects to a when only an employee_id is provided" do
+    it "redirects to full officer_path when only an officer's employee_id is provided" do
       visit "/officers/#{officer.employee_id}"
       expect(page).to have_current_path(officer_path(officer))
     end
