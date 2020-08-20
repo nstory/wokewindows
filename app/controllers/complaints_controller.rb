@@ -9,6 +9,6 @@ class ComplaintsController < ApplicationController
   end
 
   def show
-    @complaint = Complaint.find_by(ia_number: params[:id])
+    @complaint = Complaint.find_by!(ia_number: params[:id])
   end
 end

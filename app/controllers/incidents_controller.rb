@@ -9,6 +9,6 @@ class IncidentsController < ApplicationController
   end
 
   def show
-    @incident = Incident.find_by incident_number: params[:id]
+    @incident = Incident.find_by!(incident_number: params[:id])
   end
 end
