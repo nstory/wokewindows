@@ -113,9 +113,10 @@ class Officer < ApplicationRecord
     if t then "#{t} #{n}" else n end
   end
 
-  # use employee_id for resource urls
+  # use employee_id + first_name_last for resource urls
   def to_param
-    employee_id.to_s
+    slug = "#{employee_id} #{first_name_last}"
+    slug.parameterize
   end
 
   def calculate_ia_score
