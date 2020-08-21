@@ -348,6 +348,7 @@ DEPENDENCIES
   counter_culture (~> 2.5.1)
   dotenv-rails (= 2.7.5)
   factory_bot_rails (~> 6.1.0)
+  faraday (~> 1.0.1)
   geocoder (= 1.6.3)
   high_voltage (~> 3.1.2)
   httparty (~> 0.18.1)

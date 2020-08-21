@@ -43,6 +43,7 @@ gem 'clearance', '~> 2.2.0'
 gem 'httparty', '~> 0.18.1'
 gem 'sitemap_generator', '6.1.2'
 gem 'factory_bot_rails', '~> 6.1.0'
+gem 'faraday', '~> 1.0.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -17,5 +17,6 @@ module Copsonrails
     # the framework and any gems in your application.
 
     config.site_password = ENV['SITE_PASSWORD']
+    config.court_listener_token = ENV['COURT_LISTENER_TOKEN']
   end
 end
