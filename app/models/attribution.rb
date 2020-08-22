@@ -18,7 +18,8 @@ class Attribution
     "swat" => "SWAT Reports",
     "detail_records" => "Detail Records 2019",
     "2019_tickets" => "2019 Traffic Tickets",
-    "bpd_fio_data" => "BPD FIO Data"
+    "bpd_fio_data" => "BPD FIO Data",
+    "alpha_listing_20200715" => "2020 Alpha Listing"
   }
 
   attr_accessor :filename, :category, :url
