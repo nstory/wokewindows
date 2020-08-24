@@ -52,7 +52,9 @@ describe Importer::CrimeIncidentReports do
     exceptional_clearance_date: "2019-10-30",
     number_of_victims_in_incident: 1,
     number_of_offenders_in_incident: 2,
-    number_of_arrestees_in_incident: 0
+    number_of_arrestees_in_incident: 0,
+    incident_date: "2019-11-15",
+    hour_of_day: "8:00am-8:59am"
   }}
   let(:records) { [record] }
   let(:attribution) { Attribution.new filename: "a", category: "b", url: "c" }
@@ -190,6 +192,7 @@ describe Importer::CrimeIncidentReports do
       expect(inc.number_of_offenders).to eql(2)
       expect(inc.number_of_arrestees).to eql(0)
       expect(inc.nibrs_offenses.count).to eql(2)
+      expect(inc.occurred_on_date).to eql("2019-11-15 08:00:00")
       offense = inc.nibrs_offenses.find { |o| o.ucr_code == "26C"}
       expect(offense).not_to be_nil
       expect(offense.description).to eql("Impersonation")

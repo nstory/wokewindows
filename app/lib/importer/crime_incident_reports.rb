@@ -78,7 +78,33 @@ class Importer::CrimeIncidentReports < Importer::Importer
     )
   end
 
-  private
+  def map_nibrs_record(record)
+    {
+      incident_number: parse_incident_number(record[:incident_number]),
+      occurred_on_date: parse_nibrs_date(record[:incident_date], record[:hour_of_day]),
+      location_type: parse_string(record[:location_type]),
+      incident_clearance: parse_string(record[:incident_clearance]),
+      exceptional_clearance_date: parse_string(record[:exceptional_clearance_date]),
+      number_of_victims: parse_int(record[:number_of_victims_in_incident]),
+      number_of_offenders: parse_int(record[:number_of_offenders_in_incident]),
+      number_of_arrestees: parse_int(record[:number_of_arrestees_in_incident])
+    }
+  end
+
+  def map_nibrs_offense(record)
+    mapped_offense = NibrsOffense.new(
+        ucr_code: parse_string(record[:offense_code]),
+        description: parse_string(record[:offense_type]),
+        attempted_or_completed: parse_string(record[:attempted_or_completed]),
+        number_of_crimes: parse_int(record[:number_of_crimes]),
+        number_of_victims: parse_int(record[:number_of_victims]),
+        number_of_stolen_vehicles: parse_int(record[:number_of_stolen_vehicles]),
+        number_of_recovered_vehicles: parse_int(record[:number_of_recovered_vehicles]),
+        method_of_entry: parse_string(record[:method_of_entry]),
+        number_of_premises_entered: parse_int(record[:number_of_premises_entered])
+    )
+  end
+
   def parse_boolean(b)
     ["1", "Y", "Yes"].include?(b)
   end
@@ -92,31 +118,9 @@ class Importer::CrimeIncidentReports < Importer::Importer
     h
   end
 
-  private
-  def map_nibrs_record(record)
-    {
-      incident_number: parse_incident_number(record[:incident_number]),
-      location_type: parse_string(record[:location_type]),
-      incident_clearance: parse_string(record[:incident_clearance]),
-      exceptional_clearance_date: parse_string(record[:exceptional_clearance_date]),
-      number_of_victims: parse_int(record[:number_of_victims_in_incident]),
-      number_of_offenders: parse_int(record[:number_of_offenders_in_incident]),
-      number_of_arrestees: parse_int(record[:number_of_arrestees_in_incident])
-    }
-  end
-
-  private
-  def map_nibrs_offense(record)
-    mapped_offense = NibrsOffense.new(
-        ucr_code: parse_string(record[:offense_code]),
-        description: parse_string(record[:offense_type]),
-        attempted_or_completed: parse_string(record[:attempted_or_completed]),
-        number_of_crimes: parse_int(record[:number_of_crimes]),
-        number_of_victims: parse_int(record[:number_of_victims]),
-        number_of_stolen_vehicles: parse_int(record[:number_of_stolen_vehicles]),
-        number_of_recovered_vehicles: parse_int(record[:number_of_recovered_vehicles]),
-        method_of_entry: parse_string(record[:method_of_entry]),
-        number_of_premises_entered: parse_int(record[:number_of_premises_entered])
-    )
+  def parse_nibrs_date(date, hour_of_day)
+    time = hour_of_day == "Unknown" ? "" : hour_of_day.sub(/-.*/, "")
+    t = Chronic.parse("#{date} #{time}")
+    t ? t.strftime("%F %T") : nil
   end
 end
