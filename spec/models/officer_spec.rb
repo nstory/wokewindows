@@ -61,6 +61,14 @@ describe Officer do
     it "other title" do
       expect(Officer.new({hr_name: "Foo,Bar", title: "dsf"}).name_with_title).to eql("Bar Foo")
     end
+
+    it "deputy sup" do
+      expect(Officer.new({hr_name: "Foo,Bar", title: "Dep Supn (Bpd)"}).name_with_title).to eql("Deputy Supt. Bar Foo")
+    end
+
+    it "superintendent" do
+      expect(Officer.new({hr_name: "Foo,Bar", title: "Supn Bpd"}).name_with_title).to eql("Supt. Bar Foo")
+    end
   end
 
   describe ".articles_officers_to_review_count" do

@@ -5,23 +5,37 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-9">
-      <h1><%= @officer.name %></h1>
-      <dl class="row">
-        <dt class="officer__dt">Department:</dt>
-        <dd class="officer__dd">Boston Police Department</dt>
-        <dt class="officer__dt">Organization:</dt>
-        <dd class="officer__dd"><%= format_titleize(@officer.organization) %></dt>
-        <dt class="officer__dt">Title:</dt>
-        <dd class="officer__dd"><%= format_text(@officer.title) %></dt>
-        <dt class="officer__dt" title="Employee #">Emp #:</dt>
-        <dd class="officer__dd"><%= @officer.employee_id %></dt>
-        <dt class="officer__dt">Badge:</dt>
-        <dd class="officer__dd"><%= format_text(@officer.badge) %></dt>
-        <dt class="officer__dt">Start Date:</dt>
-        <dd class="officer__dd"><%= format_date @officer.doa %></dt>
-        <dt class="officer__dt">Home:</dt>
-        <dd class="officer__dd"><%= format_zip(@officer.postal) %> <%= format_neighborhood(@officer.zip_code) %></dt>
-      </dl>
+      <h1><%= @officer.name_with_title %></h1>
+      <div class="scorecard">
+        <dl class="scorecard-pair col-sm-3 col-xl-2">
+          <dt class="scorecard-label">Department</dt>
+          <dd class="scorecard-value">Boston Police</dd>
+        </dl>
+        <dl class="scorecard-pair col-sm-9 col-xl-5">
+          <dt class="scorecard-label">Organization</dt>
+          <dd class="scorecard-value"><%= format_titleize(@officer.organization) %></dd>
+        </dl>
+        <dl class="scorecard-pair col-sm-12 col-xl-5">
+          <dt class="scorecard-label">Title</dt>
+          <dd class="scorecard-value"><%= format_text(@officer.title) %></dd>
+        </dl>
+        <dl class="scorecard-pair col-sm-3 col-xl-2">
+          <dt class="scorecard-label">Employee #</dt>
+          <dd class="scorecard-value"><%= format_text(@officer.employee_id) %></dd>
+        </dl>
+        <dl class="scorecard-pair col-sm-4 col-xl-2">
+          <dt class="scorecard-label">Badge</dt>
+          <dd class="scorecard-value"><%= format_text(@officer.badge) %></dd>
+        </dl>
+        <dl class="scorecard-pair col-sm-4 col-xl-3">
+          <dt class="scorecard-label">Start Date</dt>
+          <dd class="scorecard-value"><%= format_date @officer.doa %></dd>
+        </dl>
+        <dl class="scorecard-pair col-sm-12 col-xl-5">
+          <dt class="scorecard-label">Residence</dt>
+          <dd class="scorecard-value"><%= format_residence(@officer.zip_code) %></dd>
+        </dl>
+      </div>
     </div>
     <div class="col-lg-3">
       <ul class="list-unstyled mt-2">

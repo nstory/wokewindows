@@ -105,7 +105,9 @@ class Officer < ApplicationRecord
         when /^Police Captain/
           "Captain"
         when /^Dep Supn/
-          "Deputy Superintendent"
+          "Deputy Supt."
+        when /^Supn/
+          "Supt."
         else
           nil
         end
