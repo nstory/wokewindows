@@ -12,7 +12,8 @@ describe Importer::EmployeeListing do
   let(:records) { [record] }
   let(:attribution) { Attribution.new filename: "a", category: "b", url: nil }
   let(:parser) { mock_parser(records, attribution) }
-  let(:importer) { Importer::EmployeeListing.new(parser) }
+  let(:set_active) { false }
+  let(:importer) { Importer::EmployeeListing.new(parser, set_active) }
 
   it "imports a record" do
     importer.import
@@ -48,6 +49,15 @@ describe Importer::EmployeeListing do
     record[:badge] = "0042"
     importer.import
     expect(Officer.last.badge).to eql("42")
+  end
+
+  describe "set_active=true" do
+    let(:set_active) { true }
+    it "sets active flag on existing record" do
+      officer = Officer.create(employee_id: 8511, hr_name: "Rofl,LOL")
+      importer.import
+      expect(officer.reload.active).to eql(true)
+    end
   end
 
   describe "2020 record" do

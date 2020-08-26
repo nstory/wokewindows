@@ -11,6 +11,7 @@ class Populater::OfficersFromIncidents
         if nil == officer.journal_name
           officer.employee_id = employee_id
           officer.journal_name = employee_name
+          officer.active = true
           officer.save
         end
       end

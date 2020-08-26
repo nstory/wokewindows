@@ -4,7 +4,10 @@ describe Populater::OfficersFromIncidents do
 
   it "imports an officer" do
     Populater::OfficersFromIncidents.populate
-    expect(Officer.find_by(employee_id: 14000).journal_name).to eql("LOL ROFL")
+    officer = Officer.last
+    expect(officer.employee_id).to eql(14000)
+    expect(officer.journal_name).to eql("LOL ROFL")
+    expect(officer.active).to eql(true)
   end
 
   it "doesn't import twice" do
@@ -42,5 +45,13 @@ describe Populater::OfficersFromIncidents do
     Incident.create(incident_number: 7, officer_journal_name:  "014000  LOL ROFL")
     Populater::OfficersFromIncidents.populate
     expect(Officer.find_by(employee_id: 14000).journal_name).to eql("MOST POPULAR")
+  end
+
+  it "doesn't update an officer who already has a journal_name" do
+    officer = Officer.create({employee_id: 14000, journal_name: "XXX"})
+    Populater::OfficersFromIncidents.populate
+    officer.reload
+    expect(officer.journal_name).to eql("XXX")
+    expect(officer.active).to eql(false)
   end
 end

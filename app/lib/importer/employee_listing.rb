@@ -5,19 +5,24 @@ class Importer::EmployeeListing < Importer::Importer
 
   SLICE_SIZE = 500
 
-  PARSERS = {
-    "data/CY2015_Annual_Earnings_BPD.csv.gz" => Parser::Cy2015AnnualEarnings,
-    "data/ALPHa_LISTING_BPD_with_badges_1.csv.gz" => Parser::AlphaListing,
-    "data/alpha_listing_20200715.csv.gz" => Parser::AlphaListing2020
-  }
+  PARSERS = [
+    ["data/CY2015_Annual_Earnings_BPD.csv.gz", Parser::Cy2015AnnualEarnings, false],
+    ["data/ALPHa_LISTING_BPD_with_badges_1.csv.gz", Parser::AlphaListing, false],
+    ["data/alpha_listing_20200715.csv.gz", Parser::AlphaListing2020, true]
+  ]
 
   def self.import_all
-    PARSERS.each do |file, klass|
+    PARSERS.each do |file, klass, set_active|
       if File.exist?(file)
         parser = klass.new(file)
-        new(parser).import
+        new(parser, set_active).import
       end
     end
+  end
+
+  def initialize(parser, set_active = false)
+    super(parser)
+    @set_active = set_active
   end
 
   def import
@@ -25,6 +30,15 @@ class Importer::EmployeeListing < Importer::Importer
     records.each_slice(SLICE_SIZE) do |slice|
       Officer.transaction do
         import_slice(slice, officer_by_employee_id)
+      end
+    end
+
+    if @set_active
+      Officer.transaction do
+        Officer.update_all "active = false"
+        records.pluck(:empl_id).each do |ei|
+          Officer.where(employee_id: ei).update_all("active = true")
+        end
       end
     end
   end
