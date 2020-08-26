@@ -19,7 +19,7 @@
           <dt class="scorecard-label">Title</dt>
           <dd class="scorecard-value"><%= format_text(@officer.title) %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-3 col-xl-2">
+        <dl class="scorecard-pair col-sm-4 col-xl-2">
           <dt class="scorecard-label">Employee #</dt>
           <dd class="scorecard-value"><%= format_text(@officer.employee_id) %></dd>
         </dl>
@@ -31,9 +31,13 @@
           <dt class="scorecard-label">Start Date</dt>
           <dd class="scorecard-value"><%= format_date @officer.doa %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-12 col-xl-5">
+        <dl class="scorecard-pair col-sm-4 col-xl-5">
           <dt class="scorecard-label">Residence</dt>
           <dd class="scorecard-value"><%= format_residence(@officer.zip_code) %></dd>
+        </dl>
+        <dl class="scorecard-pair col-sm-4 col-xl-5">
+          <dt class="scorecard-label">Active?</dt>
+          <dd class="scorecard-value"><%= format_yes_no(@officer.active) %></dd>
         </dl>
       </div>
     </div>
