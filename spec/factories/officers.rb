@@ -28,6 +28,7 @@ FactoryBot.define do
       details_count { 17 }
       citations_count { 18 }
       articles_officers_count { 19 }
+      active { true }
     end
   end
 end

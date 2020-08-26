@@ -1,5 +1,6 @@
 class Exporter::OfficersExporter < Exporter::Exporter
   def column_definitions
+    column("active") { write_boolean(record.active) }
     column("employee_id") { record.employee_id }
     column("name") { record.name }
     column("organization") { record.organization }

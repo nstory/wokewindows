@@ -22,6 +22,11 @@ class Exporter::Exporter
     @record
   end
 
+  def write_boolean(bool)
+    return "" if bool == nil
+    bool ? "true" : "false"
+  end
+
   def write_money(money)
     money ? "%0.2f" % money : nil
   end
