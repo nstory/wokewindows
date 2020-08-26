@@ -1,0 +1,18 @@
+<% if export %>
+  <table class="table table-bordered" style="width:auto">
+    <tbody>
+      <tr>
+        <th>File</th>
+        <td><%= export_link(export) %></td>
+      </tr>
+      <tr>
+        <th>Last Modified</th>
+        <td><%= export_last_modified(export) %></td>
+      </tr>
+      <tr>
+        <th>Size</th>
+        <td><%= export_size(export) %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

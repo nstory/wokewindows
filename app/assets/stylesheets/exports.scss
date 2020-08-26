@@ -1,0 +1,5 @@
+.export-dictionary {
+  tbody tr td:first-child {
+    @extend code;
+  }
+}

@@ -13,6 +13,10 @@ class S3
     @bucket.object(key).get.body
   end
 
+  def objects(path)
+    @bucket.objects({prefix: path}).to_a
+  end
+
   def object_exists?(key)
     @bucket.object(key).exists?
   end

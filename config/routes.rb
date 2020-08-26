@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :articles_officers
 
   get ':id', to: 'sitemaps#show', constraints: { id: /sitemap[a-z0-9.]+/ }
+  get 'exports', to: 'exports#index'
 
   root "root#index"
 end

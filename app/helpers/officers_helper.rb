@@ -6,6 +6,6 @@ module OfficersHelper
 
   def format_residence(postal)
     return format_unknown if !postal
-    "#{format_text(postal.neighborhood)}, #{format_text(postal.state)} #{format_zip(postal.zip)}"
+    raw("#{format_text(postal.neighborhood_or_city)}, #{format_text(postal.state)} #{format_zip(postal.zip)}")
   end
 end

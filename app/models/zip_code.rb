@@ -28,7 +28,11 @@ class ZipCode < ApplicationRecord
     2293 => "Central Boston", 2298 => "South Boston"
   }
 
-  def neighborhood
+  def neighborhood_or_city
     TABLE.fetch(zip, city)
+  end
+
+  def neighborhood
+    TABLE[zip]
   end
 end

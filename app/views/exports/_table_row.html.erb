@@ -1,0 +1,8 @@
+<% if export %>
+  <tr>
+    <td><%= export_link(export) %></td>
+    <td><%= export_last_modified(export) %></td>
+    <td><%= export_size(export) %></td>
+    <td><%= link_to "Docs", "##{key}" %></td>
+  </tr>
+<% end %>

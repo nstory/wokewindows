@@ -58,7 +58,7 @@ class OfficerDatatable < ApplicationDatatable
       citations_count: record.citations_count,
       postal: record.postal,
       state: record.zip_code && record.zip_code.state,
-      neighborhood: record.zip_code && record.zip_code.neighborhood
+      neighborhood: record.zip_code && record.zip_code.neighborhood_or_city
     }
   end
 
