@@ -9,6 +9,7 @@ describe Exporter::OfficersExporter do
     it "exports" do
       exporter.export(io)
       record = records.first
+      expect(record["url"]).to match(/officers\/1701-james/)
       expect(record["active"]).to eql("true")
       expect(record["employee_id"]).to eql("1701")
       expect(record["name"]).to eql("Kirk, James T")

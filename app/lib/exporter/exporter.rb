@@ -1,8 +1,14 @@
 class Exporter::Exporter
-  def export(io)
+  include Rails.application.routes.url_helpers
+
+  attr_accessor :definitions, :record
+
+  def initialize
     @definitions = {}
     column_definitions
+  end
 
+  def export(io)
     io.puts(@definitions.keys.to_csv)
     records.each do |record|
       values = @definitions.values.map do |prc|
@@ -16,6 +22,21 @@ class Exporter::Exporter
   private
   def column(name, &prc)
     @definitions[name] = prc
+  end
+
+  def prefix(name, clazz, &prc)
+    e = clazz.new
+    e.definitions.each do |key, eprc|
+      @definitions["#{name}_#{key}"] = proc do
+        r = instance_eval(&prc)
+        if r
+          e.record = r
+          e.instance_eval(&eprc)
+        else
+          nil
+        end
+      end
+    end
   end
 
   def record

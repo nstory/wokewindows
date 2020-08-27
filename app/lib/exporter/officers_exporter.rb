@@ -28,6 +28,7 @@ class Exporter::OfficersExporter < Exporter::Exporter
     column("details_count") { record.details_count }
     column("citations_count") { record.citations_count }
     column("articles_officers_count") { record.articles_officers_count }
+    column("url") { officer_url(record) }
   end
 
   def records

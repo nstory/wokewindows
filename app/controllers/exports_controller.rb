@@ -2,7 +2,10 @@ class ExportsController < ApplicationController
   KEYS = ["officers"]
 
   def index
-    @exports = KEYS.map { |k| [k, exports.find { |e| e.key == "exports/#{k}.csv" }] }.to_h
+    @exports = exports.map do |e|
+      %r{exports/(.*)\.csv}.match(e.key)
+      [$1, e]
+    end.to_h
   end
 
   private

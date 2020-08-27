@@ -18,137 +18,192 @@
           </tr>
         </thead>
         <tbody>
-          <% @exports.each do |key, export| %>
-            <%= render "table_row", export: export, key: key %>
-          <% end %>
+          <%= render "table_row", export: @exports["officers"], key: "officers" %>
+          <%= render "table_row", export: @exports["complaints_officers"], key: "complaints_officers" %>
         </tbody>
       </table>
 
       <h2 id="officers">Officers</h2>
       <%= render "info", export: @exports["officers"] %>
-      <p>Export of the <code>officers</code> table. See <%= link_to "Officers & Employees", page_path("help", anchor: "officers") %>.</p>
-      <table class="table export-dictionary">
-        <thead>
-          <tr>
-            <th>Column</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>active</td>
-            <td>whether the employee is currently employed at BPD; if the employee appears in <%= link_to "2020 Alpha Listing", page_path("help", anchor: "alpha_listing_20200715") %> or in a later <%= link_to "public journal", page_path("help", anchor: "district_journal") %>, they are considered active</td>
-          </tr>
-          <tr>
-            <td>employee_id</td>
-            <td>City of Boston employee id; useful for joining to other datasets</td>
-          </tr>
-          <tr>
-            <td>name</td>
-            <td>Officer's name taken from earnings reports or alpha listing</td>
-          </tr>
-          <tr>
-            <td>organization</td>
-            <td>The organization for which the officer works within the department</td>
-          </tr>
-          <tr>
-            <td>title</td>
-            <td>Officer's title, taken from earnings reports or alpha listing</td>
-          </tr>
-          <tr>
-            <td>doa</td>
-            <td>Date of Appointment. Officer's start date</td>
-          </tr>
-          <tr>
-            <td>badge</td>
-            <td>badge number from most recent alpha listing where officer appears. This is not a unique identifier; the numbers may be re-used overtime.</td>
-          </tr>
-          <tr>
-            <td>zip_code</td>
-            <td>five-digit zip code where officer resides</td>
-          </tr>
-          <tr>
-            <td>city</td>
-            <td>city where officer resides (derived from zip code)</td>
-          </tr>
-          <tr>
-            <td>state</td>
-            <td>two-letter abbreviation for state where officer resides (derived from zip code)</td>
-          </tr>
-          <tr>
-            <td>neighborhood</td>
-            <td>neighborhood where officer resides or blank if officer does not reside in Boston (derived from zip code); see <%= link_to "Zip Code and Neighborhood", page_path("help", anchor: "officer_zip_code") %></td>
-          </tr>
-          <tr>
-            <td>regular</td>
-            <td>2019 regular earnings; this and other earnings columns are sourced from <%= link_to "Employee Earnings Reports", page_path("help", anchor: "employee_earnings") %></td>
-          </tr>
-          <tr>
-            <td>retro</td>
-            <td>2019 retroactive earnings</td>
-          </tr>
-          <tr>
-            <td>other</td>
-            <td>2019 other earnings</td>
-          </tr>
-          <tr>
-            <td>overtime</td>
-            <td>2019 overtime earnings</td>
-          </tr>
-          <tr>
-            <td>injured</td>
-            <td>2019 injured pay earnings</td>
-          </tr>
-          <tr>
-            <td>detail</td>
-            <td>2019 earnings from working <%= link_to "paid details", page_path("help", anchor: "details") %></td>
-          </tr>
-          <tr>
-            <td>quinn</td>
-            <td>2019 earnings from education incentive</td>
-          </tr>
-          <tr>
-            <td>total</td>
-            <td>2019 total earnings</td>
-          </tr>
-          <tr>
-            <td>rank</td>
-            <td>officer rank e.g. <code>sergt</code> for Sergeant; the <code>title</code> column also often has this information</td>
-          </tr>
-          <tr>
-            <td>ia_score</td>
-            <td>metric calculated by Woke Windows based on the officer's Internal Affairs (IA) record; a number from <code>0</code> (least concerning) to <code>5</code> (very concerning); see <%= link_to "IA Score", page_path("help", anchor: "ia_score") %></td>
-          </tr>
-          <tr>
-            <td>field_contacts_count</td>
-            <td>total number of FIO records where this officer is the contact officer; see <%= link_to "Field Contacts (FIO)", page_path("help", anchor: "field_contacts") %></td>
-          </tr>
-          <tr>
-            <td>incidents_count</td>
-            <td>total number of incidents filed by this officer (note: this is most likely an undercount because we don't know the filing officer for many incidents)</td>
-          </tr>
-          <tr>
-            <td>complaints_count</td>
-            <td>total number of Internal Affairs complaints</td>
-          </tr>
-          <tr>
-            <td>swats_count</td>
-            <td>total number of SWAT reports</td>
-          </tr>
-          <tr>
-            <td>details_count</td>
-            <td>total number of paid details</td>
-          </tr>
-          <tr>
-            <td>citations_count</td>
-            <td>total number of traffic citations</td>
-          </tr>
-          <tr>
-            <td>articles_officers_count</td>
-            <td>total number of articles where this officer is mentioned</td>
-          </tr>
-        </tbody>
-      </table>
+      <p>Export of the <code>officers</code> table. This file lists every officer and civilian employee of the Boston Police Department along with fields collected from multiple sources. See <%= link_to "Officers & Employees", page_path("help", anchor: "officers") %>.</p>
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>active</td>
+          <td>whether the employee is currently employed at BPD; if the employee appears in <%= link_to "2020 Alpha Listing", page_path("help", anchor: "alpha_listing_20200715") %> or in a later <%= link_to "public journal", page_path("help", anchor: "district_journal") %>, they are considered active</td>
+        </tr>
+        <tr>
+          <td>employee_id</td>
+          <td>City of Boston employee id; useful for joining to other datasets</td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>Officer's name taken from earnings reports or alpha listing</td>
+        </tr>
+        <tr>
+          <td>organization</td>
+          <td>The organization for which the officer works within the department</td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>Officer's title, taken from earnings reports or alpha listing</td>
+        </tr>
+        <tr>
+          <td>doa</td>
+          <td>Date of Appointment. Officer's start date</td>
+        </tr>
+        <tr>
+          <td>badge</td>
+          <td>badge number from most recent alpha listing where officer appears. This is not a unique identifier; the numbers may be re-used overtime.</td>
+        </tr>
+        <tr>
+          <td>zip_code</td>
+          <td>five-digit zip code where officer resides</td>
+        </tr>
+        <tr>
+          <td>city</td>
+          <td>city where officer resides (derived from zip code)</td>
+        </tr>
+        <tr>
+          <td>state</td>
+          <td>two-letter abbreviation for state where officer resides (derived from zip code)</td>
+        </tr>
+        <tr>
+          <td>neighborhood</td>
+          <td>neighborhood where officer resides or blank if officer does not reside in Boston (derived from zip code); see <%= link_to "Zip Code and Neighborhood", page_path("help", anchor: "officer_zip_code") %></td>
+        </tr>
+        <tr>
+          <td>regular</td>
+          <td>2019 regular earnings; this and other earnings columns are sourced from <%= link_to "Employee Earnings Reports", page_path("help", anchor: "employee_earnings") %></td>
+        </tr>
+        <tr>
+          <td>retro</td>
+          <td>2019 retroactive earnings</td>
+        </tr>
+        <tr>
+          <td>other</td>
+          <td>2019 other earnings</td>
+        </tr>
+        <tr>
+          <td>overtime</td>
+          <td>2019 overtime earnings</td>
+        </tr>
+        <tr>
+          <td>injured</td>
+          <td>2019 injured pay earnings</td>
+        </tr>
+        <tr>
+          <td>detail</td>
+          <td>2019 earnings from working <%= link_to "paid details", page_path("help", anchor: "details") %></td>
+        </tr>
+        <tr>
+          <td>quinn</td>
+          <td>2019 earnings from education incentive</td>
+        </tr>
+        <tr>
+          <td>total</td>
+          <td>2019 total earnings</td>
+        </tr>
+        <tr>
+          <td>rank</td>
+          <td>officer rank e.g. <code>sergt</code> for Sergeant; the <code>title</code> column also often has this information</td>
+        </tr>
+        <tr>
+          <td>ia_score</td>
+          <td>metric calculated by Woke Windows based on the officer's Internal Affairs (IA) record; a number from <code>0</code> (least concerning) to <code>5</code> (very concerning); see <%= link_to "IA Score", page_path("help", anchor: "ia_score") %></td>
+        </tr>
+        <tr>
+          <td>field_contacts_count</td>
+          <td>total number of FIO records where this officer is the contact officer; see <%= link_to "Field Contacts (FIO)", page_path("help", anchor: "field_contacts") %></td>
+        </tr>
+        <tr>
+          <td>incidents_count</td>
+          <td>total number of incidents filed by this officer (note: this is most likely an undercount because we don't know the filing officer for many incidents)</td>
+        </tr>
+        <tr>
+          <td>complaints_count</td>
+          <td>total number of Internal Affairs complaints</td>
+        </tr>
+        <tr>
+          <td>swats_count</td>
+          <td>total number of SWAT reports</td>
+        </tr>
+        <tr>
+          <td>details_count</td>
+          <td>total number of paid details</td>
+        </tr>
+        <tr>
+          <td>citations_count</td>
+          <td>total number of traffic citations</td>
+        </tr>
+        <tr>
+          <td>articles_officers_count</td>
+          <td>total number of articles where this officer is mentioned</td>
+        </tr>
+        <tr>
+          <td>url</td>
+          <td>link to the page for the officer on Woke Windows</td>
+        </tr>
+      <% end %>
+
+      <h2 id="complaints_officers">Complaints - Officers</h2>
+      <%= render "info", export: @exports["complaints_officers"] %>
+      <p>Export of the <code>complaint_officers</code> table. This file lists every Internal Affairs (IA) allegation against a Boston Police Department officer or employee. See <%= link_to "Complaints (Internal Affairs)", page_path("help", anchor: "complaints") %> for further information including the data sources used to compile these data.</p>
+      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
+
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>ia_number</td>
+          <td>identifier for the case; a given ia_number will appear multiple times in the file, once for each allegation against an officer. A case may include multiple officers.</td>
+        </tr>
+        <tr>
+          <td>case_number</td>
+          <td>only appears in the <%= link_to "2001 to 2011 IA data", page_path("help", anchor: "bpd_ia_data_2001_2011") %> file; may be a legacy identifier</td>
+        </tr>
+        <tr>
+          <td>incident_type</td>
+          <td>one of <code>Inquiry</code>, <code>Internal investigation</code>, <code>Citizen complaint</code>, <code>Preliminary Investigation</code>, or <code>General Inquiry</code></td>
+        </tr>
+        <tr>
+          <td>received_date</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>occurred_date</td>
+          <td>only appears in <%= link_to "2014 Officer IA Log", page_path("help", anchor: "2014_officer_ia_log") %></td>
+        </tr>
+        <tr>
+          <td>summary</td>
+          <td>only appears in <%= link_to "2014 Officer IA Log", page_path("help", anchor: "2014_officer_ia_log") %></td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>name of the officer as it appears in the allegation</td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>title of the officer as it appears in the allegation</td>
+        </tr>
+        <tr>
+          <td>badge</td>
+          <td>badge number of the officer as it appears in the allegation; note that badge numbers change over time and may be reassigned</td>
+        </tr>
+        <tr>
+          <td>allegation</td>
+          <td>e.g. "Neg.Duty/Unreasonable Judge"</td>
+        </tr>
+        <tr>
+          <td>finding</td>
+          <td>current status of the allegation; sometimes old allegations are in non-final states e.g. "Pending" or "Filed"; this most likely means it only appeared in an older data source, and we haven't received an updated status</td>
+        </tr>
+        <tr>
+          <td>finding_date</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>officer_</td>
+          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code></td>
+        </tr>
+      <% end %>
     </div>
   </div>
 </div>

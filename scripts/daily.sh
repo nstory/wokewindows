@@ -27,5 +27,6 @@ rails 'counters:fix'
 # aws s3 cp incidents.csv.gz 's3://wokewindows-data/incidents.csv.gz' --acl public-read
 
 rails 'exports:export[Exporter::OfficersExporter,s3://wokewindows-data/exports/officers.csv]'
+rails 'exports:export[Exporter::ComplaintsOfficersExporter,s3://wokewindows-data/exports/complaints_officers.csv]'
 
 rails sitemap:refresh:no_ping
