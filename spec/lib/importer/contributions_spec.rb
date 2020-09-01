@@ -182,6 +182,8 @@ describe Importer::Contributions do
 
     it "eight digit zip" do
       record[:contributor_zip] = "21322923"
+      importer.import
+      expect(Contribution.first.zip).to eql(2132)
     end
   end
 end

@@ -41,7 +41,7 @@ class Importer::Contributions < Importer::Importer
     {
       date: parse_date(r[:contribution_receipt_date]),
       contributor: parse_string(r[:contributor_name]),
-      zip: parse_int(r[:contributor_zip]),
+      zip: parse_zip(r[:contributor_zip]),
       amount: parse_int(r[:contribution_receipt_amount]),
       occupation: parse_string(r[:contributor_occupation]),
       employer: parse_string(r[:contributor_employer]),
@@ -58,7 +58,7 @@ class Importer::Contributions < Importer::Importer
     {
       date: parse_date(r[:date]),
       contributor: parse_string(r[:contributor]),
-      zip: parse_int(r[:zip]),
+      zip: parse_zip(r[:zip]),
       amount: parse_money(r[:amount]),
       cpf_id: parse_int(r[:cpf_id]),
       candidate_full_name: parse_string(r[:candidate_full_name]),
@@ -70,6 +70,12 @@ class Importer::Contributions < Importer::Importer
       employer: parse_string(r[:employer]),
       committee_name: parse_string(r[:comm_name])
     }
+  end
+
+  def parse_zip(txt)
+    # weird zips like 21322923 should be 02132
+    txt = txt[0...4] if txt.length == 8
+    parse_int(txt)
   end
 
   def find_officer(name)
