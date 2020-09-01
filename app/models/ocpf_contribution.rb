@@ -1,0 +1,2 @@
+class OcpfContribution < Contribution
+end

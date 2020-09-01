@@ -1,0 +1,27 @@
+<% @layout_application_title = "Political Contributions" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Political Contributions</h1>
+      <p class="lead">Contributions by Boston Police officers to local, state, and federal candidates for political office.</p>
+      <p>Download our data from <%= link_to "the exports page", exports_path %>.</p>
+
+      <h2>Office of Campaign and Political Finance (OCPF)</h2>
+      <p><a href="https://www.ocpf.us/">OCPF</a> tracks contributions to and expenditures by candidates for office in the Commonwealth of Massachusetts. OCPF provides a web interface for searching these records at <a href="https://www.ocpf.us/Reports/SearchItems">Search Contributions and Expenditures</a>.</p>
+      <p>We performed a series of queries using the web interface to find all contributions that match the criteria:</p>
+      <ul>
+        <li>occupation contains "law enforcement" or "police" or "patrolman"</li>
+        <li>employer contains "boston"</li>
+      </ul>
+      <p>We then took the results and further filtered them to only variations of "Boston Police Department" and "City of Boston" (removing entries like "Boston College").</p>
+
+      <h2>Federal Election Commission (FEC)</h2>
+      <p>The <a href="https://www.fec.gov/">FEC</a> tracks contributions to and expenditures by candidates for federal office. The FEC provides a web interface for searching these records at <a href="https://www.fec.gov/data/receipts/individual-contributions/">Browse Individual Contributions</a>.</p>
+      <p>We performed <a href="https://www.fec.gov/data/receipts/individual-contributions/?contributor_occupation=POLICE&contributor_occupation=law+enforcement&contributor_occupation=patrolman&contributor_employer=boston">this query</a> to find contributions from police officers. We then took the results and further filtered them to only those where the employer is the City of Boston or the Boston PD.</p>
+
+      <h2>Name-based Matching</h2>
+      <p>We match the contribution records and our existing officer records based on the name of the contributor.</p>
+    </div>
+  </div>
+</div>

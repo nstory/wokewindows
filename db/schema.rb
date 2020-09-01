@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_26_130146) do
+ActiveRecord::Schema.define(version: 2020_08_28_234130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -160,6 +160,28 @@ ActiveRecord::Schema.define(version: 2020_08_26_130146) do
     t.text "bag_of_text"
     t.index ["bag_of_text"], name: "complaints_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["ia_number"], name: "index_complaints_on_ia_number", unique: true
+  end
+
+  create_table "contributions", force: :cascade do |t|
+    t.string "type"
+    t.string "date"
+    t.string "contributor"
+    t.integer "zip"
+    t.string "employer"
+    t.string "occupation"
+    t.decimal "amount"
+    t.string "committee_name"
+    t.integer "officer_id"
+    t.integer "cpf_id"
+    t.string "candidate_full_name"
+    t.string "office_type"
+    t.string "district"
+    t.string "party_affiliation"
+    t.string "committee_id"
+    t.string "memo_text"
+    t.string "receipt_type_full"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "details", force: :cascade do |t|

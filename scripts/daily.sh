@@ -28,5 +28,6 @@ rails 'counters:fix'
 
 rails 'exports:export[Exporter::OfficersExporter,s3://wokewindows-data/exports/officers.csv]'
 rails 'exports:export[Exporter::ComplaintsOfficersExporter,s3://wokewindows-data/exports/complaints_officers.csv]'
+rails 'exports:export[Exporter::ContributionsExporter,s3://wokewindows-data/exports/contributions.csv]'
 
 rails sitemap:refresh:no_ping

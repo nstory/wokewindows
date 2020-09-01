@@ -18,10 +18,141 @@
           </tr>
         </thead>
         <tbody>
-          <%= render "table_row", export: @exports["officers"], key: "officers" %>
           <%= render "table_row", export: @exports["complaints_officers"], key: "complaints_officers" %>
+          <%= render "table_row", export: @exports["contributions"], key: "contributions" %>
+          <%= render "table_row", export: @exports["officers"], key: "officers" %>
         </tbody>
       </table>
+
+      <h2 id="complaints_officers">Complaints - Officers</h2>
+      <%= render "info", export: @exports["complaints_officers"] %>
+      <p>Export of the <code>complaint_officers</code> table. This file lists every Internal Affairs (IA) allegation against a Boston Police Department officer or employee. See <%= link_to "Complaints (Internal Affairs)", page_path("help", anchor: "complaints") %> for further information including the data sources used to compile these data.</p>
+      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
+
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>ia_number</td>
+          <td>identifier for the case; a given ia_number will appear multiple times in the file, once for each allegation against an officer. A case may include multiple officers.</td>
+        </tr>
+        <tr>
+          <td>case_number</td>
+          <td>only appears in the <%= link_to "2001 to 2011 IA data", page_path("help", anchor: "bpd_ia_data_2001_2011") %> file; may be a legacy identifier</td>
+        </tr>
+        <tr>
+          <td>incident_type</td>
+          <td>one of <code>Inquiry</code>, <code>Internal investigation</code>, <code>Citizen complaint</code>, <code>Preliminary Investigation</code>, or <code>General Inquiry</code></td>
+        </tr>
+        <tr>
+          <td>received_date</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>occurred_date</td>
+          <td>only appears in <%= link_to "2014 Officer IA Log", page_path("help", anchor: "2014_officer_ia_log") %></td>
+        </tr>
+        <tr>
+          <td>summary</td>
+          <td>only appears in <%= link_to "2014 Officer IA Log", page_path("help", anchor: "2014_officer_ia_log") %></td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>name of the officer as it appears in the allegation</td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td>title of the officer as it appears in the allegation</td>
+        </tr>
+        <tr>
+          <td>badge</td>
+          <td>badge number of the officer as it appears in the allegation; note that badge numbers change over time and may be reassigned</td>
+        </tr>
+        <tr>
+          <td>allegation</td>
+          <td>e.g. "Neg.Duty/Unreasonable Judge"</td>
+        </tr>
+        <tr>
+          <td>finding</td>
+          <td>current status of the allegation; sometimes old allegations are in non-final states e.g. "Pending" or "Filed"; this most likely means it only appeared in an older data source, and we haven't received an updated status</td>
+        </tr>
+        <tr>
+          <td>finding_date</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>officer_</td>
+          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code></td>
+        </tr>
+      <% end %>
+
+      <h2 id="contributions">Contributions</h2>
+      <%= render "info", export: @exports["contributions"] %>
+      <p>Export of the <code>contributions</code> table. This file lists contributions to political candidates by Boston Police officers. See <%= link_to "Contributions", page_path("contributions") %>.</p>
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>date</td>
+          <td><code>contribution_receipt_date</code> in the FEC data; <code>date</code> in the OCPF data</td>
+        </tr>
+        <tr>
+          <td>contributor</td>
+          <td>the name of the contributor</td>
+        </tr>
+        <tr>
+          <td>zip</td>
+          <td>the zip code the contributor provided as where they reside</td>
+        </tr>
+        <tr>
+          <td>employer</td>
+          <td>the contributor's stated employer</td>
+        </tr>
+        <tr>
+          <td>occupation</td>
+          <td>the contributor's stated occupation</td>
+        </tr>
+        <tr>
+          <td>amount</td>
+          <td>the amount donated</td>
+        </tr>
+        <tr>
+          <td>committee_name</td>
+          <td>the committee to which the contributor donated</td>
+        </tr>
+        <tr>
+          <td>cpf_id</td>
+          <td>the ID used by <a href="https://www.ocpf.us/">OCPF</a> to identify the committee</td>
+        </tr>
+        <tr>
+          <td>candidate_full_name</td>
+          <td>name of the candidate as provided by OCPF</td>
+        </tr>
+        <tr>
+          <td>office_type</td>
+          <td>office the candidate is seeking per OCPF</td>
+        </tr>
+        <tr>
+          <td>district</td>
+          <td>district in which the candidate is running for office per OCPF</td>
+        </tr>
+        <tr>
+          <td>party_affiliation</td>
+          <td>party affiliation of the committee; provided by OCPF for state data; for FEC data, determined manually by Woke Windows</td>
+        </tr>
+        <tr>
+          <td>committee_id</td>
+          <td>the ID used by the <a href="https://www.fec.gov/">FEC</a> to identify the committee</td>
+        </tr>
+        <tr>
+          <td>memo_text</td>
+          <td>from the FEC data</td>
+        </tr>
+        <tr>
+          <td>receipt_type_full</td>
+          <td>from the FEC data</td>
+        </tr>
+        <tr>
+          <td>officer_</td>
+          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code></td>
+        </tr>
+      <% end %>
 
       <h2 id="officers">Officers</h2>
       <%= render "info", export: @exports["officers"] %>
@@ -142,66 +273,6 @@
         <tr>
           <td>url</td>
           <td>link to the page for the officer on Woke Windows</td>
-        </tr>
-      <% end %>
-
-      <h2 id="complaints_officers">Complaints - Officers</h2>
-      <%= render "info", export: @exports["complaints_officers"] %>
-      <p>Export of the <code>complaint_officers</code> table. This file lists every Internal Affairs (IA) allegation against a Boston Police Department officer or employee. See <%= link_to "Complaints (Internal Affairs)", page_path("help", anchor: "complaints") %> for further information including the data sources used to compile these data.</p>
-      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
-
-      <%= render "data_dictionary" do %>
-        <tr>
-          <td>ia_number</td>
-          <td>identifier for the case; a given ia_number will appear multiple times in the file, once for each allegation against an officer. A case may include multiple officers.</td>
-        </tr>
-        <tr>
-          <td>case_number</td>
-          <td>only appears in the <%= link_to "2001 to 2011 IA data", page_path("help", anchor: "bpd_ia_data_2001_2011") %> file; may be a legacy identifier</td>
-        </tr>
-        <tr>
-          <td>incident_type</td>
-          <td>one of <code>Inquiry</code>, <code>Internal investigation</code>, <code>Citizen complaint</code>, <code>Preliminary Investigation</code>, or <code>General Inquiry</code></td>
-        </tr>
-        <tr>
-          <td>received_date</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>occurred_date</td>
-          <td>only appears in <%= link_to "2014 Officer IA Log", page_path("help", anchor: "2014_officer_ia_log") %></td>
-        </tr>
-        <tr>
-          <td>summary</td>
-          <td>only appears in <%= link_to "2014 Officer IA Log", page_path("help", anchor: "2014_officer_ia_log") %></td>
-        </tr>
-        <tr>
-          <td>name</td>
-          <td>name of the officer as it appears in the allegation</td>
-        </tr>
-        <tr>
-          <td>title</td>
-          <td>title of the officer as it appears in the allegation</td>
-        </tr>
-        <tr>
-          <td>badge</td>
-          <td>badge number of the officer as it appears in the allegation; note that badge numbers change over time and may be reassigned</td>
-        </tr>
-        <tr>
-          <td>allegation</td>
-          <td>e.g. "Neg.Duty/Unreasonable Judge"</td>
-        </tr>
-        <tr>
-          <td>finding</td>
-          <td>current status of the allegation; sometimes old allegations are in non-final states e.g. "Pending" or "Filed"; this most likely means it only appeared in an older data source, and we haven't received an updated status</td>
-        </tr>
-        <tr>
-          <td>finding_date</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>officer_</td>
-          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code></td>
         </tr>
       <% end %>
     </div>

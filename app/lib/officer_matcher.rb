@@ -1,4 +1,8 @@
 class OfficerMatcher
+  def initialize(regexp = :article_regexp)
+    @regexp = regexp
+  end
+
   # returns an array of matching officer objects. only returns
   # unambiguous matches.
   def matches(text)
@@ -13,6 +17,6 @@ class OfficerMatcher
 
   private
   def regexp_to_officer
-    @regexp_to_officer ||= Officer.where("hr_name IS NOT NULL").map { |o| [o.article_regexp, o] }
+    @regexp_to_officer ||= Officer.where("hr_name IS NOT NULL").map { |o| [o.send(@regexp), o] }
   end
 end

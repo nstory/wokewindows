@@ -21,6 +21,20 @@ describe Officer do
     end
   end
 
+  describe "#last_first_regexp" do
+    def last_first_regexp(name)
+      Officer.new({hr_name: name}).last_first_regexp
+    end
+
+    it "matches jean-louis" do
+      expect("JEAN-LOUIS, JEAN").to match(last_first_regexp("Jean Louis,Jean G."))
+    end
+
+    it "does not match hester" do
+      expect("Lanchester, Wayne").to_not match(last_first_regexp("Hester,Wayne Emory"))
+    end
+  end
+
   describe "#name" do
     it "returns hr_name" do
       expect(Officer.new({hr_name: "Foo,Bar P"}).name).to eql("Foo, Bar P")

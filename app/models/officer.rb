@@ -65,7 +65,10 @@ class Officer < ApplicationRecord
 
   def last_first_regexp
     return nil if !hr_name
-    Regexp.new(name.gsub(/[^a-z]+/i, ".*"), Regexp::IGNORECASE)
+    last_name, rest = hr_name.split(",", 2)
+    first_name, middle_name = rest.split(" ", 2)
+    last_name.gsub!(/\s+/, '[\s-]+')
+    /\b#{last_name}\s*,\s*#{first_name}\s*(#{middle_name})?\b/i
   end
 
   def name

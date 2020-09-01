@@ -1,6 +1,4 @@
 class ExportsController < ApplicationController
-  KEYS = ["officers"]
-
   def index
     @exports = exports.map do |e|
       %r{exports/(.*)\.csv}.match(e.key)
