@@ -161,6 +161,50 @@ class Officer < ApplicationRecord
     articles_officers.count { |ao| ao.status == "added" }
   end
 
+  def ia_sustained_conduct_unbecoming
+    count_sustained_cases(/Conduct Unbecoming/i)
+  end
+
+  def ia_sustained_neg_duty
+    count_sustained_cases(/Neg.Duty|Neglect of Duty|Unreasonable Judge/i)
+  end
+
+  def ia_sustained_respectful_treatment
+    count_sustained_cases(/Respectful Treatment/i)
+  end
+
+  def ia_sustained_self_identification
+    count_sustained_cases(/Self Identification/i)
+  end
+
+  def ia_sustained_use_of_force
+    count_sustained_cases(/Use of Force/i)
+  end
+
+  def ia_sustained_details
+    count_sustained_cases(/Details|Detail Assignment|Detail Cards|Paid Detail Assignment/)
+  end
+
+  def ia_sustained_cases
+    count_sustained_cases(/./)
+  end
+
+  def ia_sustained_allegations
+    complaint_officers.select { |co| co.finding == "Sustained" }.count
+  end
+
+  def ia_cases
+    complaints.select do |c|
+      c.is_internal_investigation? || c.is_citizen_complaint?
+    end.count
+  end
+
+  def ia_allegations
+    complaint_officers.select do |co|
+      co.complaint.is_internal_investigation? || co.complaint.is_citizen_complaint?
+    end.count
+  end
+
   def self.by_employee_id
     Officer.find_each.index_by(&:employee_id)
   end
@@ -170,5 +214,14 @@ class Officer < ApplicationRecord
       o.ia_score = o.calculate_ia_score
       o.save
     end
+  end
+
+  private
+  # count of unique complaints against this officer where at least one allegation
+  # matches regexp
+  def count_sustained_cases(regexp)
+    complaint_officers.select do |co|
+      co.allegation =~ regexp && co.finding == "Sustained"
+    end.uniq(&:complaint).count
   end
 end

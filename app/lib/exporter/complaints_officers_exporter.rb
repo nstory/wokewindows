@@ -16,6 +16,6 @@ class Exporter::ComplaintsOfficersExporter < Exporter::Exporter
   end
 
   def records
-    ComplaintOfficer.includes(:complaint, :officer)
+    ComplaintOfficer.includes(:complaint, :officer, officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]])
   end
 end

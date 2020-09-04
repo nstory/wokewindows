@@ -19,6 +19,6 @@ class Exporter::ContributionsExporter < Exporter::Exporter
   end
 
   def records
-    Contribution.includes(:officer, officer: [:zip_code])
+    Contribution.includes(:officer, officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]])
   end
 end

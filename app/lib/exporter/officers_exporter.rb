@@ -21,6 +21,16 @@ class Exporter::OfficersExporter < Exporter::Exporter
     column("total") { write_money(record.total) }
     column("rank") { record.rank }
     column("ia_score") { record.ia_score }
+    column("ia_sustained_conduct_unbecoming") { record.ia_sustained_conduct_unbecoming }
+    column("ia_sustained_neg_duty") { record.ia_sustained_neg_duty }
+    column("ia_sustained_respectful_treatment") { record.ia_sustained_respectful_treatment }
+    column("ia_sustained_self_identification") { record.ia_sustained_self_identification }
+    column("ia_sustained_use_of_force") { record.ia_sustained_use_of_force }
+    column("ia_sustained_details") { record.ia_sustained_details }
+    column("ia_sustained_cases") { record.ia_sustained_cases }
+    column("ia_sustained_allegations") { record.ia_sustained_allegations }
+    column("ia_cases") { record.ia_cases }
+    column("ia_allegations") { record.ia_allegations }
     column("field_contacts_count") { record.field_contacts_count }
     column("incidents_count") { record.incidents_count }
     column("complaints_count") { record.complaints_count }
@@ -32,6 +42,6 @@ class Exporter::OfficersExporter < Exporter::Exporter
   end
 
   def records
-    Officer.includes(:zip_code)
+    Officer.includes(:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint])
   end
 end

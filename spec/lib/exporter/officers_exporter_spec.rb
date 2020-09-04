@@ -1,14 +1,11 @@
 describe Exporter::OfficersExporter do
-  let(:io) { StringIO.new }
-  let(:exporter) { Exporter::OfficersExporter.new }
-  let(:records) { CSV.parse(io.string, headers: true) }
+  include_context "exporter"
 
   describe "james t kirk" do
     let!(:officer_kirk) { create(:officer_kirk) }
 
     it "exports" do
-      exporter.export(io)
-      record = records.first
+      export
       expect(record["url"]).to match(/officers\/1701-james/)
       expect(record["active"]).to eql("true")
       expect(record["employee_id"]).to eql("1701")
@@ -39,6 +36,7 @@ describe Exporter::OfficersExporter do
       expect(record["details_count"]).to eql("17")
       expect(record["citations_count"]).to eql("18")
       expect(record["articles_officers_count"]).to eql("19")
+      expect(record["ia_sustained_conduct_unbecoming"]).to eql("0")
     end
   end
 end

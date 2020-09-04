@@ -26,6 +26,14 @@ class Complaint < ApplicationRecord
     incident_type == "Preliminary Investigation"
   end
 
+  def is_internal_investigation?
+    incident_type == "Internal investigation"
+  end
+
+  def is_citizen_complaint?
+    incident_type == "Citizen complaint"
+  end
+
   def short_description
     text = incident_type + " received " + received_date
     return text if complaint_officers.empty?

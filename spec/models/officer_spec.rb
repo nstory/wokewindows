@@ -166,4 +166,43 @@ describe Officer do
       expect(o.to_param).to eql('1234-foo-p-bar')
     end
   end
+
+  describe "ia" do
+    let!(:complaint_officer_kirk) { create(:complaint_officer_kirk) }
+    let(:officer_kirk) { complaint_officer_kirk.officer }
+
+    describe "#ia_sustained_neg_duty" do
+      it "zero when none" do
+        expect(officer_kirk.ia_sustained_neg_duty).to eql(0)
+      end
+
+      it "one when one" do
+        complaint_officer_kirk.allegation = "Neg.Duty/Unreasonable Judge"
+        complaint_officer_kirk.save
+        expect(officer_kirk.ia_sustained_neg_duty).to eql(1)
+      end
+    end
+
+    it "#ia_sustained_allegations" do
+      expect(officer_kirk.ia_sustained_allegations).to eql(1)
+    end
+
+    describe "#ia_cases" do
+      it "one when one" do
+        expect(officer_kirk.ia_cases).to eql(1)
+      end
+
+      it "doesn't count prelim case" do
+        complaint_officer_kirk.complaint.incident_type = "Preliminary Investigation"
+        complaint_officer_kirk.complaint.save
+        expect(officer_kirk.ia_cases).to eql(0)
+      end
+    end
+
+    describe "#ia_allegations" do
+      it "one when one" do
+        expect(officer_kirk.ia_allegations).to eql(1)
+      end
+    end
+  end
 end

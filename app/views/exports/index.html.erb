@@ -21,6 +21,7 @@
         <tbody>
           <%= render "table_row", export: @exports["complaints_officers"], key: "complaints_officers" %>
           <%= render "table_row", export: @exports["contributions"], key: "contributions" %>
+          <%= render "table_row", export: @exports["details"], key: "details" %>
           <%= render "table_row", export: @exports["officers"], key: "officers" %>
         </tbody>
       </table>
@@ -81,7 +82,7 @@
         </tr>
         <tr>
           <td>officer_</td>
-          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code></td>
+          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code>. If these fields are blank, that means we weren't able to unambiguously match the officer name to one in our database.</td>
         </tr>
       <% end %>
 
@@ -148,6 +149,88 @@
         <tr>
           <td>receipt_type_full</td>
           <td>from the FEC data</td>
+        </tr>
+        <tr>
+          <td>officer_</td>
+          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code>. If these fields are blank, that means we weren't able to unambiguously match the officer name to one in our database.</td>
+        </tr>
+      <% end %>
+
+      <h2 id="details">Details</h2>
+      <%= render "info", export: @exports["details"] %>
+      <p>Export of the <code>details</code> table. This file lists paid details worked by BPD officers. See <%= link_to "Paid Details", page_path("help", anchor: "details") %> for more documentation.</p>
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>tracking_no</td>
+          <td>unique id for each record from the <a href="/pages/help#detail_records">Detail Records 2019 Spreadsheet</a></td>
+        </tr>
+        <tr>
+          <td>employee_number</td>
+          <td>the six-digit City of Boston employee id of the officer</td>
+        </tr>
+        <tr>
+          <td>employee_name</td>
+          <td>the name of the officer</td>
+        </tr>
+        <tr>
+          <td>employee_rank</td>
+          <td>a number indicating the officer's rank</td>
+        </tr>
+        <tr>
+          <td>customer_number</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>customer_name</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>street_no</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>street</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>xstreet</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>start_date_time</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>end_date_time</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>minutes_worked</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>detail_type</td>
+          <td><code>C</code> or <code>S</code> which I believe stand for Construction and Security respectively</td>
+        </tr>
+        <tr>
+          <td>pay_hours</td>
+          <td>the number of hours for which the officer was paid after taking into account rules that "round up"</td>
+        </tr>
+        <tr>
+          <td>pay_amount</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>pay_rate</td>
+          <td>hourly rate; I believe this is based on the employee's rank</td>
+        </tr>
+        <tr>
+          <td>latitude</td>
+          <td>latitude geocoded by Woke Windows based on the street_no, street, and/or xstreet fields</td>
+        </tr>
+        <tr>
+          <td>longitude</td>
+          <td>also geocoded</td>
         </tr>
         <tr>
           <td>officer_</td>
@@ -242,6 +325,46 @@
         <tr>
           <td>ia_score</td>
           <td>metric calculated by Woke Windows based on the officer's Internal Affairs (IA) record; a number from <code>0</code> (least concerning) to <code>5</code> (very concerning); see <%= link_to "IA Score", page_path("help", anchor: "ia_score") %></td>
+        </tr>
+        <tr>
+          <td>ia_sustained_conduct_unbecoming</td>
+          <td>number of cases with the sustained allegation "Conduct Unbecoming"</td>
+        </tr>
+        <tr>
+          <td>ia_sustained_neg_duty</td>
+          <td>number of cases with the sustained allegation "Neg.Duty/Unreasonable Judge"</td>
+        </tr>
+        <tr>
+          <td>ia_sustained_respectful_treatment</td>
+          <td>number of cases with the sustained allegation "Respectful Treatment"</td>
+        </tr>
+        <tr>
+          <td>ia_sustained_self_identification</td>
+          <td>number of cases with the sustained allegation "Self Identification"</td>
+        </tr>
+        <tr>
+          <td>ia_sustained_use_of_force</td>
+          <td>number of cases with the sustained allegation "Use of Force"</td>
+        </tr>
+        <tr>
+          <td>ia_sustained_details</td>
+          <td>number of cases with sustained allegations related to paid details. This allegation only appears in the <a href="/pages/help#bpd_ia_data_2001_2011">2001 to 2011 IA Data</a>; it's unclear how this type of allegation is coded after 2011.</td>
+        </tr>
+        <tr>
+          <td>ia_sustained_cases</td>
+          <td>number of cases with at least one sustained allegation</td>
+        </tr>
+        <tr>
+          <td>ia_sustained_allegations</td>
+          <td>total number of sustained allegations</td>
+        </tr>
+        <tr>
+          <td>ia_cases</td>
+          <td>total number of "Internal Investigation" and "Citizen Complaint" cases</td>
+        </tr>
+        <tr>
+          <td>ia_allegations</td>
+          <td>total number of allegations in "Internal Investigation" and "Citizen Complaint" cases</td>
         </tr>
         <tr>
           <td>field_contacts_count</td>
