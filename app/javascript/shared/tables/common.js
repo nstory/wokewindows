@@ -53,6 +53,20 @@ export function initDataTable(selector, callback) {
 
       callback($table, options);
       setupLoadingIndicator($table);
+
+      $table.on("click", "tbody tr[role=row] td", function(ev) {
+        // if user clicked on a link, let the link change the page
+        if ($(ev.target).is("a")) {
+          return;
+        }
+
+        // if this row is associated with a url, open the url
+        const table = $table.DataTable();
+        const data = table.row(this).data();
+        if (data && data.url) {
+          Turbolinks.visit(data.url);
+        }
+      })
     });
   });
 }

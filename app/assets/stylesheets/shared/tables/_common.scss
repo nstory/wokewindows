@@ -2,6 +2,12 @@
   tbody tr td:first-child {
     padding-left: 17px; // align with headers
   }
+
+  tbody tr[role=row] {
+    // really should only be pointer when row has an associated url, but I
+    // think all rows do, so this is okay
+    cursor: pointer;
+  }
 }
 
 .table-loading {
