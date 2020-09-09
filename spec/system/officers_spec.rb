@@ -19,7 +19,7 @@ describe "Officers" do
     it "displays an officer" do
       visit officer_path(officer_kirk)
       expect(page).to have_text("James T Kirk")
-      expect(page).to have_selector("dd", text: "Boston Police")
+      expect(page).to have_content("Starship Captain at Boston Police")
       expect(page).to have_selector("dd", text: "Starfleet")
       expect(page).to have_selector("dd", text: "Starship Captain")
       expect(page).to have_selector("dd", text: "Mar 22, 2233")

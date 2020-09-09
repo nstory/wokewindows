@@ -90,32 +90,39 @@ class Officer < ApplicationRecord
   end
 
   def name_with_title
-    t = case(title)
-        when /^Police Officer/
-          "Officer"
-        when /^Police Detectiv/
-          "Detective"
-        when /^Police Sergeant \(Det/
-          "Sgt. Det."
-        when /^Police Sergeant/
-          "Sergeant"
-        when /^Police Offc/
-          "Officer"
-        when /^Police Lieutenant \(Det/
-          "Lt. Det."
-        when /^Police Lieutenant/
-          "Lieutenant"
-        when /^Police Captain/
-          "Captain"
-        when /^Dep Supn/
-          "Deputy Supt."
-        when /^Supn/
-          "Supt."
-        else
-          nil
-        end
+    t = rank_from_title
     n = first_name_last
     if t then "#{t} #{n}" else n end
+  end
+
+  def rank_from_title
+    # special case for civilians with "Supn" in their titles
+    return nil if title =~ /Supn Auto|Supn-Custodians/
+
+    case(title)
+    when /^Police Officer/
+      "Officer"
+    when /^Police Detectiv/
+      "Detective"
+    when /^Police Sergeant \(Det/
+      "Sgt. Det."
+    when /^Police Sergeant/
+      "Sergeant"
+    when /^Police Offc/
+      "Officer"
+    when /^Police Lieutenant \(Det/
+      "Lt. Det."
+    when /^Police Lieutenant/
+      "Lieutenant"
+    when /^Police Captain/
+      "Captain"
+    when /^Dep Supn/
+      "Deputy Supt."
+    when /^Supn/
+      "Supt."
+    else
+      nil
+    end
   end
 
   # use employee_id + first_name_last for resource urls
@@ -162,47 +169,58 @@ class Officer < ApplicationRecord
   end
 
   def ia_sustained_conduct_unbecoming
-    count_sustained_cases(/Conduct Unbecoming/i)
+    sustained_complaints(/Conduct Unbecoming/i)
   end
 
   def ia_sustained_neg_duty
-    count_sustained_cases(/Neg.Duty|Neglect of Duty|Unreasonable Judge/i)
+    sustained_complaints(/Neg.Duty|Neglect of Duty|Unreasonable Judge/i)
   end
 
   def ia_sustained_respectful_treatment
-    count_sustained_cases(/Respectful Treatment/i)
+    sustained_complaints(/Respectful Treatment/i)
   end
 
   def ia_sustained_self_identification
-    count_sustained_cases(/Self Identification/i)
+    sustained_complaints(/Self Identification/i)
   end
 
   def ia_sustained_use_of_force
-    count_sustained_cases(/Use of Force/i)
+    sustained_complaints(/Use of Force/i)
   end
 
   def ia_sustained_details
-    count_sustained_cases(/Details|Detail Assignment|Detail Cards|Paid Detail Assignment/)
+    sustained_complaints(/Details|Detail Assignment|Detail Cards|Paid Detail Assignment/)
   end
 
-  def ia_sustained_cases
-    count_sustained_cases(/./)
+  def ia_sustained_complaints
+    sustained_complaints(/./)
   end
 
   def ia_sustained_allegations
-    complaint_officers.select { |co| co.finding == "Sustained" }.count
+    complaint_officers.select { |co| co.finding == "Sustained" }
   end
 
-  def ia_cases
+  def ia_complaints
     complaints.select do |c|
       c.is_internal_investigation? || c.is_citizen_complaint?
-    end.count
+    end
   end
 
   def ia_allegations
     complaint_officers.select do |co|
       co.complaint.is_internal_investigation? || co.complaint.is_citizen_complaint?
     end.count
+  end
+
+  def years_of_service
+    return nil if !doa
+    hired = Date.strptime(doa, "%F")
+    days = (Date.current - hired).to_i
+    days / 365
+  end
+
+  def latest_compensation
+    compensations.max_by(&:year)
   end
 
   def self.by_employee_id
@@ -217,11 +235,11 @@ class Officer < ApplicationRecord
   end
 
   private
-  # count of unique complaints against this officer where at least one allegation
+  # unique complaints against this officer where at least one allegation
   # matches regexp
-  def count_sustained_cases(regexp)
+  def sustained_complaints(regexp)
     complaint_officers.select do |co|
       co.allegation =~ regexp && co.finding == "Sustained"
-    end.uniq(&:complaint).count
+    end.map(&:complaint).uniq
   end
 end

@@ -11,12 +11,13 @@ class OfficersController < ApplicationController
   end
 
   def show
-    @officer = Officer.includes(:compensations).find_by!(employee_id: params[:id].to_i)
+    @officer = Officer.includes(:compensations, :complaints).find_by!(employee_id: params[:id].to_i)
     redirect_to(@officer, status: 301) if params[:id] != @officer.to_param
     @attributions = [
       @officer.compensations.flat_map(&:attributions),
       @officer.attributions
     ].flatten.uniq
+    @latest_compensation = @officer.latest_compensation
   end
 
   def select2

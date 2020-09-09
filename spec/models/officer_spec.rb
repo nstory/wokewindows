@@ -83,6 +83,10 @@ describe Officer do
     it "superintendent" do
       expect(Officer.new({hr_name: "Foo,Bar", title: "Supn Bpd"}).name_with_title).to eql("Supt. Bar Foo")
     end
+
+    it "is civilian supn" do
+      expect(Officer.new({hr_name: "Foo,Bar", title: "Supn Auto Maint(Bpdfleet)"}).name_with_title).to eql("Bar Foo")
+    end
   end
 
   describe ".articles_officers_to_review_count" do
@@ -172,30 +176,30 @@ describe Officer do
     let(:officer_kirk) { complaint_officer_kirk.officer }
 
     describe "#ia_sustained_neg_duty" do
-      it "zero when none" do
-        expect(officer_kirk.ia_sustained_neg_duty).to eql(0)
+      it "empty when none" do
+        expect(officer_kirk.ia_sustained_neg_duty).to eql([])
       end
 
-      it "one when one" do
+      it "has the complaint" do
         complaint_officer_kirk.allegation = "Neg.Duty/Unreasonable Judge"
         complaint_officer_kirk.save
-        expect(officer_kirk.ia_sustained_neg_duty).to eql(1)
+        expect(officer_kirk.ia_sustained_neg_duty).to eql([complaint_officer_kirk.complaint])
       end
     end
 
     it "#ia_sustained_allegations" do
-      expect(officer_kirk.ia_sustained_allegations).to eql(1)
+      expect(officer_kirk.ia_sustained_allegations).to eql([complaint_officer_kirk])
     end
 
-    describe "#ia_cases" do
+    describe "#ia_complaints" do
       it "one when one" do
-        expect(officer_kirk.ia_cases).to eql(1)
+        expect(officer_kirk.ia_complaints).to eql([complaint_officer_kirk.complaint])
       end
 
       it "doesn't count prelim case" do
         complaint_officer_kirk.complaint.incident_type = "Preliminary Investigation"
         complaint_officer_kirk.complaint.save
-        expect(officer_kirk.ia_cases).to eql(0)
+        expect(officer_kirk.ia_complaints).to eql([])
       end
     end
 
@@ -203,6 +207,27 @@ describe Officer do
       it "one when one" do
         expect(officer_kirk.ia_allegations).to eql(1)
       end
+    end
+  end
+
+  describe "#years_of_service" do
+    let(:officer) { build(:officer) }
+    before do
+      travel_to Time.zone.local(2020, 7, 1, 1, 1, 1)
+    end
+
+    it "is nil if no doa" do
+      expect(officer.years_of_service).to eql(nil)
+    end
+
+    it "is 0 if less than one year" do
+      officer.doa = "2020-06-29"
+      expect(officer.years_of_service).to eql(0)
+    end
+
+    it "is 1 if one year" do
+      officer.doa = "2019-07-01"
+      expect(officer.years_of_service).to eql(1)
     end
   end
 end

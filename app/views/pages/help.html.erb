@@ -51,7 +51,7 @@
       <p>Conversely, the listing of complaints on the officer page may not be comprehensive; there may be cases we failed to link the officer to. To find these, try searching the <%= link_to "complaints table", complaints_path %> for variations of the officer's name.</p>
 
       <h4 id="ia_score">IA Score</h4>
-      <p>We calculate a score from 0 - 5 that indicates the severity of the Internal Affairs cases opened against an officer. This score is defined and calculated by The Woke Windows Project. The algorithm which calculates the score and the classification of allegations was invented by us.</p>
+      <p>We calculate a score from 0 - 5 that indicates the severity of the Internal Affairs cases opened against an officer. This score is defined and calculated by The Woke Windows Project. The algorithm which calculates the score and the classification of allegations was invented by us, and is open to change.</p>
 
       <table class="table">
         <thead>
@@ -63,27 +63,27 @@
         <tbody>
           <tr>
             <td>5</td>
-            <td>One serious allegation sustained or five concerning allegations sustained across unique cases</td>
+            <td>Most Concerning. One serious allegation sustained or five concerning allegations sustained across unique cases</td>
           </tr>
           <tr>
             <td>4</td>
-            <td>Two concerning allegations sustained across unique cases or one sustained <i>Use of Force</i> finding</td>
+            <td>Very Concerning. Two concerning allegations sustained across unique cases or one sustained <i>Use of Force</i> finding</td>
           </tr>
           <tr>
             <td>3</td>
-            <td>One concerning allegation sustained</td>
+            <td>Concerning. One concerning allegation sustained</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>One less-concerning allegation sustained or five-or-more cases regardless of finding</td>
+            <td>Less Concerning. One less-concerning allegation sustained or five-or-more cases regardless of finding</td>
           </tr>
           <tr>
             <td>1</td>
-            <td>Two-or-more cases regardless of finding</td>
+            <td>Least Concern. Two-or-more cases regardless of finding</td>
           </tr>
           <tr>
             <td>0</td>
-            <td>One or zero cases, none with a sustained finding</td>
+            <td>Not Concerning. One or zero cases, none with a sustained finding</td>
           </tr>
         </tbody>
       </table>

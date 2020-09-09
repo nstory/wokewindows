@@ -5,45 +5,97 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-9">
+
       <h1><%= @officer.name_with_title %></h1>
-      <div class="scorecard">
-        <dl class="scorecard-pair col-sm-3 col-xl-2">
-          <dt class="scorecard-label">Department</dt>
-          <dd class="scorecard-value">Boston Police</dd>
+      <p class="lead">
+        <% if @officer.title %>
+          <%= format_text(@officer.title) %> at
+        <% end %>
+        Boston Police
+      </p>
+
+      <div class="officer__top">
+        <dl>
+          <dt>Employed on 7/25/2020</dt>
+          <dd><%= format_yes_no(@officer.active) %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-9 col-xl-5">
-          <dt class="scorecard-label">Organization</dt>
-          <dd class="scorecard-value"><%= format_titleize(@officer.organization) %></dd>
+        <dl>
+          <dt>Employee #</dt>
+          <dd><%= format_text(@officer.employee_id) %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-12 col-xl-5">
-          <dt class="scorecard-label">Title</dt>
-          <dd class="scorecard-value"><%= format_text(@officer.title) %></dd>
+        <dl>
+          <dt>Badge #</dt>
+          <dd><%= format_text(@officer.badge) %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-4 col-xl-2">
-          <dt class="scorecard-label">Employee #</dt>
-          <dd class="scorecard-value"><%= format_text(@officer.employee_id) %></dd>
+        <dl>
+          <dt title="Date of Appointment">DOA</dt>
+          <dd><%= format_date @officer.doa %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-4 col-xl-2">
-          <dt class="scorecard-label">Badge</dt>
-          <dd class="scorecard-value"><%= format_text(@officer.badge) %></dd>
+        <dl>
+          <dt>Rank</dt>
+          <dd><%= format_titleize @officer.rank %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-4 col-xl-3">
-          <dt class="scorecard-label">Start Date</dt>
-          <dd class="scorecard-value"><%= format_date @officer.doa %></dd>
+        <dl>
+          <dt>Residence</dt>
+          <dd><%= format_residence(@officer.zip_code) %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-4 col-xl-5">
-          <dt class="scorecard-label">Residence</dt>
-          <dd class="scorecard-value"><%= format_residence(@officer.zip_code) %></dd>
+        <dl>
+          <dt>Organization</dt>
+          <dd><%= format_titleize @officer.organization %></dd>
         </dl>
-        <dl class="scorecard-pair col-sm-4 col-xl-5">
-          <dt class="scorecard-label">Active?</dt>
-          <dd class="scorecard-value"><%= format_yes_no(@officer.active) %></dd>
+        <dl>
+          <dt>Title</dt>
+          <dd><%= format_text @officer.title %></dd>
         </dl>
+        <dl>
+          <dt>IA Score<sup><%= link_to "?", page_path("help", anchor: "ia_score") %></sup></dt>
+          <dd><%= format_ia_score(@officer.ia_score) %></dd>
       </div>
+
+      <p>
+        <%= @officer.first_name_last %> is an <%= @officer.active ? "active" : "inactive" %> <%= @officer.rank_from_title || "employee" %> in the Boston Police Department.
+        <% if @officer.zip_code %>
+          <% if @officer.zip_code.neighborhood %>
+            They live in the Boston neighborhood of <%= @officer.zip_code.neighborhood %>.
+          <% else %>
+            They live outside Boston in <%= @officer.zip_code.city %>, <%= @officer.zip_code.state %>.
+          <% end %>
+        <% end %>
+
+        <% if @officer.years_of_service %>
+          <% if @officer.years_of_service == 0 %>
+            <%= @officer.name_with_title %> has been a Boston Police officer for less than one year.
+          <% elsif @officer.years_of_service == 1 %>
+            <%= @officer.name_with_title %> has been a Boston Police officer for one year.
+          <% elsif @officer.years_of_service > 1 %>
+            <%= @officer.name_with_title %> has been a Boston Police officer for <%= @officer.years_of_service %> years.
+          <% end %>
+        <% end %>
+
+        <% if @latest_compensation %>
+          They made a total of <%= format_currency(@latest_compensation.total) %> in <%= @latest_compensation.year %>.
+          <% if @officer.earnings_rank %>
+            They were the <%= @officer.earnings_rank.ordinalize %> highest earner in 2019 among Boston Police Department employees.
+          <% end %>
+        <% end %>
+      </p>
+
+      <p>
+      <%= @officer.name_with_title %> has an <%= link_to "IA Score", page_path("help", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. They have <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> with at least one sustained allegation, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
+      </p>
+
+      <div class="officer__ia-allegations">
+        <%= render "ia_allegation", allegation: "Conduct Unbecoming", complaints: @officer.ia_sustained_conduct_unbecoming %>
+        <%= render "ia_allegation", allegation: "Neg.Duty/Unreasonable Judge", complaints: @officer.ia_sustained_neg_duty %>
+        <%= render "ia_allegation", allegation: "Respectful Treatment", complaints: @officer.ia_sustained_respectful_treatment %>
+        <%= render "ia_allegation", allegation: "Self Identification", complaints: @officer.ia_sustained_self_identification %>
+        <%= render "ia_allegation", allegation: "Use of Force", complaints: @officer.ia_sustained_use_of_force %>
+      </div>
+
     </div>
     <div class="col-lg-3">
-      <ul class="list-unstyled mt-2">
-        <li><strong>Table of Contents</strong></li>
+      <h5 class="mt-2">Table of Contents</h5>
+      <ul class="list-unstyled">
         <li><a href="#earnings">Earnings</a></li>
         <li><a href="#incidents">Incident Journal <span class="text-muted"><%= @officer.incidents_count %></span></a></li>
         <li><a href="#details">Paid Details <span class="text-muted"><%= @officer.details_count %></span></a></li>
@@ -71,7 +123,7 @@
       </div>
 
       <h2 id="incidents" class="mt-5">Incident Journal</h2>
-      <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD, and most likely does not reflect all incidents this officer responded to. <%= link_to "Learn\u00a0more", page_path("help", anchor: "incidents") %></p>
+      <p>Incident reports filed by this officer. This information comes from the public journal reports published by the BPD. This data is incomplete; officers respond to many incidents that do not then appear in the journal. <%= link_to "Learn\u00a0more", page_path("help", anchor: "incidents") %></p>
       <div class="officer__table">
         <%= render "shared/tables/incidents", id: "officer-incidents-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
@@ -123,7 +175,7 @@
       </div>
 
       <h2 class="mt-5">Additional Source Materials</h2>
-      <p>For the incident journal, field contacts, and complaints listed above, the source materials for each record are listed on the page for that record. Click through each record to see from where it was sourced.</p>
+      <p>For the incident journal, paid details, traffic citations, field contacts, and complaints listed above, the source materials for each record are listed on the page for that record. Click through each record to see from where it was sourced.</p>
     </div>
   </div>
 </div>

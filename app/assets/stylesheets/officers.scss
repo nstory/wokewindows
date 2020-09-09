@@ -11,22 +11,36 @@
   font-weight: bold;
 }
 
-.scorecard {
+.officer__top {
   @extend .row;
-}
+  @extend .mb-1;
 
-.scorecard-pair {
-  margin-bottom: $spacer * .25;
-  @include media-breakpoint-up(lg) {
-    margin-bottom: $spacer;
+  dl {
+    @extend .col-xl-4;
+    @extend .col-lg-4;
+    @extend .col-md-4;
+    @extend .col-sm-6;
+    @extend .col-6;
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+
+    dt {
+      font-size: 85%;
+    }
+
+    padding-right: 36px;
+    &:last-child {
+      padding-right: 0;
+    }
   }
 }
 
-.scorecard-label {
-  font-weight: bold;
-  font-size: 85%;
-}
-
-.scorecard-value {
-  margin-bottom: 0;
+.officer__ia-allegations {
+  .officer__ia-allegation {
+    &:last-child {
+      @extend .mb-2;
+    }
+  }
 }
