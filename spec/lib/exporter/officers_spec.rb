@@ -1,4 +1,4 @@
-describe Exporter::OfficersExporter do
+describe Exporter::Officers do
   include_context "exporter"
 
   describe "james t kirk" do

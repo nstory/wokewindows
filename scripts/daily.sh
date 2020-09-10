@@ -26,9 +26,9 @@ rails 'counters:fix'
 # psql "$DATABASE_URL" -c "\COPY incidents TO STDOUT CSV HEADER" | gzip > incidents.csv.gz
 # aws s3 cp incidents.csv.gz 's3://wokewindows-data/incidents.csv.gz' --acl public-read
 
-rails 'exports:export[Exporter::OfficersExporter,s3://wokewindows-data/exports/officers.csv]'
-rails 'exports:export[Exporter::ComplaintsOfficersExporter,s3://wokewindows-data/exports/complaints_officers.csv]'
-rails 'exports:export[Exporter::ContributionsExporter,s3://wokewindows-data/exports/contributions.csv]'
-rails 'exports:export[Exporter::DetailsExporter,s3://wokewindows-data/exports/details.csv]'
+rails 'exports:export[Exporter::Officers,s3://wokewindows-data/exports/officers.csv]'
+rails 'exports:export[Exporter::ComplaintsOfficers,s3://wokewindows-data/exports/complaints_officers.csv]'
+rails 'exports:export[Exporter::Contributions,s3://wokewindows-data/exports/contributions.csv]'
+rails 'exports:export[Exporter::Details,s3://wokewindows-data/exports/details.csv]'
 
 rails sitemap:refresh:no_ping

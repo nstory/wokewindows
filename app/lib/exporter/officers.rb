@@ -1,4 +1,4 @@
-class Exporter::OfficersExporter < Exporter::Exporter
+class Exporter::Officers < Exporter::Exporter
   def column_definitions
     column("active") { write_boolean(record.active) }
     column("employee_id") { record.employee_id }

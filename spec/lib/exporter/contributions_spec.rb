@@ -1,6 +1,6 @@
-describe Exporter::ContributionsExporter do
+describe Exporter::Contributions do
   let(:io) { StringIO.new }
-  let(:exporter) { Exporter::ContributionsExporter.new }
+  let(:exporter) { Exporter::Contributions.new }
   let(:records) { CSV.parse(io.string, headers: true) }
   let(:record) { records.first }
 

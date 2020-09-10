@@ -1,4 +1,4 @@
-class Exporter::ComplaintsOfficersExporter < Exporter::Exporter
+class Exporter::ComplaintsOfficers < Exporter::Exporter
   def column_definitions
     column("ia_number") { record.complaint.ia_number }
     column("case_number") { record.complaint.case_number }
@@ -12,7 +12,7 @@ class Exporter::ComplaintsOfficersExporter < Exporter::Exporter
     column("allegation") { record.allegation }
     column("finding") { record.finding }
     column("finding_date") { record.finding_date }
-    prefix("officer", Exporter::OfficersExporter) { record.officer }
+    prefix("officer", Exporter::Officers) { record.officer }
   end
 
   def records

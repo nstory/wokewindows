@@ -1,4 +1,4 @@
-describe Exporter::DetailsExporter do
+describe Exporter::Details do
   include_context "exporter"
   let!(:detail_kirk) { create(:detail_kirk) }
 

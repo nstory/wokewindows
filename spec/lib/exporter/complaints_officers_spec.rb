@@ -1,6 +1,6 @@
-describe Exporter::ComplaintsOfficersExporter do
+describe Exporter::ComplaintsOfficers do
   let(:io) { StringIO.new }
-  let(:exporter) { Exporter::ComplaintsOfficersExporter.new }
+  let(:exporter) { Exporter::ComplaintsOfficers.new }
   let(:records) { CSV.parse(io.string, headers: true) }
 
   describe "minimal complaint" do

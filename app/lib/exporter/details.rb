@@ -1,4 +1,4 @@
-class Exporter::DetailsExporter < Exporter::Exporter
+class Exporter::Details < Exporter::Exporter
   def column_definitions
     column("tracking_no") { record.tracking_no }
     column("employee_number") { record.employee_number }
@@ -18,7 +18,7 @@ class Exporter::DetailsExporter < Exporter::Exporter
     column("pay_rate") { write_money(record.pay_rate) }
     column("latitude") { record.latitude }
     column("longitude") { record.longitude }
-    prefix("officer", Exporter::OfficersExporter) { record.officer }
+    prefix("officer", Exporter::Officers) { record.officer }
   end
 
   def records

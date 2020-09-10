@@ -1,4 +1,4 @@
-class Exporter::ContributionsExporter < Exporter::Exporter
+class Exporter::Contributions < Exporter::Exporter
   def column_definitions
     column("date") { record.date }
     column("contributor") { record.contributor }
@@ -15,7 +15,7 @@ class Exporter::ContributionsExporter < Exporter::Exporter
     column("committee_id") { record.committee_id }
     column("memo_text") { record.memo_text }
     column("receipt_type_full") { record.receipt_type_full }
-    prefix("officer", Exporter::OfficersExporter) { record.officer }
+    prefix("officer", Exporter::Officers) { record.officer }
   end
 
   def records
