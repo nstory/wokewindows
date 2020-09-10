@@ -37,6 +37,8 @@ describe Exporter::Officers do
       expect(record["citations_count"]).to eql("18")
       expect(record["articles_officers_count"]).to eql("19")
       expect(record["ia_sustained_conduct_unbecoming"]).to eql("0")
+      expect(record["ia_cases"]).to eql("0")
+      expect(record["ia_allegations"]).to eql("0")
     end
   end
 end

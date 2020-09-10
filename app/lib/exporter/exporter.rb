@@ -48,6 +48,10 @@ class Exporter::Exporter
     bool ? "true" : "false"
   end
 
+  def write_array(arr)
+    arr ? arr.join(", ") : nil
+  end
+
   def write_money(money)
     money ? "%0.2f" % money : nil
   end

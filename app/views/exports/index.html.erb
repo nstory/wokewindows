@@ -22,6 +22,7 @@
           <%= render "table_row", export: @exports["complaints_officers"], key: "complaints_officers" %>
           <%= render "table_row", export: @exports["contributions"], key: "contributions" %>
           <%= render "table_row", export: @exports["details"], key: "details" %>
+          <%= render "table_row", export: @exports["field_contacts"], key: "field_contacts" %>
           <%= render "table_row", export: @exports["officers"], key: "officers" %>
         </tbody>
       </table>
@@ -89,6 +90,7 @@
       <h2 id="contributions">Contributions</h2>
       <%= render "info", export: @exports["contributions"] %>
       <p>Export of the <code>contributions</code> table. This file lists contributions to political candidates by Boston Police officers. See <%= link_to "Contributions", page_path("contributions") %>.</p>
+      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
       <%= render "data_dictionary" do %>
         <tr>
           <td>date</td>
@@ -159,6 +161,7 @@
       <h2 id="details">Details</h2>
       <%= render "info", export: @exports["details"] %>
       <p>Export of the <code>details</code> table. This file lists paid details worked by BPD officers. See <%= link_to "Paid Details", page_path("help", anchor: "details") %> for more documentation.</p>
+      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
       <%= render "data_dictionary" do %>
         <tr>
           <td>tracking_no</td>
@@ -235,6 +238,125 @@
         <tr>
           <td>officer_</td>
           <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code>. If these fields are blank, that means we weren't able to unambiguously match the officer name to one in our database.</td>
+        </tr>
+      <% end %>
+
+      <h2 id="field_contacts">Field Contacts</h2>
+      <%= render "info", export: @exports["field_contacts"] %>
+      <p>Export of the <code>field_contacts</code> table. This file contains Field Interrogation and Observation (FIO) reports filed by Boston Police officers from mid-2015 through 2019. See <%= link_to "Field Contacts (FIO)", page_path("help", anchor: "field_contacts") %>.</p>
+      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>fc_num</td>
+          <td>unique identifier for this FIO</td>
+        </tr>
+        <tr>
+          <td>contact_date</td>
+          <td>date and time of the FIO</td>
+        </tr>
+        <tr>
+          <td>contact_officer_employee_id</td>
+          <td>six-digit City of Boston employee id of the officer who filed the report</td>
+        </tr>
+        <tr>
+          <td>contact_officer_name</td>
+          <td>name of the officer</td>
+        </tr>
+        <tr>
+          <td>supervisor_employee_id</td>
+          <td>six-digit City of Boston employee id of the supervising officer</td>
+        </tr>
+        <tr>
+          <td>supervisor_name</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>street</td>
+          <td>street name; sometimes this is an intersection or even an address</td>
+        </tr>
+        <tr>
+          <td>city</td>
+          <td>this is usually "boston" but sometimes this is a neighborhood</td>
+        </tr>
+        <tr>
+          <td>state</td>
+          <td>almost always MA</td>
+        </tr>
+        <tr>
+          <td>zip</td>
+          <td>zip code</td>
+        </tr>
+        <tr>
+          <td>frisked_searched</td>
+          <td>true if any person was frisked/searched during this contact</td>
+        </tr>
+        <tr>
+          <td>circumstance</td>
+          <td>one of: stopped, encountered, observed</td>
+        </tr>
+        <tr>
+          <td>basis</td>
+          <td>one of: probably_cause, reasonable_suspicion, encounter, intel</td>
+        </tr>
+        <tr>
+          <td>vehicle_year</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>vehicle_state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>vehicle_make</td>
+          <td>e.g. "honda"</td>
+        </tr>
+        <tr>
+          <td>vehicle_model</td>
+          <td>e.g. "civic"</td>
+        </tr>
+        <tr>
+          <td>vehicle_color</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>vehicle_style</td>
+          <td>e.g. "hatchback, 4 door"</td>
+        </tr>
+        <tr>
+          <td>vehicle_type</td>
+          <td>e.g. "station wagon"</td>
+        </tr>
+        <tr>
+          <td>key_situations</td>
+          <td>this is a comma separated list of values</td>
+        </tr>
+        <tr>
+          <td>narrative</td>
+          <td>prose description of the stop</td>
+        </tr>
+        <tr>
+          <td>weather</td>
+          <td>e.g. "sunny"</td>
+        </tr>
+        <tr>
+          <td>field_contact_names_count</td>
+          <td>the number of persons who were FIO'd as part of this encounter</td>
+        </tr>
+        <tr>
+          <td>stop_duration</td>
+          <td>e.g. "ten_to_fifteen_minutes"</td>
+        </tr>
+        <tr>
+          <td>search_vehicle</td>
+          <td>boolean indicating whether the vehicle was searched</td>
+        </tr>
+        <tr>
+          <td>summons_issued</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>officer_</td>
+          <td>Additional information about the contact_officer. See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code>. If these fields are blank, that means we weren't able to match the officer name to one in our database.</td>
         </tr>
       <% end %>
 

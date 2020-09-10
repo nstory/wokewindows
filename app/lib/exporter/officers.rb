@@ -29,7 +29,7 @@ class Exporter::Officers < Exporter::Exporter
     column("ia_sustained_details") { record.ia_sustained_details.count }
     column("ia_sustained_cases") { record.ia_sustained_complaints.count }
     column("ia_sustained_allegations") { record.ia_sustained_allegations.count }
-    column("ia_cases") { record.ia_complaints }
+    column("ia_cases") { record.ia_complaints.count }
     column("ia_allegations") { record.ia_allegations }
     column("field_contacts_count") { record.field_contacts_count }
     column("incidents_count") { record.incidents_count }
