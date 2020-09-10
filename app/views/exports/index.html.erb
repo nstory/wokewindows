@@ -23,6 +23,7 @@
           <%= render "table_row", export: @exports["contributions"], key: "contributions" %>
           <%= render "table_row", export: @exports["details"], key: "details" %>
           <%= render "table_row", export: @exports["field_contacts"], key: "field_contacts" %>
+          <%= render "table_row", export: @exports["field_contact_names"], key: "field_contact_names" %>
           <%= render "table_row", export: @exports["officers"], key: "officers" %>
         </tbody>
       </table>
@@ -243,7 +244,7 @@
 
       <h2 id="field_contacts">Field Contacts</h2>
       <%= render "info", export: @exports["field_contacts"] %>
-      <p>Export of the <code>field_contacts</code> table. This file contains Field Interrogation and Observation (FIO) reports filed by Boston Police officers from mid-2015 through 2019. See <%= link_to "Field Contacts (FIO)", page_path("help", anchor: "field_contacts") %>.</p>
+      <p>Export of the <code>field_contacts</code> table. This file contains Field Interrogation and Observation (FIO) reports filed by Boston Police officers from mid-2015 through 2019. See <%= link_to "Field Contacts (FIO)", page_path("help", anchor: "field_contacts") %> for more information.</p>
       <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
       <%= render "data_dictionary" do %>
         <tr>
@@ -357,6 +358,65 @@
         <tr>
           <td>officer_</td>
           <td>Additional information about the contact_officer. See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code>. If these fields are blank, that means we weren't able to match the officer name to one in our database.</td>
+        </tr>
+      <% end %>
+
+      <h2 id="field_contact_names">Field Contact Names</h2>
+      <%= render "info", export: @exports["field_contact_names"] %>
+      <p>Export of the <code>field_contact_names</code> table. This file contains one row for each individual who was FIO'd by Boston Police officers from mid-2015 through 2019. See <%= link_to "Field Contacts (FIO)", page_path("help", anchor: "field_contacts") %> for more information.</p>
+      <p>These records have been joined with records from <a href="#field_contacts">Field Contacts</a>, and with records from <a href="#officers">Officers</a>.</p>
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>fc_num</td>
+          <td>the unique identifier of the associated field_contact</td>
+        </tr>
+        <tr>
+          <td>race</td>
+          <td>race of the individual</td>
+        </tr>
+        <tr>
+          <td>age</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>build</td>
+          <td>e.g. "muscular"</td>
+        </tr>
+        <tr>
+          <td>hair_style</td>
+          <td>e.g. "braided"</td>
+        </tr>
+        <tr>
+          <td>skin_tone</td>
+          <td>e.g. "brown"</td>
+        </tr>
+        <tr>
+          <td>ethnicity</td>
+          <td>either "hispanic origin" or "not of hispanic origin"</td>
+        </tr>
+        <tr>
+          <td>other_clothing</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>license_state</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>license_type</td>
+          <td>e.g. "class d"</td>
+        </tr>
+        <tr>
+          <td>frisked_searched</td>
+          <td>whether the individual was frisked/searched; only appears in data starting Sep 29, 2019</td>
+        </tr>
+        <tr>
+          <td>gender</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>field_contact_</td>
+          <td>See <a href="#field_contacts">Field Contacts</a> for all fields prefixed with <code>field_contact_</code></td>
         </tr>
       <% end %>
 
