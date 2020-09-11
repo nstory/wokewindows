@@ -19,6 +19,7 @@
           </tr>
         </thead>
         <tbody>
+          <%= render "table_row", export: @exports["citations"], key: "citations" %>
           <%= render "table_row", export: @exports["complaints_officers"], key: "complaints_officers" %>
           <%= render "table_row", export: @exports["contributions"], key: "contributions" %>
           <%= render "table_row", export: @exports["details"], key: "details" %>
@@ -27,6 +28,174 @@
           <%= render "table_row", export: @exports["officers"], key: "officers" %>
         </tbody>
       </table>
+
+      <h2 id="citations">Citations</h2>
+      <%= render "info", export: @exports["citations"] %>
+      <p>Export of the <code>citations</code> table. This file lists every traffic citation issued by Boston Police officers in 2019. See <%= link_to "Traffic Citations", page_path("help", anchor: "citations") %> for further information.</p>
+      <p>Each citation appears multiple times in this file, once for each offense recorded on the ticket.</p>
+      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>ticket_number</td>
+          <td>unique identifier for the citation; the same number will appear multiple times in the spreadsheet if the ticket is for multiple offenses</td>
+        </tr>
+        <tr>
+          <td>issuing_agency</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>officer_number</td>
+          <td>the six-digit City of Boston employee id of the officer</td>
+        </tr>
+        <tr>
+          <td>ticket_type</td>
+          <td>one of CIVIL, CRIM, or ARREST</td>
+        </tr>
+        <tr>
+          <td>source</td>
+          <td>one of POLICE, COURT, ECITATION, or VIOLATOR</td>
+        </tr>
+        <tr>
+          <td>violator_type</td>
+          <td>one of OPERATOR, OWN, PASS, or BIKE</td>
+        </tr>
+        <tr>
+          <td>cdl</td>
+          <td><a href="Commercial driver's license">https://en.wikipedia.org/wiki/Commercial_driver's_license</a> boolean</td>
+        </tr>
+        <tr>
+          <td>license_class</td>
+          <td>e.g. "D" for Class D license</td>
+        </tr>
+        <tr>
+          <td>event_date</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>location_id</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>location_name</td>
+          <td>city of Boston neighborhood</td>
+        </tr>
+        <tr>
+          <td>posted_speed</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>violation_speed</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>posted</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>radar</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>clocked</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>race</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>sex</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>vehicle_color</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>make</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>model_year</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>sixteen_pass</td>
+          <td>16+ passenger vehicle</td>
+        </tr>
+        <tr>
+          <td>haz_mat</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>amount</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>paid</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>hearing_requested</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>court_code</td>
+          <td>see <a href="https://www.mass.gov/info-details/trial-court-codes-numerical-listing">Trial Court codes</a> for mapping</td>
+        </tr>
+        <tr>
+          <td>age</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>searched</td>
+          <td>boolean</td>
+        </tr>
+        <tr>
+          <td>offense</td>
+          <td>code for an offense; seems to correspond to a section in the Massachusetts General Laws e.g. "90160" is <a href="https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXIV/Chapter90/Section16">MGL c.90 §16</a></td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>description of the offense</td>
+        </tr>
+        <tr>
+          <td>assessment</td>
+          <td>for the offense</td>
+        </tr>
+        <tr>
+          <td>expected_assessment</td>
+          <td>for the offense</td>
+        </tr>
+        <tr>
+          <td>display_assessment</td>
+          <td>for the offense</td>
+        </tr>
+        <tr>
+          <td>disposition</td>
+          <td>of the offense e.g. NPC</td>
+        </tr>
+        <tr>
+          <td>disposition_description</td>
+          <td>of the offense e.g. "No Probable Cause Found"</td>
+        </tr>
+        <tr>
+          <td>major_incident</td>
+          <td>for the offense; boolean</td>
+        </tr>
+        <tr>
+          <td>surchargeable</td>
+          <td>for the offense; boolean</td>
+        </tr>
+        <tr>
+          <td>sdip_points</td>
+          <td>for the offense; see <a href="https://www.mass.gov/info-details/safe-driver-insurance-plan-sdip">Safe Driver Insurance Plan (SDIP)</a></td>
+        </tr>
+        <tr>
+          <td>officer_</td>
+          <td>See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code>. If these fields are blank, that means we weren't able to unambiguously match the officer name to one in our database.</td>
+        </tr>
+      <% end %>
 
       <h2 id="complaints_officers">Complaints - Officers</h2>
       <%= render "info", export: @exports["complaints_officers"] %>

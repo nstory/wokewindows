@@ -32,5 +32,6 @@ rails 'exports:export[Exporter::Contributions,s3://wokewindows-data/exports/cont
 rails 'exports:export[Exporter::Details,s3://wokewindows-data/exports/details.csv]'
 rails 'exports:export[Exporter::FieldContacts,s3://wokewindows-data/exports/field_contacts.csv]'
 rails 'exports:export[Exporter::FieldContactNames,s3://wokewindows-data/exports/field_contact_names.csv]'
+rails 'exports:export[Exporter::Citations,s3://wokewindows-data/exports/citations.csv]'
 
 rails sitemap:refresh:no_ping
