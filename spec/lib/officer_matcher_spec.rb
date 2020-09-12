@@ -1,5 +1,5 @@
 describe OfficerMatcher do
-  let!(:officer) { Officer.create!(hr_name: "Foo,Bar", employee_id: 42) }
+  let!(:officer) { Officer.create!(hr_name: "Foo,Bar", employee_id: 42, doa: "2020-06-29") }
   let(:officer_matcher) { OfficerMatcher.new }
 
   describe "#matches" do
@@ -16,6 +16,14 @@ describe OfficerMatcher do
       it "doesn't match if ambiguous" do
         expect(officer_matcher.matches("Officer Bar Foo lol")).to eql([])
       end
+    end
+
+    it "excludes officer hired after date" do
+      expect(officer_matcher.matches("Bar Foo", max_start_date: Date.new(2020, 6, 28))).to eql([])
+    end
+
+    it "includes officer hired before date" do
+      expect(officer_matcher.matches("Bar Foo", max_start_date: Date.new(2020, 6, 30))).to eql([officer])
     end
   end
 end
