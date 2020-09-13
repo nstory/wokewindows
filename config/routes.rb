@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   get ':id', to: 'sitemaps#show', constraints: { id: /sitemap[a-z0-9.]+/ }
   get 'exports', to: 'exports#index'
+  get "/pages/*id" => 'pages#show', as: :page, format: false
+  get "/help/*id" => 'help#show', as: :help, format: false
 
   root "root#index"
 end

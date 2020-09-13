@@ -199,7 +199,7 @@
 
       <h2 id="complaints_officers">Complaints - Officers</h2>
       <%= render "info", export: @exports["complaints_officers"] %>
-      <p>Export of the <code>complaint_officers</code> table. This file lists every Internal Affairs (IA) allegation against a Boston Police Department officer or employee. See <%= link_to "Complaints (Internal Affairs)", page_path("help", anchor: "complaints") %> for further information including the data sources used to compile these data.</p>
+      <p>Export of the <code>complaint_officers</code> table. This file lists every Internal Affairs (IA) allegation against a Boston Police Department officer or employee. See <%= link_to "Complaints (Internal Affairs)", help_path("internal_affairs") %> for further information including the data sources used to compile these data.</p>
       <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
 
       <%= render "data_dictionary" do %>

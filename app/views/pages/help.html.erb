@@ -44,73 +44,7 @@
       <h2 id="data_tables">Data Tables</h2>
 
       <h3 id="complaints">Complaints (Internal Affairs)</h3>
-      <p>Internal Affairs cases include both citizen complaints, where a member of the community files a complaint regarding the conduct of an officer or a civilian employee of the BPD, and internal investigations. We source this data from a number of sources: <a href="#bpd_ia_data_2001_2011">2001 to 2011 IA data</a>, <a href="#allegations_2010_to_2020">2010 to 2020 Allegations</a>, and <a href="#2014_officer_ia_log">2014 Officer IA Log</a>.</p>
-      <p>A case is identified by a unique number e.g. <i>IAD2019-0412</i>. An individual case may involve one-or-more employees, each with one-or-more allegations. A finding is made for each allegation against each officer.</p>
-      <p>For the vast majority of cases, we only have the general nature of the allegations e.g. <i>Neg.Duty/Unreasonable Judge</i>. For a subset of the cases from 2014, we also have prose summaries (redacted).</p>
-      <p>The list of complaints that appears on the officer page (see the <%= link_to "Commissioner Gross", officer_path("9018") %> page for an example of an officer's page) is linked based on matching the name of the officer to that listed in the complaint. We make efforts to not link ambiguous cases where two officers have very similar names (or the exact same name!) but it's possible a mislink could happen. It's wise to look to the original source data to confirm.</p>
-      <p>Conversely, the listing of complaints on the officer page may not be comprehensive; there may be cases we failed to link the officer to. To find these, try searching the <%= link_to "complaints table", complaints_path %> for variations of the officer's name.</p>
-
-      <h4 id="ia_score">IA Score</h4>
-      <p>We calculate a score from 0 - 5 that indicates the severity of the Internal Affairs cases opened against an officer. This score is defined and calculated by The Woke Windows Project. The algorithm which calculates the score and the classification of allegations was invented by us, and is open to change.</p>
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th>IA&nbsp;Score</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>5</td>
-            <td>Most Concerning. One serious allegation sustained or five concerning allegations sustained across unique cases</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Very Concerning. Two concerning allegations sustained across unique cases or one sustained <i>Use of Force</i> finding</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Concerning. One concerning allegation sustained</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Less Concerning. One less-concerning allegation sustained or five-or-more cases regardless of finding</td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Least Concern. Two-or-more cases regardless of finding</td>
-          </tr>
-          <tr>
-            <td>0</td>
-            <td>Not Concerning. One or zero cases, none with a sustained finding</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="table">
-        <thead>
-          <tr>
-            <th colspan="2">Classification of Allegations</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Serious</th>
-            <td>Violation of Criminal Law, Conformance to Laws</td>
-          </tr>
-          <tr>
-            <th>Concerning</th>
-            <td>
-              Neg.Duty/Unreasonable Judge, Respectful Treatment, Conduct Unbecoming, Use of Force, Untruthfulness, Drug Test, Dir./Orders, Self Identification, Directives/Orders, Abuse of Process, Securing and Maintenance of Firearm, Untruthfulness in Department Report, Investigation of Use Of Force
-            </td>
-          </tr>
-          <tr>
-            <th>Less Concerning</th>
-            <td><i>All other allegations</i></td>
-          </tr>
-        </tbody>
-      </table>
+      <p><a href="/help/internal_affairs">See the dedicated Internal Affairs help page</a></p>
 
       <h3 id="field_contacts">Field Contacts (FIO)</h3>
       <p>Field Interrogation and Observation (FIO) reports are how the BPD records the department's stop-and-frisk encounters (and other encouters, many of which do not involve a search).</p>

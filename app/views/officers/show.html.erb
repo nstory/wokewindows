@@ -81,7 +81,7 @@
       </p>
 
       <p>
-      <%= @officer.name_with_title %> has an <%= link_to "IA Score", page_path("help", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. They have <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> with at least one sustained allegation, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
+      <%= @officer.name_with_title %> has an <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. They have <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> with at least one sustained allegation, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
       </p>
 
       <div class="officer__ia-allegations">
@@ -153,7 +153,7 @@
       </div>
 
       <h2 id="complaints" class="mt-5">Complaints (IA Cases) <span class="text-muted">&mdash;</span> IA Score: <%= format_ia_score(@officer.ia_score) %> <sup><a href="<%= page_path('help', anchor: 'ia_score') %>">?</a></h2>
-      <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn\u00a0more", page_path("help", anchor: "complaints") %></p>
+      <p>Complaints filed against this officer either by citizens or as a result of internal investigations. This data reflects the years 2001-2020, but may be incomplete. <%= link_to "Learn\u00a0more", help_path("internal_affairs") %></p>
       <div class="officer__table">
         <%= render "shared/tables/complaints", id: "officer-complaints-table", params: {officer_id: @officer.id}, options: {searching: false, saveState: false} %>
       </div>
