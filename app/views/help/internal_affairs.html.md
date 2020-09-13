@@ -20,7 +20,7 @@ With the exception of the records from the [2014 Officer IA Log](/pages/help#201
 
 We link an allegation to an officer using the officer's name. Our algorithm for matching records will not make the link if the name is ambiguous (i.e. if two officers share the same name), however, it is possible a mis-link could happen.
 
-Conversely, it is possible we have an allegation against an officer in our database, but it does not appear on the officer's page (i.e. it was not linked). You may wish to do a more thorough search against the [Complaints (Internal Affairs) Data Table](/complaints), which does contain all cases in our database.
+Conversely, it is possible we have an allegation against an officer in our database, but it does not appear on the officer's page (i.e. it was not linked). You may wish to do a search against the [Complaints (Internal Affairs) Data Table](/complaints), which does contain all cases in our database.
 
 ### How to Access this Data
 
