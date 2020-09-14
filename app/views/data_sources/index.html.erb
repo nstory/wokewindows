@@ -1,0 +1,41 @@
+<% @layout_application_title = "Data Sources" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Data Sources</h1>
+      <p class="lead">Collections of public records regarding the Boston Police Department (BPD)</p>
+      <p>This is a full list of the data sources we use to populate Woke Windows (and some data sources we have yet to incorporate). Most of these data sets are spreadsheets or other tabular data that were received in response to public records requests.</p>
+      <p>Do you know or possess a source of data we do not list here? Please contact us at <%= contact_us %> so we may include it on this list. We are especially interested in any public records from the Internal Affairs Division.</p>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @data_sources.each do |ds| %>
+            <tr>
+              <td>
+                <% if ds.status == "Available" %>
+                  <span class="badge badge-success text-white">Available</span>
+                <% elsif ds.status == "Withdrawn" %>
+                  <span class="badge badge-secondary">Withdrawn</span>
+                <% elsif ds.status == "Requested" %>
+                  <span class="badge badge-pill badge-light">Requested</span>
+                <% end %>
+              </td>
+              <td><%= link_to ds.title, data_source_path(ds.id) %></td>
+              <td class="text-nowrap"><%= ds.date ? ds.date.strftime("%F") : format_unknown %></td>
+              <td><%= ds.description %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

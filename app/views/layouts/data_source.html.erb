@@ -1,0 +1,23 @@
+<% content_for :content do %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="mt-1 mb-1">
+          <%= link_to "« Browse all data sources", data_sources_path %>
+        </p>
+        <h1><%= @data_source.title %></h1>
+        <p>
+          <% @data_source.links.each do |link| %>
+            <%= link_to link, link %>
+            <br>
+          <% end %>
+        </p>
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<% @layout_application_title = @data_source.title %>
+
+<%= render template: "layouts/application" %>

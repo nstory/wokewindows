@@ -1,0 +1,76 @@
+<%#
+---
+title: Court Overtime 2014 to 2019
+date: "2020-08-19"
+status: Available
+description: Report showing court and trial overtime
+links:
+  - https://www.baystatebanner.com/2020/08/19/little-oversight-on-police-court-overtime/
+  - https://wokewindows-data.s3.amazonaws.com/court_overtime_2014_2019.xlsx
+---
+%>
+
+<p>Report requested by City Councilor Ricardo Arroyo showing court-related overtime hours worked by Boston Police officers.</p>
+
+<table class="table help__definitions">
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ID</td>
+      <td>employee id of the officer</td>
+    </tr>
+    <tr>
+      <td>NAME</td>
+      <td>name of the officer</td>
+    </tr>
+    <tr>
+      <td>RANK</td>
+      <td>e.g. Ptl or Det</td>
+    </tr>
+    <tr>
+      <td>ASSIGNED</td>
+      <td>this matches the organization of the officer in the employee roster</td>
+    </tr>
+    <tr>
+      <td>CHARGED</td>
+      <td>usually matches ASSIGNED</td>
+    </tr>
+    <tr>
+      <td>OTDATE</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>DESCRIPTIONS</td>
+      <td>always COURT CODE ONLY</td>
+    </tr>
+    <tr>
+      <td>OTCODE</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>DESCRIPTION</td>
+      <td>e.g. "PROBATION HEARING" or "COURT:TRIAL"</td>
+    </tr>
+    <tr>
+      <td>STARTTIME</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>ENDTIME</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>WRKDHRS</td>
+      <td>difference between STARTTIME and ENDTIME</td>
+    </tr>
+    <tr>
+      <td>OTHOURS</td>
+      <td>WRKDHRS after rounding-up logic is applied (e.g. anything under four hours is rounded up to four)</td>
+    </tr>
+  </tbody>
+</table>

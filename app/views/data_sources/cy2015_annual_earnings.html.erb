@@ -1,0 +1,33 @@
+<%#
+---
+title: BPD CY2015 Annual Earnings File
+date: "2015-12-31"
+status: Available
+description: Earnings for all BPD employees in 2015
+links:
+  - https://www.muckrock.com/foi/boston-3/boston-police-department-overtime-pay-2015-25166/
+---
+%>
+<p>This report for the year 2015 includes all BPD employees, including civilian employees. It contains many fields that also appear in the <%= link_to "Employee Earnings Reports", data_source_path("employee_earnings") %>, and are explained in the documentation for those reports. In addition, it contains the following fields:</p>
+<table class="table help__definitions">
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>EMPL ID</td>
+      <td>Six digit City of Boston employee id</td>
+    </tr>
+    <tr>
+      <td>DEPTID</td>
+      <td>Always 211000</td>
+    </tr>
+    <tr>
+      <td>EMPL RCD</td>
+      <td>This seems to be a common field in PeopleSoft systems &mdash; I'm unsure as to its meaning</td>
+    </tr>
+  </tbody>
+</table>

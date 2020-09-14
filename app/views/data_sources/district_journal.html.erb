@@ -1,0 +1,50 @@
+<%#
+---
+title: Public Journal
+description: Daily PDF of incidents to which Boston Police officers responded, and arrests made
+status: Available
+links:
+  - https://bpdnews.com/
+---
+%>
+
+<p>On an almost daily basis, The Boston Police Department posts on <a href="https://bpdnews.com/">bpdnews.com</a> a public journal of the incident reports filed by officers.</p>
+<p>This data is similar to and overlaps with that provided by the <%= link_to "Crime Incident Reports", data_source_path("crime_incident_reports") %>. However, the journals provide some additional information: the officer who responded, and any arrests that were made.</p>
+<table class="table help__definitions">
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Report Date &amp; Time</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Complaint #</td>
+      <td>this can be joined with the <code>INCIDENT_NUMBER</code> field from the <%= link_to "Crime Incident Reports", data_source_path("crime_incident_reports") %>; the number may be prefixed with the letter <i>I</i> or have a trailing <i>-00</i> I remove these leaving just a nine-digit number</td>
+    </tr>
+    <tr>
+      <td>Occurrence Date &amp; Time</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Officer</td>
+      <td>the employee id of a police officer and name; I believe this is the "Reporting Officer" &mdash; sometimes the employee id and the officer name are mismatched, possibly due to human errors in transcription</td>
+    </tr>
+    <tr>
+      <td>Location of Occurrence</td>
+      <td>this is similar to the <code>STREET</code> field in the <%= link_to "Crime Incident Reports", data_source_path("crime_incident_reports") %>, but is sometimes more specific</td>
+    </tr>
+    <tr>
+      <td>Nature of Incident</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Arrests</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

@@ -39,6 +39,10 @@ GEM
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
     actionview-encoded_mail_to (1.0.9)
       rails
+    active_attr (0.15.0)
+      actionpack (>= 3.0.2, < 6.1)
+      activemodel (>= 3.0.2, < 6.1)
+      activesupport (>= 3.0.2, < 6.1)
     activejob (6.0.3.2)
       activesupport (= 6.0.3.2)
       globalid (>= 0.3.6)
@@ -153,6 +157,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    front_matter_parser (0.2.1)
     geocoder (1.6.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -339,6 +344,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionview-encoded_mail_to (= 1.0.9)
+  active_attr (= 0.15.0)
   ajax-datatables-rails (= 1.2.0)
   aws-sdk-s3 (~> 1.72)
   bootstrap (~> 4.5.0)
@@ -350,6 +356,7 @@ DEPENDENCIES
   dotenv-rails (= 2.7.5)
   factory_bot_rails (~> 6.1.0)
   faraday (~> 1.0.1)
+  front_matter_parser (= 0.2.1)
   geocoder (= 1.6.3)
   high_voltage (~> 3.1.2)
   httparty (~> 0.18.1)

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'exports', to: 'exports#index'
   get "/pages/*id" => 'pages#show', as: :page, format: false
   get "/help/*id" => 'help#show', as: :help, format: false
+  get "/data_sources" => 'data_sources#index', as: :data_sources, format: false
+  get "/data_sources/*id" => 'data_sources#show', as: :data_source, format: false
 
   root "root#index"
 end
