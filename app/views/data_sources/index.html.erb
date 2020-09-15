@@ -6,39 +6,65 @@
     <div class="col">
       <h1>Data Sources</h1>
       <p class="lead">Collections of public records regarding the Boston Police Department (BPD)</p>
-      <p>This is a full list of the data sources we use to populate Woke Windows (and some data sources we have yet to incorporate). Most of these data sets are spreadsheets or other tabular data that were received in response to public records requests.</p>
+      <p>This is a full list of the data sources we use to populate <a href="/">Woke Windows</a> (and some data sources we have yet to incorporate). Most of these data sets are spreadsheets or other tabular data that were received in response to public records requests.</p>
+      <p>Looking for Boston Police data to analyze? See our <%= link_to "Data Exports", exports_path %> for CSV files that have already been combined, cleaned, and documented.</p>
       <p>Do you know of or possess a source of data we do not list here? Please contact us at <%= contact_us %> so we may include it on this list. We are especially interested in any public records from the Internal Affairs Division.</p>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @data_sources.each do |ds| %>
+      <div class="table-responsive-sm">
+        <table class="table">
+          <thead>
             <tr>
-              <td>
-                <% if ds.status == "Available" %>
-                  <span class="badge badge-pill badge-info" title="Available for download; not yet included in Woke Windows">Available</span>
-                <% elsif ds.status == "Withdrawn" %>
-                  <span class="badge badge-pill badge-secondary" title="Public records request withdrawn">Withdrawn</span>
-                <% elsif ds.status == "Requested" %>
-                  <span class="badge badge-pill badge-light" title="Public records request made but not yet fulfilled">Requested</span>
-                <% elsif ds.status == "Included" %>
-                  <span class="badge badge-pill badge-success text-white" title="Included in the Woke Windows database">Included</span>
-                <% end %>
-              </td>
-              <td><%= link_to ds.title, data_source_path(ds.id) %></td>
-              <td class="text-nowrap"><%= ds.date ? ds.date.strftime("%F") : format_unknown %></td>
-              <td><%= ds.description %></td>
+              <th></th>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Description</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @data_sources.sort_by(&:title).each do |ds| %>
+              <tr>
+                <td>
+                  <% if ds.status == "Available" %>
+                    <span class="badge badge-pill badge-info" title="Available for download; not yet included in Woke Windows">Available</span>
+                  <% elsif ds.status == "Withdrawn" %>
+                    <span class="badge badge-pill badge-secondary" title="Public records request withdrawn">Withdrawn</span>
+                  <% elsif ds.status == "Requested" %>
+                    <span class="badge badge-pill badge-light" title="Public records request made but not yet fulfilled">Requested</span>
+                  <% elsif ds.status == "Included" %>
+                    <span class="badge badge-pill badge-success text-white" title="Included in the Woke Windows database">Included</span>
+                  <% end %>
+                </td>
+                <td><%= link_to ds.title, data_source_path(ds.id) %></td>
+                <td class="text-nowrap"><%= ds.date ? ds.date.strftime("%F") : format_unknown %></td>
+                <td><%= ds.description %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>More Resources</h2>
+      <p>Listed below are sites with more records similar to those above.</p>
+
+      <p>
+        <a href="https://data.aclum.org/">Data for Justice Project</a><br>
+        Lots of useful resources and tools from the <a href="https://www.aclum.org/">ACLU Massachusetts</a>.
+      </p>
+
+      <p>
+        <a href="https://blackstonian.org/">Blackstonian</a><br>
+        See the <a href="http://vault.blackstonian.org/">Blackstonian Vault</a> for reports and datasets.
+      </p>
+
+      <p>
+        <a href="https://masscrime.chs.state.ma.us/">CrimeSOLV</a><br>
+        Tables and charts of crime data; compiled from data submitted by departments throughout Massachusetts.
+      </p>
+
+      <p>
+        <a href="https://www.muckrock.com/">MuckRock</a><br>
+        I've found a lot of great datasets by searching the requests made by other people.
+      </p>
     </div>
   </div>
 </div>
