@@ -4,9 +4,9 @@
 ## Overview
 We present Internal Affairs Division (IAD) cases aggregated from three sources:
 
-- [2010 to 2020 Allegations](/pages/help#allegations_2010_to_202)
-- [2001 to 2011 IA Data](/pages/help#bpd_ia_data_2001_2011)
-- [2014 Officer IA Log](/pages/help#2014_officer_ia_log)
+- [2010 to 2020 Allegations](/data_sources/allegations_2010_to_2020)
+- [2001 to 2011 IA Data](/data_sources/bpd_ia_data_2001_2011)
+- [2014 Officer IA Log](/data_sources/2014_officer_ia_log)
 
 These cases include both _Citizen Complaints_, where a member of the community files a complaint regarding the conduct of an officer or civilian employee of the BPD, and _Internal Investigations_. A case is identified by a unique number e.g. _IAD2019-0412_. A given case may accuse one-or-more employees, each with one-or-more allegations. A finding is made by IAD for each allegation against each officer.
 
@@ -16,7 +16,7 @@ For the vast majority of cases, we only have the general nature of the allegatio
 
 For 2010 to 2020, we only have records with the following allegations: Conduct Unbecoming, Neg.Duty/Unreasonable Judge, Respectful Treatment, Self Identification, and Use of Force. [See this Twitter thread](https://twitter.com/nathan_story/status/1304446879665729537).
 
-With the exception of the records from the [2014 Officer IA Log](/pages/help#2014_officer_ia_log) file, we do not have summaries of the alleged conduct; we just have the high-level allegation e.g. "Conduct Unbecoming"
+With the exception of the records from the [2014 Officer IA Log](/data_sources/2014_officer_ia_log) file, we do not have summaries of the alleged conduct; we just have the high-level allegation e.g. "Conduct Unbecoming"
 
 We link an allegation to an officer using the officer's name. Our algorithm for matching records will not make the link if the name is ambiguous (i.e. if two officers share the same name), however, it is possible a mis-link could happen.
 
