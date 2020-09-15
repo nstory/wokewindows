@@ -7,11 +7,30 @@
       <div class="mt-5 mb-5">
         <h1>The Woke Windows Project</h1>
         <p class="lead">Providing a view into the Boston Police Department (BPD)</p>
-        <p>We've collected information and records from a <a href="<%= page_path('help', anchor: 'data_sources') %>">variety of data sources</a> and created a database you can sort, search, and download. Select one of the tables below to get started:</p>
+        <p>We've collected information and records from a <a href="/data_sources">variety of data sources</a> and created a database you can sort, search, and download.</p>
       </div>
 
 
+      <div class="text-center mb-5">
+        <h2>Need to Look Up an Officer?</h2>
+        <p class="lead">Find a BPD officer and see their earnings, policing activity, misconduct cases, and press coverage</p>
+        <a href="<%= officers_path %>" class="btn btn-info btn-lg">Look up an Employee</a>
+      </div>
+
       <div class="row">
+        <div class="col-sm-6 mb-5">
+          <h3><a href="/exports">Data Exports</a></h3>
+          <p>Are you a data scientist, a data journalist, or just curious? Try our <a href="/exports">Data Exports</a>! These are CSV files containing cleaned and joined data, ready to be analyzed using your favorite tools.</p>
+        </div>
+
+        <div class="col-sm-6 mb-5">
+          <h3><a href="/data_sources">Data Sources</a></h3>
+          <p>Do you want to see where all these records come from? Do you need to verify against original sources? We've thoroughly documented our <a href="/data_sources">sources of data</a>.</p>
+        </div>
+        <div class="col-12">
+          <h2>Data Tables</h2>
+          <p>Search, filter, sort and explore our datasets.</p>
+        </div>
         <div class="col-lg-6">
           <%= render "shared/root_card", image: 'police-15.svg', link: officers_path do %>
             <h5 class="card-title"><a href="<%= officers_path %>">Officers &amp; Employees</a></h5>
