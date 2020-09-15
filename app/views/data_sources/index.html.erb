@@ -22,11 +22,13 @@
             <tr>
               <td>
                 <% if ds.status == "Available" %>
-                  <span class="badge badge-success text-white">Available</span>
+                  <span class="badge badge-pill badge-info" title="Available for download; not yet included in Woke Windows">Available</span>
                 <% elsif ds.status == "Withdrawn" %>
-                  <span class="badge badge-secondary">Withdrawn</span>
+                  <span class="badge badge-pill badge-secondary">Withdrawn</span>
                 <% elsif ds.status == "Requested" %>
                   <span class="badge badge-pill badge-light">Requested</span>
+                <% elsif ds.status == "Included" %>
+                  <span class="badge badge-pill badge-success text-white" title="Included in the Woke Windows database">Included</span>
                 <% end %>
               </td>
               <td><%= link_to ds.title, data_source_path(ds.id) %></td>
