@@ -59,6 +59,7 @@ class Officer < ApplicationRecord
     # a couple nicknames
     first_name = "jack|john" if first_name =~ /^john$/i
     first_name = "jim|james" if first_name =~ /^james$/i
+    first_name = "patrick|pat" if first_name =~ /^patrick$/i
 
     Regexp.new("\\b(#{first_name})\\b.{0,5}\\b(#{last_name})\\b", Regexp::IGNORECASE)
   end
