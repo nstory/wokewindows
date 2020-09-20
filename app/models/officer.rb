@@ -189,6 +189,10 @@ class Officer < ApplicationRecord
     sustained_complaints(/Use of Force/i)
   end
 
+  def ia_sustained_law_breaking
+    sustained_complaints(/Violation of Criminal Law|Conformance to Laws/)
+  end
+
   def ia_sustained_details
     sustained_complaints(/Details|Detail Assignment|Detail Cards|Paid Detail Assignment/)
   end

@@ -1,6 +1,0 @@
-<% if !complaints.empty? %>
-  <div class="officer__ia-allegation">
-    Sustained finding of <i><%= allegation %></i> in <%= pluralize(complaints.count, "case") %>:
-    <%= to_sentence(complaints.map { |c| link_to c.ia_number, c }) %>
-  </div>
-<% end %>

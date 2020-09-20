@@ -81,16 +81,40 @@
       </p>
 
       <p>
-      <%= @officer.name_with_title %> has an <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. They have <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> with at least one sustained allegation, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
+      <%= @officer.name_with_title %> has an <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. Our database shows <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> containing at least one sustained allegation against this officer, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
       </p>
 
-      <div class="officer__ia-allegations">
-        <%= render "ia_allegation", allegation: "Conduct Unbecoming", complaints: @officer.ia_sustained_conduct_unbecoming %>
-        <%= render "ia_allegation", allegation: "Neg.Duty/Unreasonable Judge", complaints: @officer.ia_sustained_neg_duty %>
-        <%= render "ia_allegation", allegation: "Respectful Treatment", complaints: @officer.ia_sustained_respectful_treatment %>
-        <%= render "ia_allegation", allegation: "Self Identification", complaints: @officer.ia_sustained_self_identification %>
-        <%= render "ia_allegation", allegation: "Use of Force", complaints: @officer.ia_sustained_use_of_force %>
-      </div>
+      <% if !@sustained_allegations.empty? %>
+        <p>The <%= link_to" Internal Affairs Division", help_path("internal_affairs") %> has found <%= @officer.name_with_title %> in violation of <%= @sustained_allegations.count > 1 ? "policies including" : "the policy of" %> <%= to_sentence(@sustained_allegations.pluck(:allegation).uniq) %>.</p>
+      <% end %>
+
+      <% if !@sustained_allegations.empty? %>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <caption><a href="#complaints">See all investigations naming this officer</a></caption>
+            <thead>
+              <tr>
+                <th class="text-center" colspan="4">Allegations Against this Officer Sustained by the Internal Affairs Division (2000 - 2020)</th>
+              <tr>
+                <th>IA #</th>
+                <th>Received</th>
+                <th>Allegation</th>
+                <th>Finding</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @sustained_allegations.each do |co| %>
+                <tr>
+                  <td class="text-nowrap"><%= link_to co.complaint.ia_number, co.complaint %></td>
+                  <td><%= format_date(co.complaint.received_date) %></td>
+                  <td><%= co.allegation %></td>
+                  <td><%= co.finding %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
 
     </div>
     <div class="col-lg-3">

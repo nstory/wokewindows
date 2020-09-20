@@ -18,6 +18,7 @@ class OfficersController < ApplicationController
       @officer.attributions
     ].flatten.uniq
     @latest_compensation = @officer.latest_compensation
+    @sustained_allegations = @officer.ia_sustained_allegations.sort_by { |co| co.complaint.received_date || "0000-00-00" }.reverse
   end
 
   def select2
