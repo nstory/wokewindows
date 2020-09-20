@@ -26,6 +26,7 @@
           <%= render "table_row", export: @exports["field_contacts"], key: "field_contacts" %>
           <%= render "table_row", export: @exports["field_contact_names"], key: "field_contact_names" %>
           <%= render "table_row", export: @exports["officers"], key: "officers" %>
+          <%= render "table_row", export: @exports["overtimes"], key: "overtimes" %>
         </tbody>
       </table>
 
@@ -748,6 +749,65 @@
         <tr>
           <td>url</td>
           <td>link to the page for the officer on Woke Windows</td>
+        </tr>
+      <% end %>
+
+      <h2 id="overtimes">Court Overtime Shifts</h2>
+      <%= render "info", export: @exports["overtimes"] %>
+      <p>Export of the <code>overtimes</code> table. This file lists court-related overtime worked by police officers and detectives. See <%= link_to "Court Overtime 2014 to 2019", data_source_path("court_overtime_2014_2019") %> for more information regarding these records and their origin.</p>
+      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
+      <%= render "data_dictionary" do %>
+        <tr>
+          <td>employee_id</td>
+          <td>six-digit City of Boston employee id of the officer who filed the report</td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>name of the officer</td>
+        </tr>
+        <tr>
+          <td>rank</td>
+          <td>rank of the officer</td>
+        </tr>
+        <tr>
+          <td>assigned</td>
+          <td>this corresponds to the organization the officer is assigned to</td>
+        </tr>
+        <tr>
+          <td>charged</td>
+          <td>the name of an organization, usually the same as assigned</td>
+        </tr>
+        <tr>
+          <td>date</td>
+          <td>the date when the overtime was worked</td>
+        </tr>
+        <tr>
+          <td>code</td>
+          <td>code for the type of overtime</td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>description of the type of overtime</td>
+        </tr>
+        <tr>
+          <td>start_time</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>end_time</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>worked_hours</td>
+          <td>difference between start_time and end_time as provided in <%= link_to "Court Overtime 2014 to 2019", data_source_path("court_overtime_2014_2019") %></td>
+        </tr>
+        <tr>
+          <td>ot_hours</td>
+          <td>worked_hours after rounding-up logic is applied (e.g. anything under four hours is rounded up to four)</td>
+        </tr>
+        <tr>
+          <td>officer_</td>
+          <td>Additional information about the contact_officer. See <a href="#officers">Officers</a> for all fields prefixed with <code>officer_</code>.</td>
         </tr>
       <% end %>
     </div>

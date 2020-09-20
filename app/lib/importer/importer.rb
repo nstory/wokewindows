@@ -32,6 +32,10 @@ class Importer::Importer
     time ? time.strftime("%F %T") : nil
   end
 
+  def parse_float(str)
+    str.blank? ? nil : str.to_f
+  end
+
   def parse_incident_number(str)
     subbed = str.sub(/^I/, "").sub(/-\d\d$/, "")
     if /^\d{7,}$/ =~ subbed

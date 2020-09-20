@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_234130) do
+ActiveRecord::Schema.define(version: 2020_09_20_172426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -375,6 +375,26 @@ ActiveRecord::Schema.define(version: 2020_08_28_234130) do
     t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
     t.index ["total"], name: "index_officers_on_total"
+  end
+
+  create_table "overtimes", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "officer_id"
+    t.string "name"
+    t.string "rank"
+    t.string "assigned"
+    t.string "charged"
+    t.string "date"
+    t.integer "code"
+    t.string "description"
+    t.string "start_time"
+    t.string "end_time"
+    t.decimal "worked_hours"
+    t.decimal "ot_hours"
+    t.text "attributions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["officer_id"], name: "index_overtimes_on_officer_id"
   end
 
   create_table "swats", force: :cascade do |t|
