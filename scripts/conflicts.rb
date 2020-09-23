@@ -2,11 +2,14 @@ Event = Struct.new(:record, :id, :time, :reported, :url, :location, :latitude, :
   MARGIN = 300
 
   def relationship(start_time, end_time)
-    return :adjacent if time == start_time || time == end_time
-    return :within if time >= start_time && time <= end_time
-    return :just_before if (start_time - time).abs <= MARGIN
-    return :just_after if (time - end_time).abs <= MARGIN
-    nil
+    if record.instance_of?(Incident)
+      r1 = relationship_for_time(time, start_time, end_time)
+      r2 = relationship_for_time(reported, start_time, end_time)
+      return r1 if r1 == r2
+      nil
+    else
+      relationship_for_time(time, start_time, end_time)
+    end
   end
 
   def self.from_citation(citation)
@@ -49,6 +52,17 @@ Event = Struct.new(:record, :id, :time, :reported, :url, :location, :latitude, :
       officer.incidents.map { |inc| from_incident(inc) }
     ].flatten.select(&:time)
   end
+
+  private
+  def relationship_for_time(time, start_time, end_time)
+    return nil if !time
+    return :adjacent if time == start_time || time == end_time
+    return :within if time >= start_time && time <= (end_time - 15*60)
+    return :within_15_of_end if time >= start_time && time <= (end_time - 15*60)
+    return :just_before if (start_time - time).abs <= MARGIN
+    return :just_after if (time - end_time).abs <= MARGIN
+    nil
+  end
 end
 
 def helpers
@@ -88,7 +102,7 @@ def overtime
       ot_end = parse_ot_date_time(ot.date, ot.end_time)
       events.each do |event|
         relationship = event.relationship(ot_start, ot_end)
-        if relationship
+        if relationship == :within
           puts [
             officer.employee_id,
             officer.name,
