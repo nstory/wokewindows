@@ -10,13 +10,14 @@ class ArticlesOfficer < ApplicationRecord
 
   counter_culture :officer, column_name: proc { |ao| ao.visible? ? 'articles_officers_count' : nil }, column_names: {["status in ('added', 'confirmed')"] => 'articles_officers_count'}
 
+  def excerpts(size = 40)
+    (article.body || "").scan(officer.article_regexp).map do
+      [$`[-size .. -1], $&, $'[0 ... size]].join
+    end.uniq
+  end
+
   def excerpt(size = 40)
-    re = officer.article_regexp
-    match = re.match(article.body)
-    return nil unless match
-    start = match.begin(0)
-    finish = match.end(0)
-    article.body[[start - size, 0].max .. (finish + size)]
+    excerpts(size).first
   end
 
   def visible?
