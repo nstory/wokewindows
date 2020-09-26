@@ -80,12 +80,16 @@
         <% end %>
       </p>
 
+      <% if @officer.lead_entry %>
+        <p><strong><%= @officer.name_with_title %> appears in the <%= link_to "Law Enforcement Automatic Discovery (LEAD)", help_path("lead") %> database</strong> maintained by the Suffolk County District Attorney. Information regarding LEAD entry: <i><%= @officer.lead_entry %></i></p>
+      <% end %>
+
       <p>
       <%= @officer.name_with_title %> has an <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. Our database shows <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> containing at least one sustained allegation against this officer, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
       </p>
 
       <% if !@sustained_allegations.empty? %>
-        <p>The <%= link_to" Internal Affairs Division", help_path("internal_affairs") %> has found <%= @officer.name_with_title %> in violation of <%= @sustained_allegations.count > 1 ? "policies including" : "the policy of" %> <%= to_sentence(@sustained_allegations.pluck(:allegation).uniq) %>.</p>
+        <p>The <%= link_to "Internal Affairs Division", help_path("internal_affairs") %> has found <%= @officer.name_with_title %> in violation of <%= @sustained_allegations.count > 1 ? "policies including" : "the policy of" %> <%= to_sentence(@sustained_allegations.pluck(:allegation).uniq) %>.</p>
       <% end %>
 
       <% if !@sustained_allegations.empty? %>
@@ -94,7 +98,7 @@
             <caption><a href="#complaints">See all investigations naming this officer</a></caption>
             <thead>
               <tr>
-                <th class="text-center" colspan="4">Allegations Against this Officer Sustained by the Internal Affairs Division (2000 - 2020)</th>
+                <th class="text-center" colspan="4">Allegations Against this Officer Sustained by the Internal Affairs Division (2000 - 2020) <sup><%= link_to "?", help_path("internal_affairs") %></sup></th>
               <tr>
                 <th>IA #</th>
                 <th>Received</th>

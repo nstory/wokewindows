@@ -32,6 +32,13 @@ describe "Officers" do
       assert_canonical_link(officer_path(officer_kirk))
     end
 
+    it "display a lead_entry" do
+      officer_kirk.lead_entry = "stole a Klingon Bird of Prey"
+      officer_kirk.save
+      visit officer_path(officer_kirk)
+      expect(page).to have_content("stole a Klingon Bird of Prey")
+    end
+
     describe "officer with an article" do
       let!(:article) { Article.create!(url: "http://example.com/foo", title: "LOL456", body: "rofl James T Kirk lmao") }
       let!(:articles_officer) { ArticlesOfficer.create!(article: article, officer: officer_kirk) }
