@@ -5,6 +5,7 @@ def output
     "title" => ->(ao) { ao.article.title },
     "url" => ->(ao) { ao.article.url },
     "officer" => ->(ao) { ao.officer.name },
+    "officer_title" => ->(ao) { ao.officer.title },
     "doa" => ->(ao) { ao.officer.doa },
     "officer_url" => ->(ao) { "https://www.wokewindows.org/officers/#{ao.officer.employee_id}" },
     "status" => ->(ao) { ao.status },
@@ -18,6 +19,7 @@ def output
   ArticlesOfficer.includes(:article, :officer).find_each do |ao|
     next if ao.status == "rejected"
     next if ["Pax Centurion", "bpdnews.com"].include?(ao.article.source)
+    next if [8511, 9018].include?(ao.officer.employee_id)
     puts mapping.values.map { |l| l.call(ao) }.to_csv
   end
 end
