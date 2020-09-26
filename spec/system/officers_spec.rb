@@ -30,12 +30,14 @@ describe "Officers" do
       assert_meta_description(/James T Kirk/)
       assert_meta_description(/Boston Police Department/)
       assert_canonical_link(officer_path(officer_kirk))
+      expect(page).to_not have_content("Law Enforcement Automatic Discovery")
     end
 
     it "display a lead_entry" do
       officer_kirk.lead_entry = "stole a Klingon Bird of Prey"
       officer_kirk.save
       visit officer_path(officer_kirk)
+      expect(page).to have_content("Law Enforcement Automatic Discovery")
       expect(page).to have_content("stole a Klingon Bird of Prey")
     end
 
