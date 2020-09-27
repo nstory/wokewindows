@@ -89,7 +89,7 @@
       </p>
 
       <% if !@sustained_allegations.empty? %>
-        <p>The <%= link_to "Internal Affairs Division", help_path("internal_affairs") %> has found <%= @officer.name_with_title %> in violation of <%= @sustained_allegations.count > 1 ? "policies including" : "the policy of" %> <%= to_sentence(@sustained_allegations.pluck(:allegation).uniq) %>.</p>
+        <p>The <%= link_to "Internal Affairs Division", help_path("internal_affairs") %> has found <%= @officer.name_with_title %> in violation of <%= @sustained_allegations.count > 1 ? "policies including" : "the policy of" %> <%= to_sentence(@sustained_allegations.map(&:normalized_allegation).compact.uniq) %>.</p>
       <% end %>
 
       <% if !@sustained_allegations.empty? %>

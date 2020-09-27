@@ -50,4 +50,11 @@ class ComplaintOfficer < ApplicationRecord
   def use_of_force?
     /Use of Force/i =~ allegation
   end
+
+  def normalized_allegation
+    return nil if !allegation
+    allegation.sub(/\(.+\)$/, "")
+      .sub(/\d+ counts.*/i, "")
+      .strip
+  end
 end
