@@ -80,6 +80,7 @@
         <% end %>
       </p>
 
+      <h3>Internal Affairs Overview</h3>
       <% if @officer.lead_entry %>
         <p><strong><%= @officer.name_with_title %> appears in the <%= link_to "Law Enforcement Automatic Discovery (LEAD)", help_path("lead") %> database</strong> maintained by the Suffolk County District Attorney. Information regarding LEAD entry: <i><%= @officer.lead_entry %></i></p>
       <% end %>
@@ -120,6 +121,34 @@
         </div>
       <% end %>
 
+      <% if !@concerning_articles_officers.empty? %>
+        <h3>News Coverage and Documents</h3>
+        <p><%= @officer.name_with_title %> has been named in news articles, court records, and/or other documents that contain concerning allegations.</p>
+        <div class="table-responsive-sm">
+          <table class="table table-sm">
+            <caption><a href="#articles">See all articles mentioning this officer</a></caption>
+            <thead>
+              <tr>
+                <th class="d-none d-sm-table-cell">Date</th>
+                <th class="d-none d-sm-table-cell">Source</th>
+                <th>Article</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @concerning_articles_officers.each do |ao| %>
+                <tr>
+                  <td class="text-nowrap d-none d-sm-table-cell"><%= format_date(ao.article.date_published) %></td>
+                  <td class="d-none d-sm-table-cell"><%= format_text(ao.article.source) %></td>
+                  <td>
+                    <div><%= link_to ao.article.title, ao.article.url %></div>
+                    <a href="<%= ao.article.url %>"><span class="text-muted"><%= ao.excerpt(60) %></span></a>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
     </div>
     <div class="col-lg-3">
       <h5 class="mt-2">Table of Contents</h5>

@@ -42,52 +42,66 @@ describe "Officers" do
     end
 
     describe "officer with an article" do
-      let!(:article) { Article.create!(url: "http://example.com/foo", title: "LOL456", body: "rofl James T Kirk lmao") }
-      let!(:articles_officer) { ArticlesOfficer.create!(article: article, officer: officer_kirk) }
+      let!(:articles_officer_kirk) { create(:articles_officer_kirk, officer: officer_kirk) }
+      let(:article_kirk) { articles_officer_kirk.article }
 
       it "displays the article" do
         visit officer_path(officer_kirk)
-        expect(page).to have_selector("td", text: "LOL456")
+        expect(page).to have_selector("td", text: "bar")
+      end
+
+      it "displays concerning articles" do
+        visit officer_path(officer_kirk)
+        expect(page).to have_content("that contain concerning allegations")
+      end
+
+      it "doesn't display concerning articles" do
+        articles_officer_kirk.concerning = false
+        articles_officer_kirk.save
+        visit officer_path(officer_kirk)
+        expect(page).to have_no_content("that contain concerning allegations")
       end
 
       it "does not display a rejected article" do
-        articles_officer.status = "rejected"
-        articles_officer.save
+        articles_officer_kirk.status = "rejected"
+        articles_officer_kirk.save
         visit officer_path(officer_kirk)
-        expect(page).to_not have_selector("td", text: "LOL456")
+        expect(page).to_not have_selector("td", text: "bar")
       end
 
       it "does display a confirmed article" do
-        articles_officer.status = "confirmed"
-        articles_officer.save!
+        articles_officer_kirk.status = "confirmed"
+        articles_officer_kirk.save!
         visit officer_path(officer_kirk)
-        expect(page).to have_selector("td", text: "LOL456")
+        expect(page).to have_selector("td", text: "bar")
       end
 
       it "does not link to article edit page" do
         visit officer_path(officer_kirk)
-        expect(page).to have_selector("td", text: "LOL456")
-        expect(page).to have_no_link(href: Regexp.new(edit_article_path(article)))
+        expect(page).to have_selector("td", text: "bar")
+        expect(page).to have_no_link(href: Regexp.new(edit_article_path(article_kirk)))
       end
 
       it "does link to article edit page if user logged in" do
         visit officer_path(officer_kirk, as: user)
-        expect(page).to have_link(href: Regexp.new(edit_article_path(article)))
+        expect(page).to have_link(href: Regexp.new(edit_article_path(article_kirk)))
       end
 
       it "does not display confirm all link for non-logged-in user" do
         visit officer_path(officer_kirk)
         # wait until page is loaded
-        expect(page).to have_selector("td", text: "LOL456")
+        expect(page).to have_selector("td", text: "bar")
         expect(page).to have_no_link("Confirm All")
       end
 
       it "confirm all articles" do
+        articles_officer_kirk.status = "added"
+        articles_officer_kirk.save
         visit officer_path(officer_kirk, as: user)
         accept_confirm do
           click_link "Confirm All"
         end
-        wait_for { articles_officer.reload.confirmed? }.to eql(true)
+        wait_for { articles_officer_kirk.reload.confirmed? }.to eql(true)
       end
     end
   end

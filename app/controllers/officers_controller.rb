@@ -19,6 +19,7 @@ class OfficersController < ApplicationController
     ].flatten.uniq
     @latest_compensation = @officer.latest_compensation
     @sustained_allegations = @officer.ia_sustained_allegations.sort_by { |co| co.complaint.received_date || "0000-00-00" }.reverse
+    @concerning_articles_officers = @officer.articles_officers.confirmed.includes(:article).where(concerning: true).sort_by { |ao| ao.article.date_published || "0000-00-00" }.reverse
   end
 
   def select2
