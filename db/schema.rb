@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_26_155217) do
+ActiveRecord::Schema.define(version: 2020_09_30_141223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -374,6 +374,7 @@ ActiveRecord::Schema.define(version: 2020_09_26_155217) do
     t.string "organization"
     t.boolean "active", default: false, null: false
     t.string "lead_entry"
+    t.string "lead_added"
     t.index ["bag_of_text"], name: "officers_bag_of_text_gin", opclass: :gin_trgm_ops, using: :gin
     t.index ["employee_id"], name: "index_officers_on_employee_id", unique: true
     t.index ["total"], name: "index_officers_on_total"
@@ -397,6 +398,19 @@ ActiveRecord::Schema.define(version: 2020_09_26_155217) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["officer_id"], name: "index_overtimes_on_officer_id"
+  end
+
+  create_table "pensions", force: :cascade do |t|
+    t.string "name"
+    t.decimal "amount"
+    t.string "retirement_date"
+    t.string "department"
+    t.string "job_description"
+    t.integer "officer_id"
+    t.text "attributions"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["officer_id"], name: "index_pensions_on_officer_id", unique: true
   end
 
   create_table "swats", force: :cascade do |t|
