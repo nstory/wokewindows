@@ -39,6 +39,18 @@ describe Exporter::Officers do
       expect(record["ia_sustained_conduct_unbecoming"]).to eql("0")
       expect(record["ia_cases"]).to eql("0")
       expect(record["ia_allegations"]).to eql("0")
+      expect(record["lead_added"]).to eql("2012-06-29")
+      expect(record["lead_entry"]).to eql("stole a Klingon Bird of Prey")
+    end
+
+    describe "with pension data" do
+      let!(:pension) { create(:pension, officer: officer_kirk) }
+
+      it "exports" do
+        export
+        expect(record["retirement_date"]).to eql("2020-06-29")
+        expect(record["retirement_amount"]).to eql("1234.56")
+      end
     end
   end
 end

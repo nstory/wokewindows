@@ -38,10 +38,14 @@ class Exporter::Officers < Exporter::Exporter
     column("details_count") { record.details_count }
     column("citations_count") { record.citations_count }
     column("articles_officers_count") { record.articles_officers_count }
+    column("retirement_date") { record.pension && record.pension.retirement_date }
+    column("retirement_amount") { record.pension && write_money(record.pension.amount) }
+    column("lead_added") { record.lead_added }
+    column("lead_entry") { record.lead_entry }
     column("url") { officer_url(record) }
   end
 
   def records
-    Officer.includes(:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint])
+    Officer.includes(:pension, :zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint])
   end
 end

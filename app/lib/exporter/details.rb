@@ -22,6 +22,6 @@ class Exporter::Details < Exporter::Exporter
   end
 
   def records
-    Detail.includes(:officer, officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]])
+    Detail.includes(:officer, officer: [:pension, :zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]])
   end
 end

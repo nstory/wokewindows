@@ -62,7 +62,7 @@
           <% end %>
         <% end %>
 
-        <% if @officer.years_of_service %>
+        <% if @officer.active && @officer.years_of_service %>
           <% if @officer.years_of_service == 0 %>
             <%= @officer.name_with_title %> has been a Boston Police officer for less than one year.
           <% elsif @officer.years_of_service == 1 %>
@@ -73,18 +73,24 @@
         <% end %>
 
         <% if @latest_compensation %>
-          They made a total of <%= format_currency(@latest_compensation.total) %> in <%= @latest_compensation.year %>.
+          They were paid a total of <%= format_currency(@latest_compensation.total) %> in <%= @latest_compensation.year %>.
           <% if @officer.earnings_rank %>
             They were the <%= @officer.earnings_rank.ordinalize %> highest earner in 2019 among Boston Police Department employees.
           <% end %>
         <% end %>
       </p>
 
-      <h3>Internal Affairs Overview</h3>
-      <% if @officer.lead_entry %>
-        <p><strong><%= @officer.name_with_title %> appears in the <%= link_to "Law Enforcement Automatic Discovery (LEAD)", help_path("lead") %> database</strong> maintained by the Suffolk County District Attorney. Information regarding LEAD entry: <i><%= @officer.lead_entry %></i></p>
+      <% if @officer.pension %>
+        <p>
+        <%= @officer.first_name_last %> retired on <%= format_date(@officer.pension.retirement_date) %> and receives a monthly pension of <%= format_currency(@officer.pension.amount) %>.
+        </p>
       <% end %>
 
+      <% if @officer.lead_entry %>
+        <p><strong><%= @officer.name_with_title %> was added to the <%= link_to "Law Enforcement Automatic Discovery (LEAD)", help_path("lead") %> database</strong> maintained by the Suffolk County District Attorney on <%= format_date @officer.lead_added %>. Information from LEAD entry: <i><%= @officer.lead_entry %></i></p>
+      <% end %>
+
+      <h3>Internal Affairs Overview</h3>
       <p>
       <%= @officer.name_with_title %> has an <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. Our database shows <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> containing at least one sustained allegation against this officer, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
       </p>
@@ -122,7 +128,7 @@
       <% end %>
 
       <% if !@concerning_articles_officers.empty? %>
-        <h3>News Coverage and Documents</h3>
+        <h3>Concerning News Coverage and Documents</h3>
         <p><%= @officer.name_with_title %> has been named in news articles, court records, and/or other documents that contain concerning allegations.</p>
         <div class="table-responsive-sm">
           <table class="table table-sm">

@@ -14,6 +14,7 @@ describe "Officers" do
       visit officer_path(officer)
       expect(page).to have_selector("dd", text: "14242")
       expect(page).not_to have_text("highest earner in 2019")
+      expect(page).to_not have_content("Law Enforcement Automatic Discovery")
     end
 
     it "displays an officer" do
@@ -27,18 +28,12 @@ describe "Officers" do
       expect(page).to have_selector("dd", text: "4223")
       expect(page).to have_title("Kirk, James T")
       expect(page).to have_text("42nd highest earner in 2019")
+      expect(page).to have_content("Law Enforcement Automatic Discovery")
+      expect(page).to have_content("Jun 29, 2012")
+      expect(page).to have_content("stole a Klingon Bird of Prey")
       assert_meta_description(/James T Kirk/)
       assert_meta_description(/Boston Police Department/)
       assert_canonical_link(officer_path(officer_kirk))
-      expect(page).to_not have_content("Law Enforcement Automatic Discovery")
-    end
-
-    it "display a lead_entry" do
-      officer_kirk.lead_entry = "stole a Klingon Bird of Prey"
-      officer_kirk.save
-      visit officer_path(officer_kirk)
-      expect(page).to have_content("Law Enforcement Automatic Discovery")
-      expect(page).to have_content("stole a Klingon Bird of Prey")
     end
 
     describe "officer with an article" do
@@ -102,6 +97,15 @@ describe "Officers" do
           click_link "Confirm All"
         end
         wait_for { articles_officer_kirk.reload.confirmed? }.to eql(true)
+      end
+    end
+
+    describe "officer with a pension" do
+      let!(:pension) { create(:pension, officer: officer_kirk) }
+      it "displays pension amount and retirement date" do
+        visit officer_path(officer_kirk)
+        expect(page).to have_content("$1,234.56")
+        expect(page).to have_content("Jun 29, 2020")
       end
     end
   end

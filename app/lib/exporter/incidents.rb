@@ -27,6 +27,6 @@ class Exporter::Incidents < Exporter::Exporter
   end
 
   def records
-    Incident.includes(:officer, officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]).find_each
+    Incident.includes(:officer, officer: [:pension, :zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]).find_each
   end
 end

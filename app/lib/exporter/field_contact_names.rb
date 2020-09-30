@@ -16,6 +16,6 @@ class Exporter::FieldContactNames < Exporter::Exporter
   end
 
   def records
-    FieldContactName.includes(:field_contact, field_contact: [contact_officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]])
+    FieldContactName.includes(:field_contact, field_contact: [contact_officer: [:pension, :zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]])
   end
 end

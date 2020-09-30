@@ -31,6 +31,6 @@ class Exporter::FieldContacts < Exporter::Exporter
   end
 
   def records
-    FieldContact.includes(:contact_officer, contact_officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]])
+    FieldContact.includes(:contact_officer, contact_officer: [:pension, :zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]])
   end
 end

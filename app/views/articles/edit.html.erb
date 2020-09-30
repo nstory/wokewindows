@@ -38,6 +38,7 @@
                 <th>Title</th>
                 <th title="Date of Appointment">DOA</th>
                 <th>Status</th>
+                <th></th>
                 <th>&nbsp;</th>
               </tr>
             </thead>
@@ -54,8 +55,18 @@
                   <td><%= format_date(ao.officer.doa) %></td>
                   <td>
                     <%= form_with model: ao do |f| %>
-                      <%= f.select :status, ArticlesOfficer.statuses.map { |k,v| [k.humanize, v] }, {}, {class: "form-control", data: {controller: "submit-on-change"}} %>
+                      <%= f.select :status, ArticlesOfficer.statuses.map { |k,v| [k.humanize, v] }, {}, {class: "form-control form-control-sm", data: {controller: "submit-on-change"}} %>
                     <% end %>
+                  </td>
+                  <td>
+                    <div class="form-check">
+                      <%= form_with model: ao do |f| %>
+                        <%= f.check_box :concerning, class: "form-check-input", data: {controller: "submit-on-change"} %>
+                        <label class="form-check-label">
+                          Concerning?
+                        </label>
+                      <% end %>
+                    </div>
                   </td>
                   <td><%= link_to "Delete", articles_officer_path(ao), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure you wish to delete this record?"} %></td>
                 </tr>

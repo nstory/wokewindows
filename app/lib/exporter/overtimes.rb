@@ -16,6 +16,6 @@ class Exporter::Overtimes < Exporter::Exporter
   end
 
   def records
-    Overtime.includes(:officer, officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]).find_each
+    Overtime.includes(:officer, officer: [:pension, :zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]).find_each
   end
 end

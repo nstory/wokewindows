@@ -3,4 +3,8 @@ shared_context "parser" do
   let(:records) { parser.records }
   let(:record) { records.first }
   let(:attribution) { parser.attribution }
+
+  it "attributes" do
+    expect(attribution.category).to match(/./)
+  end
 end

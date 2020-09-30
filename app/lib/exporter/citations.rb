@@ -43,7 +43,7 @@ class Exporter::Citations < Exporter::Exporter
   end
 
   def records
-    Citation.includes(:officer, officer: [:zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]).flat_map do |cit|
+    Citation.includes(:officer, officer: [:pension, :zip_code, :complaint_officers, :complaints, complaint_officers: [:complaint]]).flat_map do |cit|
       cit.offenses.map do |off|
         OpenStruct.new offense: off, citation: cit
       end

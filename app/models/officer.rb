@@ -16,6 +16,7 @@ class Officer < ApplicationRecord
   has_many :articles_officers, dependent: :delete_all
   has_many :articles, through: :articles_officers
   has_many :overtimes, dependent: :nullify
+  has_one :pension
 
   enum rank: {
     capt: "capt",

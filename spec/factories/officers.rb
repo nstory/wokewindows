@@ -29,6 +29,8 @@ FactoryBot.define do
       citations_count { 18 }
       articles_officers_count { 19 }
       active { true }
+      lead_added { "2012-06-29" }
+      lead_entry { "stole a Klingon Bird of Prey" }
     end
   end
 end

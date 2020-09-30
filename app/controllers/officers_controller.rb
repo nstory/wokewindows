@@ -15,8 +15,9 @@ class OfficersController < ApplicationController
     redirect_to(@officer, status: 301) if params[:id] != @officer.to_param
     @attributions = [
       @officer.compensations.flat_map(&:attributions),
-      @officer.attributions
-    ].flatten.uniq
+      @officer.attributions,
+      @officer.pension && @officer.pension.attributions
+    ].flatten.compact.uniq
     @latest_compensation = @officer.latest_compensation
     @sustained_allegations = @officer.ia_sustained_allegations.sort_by { |co| co.complaint.received_date || "0000-00-00" }.reverse
     @concerning_articles_officers = @officer.articles_officers.confirmed.includes(:article).where(concerning: true).sort_by { |ao| ao.article.date_published || "0000-00-00" }.reverse

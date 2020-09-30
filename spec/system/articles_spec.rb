@@ -90,6 +90,10 @@ describe "Articles" do
         page.select("Rejected", from: "articles_officer[status]")
         wait_for { ao.reload.status }.to eql("rejected")
 
+        # change concerning
+        page.check("articles_officer_concerning")
+        wait_for { ao.reload.concerning }.to eql(true)
+
         # now delete the officer
         accept_confirm do
           click_link "Delete"

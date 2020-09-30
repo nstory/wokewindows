@@ -20,6 +20,6 @@ class ArticlesOfficersController < ApplicationController
 
   private
   def articles_officer_params
-    params.require(:articles_officer).permit(:officer_id, :article_id, :status)
+    params.require(:articles_officer).permit(:officer_id, :article_id, :status, :concerning)
   end
 end
