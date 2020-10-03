@@ -82,7 +82,7 @@
 
       <% if @officer.pension %>
         <p>
-        <%= @officer.first_name_last %> retired on <%= format_date(@officer.pension.retirement_date) %> and receives a monthly pension of <%= format_currency(@officer.pension.amount) %>.
+        <%= @officer.first_name_last %> retired on <%= format_date(@officer.pension.retirement_date) %> and receives a monthly pension of <%= format_currency(@officer.pension.amount) %> from the <%= link_to "Boston Retirement System", data_source_path("boston_retirement_system") %>.
         </p>
       <% end %>
 

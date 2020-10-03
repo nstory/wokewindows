@@ -29,6 +29,7 @@ class Importer::BostonRetirementSystem < Importer::Importer
   def find_officer(sort_name, job_description)
     hr_name = sort_name.sub(/, +/, ",")
     os = Officer.where("hr_name ILIKE ?", hr_name)
+      .reject(&:active)
       .select { |o| o.title && job_description.start_with?(o.title) }
     raise "multiple officers" if os.count > 1
     os.first

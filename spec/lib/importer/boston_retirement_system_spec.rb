@@ -9,7 +9,7 @@ describe Importer::BostonRetirementSystem do
     :job_description=>"Starship Captain - 311251"
   }}
 
-  let!(:officer_kirk) { create(:officer_kirk) }
+  let!(:officer_kirk) { create(:officer_kirk, active: false) }
 
   it "imports record" do
     importer.import
@@ -34,5 +34,12 @@ describe Importer::BostonRetirementSystem do
     record[:department] = "Xyzzy"
     importer.import
     expect(Pension.count).to eql(0)
+  end
+
+  it "doesn't connect to active officer" do
+    officer_kirk.active = true
+    officer_kirk.save
+    importer.import
+    expect(Pension.first.officer).to eql(nil)
   end
 end
