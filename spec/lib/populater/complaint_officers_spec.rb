@@ -37,7 +37,7 @@ describe Populater::ComplaintOfficers do
   it "matches a hard-coded name" do
     complaint_officer_2.name = "Ezekial,Jason"
     complaint_officer_2.save
-    officer.hr_name = "Ezekiel,Jason M"
+    officer.employee_id = 11817
     officer.save
     Populater::ComplaintOfficers.populate
     expect(complaint_officer_2.reload.officer).to eql(officer)
