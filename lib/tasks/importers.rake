@@ -15,7 +15,7 @@ namespace :importers do
     Importer::DistrictJournal.import_all
 
     # create any new officers found in the district journals
-    Populater::OfficersFromIncidents.populate
+    # Populater::OfficersFromIncidents.populate
 
     # set the officer field on each Incident
     Populater::IncidentOfficers.populate
