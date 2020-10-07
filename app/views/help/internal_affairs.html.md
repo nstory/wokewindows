@@ -7,14 +7,15 @@ We present Internal Affairs Division (IAD) cases aggregated from three sources:
 - [2010 to 2020 Allegations](/data_sources/allegations_2010_to_2020)
 - [2001 to 2011 IA Data](/data_sources/bpd_ia_data_2001_2011)
 - [2014 Officer IA Log](/data_sources/2014_officer_ia_log)
+- [IAD Cases 2010 through 2020-08-15](/data_sources/iad_cases_20200815)
 
 These cases include both _Citizen Complaints_, where a member of the community files a complaint regarding the conduct of an officer or civilian employee of the BPD, and _Internal Investigations_. A case is identified by a unique number e.g. _IAD2019-0412_. A given case may accuse one-or-more employees, each with one-or-more allegations. A finding is made by IAD for each allegation against each officer.
 
-For the vast majority of cases, we only have the general nature of the allegations e.g. _Neg.Duty/Unreasonable Judge_. For a subset of the cases from 2014, we also have prose summaries.
+For the vast majority of cases, we only have the general nature of the allegations e.g. _Neg.Duty/Unreasonable Judge_. For a subset of the cases from 2014, we also have brief prose summaries.
 
 ### Caveats
 
-For 2010 to 2020, we only have records with the following allegations: Conduct Unbecoming, Neg.Duty/Unreasonable Judge, Respectful Treatment, Self Identification, and Use of Force. [See this Twitter thread](https://twitter.com/nathan_story/status/1304446879665729537).
+For civilian employees, we only have a subset of allegation types for the years 2010 to 2020. Specifically: Conduct Unbecoming, Neg.Duty/Unreasonable Judge, Respectful Treatment, Self Identification, and Use of Force. [See this Twitter thread](https://twitter.com/nathan_story/status/1304446879665729537).
 
 With the exception of the records from the [2014 Officer IA Log](/data_sources/2014_officer_ia_log) file, we do not have summaries of the alleged conduct; we just have the high-level allegation e.g. "Conduct Unbecoming"
 

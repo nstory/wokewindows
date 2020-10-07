@@ -2,6 +2,8 @@ class ComplaintOfficer < ApplicationRecord
   belongs_to :complaint
   belongs_to :officer, optional: true
 
+  serialize :action_taken, Array
+
   # one of :severe, :concerning, :less_concerning
   # I made up these classifications
   def severity

@@ -20,7 +20,8 @@ class Attribution
     "2019_tickets" => "2019 Traffic Tickets",
     "bpd_fio_data" => "BPD FIO Data",
     "alpha_listing_20200715" => "2020 Alpha Listing",
-    "boston_retirement_system" => "Boston Retirement System"
+    "boston_retirement_system" => "Boston Retirement System",
+    "iad_cases_20200815" => "IAD Cases 2010 through 2020-08-15"
   }
 
   attr_accessor :filename, :category, :url

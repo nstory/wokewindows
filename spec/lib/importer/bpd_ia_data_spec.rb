@@ -1,4 +1,6 @@
 describe Importer::BpdIaData do
+  include_context "importer"
+
   let(:record) {{
     :ia_no=>"401",
     :case_no=>"4192",
@@ -10,12 +12,9 @@ describe Importer::BpdIaData do
     :badge_id_number=>"4528",
     :allegation=>"Neg.Duty/Unreasonable Judge",
     :finding=>"Sustained",
-    :finding_date=>"6/29/2004"
+    :finding_date=>"6/29/2004",
+    :action_taken => "Flogging"
   }}
-  let(:records) { [record] }
-  let(:attribution) { Attribution.new(filename: "foo.csv", category: "bar") }
-  let(:parser) { mock_parser(records, attribution) }
-  let(:importer) { Importer::BpdIaData.new(parser) }
 
   it "imports a record" do
     importer.import
@@ -33,9 +32,10 @@ describe Importer::BpdIaData do
     expect(co.allegation).to eql("Neg.Duty/Unreasonable Judge")
     expect(co.finding).to eql("Sustained")
     expect(co.finding_date).to eql("2004-06-29")
+    expect(co.action_taken).to eql(["Flogging"])
   end
 
-  it "does not update a record that existing before import" do
+  it "does not update a record that existed before import" do
     c = Complaint.create({ia_number: "401"})
     importer.import
     expect(c.reload.case_number).to eql(nil)
@@ -50,6 +50,32 @@ describe Importer::BpdIaData do
     importer.import
     c = Complaint.first
     expect(c.complaint_officers.count).to eql(2)
+  end
+
+  it "does not import a preliminary investigation" do
+    record[:incident_type] = "Preliminary Investigation"
+    importer.import
+    expect(Complaint.count).to eql(0)
+  end
+
+  it "converts Sustained A to Sustained" do
+    record[:finding] = "Sustained A"
+    importer.import
+    expect(ComplaintOfficer.first.finding).to eql("Sustained")
+  end
+
+  it "loads a blank name as nil" do
+    record[:first_name] = ""
+    record[:last_name] = ""
+    importer.import
+    expect(ComplaintOfficer.first.name).to eql(nil)
+  end
+
+  it "loads Unknown name as Unknown" do
+    record[:first_name] = ""
+    record[:last_name] = "Unknown"
+    importer.import
+    expect(ComplaintOfficer.first.name).to eql("Unknown")
   end
 
   describe "dup records" do
