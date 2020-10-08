@@ -35,11 +35,12 @@ class Complaint < ApplicationRecord
   end
 
   def short_description
-    text = incident_type + " received " + received_date
+    text = (incident_type || "") + " received " + (received_date || "")
     return text if complaint_officers.empty?
     names = complaint_officers.map(&:name).uniq
     if names.count == 1
       name = names.first
+      name ||= "Unknown"
       return text + " against an unknown officer" if name.include?('Unknown')
       return text + " against " + name
     end

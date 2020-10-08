@@ -10,6 +10,7 @@ FactoryBot.define do
       allegation { "Piracy" }
       finding { "Sustained" }
       finding_date { "2061-06-29" }
+      action_taken { ["Flogging", "Feathering"] }
       complaint factory: :complaint_kirk
       officer factory: :officer_kirk
     end

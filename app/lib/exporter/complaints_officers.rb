@@ -12,6 +12,7 @@ class Exporter::ComplaintsOfficers < Exporter::Exporter
     column("allegation") { record.allegation }
     column("finding") { record.finding }
     column("finding_date") { record.finding_date }
+    column("action_taken") { record.action_taken.sort.join(", ") }
     prefix("officer", Exporter::Officers) { record.officer }
   end
 

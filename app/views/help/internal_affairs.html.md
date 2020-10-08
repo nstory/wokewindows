@@ -31,6 +31,71 @@ We make IAD data available in the following ways:
 - [Complaints (Internal Affairs) Data Table](/complaints) sort, filter, and explore interactively
 - [Complaints - Officers Data Export](/exports#complaints_officers) download a spreadsheet of all IAD data
 
+## Data Dictionary
+
+<table class="table help__definitions">
+<thead>
+<tr>
+<th>Field Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>IA #</th>
+<td>the Internal Affairs case number; a given case may include multiple allegations against multiple officers</td>
+</tr>
+<tr>
+<th>Case #</th>
+<td>unknown meaning; only in cases loaded from <a href="/data_sources/bpd_ia_data_2001_2011">2001 to 2011 IA Data</a></td>
+</tr>
+<tr>
+<th>Incident Type</th>
+<td>either <i>Citizen complaint</i> for cases originating from a citizen making a formal complaint or <i>Internal investigation</i> for cases initiated by IAD</td>
+</tr>
+<tr>
+<th>Received</th>
+<td>when the case was opened</td>
+</tr>
+<tr>
+<th>Occurred</th>
+<td>when the alleged incident occurred</td>
+</tr>
+<tr>
+<th>Summary</th>
+<td>a brief summary of the incident; only available for cases from 2014 present in <a href="/data_sources/2014_officer_ia_log">2014 Officer IA Log</a></td>
+</tr>
+<tr>
+<th>Name</th>
+<td>the name of the accused officer or civilian employee; this name is provided as it appears in the source document</td>
+</tr>
+<tr>
+<th>Title</th>
+<td>the title of the employee as provided in the source document (may differ from the employee's current title)</td>
+</tr>
+<tr>
+<th>Badge #</th>
+<td>badge number provided in the source document</td>
+</tr>
+<tr>
+<th>Allegation</th>
+<td>the rule that was alleged to have been broken</td>
+</tr>
+<tr>
+<th>Finding</th>
+<td>the finding by IAD; see <i>Findings</i> below for definitions</td>
+</tr>
+<tr>
+<th>Finding Date</th>
+<td></td>
+</tr>
+<tr>
+<th>Action Take</th>
+<td>e.g. "Oral Reprimand" or "Termination" &mdash; only available for cases from <a href="/data_sources/iad_cases_20200815">IAD Cases 2010 through 2020-08-15</a>; this data may be incomplete, as many sustained allegations show no action taken</td>
+</tr>
+</tbody>
+</table>
+
 ## Findings
 
 The IAD determines a finding for each allegation that makes up an Internal Investigation or Citizen Complaint. If we do not know the finding that was made for an allegation, we show <span class="text-muted font-italic">N/A</span> (Not Available) instead. Otherwise, one of the findings below will be shown:

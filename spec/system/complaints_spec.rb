@@ -1,4 +1,13 @@
 describe "Complaints" do
+  describe "show" do
+    let(:complaint_officer) { create(:complaint_officer) }
+
+    it "shows stuff" do
+      visit complaint_path(complaint_officer.complaint)
+      expect(page).to have_selector("dd", text: "IAD2020-0042")
+    end
+  end
+
   describe "index" do
     let(:complaint_officer) { ComplaintOfficer.new(name: "Ptl James Kirk", finding: "Sustained") }
     let!(:complaint) { Complaint.create(ia_number: "123", summary: "foobar", complaint_officers: [complaint_officer]) }

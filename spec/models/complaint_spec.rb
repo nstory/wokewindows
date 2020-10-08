@@ -55,6 +55,11 @@ describe Complaint do
       expect(complaint.short_description).to eql(desc_stub + " against an unknown officer")
     end
 
+    it "returns a message with 'against an unknown officer' if single complaint_officer is nil" do
+      complaint = build_complaint([nil])
+      expect(complaint.short_description).to eql(desc_stub + " against an unknown officer")
+    end
+
     it "returns a message with 'against multiple officers' if multiple complaint_officers" do
       complaint = build_complaint([ "Name1", "Name2"])
       expect(complaint.short_description).to eql(desc_stub + " against multiple officers")

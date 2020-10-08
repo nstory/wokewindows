@@ -17,6 +17,9 @@ class Populater::ComplaintOfficers
     [{"name" => "Murray,Timothy", "title" => "Captain"}, 8907],
     [{"name" => "Harrington,Richard F", "title" => "Ptl"}, 8856],
     [{"name" => "Harrington,Richard F", "title" => "Police Officer"}, 8856],
+    [{"name" => "Flynn,Robert", "badge" =>"4343"}, 81082],
+    [{"name" => "Doherty,Brian J", "badge" => "4168"}, 135945],
+    [{"name" => "Doherty,Brian J", "badge" => "5550"}, 10258],
   ]
 
   def self.populate

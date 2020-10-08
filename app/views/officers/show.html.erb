@@ -89,7 +89,24 @@
       <% if @officer.lead_entry %>
         <p><strong><%= @officer.name_with_title %> was added to the <%= link_to "Law Enforcement Automatic Discovery (LEAD)", help_path("lead") %> database</strong> maintained by the Suffolk County District Attorney on <%= format_date @officer.lead_added %>. Information from LEAD entry: <i><%= @officer.lead_entry %></i></p>
       <% end %>
-
+    </div>
+    <div class="col-lg-3">
+      <h5 class="mt-2">Table of Contents</h5>
+      <ul class="list-unstyled">
+        <li><a href="#earnings">Earnings</a></li>
+        <li><a href="#incidents">Incident Journal <span class="text-muted"><%= @officer.incidents_count %></span></a></li>
+        <li><a href="#details">Paid Details <span class="text-muted"><%= @officer.details_count %></span></a></li>
+        <li><a href="#citations">Traffic Citations <span class="text-muted"><%= @officer.citations_count %></span></a></li>
+        <li><a href="#field_contacts">Field Contacts <span class="text-muted"><%= @officer.field_contacts_count %></span></a></li>
+        <li><a href="#swats">SWAT Reports <span class="text-muted"><%= @officer.swats_count %></span></a></li>
+        <li><a href="#complaints">Complaints (IA Cases) <span class="text-muted"><%= @officer.complaints_count %></span></a></li>
+        <li><a href="#articles">Articles <span class="text-muted"><%= @officer.articles_officers_count %></span></a></li>
+        <li><a href="#source_materials">Source Materials</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
       <h3>Internal Affairs Overview</h3>
       <p>
       <%= @officer.name_with_title %> has an <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %> of <%= format_ia_score(@officer.ia_score) %>. Our database shows <%= pluralize(@officer.ia_sustained_complaints.count, "Internal Affairs case") %> containing at least one sustained allegation against this officer, and <a href="#complaints"><%= pluralize(@officer.ia_complaints.count, "case") %> total</a>, regardless of finding.
@@ -105,12 +122,13 @@
             <caption><a href="#complaints">See all investigations naming this officer</a></caption>
             <thead>
               <tr>
-                <th class="text-center" colspan="4">Allegations Against this Officer Sustained by the Internal Affairs Division (2000 - 2020) <sup><%= link_to "?", help_path("internal_affairs") %></sup></th>
+                <th class="text-center" colspan="5">Allegations Against this Officer Sustained by the Internal Affairs Division (2000 - 2020) <sup><%= link_to "?", help_path("internal_affairs") %></sup></th>
               <tr>
                 <th>IA #</th>
                 <th>Received</th>
                 <th>Allegation</th>
                 <th>Finding</th>
+                <th>Action Taken</th>
               </tr>
             </thead>
             <tbody>
@@ -120,6 +138,7 @@
                   <td><%= format_date(co.complaint.received_date) %></td>
                   <td><%= co.allegation %></td>
                   <td><%= co.finding %></td>
+                  <td><%= format_action_taken(co) %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -155,24 +174,7 @@
           </table>
         </div>
       <% end %>
-    </div>
-    <div class="col-lg-3">
-      <h5 class="mt-2">Table of Contents</h5>
-      <ul class="list-unstyled">
-        <li><a href="#earnings">Earnings</a></li>
-        <li><a href="#incidents">Incident Journal <span class="text-muted"><%= @officer.incidents_count %></span></a></li>
-        <li><a href="#details">Paid Details <span class="text-muted"><%= @officer.details_count %></span></a></li>
-        <li><a href="#citations">Traffic Citations <span class="text-muted"><%= @officer.citations_count %></span></a></li>
-        <li><a href="#field_contacts">Field Contacts <span class="text-muted"><%= @officer.field_contacts_count %></span></a></li>
-        <li><a href="#swats">SWAT Reports <span class="text-muted"><%= @officer.swats_count %></span></a></li>
-        <li><a href="#complaints">Complaints (IA Cases) <span class="text-muted"><%= @officer.complaints_count %></span></a></li>
-        <li><a href="#articles">Articles <span class="text-muted"><%= @officer.articles_officers_count %></span></a></li>
-        <li><a href="#source_materials">Source Materials</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
+
       <h2 id="earnings">Earnings</h2>
       <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn\u00a0more", page_path("help", anchor: "officers") %></p>
       <% if @officer.earnings_rank? %>

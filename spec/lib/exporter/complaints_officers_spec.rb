@@ -30,6 +30,7 @@ describe Exporter::ComplaintsOfficers do
       expect(record["allegation"]).to eql("Piracy")
       expect(record["finding"]).to eql("Sustained")
       expect(record["finding_date"]).to eql("2061-06-29")
+      expect(record["action_taken"]).to eql("Feathering, Flogging")
       expect(record["officer_employee_id"]).to eql("1701")
     end
   end
