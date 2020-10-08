@@ -20,6 +20,7 @@ class Populater::ComplaintOfficers
     [{"name" => "Flynn,Robert", "badge" =>"4343"}, 81082],
     [{"name" => "Doherty,Brian J", "badge" => "4168"}, 135945],
     [{"name" => "Doherty,Brian J", "badge" => "5550"}, 10258],
+    [{"name" => "Manning,Michael"}, -1] # retired, not in database
   ]
 
   def self.populate
@@ -37,10 +38,12 @@ class Populater::ComplaintOfficers
   private
   def self.populate_group(group, officers)
     group.each do |co|
-      hard_coded = match_hard_coded(co)
-      if hard_coded
-        co.officer = hard_coded
-        co.save
+      hard_coded_id = match_hard_coded(co)
+      if hard_coded_id
+        if hard_coded_id != -1
+          co.officer = Officer.find_by(employee_id: hard_coded_id)
+          co.save
+        end
         next
       end
 
@@ -63,7 +66,7 @@ class Populater::ComplaintOfficers
   def self.match_hard_coded(co)
     MAPPINGS.each do |criteria, employee_id|
       if co.attributes.slice(*criteria.keys) == criteria
-        return Officer.find_by(employee_id: employee_id)
+        return employee_id
       end
     end
     nil
