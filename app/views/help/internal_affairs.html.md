@@ -102,7 +102,7 @@ The IAD determines a finding for each allegation that makes up an Internal Inves
 
 <table class="table">
   <caption>
-    Copied verbatim from <a href="https://www.boston.gov/sites/default/files/file/document_files/2016/08/co-op_annual_report_final_2015_tcm3-53522.pdf#page=11">Community Ombudsman Oversight Panel. <i>Annual Report 2015</i>, p. 11</a>
+    Copied from <a href="https://www.boston.gov/sites/default/files/file/document_files/2016/08/co-op_annual_report_final_2015_tcm3-53522.pdf#page=11">Community Ombudsman Oversight Panel. <i>Annual Report 2015</i>, p. 11</a> and <a href="https://www.boston.gov/sites/default/files/file/document_files/2016/08/2013_coop_report_tcm3-44009.pdf"><i>Annual Report 2013</i>, p. 12</a>
   </caption>
   <thead>
     <tr>
@@ -133,6 +133,10 @@ conduct alleged in the complaint occurred.</td>
     <tr>
       <th>Pending</th>
       <td>The complaint is currently under investigation.</td>
+    </tr>
+    <tr>
+      <th>Filed</th>
+      <td>Investigation was inconclusive, due to one or more reasons beyond the control of the investigator, and may be re-opened at a later date.</td>
     </tr>
   </tbody>
 </table>
