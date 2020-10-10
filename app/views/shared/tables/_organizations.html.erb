@@ -1,0 +1,10 @@
+<%= render "shared/tables/common", {
+  id: id,
+  class_name: "organizations-table",
+  path: ->(params) { datatable_organizations_path(params) }
+}.merge(local_assigns) do %>
+<tr>
+  <th scope="col">Organization</th>
+  <th scope="col"># Employees</th>
+</tr>
+<% end %>

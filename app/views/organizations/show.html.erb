@@ -1,0 +1,18 @@
+<% titleized_name = format_titleize org_name(@organization_officers) %>
+<% num_members = @organization_officers.length %>
+<% @layout_application_title = titleized_name %>
+<% @layout_application_description = "#{titleized_name} is an organization in the Boston Police Department with #{num_members} past or present members." %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1><%= titleized_name %></h1>
+      <p>This is an organization in the Boston Police Department. <%= link_to "Learn\u00a0more", page_path("help", anchor: "organizations") %></p>
+      <p>It has <%= num_members %> past or present <%= "member".pluralize(num_members) %>.</p>
+      <h3>Officers and employees in this organization</h3>
+      <div class="organization__table">
+          <%= render "shared/tables/officers", id: "officers-table", params: { organization: org_name(@organization_officers) }, options: {searching: false, saveState: false} %>
+      </div>
+    </div>
+  </div>
+</div>

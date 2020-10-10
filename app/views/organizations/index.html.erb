@@ -1,0 +1,5 @@
+<% @layout_application_title = "BPD Organizations" %>
+
+<%= render "shared/index", table_partial: "shared/tables/organizations", table_id: "organizations-table" do %>
+  <h1>Boston Police Department Organizations <small>The divisions, units, offices, etc., that make up the BPD <%= link_to "Learn\u00a0more", page_path("help", anchor: "organizations") %></small></h1>
+<% end %>

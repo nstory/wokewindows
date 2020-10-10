@@ -32,5 +32,10 @@ FactoryBot.define do
       lead_added { "2012-06-29" }
       lead_entry { "stole a Klingon Bird of Prey" }
     end
+
+    factory :officer_other do
+      employee_id { 10101 }
+      organization { "Two Words"}
+    end
   end
 end

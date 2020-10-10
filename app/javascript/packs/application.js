@@ -31,6 +31,7 @@ require("shared/tables/field_contacts");
 require("shared/tables/incidents");
 require("shared/tables/officers");
 require("shared/tables/swats");
+require("shared/tables/organizations");
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

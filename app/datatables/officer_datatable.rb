@@ -38,6 +38,7 @@ class OfficerDatatable < ApplicationDatatable
       badge: record.badge,
       name: record.name,
       title: record.title,
+      org_url: record.organization && organization_url(record.organization.parameterize),
       organization: record.organization,
       doa: record.doa,
       total: record.total,
@@ -63,6 +64,10 @@ class OfficerDatatable < ApplicationDatatable
   end
 
   def get_raw_records
-    Officer.includes(:zip_code, :articles_officers).references(:zip_code).distinct
+    q = Officer.includes(:zip_code, :articles_officers).references(:zip_code).distinct
+    if params[:organization]
+      q = q.where(organization: params[:organization])
+    end
+    q
   end
 end
