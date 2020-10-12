@@ -56,7 +56,8 @@ function organization_renderer(data, type, row) {
   if (data == null) {
     return unknown();
   }
-  return `<a href=${row.org_url}>${data}</a>`
+  const titleizedData = title_renderer(data, type, row)
+  return `<a href=${row.org_url}>${titleizedData}</a>`
 }
 
 function ia_score_renderer(data, type, row) {
