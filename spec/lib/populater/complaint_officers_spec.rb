@@ -69,4 +69,13 @@ describe Populater::ComplaintOfficers do
     Populater::ComplaintOfficers.populate
     expect(complaint_officer_2.reload.officer).to eql(officer)
   end
+
+  it "doesn't match if received date before doa" do
+    officer.doa = "2020-01-01"
+    officer.save
+    complaint.received_date = "2019-12-31"
+    complaint.save
+    Populater::ComplaintOfficers.populate
+    expect(complaint_officer_2.reload.officer).to eql(nil)
+  end
 end

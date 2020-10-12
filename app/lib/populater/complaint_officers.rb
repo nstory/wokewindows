@@ -56,8 +56,10 @@ class Populater::ComplaintOfficers
       end
 
       if matching.count == 1
-        co.officer = matching.first
-        co.save
+        unless ruled_out(co, matching.first)
+          co.officer = matching.first
+          co.save
+        end
       end
     end
   end
@@ -107,5 +109,13 @@ class Populater::ComplaintOfficers
   def self.reverse_name(name)
     matches = name.match(/^(.*),(.*)$/)
     matches ? "#{matches[2]} #{matches[1]}" : name
+  end
+
+  def self.ruled_out(complaint_officer, officer)
+    complaint = complaint_officer.complaint
+    if complaint.received_date && officer.doa
+      return true if complaint.received_date < officer.doa
+    end
+    false
   end
 end
