@@ -1,5 +1,5 @@
 describe Populater::ComplaintOfficers do
-  let!(:officer) { Officer.create(employee_id: 1234, hr_name: "Kirk,James T", badge: "00456") }
+  let!(:officer) { Officer.create(employee_id: 1234, hr_name: "Kirk,James T", badge: "456") }
   let!(:complaint_officer) { ComplaintOfficer.new(badge: "789", name: "BMccoy,Bones") }
   let!(:complaint_officer_2) { ComplaintOfficer.new(badge: "456", name: "Kirk,James T") }
   let!(:complaint) { Complaint.create(ia_number: 101, complaint_officers: [complaint_officer, complaint_officer_2]) }
@@ -77,5 +77,45 @@ describe Populater::ComplaintOfficers do
     complaint.save
     Populater::ComplaintOfficers.populate
     expect(complaint_officer_2.reload.officer).to eql(nil)
+  end
+
+  describe "retired person with same name" do
+    let!(:pension) { create(:pension, name: "KIRK, JAMES T") }
+    it "doesn't match if badge numbers don't match" do
+      officer.badge = "123"
+      officer.save
+      Populater::ComplaintOfficers.populate
+      expect(complaint_officer_2.reload.officer).to eql(nil)
+    end
+
+    it "does match if pension is for this officer" do
+      officer.badge = "123"
+      officer.save
+      pension.officer = officer
+      pension.save
+      Populater::ComplaintOfficers.populate
+      expect(complaint_officer_2.reload.officer).to eql(officer)
+    end
+
+    it "does match if badge numbers match" do
+      Populater::ComplaintOfficers.populate
+      expect(complaint_officer_2.reload.officer).to eql(officer)
+    end
+  end
+
+  describe "officer with same name" do
+    let!(:officer2) { Officer.create(employee_id: 2345, hr_name: "Kirk,James T") }
+
+    it "doesn't match if ambiguous" do
+      complaint_officer_2.badge = "xxx"
+      complaint_officer_2.save
+      Populater::ComplaintOfficers.populate
+      expect(complaint_officer_2.reload.officer).to eql(nil)
+    end
+
+    it "does match if ambiguity resolved by badge number" do
+      Populater::ComplaintOfficers.populate
+      expect(complaint_officer_2.reload.officer).to eql(officer)
+    end
   end
 end

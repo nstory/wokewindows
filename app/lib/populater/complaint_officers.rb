@@ -18,10 +18,13 @@ class Populater::ComplaintOfficers
     [{"name" => "Harrington,Richard F", "title" => "Ptl"}, 8856],
     [{"name" => "Harrington,Richard F", "title" => "Police Officer"}, 8856],
     [{"name" => "Flynn,Robert", "badge" =>"4343"}, 81082],
+    [{"name" => "Flynn,Robert", "badge" =>"2157"}, 131233],
     [{"name" => "Doherty,Brian J", "badge" => "4168"}, 135945],
     [{"name" => "Doherty,Brian J", "badge" => "5550"}, 10258],
     [{"name" => "Manning,Michael"}, -1], # retired, not in database
     [{"name" => "Walsh,Michael D", "badge" => "1710"}, -1], # retired, not in database
+    [{"name" => "Walsh,Michael D", "badge" => "1710"}, -1], # retired, not in database
+    [{"name" => "Survillo,George", "badge" => "602"}, 7876],
   ]
 
   def self.populate
@@ -55,10 +58,17 @@ class Populater::ComplaintOfficers
         end
       end
 
+      # try to resolve ambiguous names using badge #
+      if matching.count > 1 && co.badge
+        matching = matching.select { |o| badges_equal(o.badge, co.badge) }
+      end
+
       if matching.count == 1
         unless ruled_out(co, matching.first)
-          co.officer = matching.first
-          co.save
+          unless ruled_out_by_retiree(co, matching.first)
+            co.officer = matching.first
+            co.save
+          end
         end
       end
     end
@@ -117,5 +127,24 @@ class Populater::ComplaintOfficers
       return true if complaint.received_date < officer.doa
     end
     false
+  end
+
+  # if there's a retiree with an identical name, be careful
+  def self.ruled_out_by_retiree(complaint_officer, officer)
+    return false if !officer.hr_name
+    if officer.badge && complaint_officer.badge
+      return false if badges_equal(officer.badge, complaint_officer.badge)
+    end
+    ps = Pension.where("name ILIKE ?", officer.hr_name.sub(/,/, ", "))
+    return true if ps.count > 1
+    return false if ps.count == 0
+    p = ps.first
+    p && p.officer != officer
+  end
+
+  def self.badges_equal(b1, b2)
+    nb1 = b1 && b1.sub(/^0+/, "")
+    nb2 = b2 && b2.sub(/^0+/, "")
+    return true if nb1 == nb2
   end
 end
