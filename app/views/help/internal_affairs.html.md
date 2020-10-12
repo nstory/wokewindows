@@ -23,7 +23,7 @@ We link an allegation to an officer using the officer's name. Our algorithm for 
 
 Conversely, it is possible we have an allegation against an officer in our database, but it does not appear on the officer's page (i.e. it was not linked). You may wish to do a search against the [Complaints (Internal Affairs) Data Table](/complaints), which does contain all cases in our database.
 
-### How to Access this Data
+### How to Access these Data
 
 We make IAD data available in the following ways:
 

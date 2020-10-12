@@ -45,6 +45,7 @@ describe Populater::ComplaintOfficers do
 
   it "doesn't match Manning,Michael" do
     complaint_officer_2.name = "Manning,Michael"
+    complaint_officer_2.officer = officer
     complaint_officer_2.save
     officer.hr_name = "Manning,Michael"
     officer.save

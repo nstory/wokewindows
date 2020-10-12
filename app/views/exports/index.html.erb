@@ -33,7 +33,7 @@
 
       <h2 id="citations">Citations</h2>
       <%= render "info", export: @exports["citations"] %>
-      <p>Export of the <code>citations</code> table. This file lists every traffic citation issued by Boston Police officers in 2019. See <%= link_to "Traffic Citations", page_path("help", anchor: "citations") %> for more information.</p>
+      <p>Export of the <code>citations</code> table. This file lists every traffic citation issued by Boston Police officers in 2019. See <%= link_to "Traffic Citations", help_path("traffic_citations") %> for more information.</p>
       <p>Each citation appears multiple times in this file, once for each offense recorded on the ticket.</p>
       <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
       <%= render "data_dictionary" do %>
