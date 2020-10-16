@@ -1,6 +1,4 @@
-# imports into officers a list of BPD employees created by either
-# Parser::Cy2015AnnualEarnings or Parser::AlphaListing or
-# Parser::AlphaListing2020
+# imports into officers a list of BPD employees
 class Importer::EmployeeListing < Importer::Importer
 
   SLICE_SIZE = 500
@@ -8,7 +6,8 @@ class Importer::EmployeeListing < Importer::Importer
   PARSERS = [
     ["data/CY2015_Annual_Earnings_BPD.csv.gz", Parser::Cy2015AnnualEarnings, false],
     ["data/ALPHa_LISTING_BPD_with_badges_1.csv.gz", Parser::AlphaListing, false],
-    ["data/alpha_listing_20200715.csv.gz", Parser::AlphaListing2020, true]
+    ["data/alpha_listing_20200715.csv.gz", Parser::AlphaListing2020, true],
+    ["data/roster_20200904.csv.gz", Parser::Roster20200904, false]
   ]
 
   def self.import_all
@@ -56,13 +55,12 @@ class Importer::EmployeeListing < Importer::Importer
         doa: parse_doa(record[:doa]),
         badge: parse_badge(record[:badge]),
         rank: parse_rank(record[:rank_rank]),
-        organization: parse_organization(record[:org_description])
+        organization: parse_organization(record[:org_description]),
+        title: parse_string(record[:title]),
+        start_date: parse_date(record[:start_date]),
+        sex: parse_string(record[:sex]),
+        ethnic_group: parse_string(record[:ethnic_grp]),
       }.compact
-
-      # title is normally populated from the earnings report, the listings
-      # also have the title but it's sometimes truncated, so, don't overwrite
-      # one from the earnings report
-      officer.title = parse_string(record[:title]) if !officer.title
 
       officer.add_attribution(attribution)
       officer.save

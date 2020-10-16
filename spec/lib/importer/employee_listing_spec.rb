@@ -81,11 +81,25 @@ describe Importer::EmployeeListing do
       expect(officer.organization).to eql("OFFICE OF POLICE COMMISSIONER")
       expect(officer.title).to eql("Commissioner (Bpd)")
     end
+  end
 
-    it "doesn't replace existing title" do
-      officer = Officer.create(employee_id: 8511, title: "ROFL")
+  describe "roster20200904 record" do
+    let(:record) {{
+      :name=>"Gross,William G.",
+      :empl_id=>"009018",
+      :start_date=>"8/10/83",
+      :sex=>"M",
+      :title=>"Commissioner (Bpd)",
+      :org_description=>"Office Of Police Commissioner",
+      :ethnic_grp=>"BLACK"
+    }}
+
+    it "imports the record" do
       importer.import
-      expect(officer.reload.title).to eql("ROFL")
+      officer = Officer.last
+      expect(officer.start_date).to eql("1983-08-10")
+      expect(officer.sex).to eql("M")
+      expect(officer.ethnic_group).to eql("BLACK")
     end
   end
 end

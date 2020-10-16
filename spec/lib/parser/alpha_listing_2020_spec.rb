@@ -1,8 +1,6 @@
 describe Parser::AlphaListing2020 do
+  include_context "parser"
   let(:file) { file_fixture("sample_alpha_listing_20200715.csv") }
-  let(:parser) { Parser::AlphaListing2020.new(file) }
-  let(:records) { parser.records.to_a }
-  let(:attribution) { parser.attribution }
 
   it "parses a row" do
     record = records.first
@@ -16,9 +14,5 @@ describe Parser::AlphaListing2020 do
     expect(record[:badge]).to eql("00541")
     expect(record[:status]).to eql("A")
     expect(record[:asof]).to eql("7/15/20")
-  end
-
-  it "attributes" do
-    expect(attribution.category).to eql("alpha_listing_20200715")
   end
 end

@@ -21,7 +21,8 @@ class Attribution
     "bpd_fio_data" => "BPD FIO Data",
     "alpha_listing_20200715" => "2020 Alpha Listing",
     "boston_retirement_system" => "Boston Retirement System",
-    "iad_cases_20200815" => "IAD Cases 2010 through 2020-08-15"
+    "iad_cases_20200815" => "IAD Cases 2010 through 2020-08-15",
+    "roster_20200904" => "Roster 2020-09-04"
   }
 
   attr_accessor :filename, :category, :url
