@@ -230,4 +230,28 @@ describe Officer do
       expect(officer.years_of_service).to eql(1)
     end
   end
+
+  describe "organizations" do
+    let(:organization) { "Some./ strange! org" }
+    let(:organization_param) { "some-strange-org-U29tZS4vIHN0cmFuZ2UhIG9yZw" }
+    describe "#organization_to_param" do
+      it "generates a well-formatted organization URL slug" do
+        expect(Officer.organization_to_param(organization)).to eql(organization_param)
+      end
+      
+      it "handles an empty organization" do
+        expect(Officer.organization_to_param(nil)).to eql(nil)
+      end
+    end
+
+    describe "#organization_from_param" do
+      it "parses a well-formatted organization URL slug" do
+        expect(Officer.organization_from_param(organization_param)).to eql(organization)
+      end
+
+      it "handles a poorly-formatted organization URL slug" do
+        expect(Officer.organization_from_param("uh; oh!")).to eql(nil)
+      end
+    end
+  end
 end

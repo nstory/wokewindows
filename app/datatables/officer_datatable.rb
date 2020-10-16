@@ -38,7 +38,7 @@ class OfficerDatatable < ApplicationDatatable
       badge: record.badge,
       name: record.name,
       title: record.title,
-      org_url: record.organization && organization_url(record.organization.parameterize),
+      org_url: record.organization && organization_url(record.organization_param),
       organization: record.organization,
       doa: record.doa,
       total: record.total,

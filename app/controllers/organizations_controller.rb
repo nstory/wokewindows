@@ -1,17 +1,12 @@
 class OrganizationsController < ApplicationController
-  include Datatableable
-
-  def datatable_class
-    OrganizationDatatable
-  end
-
   def index
+    @organizations = Officer.group(:organization).where.not(organization: nil).order("count(employee_id) desc").count
   end
 
   def show
-    @organization_officers = Officer.where("organization ILIKE ?", params[:id].gsub("-", " "))
-    raise ActiveRecord::RecordNotFound.new("Couldn't find Organization") if @organization_officers.length == 0
-    org_param = params[:id].parameterize
-    redirect_to organization_path(org_param), status: 301 if params[:id] != org_param
+    @organization = Officer.organization_from_param(params[:id])
+    raise ActiveRecord::RecordNotFound if @organization == nil
+    @officers = Officer.where(organization: @organization).order(ia_score: :desc)
+    raise ActiveRecord::RecordNotFound if @officers.length == 0
   end
 end

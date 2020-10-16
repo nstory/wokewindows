@@ -1,15 +1,20 @@
 describe OrganizationsController do
   describe "show" do
     let!(:officer_other) { create(:officer_other) }
-    it "redirects with 301 to a well-formatted URL slug" do
-      get :show, params: {:id => officer_other.organization}
-      expect(response.status).to eq(301)
-      expect(response.location).to end_with(officer_other.organization.parameterize)
+    it "respond with 200 when passed a well-formatted ID param" do
+      get :show, params: {:id => officer_other.organization_param}
+      expect(response.status).to eq(200)
     end
 
-    it "responds with 404 when an organization isn't found" do
+    it "responds with 404 when passed a badly formed param" do
       expect {
-        get :show, params: {:id => "oops doesn't exist"}
+        get :show, params: {:id => officer_other.organization}
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "responds with 404 when passed an organization that doesn't exist" do
+      expect {
+        get :show, params: {:id => Officer.organization_to_param("oops doesn't exist")}
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end

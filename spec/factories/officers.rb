@@ -35,7 +35,7 @@ FactoryBot.define do
 
     factory :officer_other do
       employee_id { 10101 }
-      organization { "Two Words"}
+      organization { "Two/. Words"}
     end
   end
 end

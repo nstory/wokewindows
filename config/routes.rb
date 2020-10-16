@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :citations, concerns: [:with_datatable]
   resources :articles, concerns: [:with_datatable]
   resources :articles_officers
-  resources :organizations, concerns: [:with_datatable]
+  resources :organizations
 
   get ':id', to: 'sitemaps#show', constraints: { id: /sitemap[a-z0-9.]+/ }
   get 'exports', to: 'exports#index'
