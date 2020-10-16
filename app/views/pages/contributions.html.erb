@@ -5,7 +5,7 @@
     <div class="col">
       <h1>Political Contributions</h1>
       <p class="lead">Contributions by Boston Police officers to local, state, and federal candidates for political office.</p>
-      <p>Download our data from <%= link_to "the exports page", exports_path %>.</p>
+      <p>Download our data from <%= link_to "the exports page", exports_path %>. These data were compiled on August 27, 2020.</p>
 
       <h2>Office of Campaign and Political Finance (OCPF)</h2>
       <p><a href="https://www.ocpf.us/">OCPF</a> tracks contributions to and expenditures by candidates for office in the Commonwealth of Massachusetts. OCPF provides a web interface for searching these records at <a href="https://www.ocpf.us/Reports/SearchItems">Search Contributions and Expenditures</a>.</p>
@@ -21,7 +21,8 @@
       <p>We performed <a href="https://www.fec.gov/data/receipts/individual-contributions/?contributor_occupation=POLICE&contributor_occupation=law+enforcement&contributor_occupation=patrolman&contributor_employer=boston">this query</a> to find contributions from police officers. We then took the results and further filtered them to only those where the employer is the City of Boston or the Boston PD.</p>
 
       <h2>Name-based Matching</h2>
-      <p>We match the contribution records and our existing officer records based on the name of the contributor.</p>
+      <p>We link the contribution records to our existing officer records based on the name of the contributor. Where there is ambiguity (i.e. when two officers share an identical or similar name) we do not link the contribution to an officer record.</p>
+      <p>However, there may be circumstances where a "mis-link" could occur and a contribution erroneously attributed to an officer; please view these data with a critical eye.</p>
     </div>
   </div>
 </div>
