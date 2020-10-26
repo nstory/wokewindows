@@ -4,9 +4,9 @@ import { definitionsFromContext } from "stimulus/webpack-helpers";
 window.jQuery = window.$ = require("jquery");
 require("jquery.redirect");
 require("jquery-ujs");
-require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
+require("turbolinks").start();
+require("@rails/activestorage").start();
+require("channels");
 
 // load stimulus and controllers
 const application = Application.start();

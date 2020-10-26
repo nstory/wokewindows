@@ -1,0 +1,32 @@
+<% @layout_application_title = "BPD Organizations" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>
+        Boston Police Department Organizations <br/>
+        <small>The divisions, units, offices, etc., that make up the BPD <%= link_to "Learn\u00a0more", page_path("help", anchor: "organizations") %></small>
+      </h2>
+      <div class="table-responsive">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>Organization</th>
+              <th># of Employees</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @organizations.map do |org, num_employees| %>
+              <tr>
+                <td>
+                  <a href="<%= org_url(org) %>"><%= format_titleize org %></a>
+                </td>
+                <td><%= num_employees %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

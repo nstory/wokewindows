@@ -11,7 +11,7 @@ initDataTable("table.officers-table", function($table, options) {
       {data: "badge", render: badge_renderer, orderable: false},
       {data: "name", render: employee_name_renderer},
       {data: "title", render: text_renderer},
-      {data: "organization", render: title_renderer},
+      {data: "organization", render: organization_renderer},
       {data: "doa", render: date_renderer},
       {data: "postal", render: zip_renderer},
       {data: "state", render: text_renderer},
@@ -47,6 +47,17 @@ function badge_renderer(data, type, row) {
     data = padStart(data, 5, "0");
   }
   return data;
+}
+
+function organization_renderer(data, type, row) {
+  if (type != "display") {
+    return data;
+  }
+  if (data == null) {
+    return unknown();
+  }
+  const titleizedData = title_renderer(data, type, row)
+  return `<a href=${row.org_url}>${titleizedData}</a>`
 }
 
 function ia_score_renderer(data, type, row) {

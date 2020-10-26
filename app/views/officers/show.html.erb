@@ -41,7 +41,13 @@
         </dl>
         <dl>
           <dt>Organization</dt>
-          <dd><%= format_titleize @officer.organization %></dd>
+          <dd>
+            <% if @officer.organization %>
+              <a href="<%= organization_url(@officer.organization_param) %>"><%= format_titleize @officer.organization %></a>
+            <% else %>
+              <%= format_titleize @officer.organization %>
+            <% end %>
+          </dd>
         </dl>
         <dl>
           <dt>Title</dt>

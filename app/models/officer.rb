@@ -234,6 +234,27 @@ class Officer < ApplicationRecord
     compensations.max_by(&:year)
   end
 
+  def organization_param
+    self.class.organization_to_param(organization)
+  end
+
+  def self.organization_to_param(organization)
+    return nil if organization == nil
+    slug = organization.parameterize
+    encoded_name = Base64.urlsafe_encode64(organization, padding: false)
+    "#{slug}-#{encoded_name}"
+  end
+
+  def self.organization_from_param(organization_param)
+    return nil if organization_param == nil
+    encoded_name = organization_param.split("-")[-1]
+    begin
+      Base64.urlsafe_decode64 encoded_name
+    rescue ArgumentError
+      nil
+    end
+  end
+
   def self.by_employee_id
     Officer.find_each.index_by(&:employee_id)
   end
