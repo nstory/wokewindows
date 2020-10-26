@@ -231,6 +231,15 @@ describe Officer do
     end
   end
 
+  describe "#organization_to_param" do
+    ["Youth Violence Strike Force"].each do |org|
+      it org do
+        o = Officer.new(organization: org)
+        expect(Officer.organization_from_param(o.organization_param)).to eql(org)
+      end
+    end
+  end
+
   describe "organizations" do
     let(:organization) { "Some./ strange! org" }
     let(:organization_param) { "some-strange-org-U29tZS4vIHN0cmFuZ2UhIG9yZw" }

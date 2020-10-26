@@ -43,7 +43,7 @@
           <dt>Organization</dt>
           <dd>
             <% if @officer.organization %>
-              <a href="<%= organization_url(@officer.organization_param) %>%"><%= format_titleize @officer.organization %></a>
+              <a href="<%= organization_url(@officer.organization_param) %>"><%= format_titleize @officer.organization %></a>
             <% else %>
               <%= format_titleize @officer.organization %>
             <% end %>
