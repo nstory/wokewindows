@@ -48,6 +48,8 @@ gem 'redcarpet', '3.5.0'
 gem 'active_attr', '0.15.0'
 gem 'front_matter_parser', '0.2.1'
 gem 'haversine', '0.3.2'
+gem 'scoped_search', '~> 4.1.9'
+gem 'kaminari', '~> 1.2.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

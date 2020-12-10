@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Appeals</h1>
+      <p class="lead">Search appeals made to the <a href="https://www.sec.state.ma.us/pre/preidx.htm">Public Records Division</a> of the Secretary of the Commonwealth of Massachusetts.</p>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <%= form_tag(appeals_path, method: :get) do %>
+        <div class="input-group">
+          <%= text_field_tag "q", @q, class: "form-control", placeholder: "Search..." %>
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-info">Search</button>
+          </div>
+        </div>
+        <small class="form-text text-muted">Search operators are supported e.g. <i>"boston police" OR "cambridge police"</i></small>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @appeals %>
+    <%= render "appeals/pagination" %>
+
+    <div class="row">
+      <div class="col">
+        <div class="appeal-search-results">
+          <% @appeals.each do |appeal| %>
+            <div class="appeal-search-result mb-4 pb-4">
+              <div class="mb-0">
+                <%= link_to appeal_path(appeal) do %>
+                  <%= render "shared/icons/journal" %> Case <%= appeal.case_no %>
+                <% end %>
+              </div>
+              <div class="text-muted small">
+                <strong>Custodian:</strong> <%= appeal.custodian %> |
+                <strong>Opened:</strong> <%= format_date(appeal.date_opened) %> |
+                <strong>Response provided:</strong> <%= format_date(appeal.resp_prov_date) %>
+              </div>
+              <div class="appeal-search-result__decision"><a class="text-body" href="<%= appeal_path(appeal) %>"><%= render_appeal_decision_excerpt(appeal, @q) %></a></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render "appeals/pagination" %>
+  <% end %>
+</div>

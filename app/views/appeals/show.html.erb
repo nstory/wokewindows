@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p class="mb-0 mt-1">
+        <% if %r{/appeals} =~ request.referrer %>
+          <%= link_to "\u00ab Back to search results", request.referrer %>
+        <% else %>
+          <%= link_to "\u00ab Search appeals", appeals_path %>
+        <% end %>
+      </p>
+      <h1>Appeal #<%= @appeal.case_no %></h1>
+      <p class="lead">This is an appeal made to the Public Records Division of the Secretary of the Commonwealth of Massachusetts.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <dl class="row appeals-show-dl">
+        <dt>Case Type</dt>
+        <dd><%= @appeal.case_type %></dd>
+        <dt>Status</dt>
+        <dd><%= @appeal.status %></dd>
+        <dt>Time required to comply with orders</dt>
+        <dd><%= format_text(@appeal.comply) %></dd>
+        <dt>Date submitted to RAO</dt>
+        <dd><%= format_date(@appeal.req_rec_date) %></dd>
+        <dt>Processing fees charged</dt>
+        <dd><%= format_currency(@appeal.fees) %></dd>
+        <dt>Date initial opened</dt>
+        <dd><%= format_date(@appeal.date_opened) %></dd>
+        <dt>Date reconsideration opened</dt>
+        <dd><%= format_date(@appeal.reconsider_open_date) %></dd>
+        <dt>Date in camera review opened</dt>
+        <dd><%= format_date(@appeal.in_cam_open_date) %></dd>
+        <dt>Did request go to court</dt>
+        <dd><%= format_yes_no(@appeal.request_to_court) %></dd>
+        <dt>Determinations</dt>
+        <dd><%= safe_join(@appeal.decision_urls.map { |url| link_to(url.sub(%r{.*/}, ""), url) }, " ") %></dd>
+      </dl>
+    </div>
+    <div class="col-md-6">
+      <dl class="row appeals-show-dl">
+        <dt>Case sub-type</dt>
+        <dd><%= @appeal.case_subtype %></dd>
+        <dt>Case number</dt>
+        <dd><%= @appeal.case_no %></dd>
+        <dt>Requester</dt>
+        <dd><%= @appeal.requester %></dd>
+        <dt>Response provided date</dt>
+        <dd><%= format_date(@appeal.resp_prov_date) %></dd>
+        <dt>Petitions submitted regarding fees</dt>
+        <dd><%= format_yes_no(@appeal.petitions) %></dd>
+        <dt>Date initial closed</dt>
+        <dd><%= format_date(@appeal.date_closed) %></dd>
+        <dt>Date reconsideration closed</dt>
+        <dd><%= format_date(@appeal.reconsider_close_date) %></dd>
+        <dt>Date in camera review closed</dt>
+        <dd><%= format_date(@appeal.in_cam_close_date) %></dd>
+        <dt>Custodian</dt>
+        <dd><%= @appeal.custodian %></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <% if @appeal.appeal_status_detail_url %>
+        <p><%= link_to "View this appeal on the Secretary of the Commonwealth's website", @appeal.appeal_status_detail_url %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

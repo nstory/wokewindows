@@ -173,6 +173,18 @@ GEM
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
+    kaminari (1.2.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
+      actionview
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
+      activerecord
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -293,6 +305,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scoped_search (4.1.9)
+      activerecord (>= 4.2.0)
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
@@ -363,6 +377,7 @@ DEPENDENCIES
   high_voltage (~> 3.1.2)
   httparty (~> 0.18.1)
   jbuilder (~> 2.7)
+  kaminari (~> 1.2.1)
   listen (~> 3.2)
   metainspector (~> 5.10.0)
   origami (~> 2.1.0)
@@ -375,6 +390,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.0)
   rspec-wait (~> 0.0.9)
   sass-rails (>= 6)
+  scoped_search (~> 4.1.9)
   selenium-webdriver
   sitemap_generator (= 6.1.2)
   spring

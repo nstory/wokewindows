@@ -1,0 +1,16 @@
+.appeal-search-result {
+  border-bottom: 1px solid #eee;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.appeals-show-dl {
+  dt {
+    @extend .col-md-7;
+  }
+  dd {
+    @extend .col-md-5;
+  }
+}

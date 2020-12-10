@@ -10,12 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_14_143600) do
+ActiveRecord::Schema.define(version: 2020_11_30_163503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
+
+  create_table "appeals", force: :cascade do |t|
+    t.string "case_type"
+    t.string "case_subtype"
+    t.string "status"
+    t.string "case_no", null: false
+    t.string "appeal_no"
+    t.string "requester"
+    t.string "custodian"
+    t.string "req_rec_date"
+    t.string "resp_prov_date"
+    t.decimal "fees"
+    t.boolean "petitions"
+    t.string "comply"
+    t.string "date_opened"
+    t.string "date_closed"
+    t.string "reconsider_open_date"
+    t.string "reconsider_close_date"
+    t.string "in_cam_open_date"
+    t.string "in_cam_close_date"
+    t.boolean "request_to_court"
+    t.text "decisions_text"
+    t.text "decision_urls"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["case_no"], name: "index_appeals_on_case_no", unique: true
+    t.index ["custodian"], name: "appeals_custodian_gin", opclass: :gin_trgm_ops, using: :gin
+    t.index ["custodian"], name: "index_appeals_on_custodian"
+    t.index ["decisions_text"], name: "appeals_decisions_text_gin", opclass: :gin_trgm_ops, using: :gin
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string "url", null: false
