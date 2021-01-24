@@ -18,6 +18,7 @@ class Article < ApplicationRecord
     return "Harvard Crimson" if /thecrimson\.com/ =~ host
     return "Universal Hub" if /universalhub\.com/ =~ host
     return "CourtListener" if /courtlistener\.com/ =~ host
+    return "Other" if /wokewindows-data/ =~ host
     host.sub(/^www\./, "")
   end
 end
