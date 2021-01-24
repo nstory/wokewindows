@@ -5,9 +5,19 @@ class ArticleFetcher
   end
 
   def fetch
-    article = Article.new
     response = get(@url)
     return nil if !response
+    return nil if response.code >= 400
+
+    if /html/i =~ response.headers.content_type
+      parse_html(response)
+    else
+      parse_other(response)
+    end
+  end
+
+  def parse_html(response)
+    article = Article.new
     doc = Nokogiri::HTML(response.body)
     article.body = parse_body(doc)
     article.title = parse_title(doc)
@@ -16,6 +26,14 @@ class ArticleFetcher
       article.date_published = "#{$1}-#{$2}-#{$3}"
     end
     article.officers = @officer_matcher.matches(article.body)
+    article
+  end
+
+  def parse_other(response)
+    article = Article.new
+    article.url = @url
+    article.title = URI(@url).path.sub(%r{.*/}, "")
+    article.body = ""
     article
   end
 

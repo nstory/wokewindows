@@ -1,9 +1,12 @@
 describe ArticleFetcher do
   let(:code) { 200 }
-  let(:response) { OpenStruct.new(body: body, code: code) }
-  let(:article_fetcher) { ArticleFetcher.new("foobar") }
+  let(:body) { "" }
+  let(:headers) { OpenStruct.new(content_type: "text/html") }
+  let(:response) { OpenStruct.new(body: body, code: code, headers: headers) }
+  let(:article_fetcher) { ArticleFetcher.new("http://wokewindows.org/foobar") }
+  let(:article) { article_fetcher.fetch }
 
-  describe "valid response" do
+  describe "response" do
     before do
       expect(HTTParty).to receive(:get).and_return(response)
     end
@@ -40,20 +43,31 @@ describe ArticleFetcher do
         expect(a.title).to match(/Boston police detective/)
       end
     end
+
+    describe "pdf document" do
+      let(:body) { file_fixture("district_journal.pdf") }
+      let(:headers) { OpenStruct.new(content_type: "application/pdf") }
+      it "returns article" do
+        expect(article.url).to eql("http://wokewindows.org/foobar")
+        expect(article.title).to eql("foobar")
+        expect(article.date_published).to eql(nil)
+        expect(article.body).to eql("")
+      end
+    end
+
+    describe "404 status code" do
+      let(:code) { 404 }
+
+      it "returns nil" do
+        expect(article_fetcher.fetch).to eql(nil)
+      end
+    end
   end
 
   describe "exception thrown by http request" do
     before do
       expect(HTTParty).to receive(:get).and_raise(Errno::ECONNREFUSED)
     end
-
-    it "returns nil" do
-      expect(article_fetcher.fetch).to eql(nil)
-    end
-  end
-
-  describe "404 status code" do
-    let(:code) { 404 }
 
     it "returns nil" do
       expect(article_fetcher.fetch).to eql(nil)
