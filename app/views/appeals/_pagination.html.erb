@@ -3,7 +3,8 @@
     <%= paginate @appeals, window: 2 %>
   </div>
   <div class="col-md-6 text-md-right">
-    <%= page_entries_info @appeals %>
+    <div><%= page_entries_info @appeals %></div>
+    <div><a href="<%= csv_appeals_path(q: params[:q]) %>"><%= render "shared/icons/download" %> &nbsp;Export Results as CSV</a></div>
   </div>
 </div>
 

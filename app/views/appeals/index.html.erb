@@ -1,3 +1,5 @@
+<% @layout_application_title = "Appeals" %>
+
 <div class="container">
   <div class="row">
     <div class="col">
@@ -15,7 +17,7 @@
             <button type="submit" class="btn btn-info">Search</button>
           </div>
         </div>
-        <small class="form-text text-muted">Search operators are supported e.g. <i>"boston police" OR "cambridge police"</i></small>
+        <small class="form-text text-muted">Search operators are supported e.g. <code>"internal affairs" AND ("boston police" OR "cambridge police")</code></small>
       <% end %>
     </div>
   </div>
@@ -31,6 +33,16 @@
               <div class="mb-0">
                 <%= link_to appeal_path(appeal) do %>
                   <%= render "shared/icons/journal" %> Case <%= appeal.case_no %>
+                <% end %>
+
+                <% unless appeal.decision_urls.empty? %>
+                  <span class="text-muted">&nbsp; &mdash; &nbsp;</span>
+                <% end %>
+
+                <% appeal.decision_urls.each do |url| %>
+                  <a href="<%= url %>" title="<%= url.sub(/.*\//, "") %>">
+                    <%= render "shared/icons/file_earmark_text" %>
+                  </a>
                 <% end %>
               </div>
               <div class="text-muted small">

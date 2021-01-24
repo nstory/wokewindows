@@ -7,6 +7,7 @@ describe "Appeals" do
       visit appeals_path
       click_button "Search"
       expect(page).to have_link("20200042", href: appeal_path(appeal))
+      expect(page).to have_link("", href: "https://test.wokewindows.org/foobar.pdf" )
     end
   end
 

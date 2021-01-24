@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   resources :articles, concerns: [:with_datatable]
   resources :articles_officers
   resources :organizations
-  resources :appeals
+  resources :appeals do
+    get 'csv', on: :collection
+  end
 
   get ':id', to: 'sitemaps#show', constraints: { id: /sitemap[a-z0-9.]+/ }
   get 'exports', to: 'exports#index'

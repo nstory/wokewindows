@@ -23,6 +23,7 @@ FactoryBot.define do
       in_cam_close_date { "2019-11-29" }
       request_to_court { "No" }
       decisions_text { "lol omg rofl lmao" }
+      decision_urls { ["https://test.wokewindows.org/foobar.pdf"] }
     end
   end
 end
