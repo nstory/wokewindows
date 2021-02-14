@@ -7,6 +7,7 @@ class Officer < ApplicationRecord
   has_many :complaints, -> { distinct }, through: :complaint_officers
   has_many :incidents, dependent: :nullify
   has_many :field_contacts, foreign_key: :contact_officer_id, class_name: "FieldContact", inverse_of: :contact_officer, dependent: :nullify
+  has_many :field_contact_names, through: :field_contacts
   has_many :supervised_field_contacts, foreign_key: :supervisor_id, class_name: "FieldContact", inverse_of: :supervisor, dependent: :nullify
   belongs_to :zip_code, foreign_key: :postal, primary_key: :zip, optional: true
   has_many :swats_officers, dependent: :nullify
