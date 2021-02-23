@@ -16,7 +16,7 @@ data/Details_Paid_2020.xlsx:
 	wget 'https://cdn.muckrock.com/foia_files/2021/01/27/Details_Paid_2020.xlsx' -O data/Details_Paid_2020.xlsx
 
 $(APPEALS_JSONL_FILE):
-	wget 'https://wokewindows-data.s3.amazonaws.com/appeals.jsonl.gz' -O $(APPEALS_JSONL_FILE)
+	mkdir -p data && wget 'https://wokewindows-data.s3.amazonaws.com/appeals.jsonl.gz' -O $(APPEALS_JSONL_FILE)
 
 appeals: $(APPEALS_JSONL_FILE)
 	bundle exec rails r Importer::Appeals.import_all
