@@ -25,7 +25,6 @@ class FieldContact < ApplicationRecord
   }
 
   enum circumstance: {
-    circumstance: "circumstance",
     encountered: "encountered",
     observed: "observed",
     stopped: "stopped"

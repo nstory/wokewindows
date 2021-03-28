@@ -11,16 +11,30 @@
   <div class="row mb-3">
     <div class="col">
       <%= form_tag(appeals_path, method: :get) do %>
-        <div class="input-group">
+        <div class="input-group <%= @error_message && "is-invalid" %>">
           <%= text_field_tag "q", @q, class: "form-control", placeholder: "Search..." %>
           <div class="input-group-append">
             <button type="submit" class="btn btn-info">Search</button>
           </div>
         </div>
+        <% if @error_message %>
+          <div class="invalid-feedback">
+            <%= @error_message %>
+          </div>
+        <% end %>
         <small class="form-text text-muted">Search operators are supported e.g. <code>"internal affairs" AND ("boston police" OR "cambridge police")</code>. See <a href="/help/appeals">the help page for all supported operators</a>.</small>
       <% end %>
     </div>
   </div>
+
+  <% if @most_recent_appeal %>
+    <div class="row">
+      <div class="col">
+        <p>This database is not updated at a regular interval (really, it's updated when I remember to!). There are currently <%= number_with_delimiter Appeal.count %> appeals in this database. The most recent appeal is <%= link_to "Case ##{@most_recent_appeal.case_no}", appeal_path(@most_recent_appeal) %> opened on <strong><%= format_date(@most_recent_appeal.date_opened) %></strong>.</p>
+        <p>Have questions? Don't know what this page is for? <a href="/help/appeals">See the help page</a>.</p>
+      </div>
+    </div>
+  <% end %>
 
   <% if @appeals %>
     <%= render "appeals/pagination" %>

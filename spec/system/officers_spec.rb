@@ -160,4 +160,14 @@ describe "Officers" do
       expect(page).to have_selector("td", text: "02131")
     end
   end
+
+  describe "field_contacts" do
+    let!(:field_contact_name_kirk) { create(:field_contact_name_kirk) }
+
+    it "displays stuff" do
+      visit field_contacts_officer_path(Officer.last)
+      expect(page).to have_selector("h1", text: "James T Kirk")
+      expect(page).to have_selector(".stopped-black", text: "1")
+    end
+  end
 end

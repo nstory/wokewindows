@@ -44,4 +44,8 @@ class OfficersController < ApplicationController
     end
     redirect_to officer_path(@officer, anchor: "articles")
   end
+
+  def field_contacts
+    @officer = Officer.includes(:field_contacts, :field_contact_names).find_by!(employee_id: params[:id].to_i)
+  end
 end

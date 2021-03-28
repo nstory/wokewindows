@@ -9,6 +9,13 @@ describe "Appeals" do
       expect(page).to have_link("20200042", href: appeal_path(appeal))
       expect(page).to have_link("", href: "https://test.wokewindows.org/foobar.pdf" )
     end
+
+    it "shows error message" do
+      visit appeals_path
+      fill_in "q", with: "foo ~ bar"
+      click_button "Search"
+      expect(page).to have_content("Field 'foo' not recognized for searching!")
+    end
   end
 
   describe "show" do

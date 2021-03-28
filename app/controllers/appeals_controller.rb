@@ -2,7 +2,13 @@ class AppealsController < ApplicationController
   def index
     if params[:q]
       @q = params[:q]
-      @appeals = search.page(params[:page])
+      begin
+        @appeals = search.page(params[:page])
+      rescue ScopedSearch::QueryNotSupported => e
+        @error_message = e.message
+      end
+    else
+      @most_recent_appeal = Appeal.order(case_no: "desc").first
     end
   end
 
