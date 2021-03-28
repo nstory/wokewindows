@@ -161,7 +161,7 @@ describe "Officers" do
     end
   end
 
-  describe "field_contacts" do
+  xdescribe "field_contacts" do
     let!(:field_contact_name_kirk) { create(:field_contact_name_kirk) }
 
     it "displays stuff" do
