@@ -9,7 +9,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
-    "datatables.net": "^1.10.21",
+    "datatables.net": "^1.10.22",
     "datatables.net-buttons": "^1.6.2",
     "datatables.net-buttons-dt": "^1.6.2",
     "datatables.net-dt": "^1.10.21",
