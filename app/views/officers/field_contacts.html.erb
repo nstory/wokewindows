@@ -1,0 +1,55 @@
+<%# o.field_contacts.includes(:field_contact_names).stopped.flat_map(&:field_contact_names).select(&:black?).count %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center">Field Interrogation and Observation (FIO) Summary for <span class="text-nowrap"><%= @officer.name_with_title %></span></h1>
+      <div class="row">
+        <div class="col">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <td><%= @officer.name %>
+              </tr>
+              <tr>
+                <th>Employee #</th>
+                <td><%= @officer.employee_id %>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-bordered table-sm">
+            <thead>
+              <tr>
+                <th></th>
+                <th># of reports</th>
+                <th># of individuals</th>
+                <th># Black individuals</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Stopped</th>
+                <td><%= @officer.field_contacts.stopped.count %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Encountered</th>
+                <td><%= @officer.field_contacts.encountered.count %></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Observed</th>
+                <td><%= @officer.field_contacts.observed.count %></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
