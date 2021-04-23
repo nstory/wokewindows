@@ -1,26 +1,18 @@
-# ingests and combines two files:
-# tickets_with_ticket_number -- citations with the TXXXXXXX number but no officer id
-# tickets_with_officer_id -- citations with the officer id, but no ticket number
 class Importer::Citations < Importer::Importer
   SLICE = 1000
 
   def self.import_all
-    ticket_number_parser = Parser::TicketsWithTicketNumber.new("data/2019_boston_police_tickets_with_ticket_number.csv.gz")
-    officer_id_parser = Parser::TicketsWithOfficerId.new("data/2019_boston_police_tickets_with_officer_id.csv.gz")
-    new(ticket_number_parser, officer_id_parser).import
-  end
-
-  def initialize(ticket_number_parser, officer_id_parser)
-    @parser = ticket_number_parser
-    @officer_id_parser = officer_id_parser
+    parser = Parser::Citations.new("data/boston_pd_citations_with_names_2011_2020.csv")
+    Citation.transaction do
+      Citation.delete_all
+      new(parser).import
+    end
   end
 
   def import
     @officer_by_employee_id = Officer.by_employee_id
-    combined_records.each_slice(SLICE) do |slice|
-      Citation.transaction do
-        import_slice(slice)
-      end
+    records.each_slice(SLICE) do |slice|
+      import_slice(slice)
     end
   end
 
@@ -31,11 +23,12 @@ class Importer::Citations < Importer::Importer
       slice.map { |r| map_ticket_num(r) }
     )
     slice.each do |record|
+      next unless map_ticket_num(record)
       citation = by_ticket_number[map_ticket_num(record)]
       citation.attributes = map_record(record)
       citation.add_offense(CitationOffense.new(map_record_offense(record)))
       citation.officer ||= @officer_by_employee_id[citation.officer_number]
-      citation.add_attribution(@officer_id_parser.attribution)
+      citation.add_attribution(attribution)
       citation.save
     end
   end
@@ -46,14 +39,6 @@ class Importer::Citations < Importer::Importer
       Citation.where(ticket_number: numbers).index_by(&:ticket_number)
     )
     hash
-  end
-
-  def combined_records
-    key_to_traffic_number = map_key_to_traffic_number(@parser.records)
-    @officer_id_parser.records.lazy.map do |r|
-      r[:ticket_num] = key_to_traffic_number[key(r)]
-      r
-    end.reject { |r| r[:ticket_num].blank? }
   end
 
   def map_record(record)
@@ -95,28 +80,19 @@ class Importer::Citations < Importer::Importer
     {
       offense: parse_string(record[:offense]),
       description: parse_string(record[:offense_description]),
-      assessment: parse_money(record[:assessment]),
-      expected_assessment: parse_money(record[:expected_assessmnt]),
-      display_assessment: parse_money(record[:display_assessmnt]),
+      # assessment: parse_money(record[:assessment]),
+      # expected_assessment: parse_money(record[:expected_assessmnt]),
+      # display_assessment: parse_money(record[:display_assessmnt]),
       disposition: parse_string(record[:disposition]),
-      disposition_description: parse_string(record[:diposition_desc]),
-      major_incident: parse_boolean(record[:major_indc]),
-      surchargeable: parse_boolean(record[:surchargeable]),
-      sdip_points: parse_int(record[:sdip_points])
+      disposition_description: parse_string(record[:disposition_desc]),
+      # major_incident: parse_boolean(record[:major_indc]),
+      # surchargeable: parse_boolean(record[:surchargeable]),
+      # sdip_points: parse_int(record[:sdip_points])
     }
   end
 
   def map_ticket_num(record)
     record[:ticket_num].blank? ? nil : record[:ticket_num].upcase
-  end
-
-  def map_key_to_traffic_number(records)
-    records.lazy.map { |r| [key(r), r[:ticket_num].upcase] }
-      .group_by(&:first)
-      .map { |k,v| [k, v.map(&:second).uniq.reject(&:blank?)] }
-      .reject { |k,v| v.count > 1 } # kill the ambiguous ones
-      .map { |k,v| [k, v.first] }
-      .to_h
   end
 
   def key(record)

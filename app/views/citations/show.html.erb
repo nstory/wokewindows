@@ -24,8 +24,8 @@
             <dd class="citation__dd"><%= format_currency(@citation.amount) %></dd>
             <dt class="citation__dt">Type</dt>
             <dd class="citation__dd"><%= format_text(@citation.ticket_type) %></dd>
-            <dt class="citation__dt">Source</dt>
-            <dd class="citation__dd"><%= format_text(@citation.source) %></dd>
+            <%# <dt class="citation__dt">Source</dt> %>
+            <%# <dd class="citation__dd"><%= format_text(@citation.source) %1></dd> %>
             <dt class="citation__dt" title="Commercial Driver's License">CDL</dt>
             <dd class="citation__dd"><%= format_yes_no(@citation.cdl) %></dd>
             <dt class="citation__dt">Class</dt>
@@ -72,8 +72,8 @@
             <dd class="citation__dd"><%= format_yes_no(@citation.hearing_requested) %></dd>
             <dt class="citation__dt">Court</dt>
             <dd class="citation__dd"><%= format_text(@citation.court_name) %></dd>
-            <dt class="citation__dt">Age</dt>
-            <dd class="citation__dd"><%= format_text(@citation.age) %></dd>
+            <%# <dt class="citation__dt">Age</dt> %>
+            <%# <dd class="citation__dd"><%= format_text(@citation.age) %1></dd> %>
           </dl>
         </div>
       </div>
@@ -85,12 +85,12 @@
             <tr>
               <th>Offense</th>
               <th>Description</th>
-              <th>Assessment</th>
-              <th>Display Assessment</th>
-              <th>Expected Assessment</th>
-              <th>Major Incident</th>
-              <th>SDIP Points</th>
-              <th>Surchargeable</th>
+              <%# <th>Assessment</th> %>
+              <%# <th>Display Assessment</th> %>
+              <%# <th>Expected Assessment</th> %>
+              <%# <th>Major Incident</th> %>
+              <%# <th>SDIP Points</th> %>
+              <%# <th>Surchargeable</th> %>
               <th title="Disposition">Disp.</th>
               <th title="Disposition">Disposition Description</th>
             </tr>
@@ -100,12 +100,12 @@
               <tr>
                 <td><%= format_text(offense.offense) %></td>
                 <td><%= format_text(offense.description) %></td>
-                <td><%= format_currency(offense.assessment) %></td>
-                <td><%= format_currency(offense.display_assessment) %></td>
-                <td><%= format_currency(offense.expected_assessment) %></td>
-                <td><%= format_yes_no(offense.major_incident) %></td>
-                <td><%= format_text(offense.sdip_points) %></td>
-                <td><%= format_yes_no(offense.surchargeable) %></td>
+                <%# <td><%= format_currency(offense.assessment) %1></td> %>
+                <%# <td><%= format_currency(offense.display_assessment) %1></td> %>
+                <%# <td><%= format_currency(offense.expected_assessment) %1></td> %>
+                <%# <td><%= format_yes_no(offense.major_incident) %1></td> %>
+                <%# <td><%= format_text(offense.sdip_points) %1></td> %>
+                <%# <td><%= format_yes_no(offense.surchargeable) %1></td> %>
                 <td><%= format_text(offense.disposition) %></td>
                 <td><%= format_text(offense.disposition_description) %></td>
               </tr>

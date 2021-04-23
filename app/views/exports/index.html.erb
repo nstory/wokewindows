@@ -20,7 +20,13 @@
           </tr>
         </thead>
         <tbody>
-          <%= render "table_row", export: @exports["citations"], key: "citations" %>
+          <%# <%= render "table_row", export: @exports["citations"], key: "citations" %1> %>
+          <tr>
+            <td class="text-muted">citations.csv</td>
+            <td><%= format_unknown %></td>
+            <td><%= format_unknown %></td>
+            <td><%= link_to "Docs", "#citations" %></td>
+          </tr>
           <%= render "table_row", export: @exports["complaints_officers"], key: "complaints_officers" %>
           <%= render "table_row", export: @exports["contributions"], key: "contributions" %>
           <%= render "table_row", export: @exports["details"], key: "details" %>
@@ -32,10 +38,12 @@
       </table>
 
       <h2 id="citations">Citations</h2>
-      <%= render "info", export: @exports["citations"] %>
-      <p>Export of the <code>citations</code> table. This file lists every traffic citation issued by Boston Police officers in 2019. See <%= link_to "Traffic Citations", help_path("traffic_citations") %> for more information.</p>
-      <p>Each citation appears multiple times in this file, once for each offense recorded on the ticket.</p>
-      <p>These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
+      <%# <%= render "info", export: @exports["citations"] %1> %>
+      <p><strong>This export is temporarily unavailable.</strong></p>
+      <p>See <a href="https://github.com/nstory/boston_pd_citations">nstory/boston_pd_citations</a> to download traffic citation data for the 2011 to 2020 time period.</p>
+      <p class="text-muted">Export of the <code>citations</code> table. This file lists every traffic citation issued by Boston Police officers in 2019. See <%= link_to "Traffic Citations", help_path("traffic_citations") %> for more information.</p>
+      <p class="text-muted">Each citation appears multiple times in this file, once for each offense recorded on the ticket.</p>
+      <p class="text-muted">These records have been joined with records from <a href="#officers">Officers</a>, which reflect our latest information about the officer.</p>
       <%= render "data_dictionary" do %>
         <tr>
           <td>ticket_number</td>
