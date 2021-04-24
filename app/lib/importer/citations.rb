@@ -3,16 +3,16 @@ class Importer::Citations < Importer::Importer
 
   def self.import_all
     parser = Parser::Citations.new("data/boston_pd_citations_with_names_2011_2020.csv")
-    Citation.transaction do
-      Citation.delete_all
-      new(parser).import
-    end
+    Citation.delete_all
+    new(parser).import
   end
 
   def import
     @officer_by_employee_id = Officer.by_employee_id
     records.each_slice(SLICE) do |slice|
-      import_slice(slice)
+      Citation.transaction do
+        import_slice(slice)
+      end
     end
   end
 
