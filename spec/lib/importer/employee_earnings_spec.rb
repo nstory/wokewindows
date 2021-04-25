@@ -1,47 +1,50 @@
 describe Importer::EmployeeEarnings do
+  include_context "importer"
+
   let(:record) {{
+    :employee_id=>"1701",
     :name=>"Kirk,James T.",
-    :department=>"Boston Police Department",
-    :title=>"Police Lieutenant/Hdq Dispatch",
-    :regular=>"  142,061.86 ",
-    :retro=>"  -   ",
-    :other=>"  21,262.85 ",
-    :overtime=>"  115,361.12 ",
-    :injured=>"  -   ",
-    :detail=>"  41,360.00 ",
-    :quinn=>"  35,492.87 ",
-    :total=>"355,538.70",
-    :postal=>"02135"
+    :department_name=>"Boston Police Department",
+    :title=>"Police Officer",
+    :regular=>"$56517.90",
+    :retro=>"$0.00",
+    :other=>"$800.00",
+    :overtime=>"$17098.66",
+    :injured=>"$13183.30",
+    :detail=>"$28994.00",
+    :quinn=>"$6970.34",
+    :total_earnings=>"$123564.20",
+    :postal=>"02124-5843",
+    :filename=>"input/employee-earnings-report-2012.csv",
+    :year=>"2012"
   }}
 
-  let(:records) { [record] }
-  let(:attribution) { Attribution.new filename: "a", category: "b", url: nil }
-  let(:parser) { mock_parser(records, attribution) }
-  let(:importer) { Importer::EmployeeEarnings.new(parser) }
+  let!(:officer_kirk) { create(:officer_kirk) }
 
   it "imports a record" do
-    importer.import(2001)
+    importer.import
     expect(Compensation.count).to eql(1)
     comp = Compensation.first
     expect(comp.name).to eql("Kirk,James T.")
     expect(comp.department_name).to eql("Boston Police Department")
-    expect(comp.title).to eql("Police Lieutenant/Hdq Dispatch")
-    expect(comp.regular).to eql(142061.86)
+    expect(comp.title).to eql("Police Officer")
+    expect(comp.regular).to eql(56517.90)
     expect(comp.retro).to eql(0)
-    expect(comp.other).to eql(21262.85)
-    expect(comp.overtime).to eql(115361.12)
-    expect(comp.injured).to eql(0)
-    expect(comp.detail).to eql(41360.00)
-    expect(comp.quinn).to eql(35492.87)
-    expect(comp.total).to eql(355538.70)
-    expect(comp.postal).to eql(2135)
-    expect(comp.year).to eql(2001)
+    expect(comp.other).to eql(800)
+    expect(comp.overtime).to eql(17098.66)
+    expect(comp.injured).to eql(13183.30)
+    expect(comp.detail).to eql(28994.00)
+    expect(comp.quinn).to eql(6970.34)
+    expect(comp.total).to eql(123564.20)
+    expect(comp.postal).to eql(2124)
+    expect(comp.year).to eql(2012)
     expect(comp.attributions).to eql([attribution])
+    expect(comp.officer).to eql(officer_kirk)
   end
 
   it "doesn't import non-BPD records" do
-    record[:department] = "Foobar"
-    importer.import(2019)
+    record[:department_name] = "Foobar"
+    importer.import
     expect(Compensation.count).to eql(0)
   end
 end

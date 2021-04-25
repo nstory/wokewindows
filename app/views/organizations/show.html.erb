@@ -19,7 +19,7 @@
               <th>Name</th>
               <th>Title</th>
               <th title="Internal Affairs Score">IA<sup><%= link_to "?", help_path("internal_affairs", anchor: "ia_score") %></sup></th>
-              <th class="text-nowrap">Earnings (2019)</th>
+              <th class="text-nowrap">Earnings (<%= Rails.configuration.last_year %>)</th>
             </tr>
           </thead>
           <tbody>

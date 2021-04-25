@@ -33,11 +33,11 @@ describe Populater::Officers do
     })
   }
 
-  let!(:compensation_2019) {
+  let!(:compensation_2020) {
     Compensation.create!({
       "officer" => officer,
       "name"=>"Kirk,James T.",
-      "title"=>"2019 title",
+      "title"=>"2020 title",
       "regular"=> 1,
       "retro"=> 2,
       "other"=> 3,
@@ -47,7 +47,7 @@ describe Populater::Officers do
       "quinn"=> 7,
       "total"=> 8,
       "postal"=> 12019,
-      "year"=> 2019
+      "year"=> 2020
     })
   }
 
@@ -77,10 +77,10 @@ describe Populater::Officers do
     })
   }
 
-  it "populates based on 2019 compensation" do
+  it "populates based on 2020 compensation" do
     Populater::Officers.populate
     officer.reload
-    expect(officer.title).to eql("2019 title")
+    expect(officer.title).to eql("2020 title")
     expect(officer.regular).to eql(1)
     expect(officer.retro).to eql(2)
     expect(officer.other).to eql(3)

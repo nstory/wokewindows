@@ -13,7 +13,7 @@ describe "Officers" do
     it "displays minimal officer" do
       visit officer_path(officer)
       expect(page).to have_selector("dd", text: "14242")
-      expect(page).not_to have_text("highest earner in 2019")
+      expect(page).not_to have_text("highest earner")
       expect(page).to_not have_content("Law Enforcement Automatic Discovery")
     end
 
@@ -27,7 +27,7 @@ describe "Officers" do
       expect(page).to have_selector("dd", text: "Roslindale, MA 02131")
       expect(page).to have_selector("dd", text: "4223")
       expect(page).to have_title("Kirk, James T")
-      expect(page).to have_text("42nd highest earner in 2019")
+      expect(page).to have_text("42nd highest earner in 2020")
       expect(page).to have_content("Law Enforcement Automatic Discovery")
       expect(page).to have_content("Jun 29, 2012")
       expect(page).to have_content("stole a Klingon Bird of Prey")

@@ -81,7 +81,7 @@
         <% if @latest_compensation %>
           They were paid a total of <%= format_currency(@latest_compensation.total) %> in <%= @latest_compensation.year %>.
           <% if @officer.earnings_rank %>
-            They were the <%= @officer.earnings_rank.ordinalize %> highest earner in 2019 among Boston Police Department employees.
+            They were the <%= @officer.earnings_rank.ordinalize %> highest earner in <%= Rails.configuration.last_year %> among Boston Police Department employees.
           <% end %>
         <% end %>
       </p>
@@ -185,7 +185,7 @@
       <p>Details regarding this employee's compensation come from earnings reports published by the City of Boston. <%= link_to "Learn\u00a0more", page_path("help", anchor: "officers") %></p>
       <% if @officer.earnings_rank? %>
         <p>
-          This employee was the <strong><%= @officer.earnings_rank.ordinalize %> highest earner</strong> in 2019.
+          This employee was the <strong><%= @officer.earnings_rank.ordinalize %> highest earner</strong> in <%= Rails.configuration.last_year %>.
         </p>
       <% end %>
       <%= render "shared/charts/compensations", compensations: @officer.compensations %>

@@ -1,5 +1,5 @@
 <% @layout_application_title = "BPD Officers & Employees" %>
 
 <%= render "shared/index", table_partial: "shared/tables/officers", table_id: "officers-table" do %>
-  <h1>Officers &amp; Employees <small>Boston Police Department officers with 2019 earnings <%= link_to "Learn more", page_path("help", anchor: "officers") %></small></h1>
+  <h1>Officers &amp; Employees <small>Boston Police Department officers with <%= Rails.configuration.last_year %> earnings <%= link_to "Learn more", page_path("help", anchor: "officers") %></small></h1>
 <% end %>

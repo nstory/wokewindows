@@ -21,7 +21,7 @@ export default class CompensationsChartController extends Controller {
   }
 
   createChart($chart, compensations) {
-    const years = range(2011, 2020);
+    const years = range(2011, 2021);
     const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
     function getData(type) {

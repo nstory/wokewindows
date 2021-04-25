@@ -1,7 +1,5 @@
 # roll up some values from associations into Officer
 class Populater::Officers
-  LAST_YEAR = 2019
-
   def self.populate
     query = Officer.includes(:compensations, :complaints)
     query.find_in_batches do |group|
@@ -23,7 +21,7 @@ class Populater::Officers
       officer.postal = latest_comp.postal
     end
 
-    last_year_comp = officer.compensations.find { |c| c.year == LAST_YEAR }
+    last_year_comp = officer.compensations.find { |c| c.year == Rails.configuration.last_year }
     if last_year_comp
       officer.regular = last_year_comp.regular
       officer.retro = last_year_comp.retro
