@@ -39,7 +39,7 @@ gem 'aws-sdk-s3', '~> 1.72'
 gem 'pry-rails', '~> 0.3.9' # yes, I want pry available in production too
 gem 'rack-canonical-host', '~> 1.0.0'
 gem 'geocoder', '1.6.3'
-gem 'clearance', '~> 2.2.0'
+gem 'clearance', '~> 2.5.0'
 gem 'httparty', '~> 0.18.1'
 gem 'sitemap_generator', '6.1.2'
 gem 'factory_bot_rails', '~> 6.1.0'
