@@ -25,6 +25,10 @@ npm install -g yarn # install yarn using npm (lol)
 yarn                # install JS libs
 ```
 
+We use docker-compose to run the database for the app. Type `docker compose up` to start
+the database. You will need to set the variables POSTGRES_PASSWORD and POSTGRES_PORT
+in the `.env` file in the project directory.
+
 See "Import Production Database into Dev" section below to create the database table.
 
 Start the app in the standard rails way: `bundle exec rails s`
