@@ -32,5 +32,6 @@ test:
 production:
   <<: *default
   database: cops_production
-  username: cops
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  username: postgres
+  password: <%= Rails.application.credentials.prod_db_password %>
+  host: <%= Rails.application.credentials.prod_db_host %>

@@ -47,8 +47,11 @@ You will need to have a test database `cops_test` in your local PostgreSQL datab
 
 The system tests use Chrome in headless mode; they should automatically find any Chrome install on your system.
 
-## Production Environment
-Heroku.
+## Deploy to Production
+```
+gem install kamal
+kamal setup
+```
 
 ## LICENSE
 This project is released under the MIT License.
