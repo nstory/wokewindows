@@ -62,6 +62,11 @@ traefik:
     certificatesResolvers.letsencrypt.acme.httpchallenge: true
     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web # Must match the role in `servers`
 
+builder:
+  context: "."
+  args:
+    RAILS_MASTER_KEY: <%= ENV.fetch("RAILS_MASTER_KEY") %>
+
 # Use a different ssh user than root
 # ssh:
 #   user: app

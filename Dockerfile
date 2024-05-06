@@ -13,9 +13,6 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
-ARG RAILS_MASTER_KEY
-ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
-
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
@@ -44,6 +41,10 @@ RUN yarn install --frozen-lockfile
 
 # Copy application code
 COPY . .
+
+# assets:precompile needs this b/c SECRET_KEY_BASE_DUMMY isn't support int his rails version
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
