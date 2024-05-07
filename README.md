@@ -1,3 +1,5 @@
+[![Ceasefire Now](https://badge.techforpalestine.org/default)](https://techforpalestine.org/learn-more)
+
 # The Woke Windows Project
 
 ![Rails Tests](https://github.com/nstory/wokewindows/workflows/Rails%20Tests/badge.svg)

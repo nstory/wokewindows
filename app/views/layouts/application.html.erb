@@ -42,5 +42,9 @@
     <%= render layout do %>
       <%= content_for?(:content) ? yield(:content) : yield %>
     <% end %>
+
+    <% unless @layout_application_fullscreen %>
+      <%= render "shared/free_palestine" %>
+    <% end %>
   </body>
 </html>
