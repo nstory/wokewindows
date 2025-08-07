@@ -6,7 +6,7 @@
     <div class="col">
       <h1>Data Sources</h1>
       <p class="lead">Collections of public records regarding the Boston Police Department (BPD)</p>
-      <p>This is a full list of the data sources we use to populate <a href="/">Woke Windows</a> (and some data sources we have yet to incorporate). Most of these data sets are spreadsheets or other tabular data that were received in response to public records requests.</p>
+      <p>This is a full list of the data sources we use to populate <a href="/">StateReference Window</a> (and some data sources we have yet to incorporate). Most of these data sets are spreadsheets or other tabular data that were received in response to public records requests.</p>
       <p>Looking for Boston Police data to analyze? See our <%= link_to "Data Exports", exports_path %> for CSV files that have already been combined, cleaned, and documented.</p>
       <p>Do you know of or possess a source of data we do not list here? Please contact us at <%= contact_us %> so we may include it on this list. We are especially interested in any public records from the Internal Affairs Division.</p>
 
@@ -25,13 +25,13 @@
               <tr>
                 <td>
                   <% if ds.status == "Available" %>
-                    <span class="badge badge-pill badge-info" title="Available for download; not yet included in Woke Windows">Available</span>
+                    <span class="badge badge-pill badge-info" title="Available for download; not yet included in StateReference Window">Available</span>
                   <% elsif ds.status == "Withdrawn" %>
                     <span class="badge badge-pill badge-secondary" title="Public records request withdrawn">Withdrawn</span>
                   <% elsif ds.status == "Requested" %>
                     <span class="badge badge-pill badge-light" title="Public records request made but not yet fulfilled">Requested</span>
                   <% elsif ds.status == "Included" %>
-                    <span class="badge badge-pill badge-success text-white" title="Included in the Woke Windows database">Included</span>
+                    <span class="badge badge-pill badge-success text-white" title="Included in the StateReference Window database">Included</span>
                   <% end %>
                 </td>
                 <td><%= link_to ds.title, data_source_path(ds.id) %></td>

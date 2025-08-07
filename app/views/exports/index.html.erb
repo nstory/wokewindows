@@ -7,7 +7,7 @@
     <div class="col">
       <h1>Data Exports</h1>
       <p class="lead">Daily exports of records providing a view into the Boston Police Department (BPD)</p>
-      <p>These <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files are produced daily from data in the Woke Windows database, all of which was originally sourced from public records provided by the <a href="https://www.boston.gov/">City of Boston</a>, the <a href="https://www.mass.gov/">Commonwealth of Massachusetts</a>, and other entities. These files are ready to be imported into <a href="https://www.microsoft.com/en-us/microsoft-365/excel">Microsoft Excel</a> or your preferred tool for data analysis.</p>
+      <p>These <a href="https://en.wikipedia.org/wiki/Comma-separated_values">CSV</a> files are produced daily from data in the StateReference Window database, all of which was originally sourced from public records provided by the <a href="https://www.boston.gov/">City of Boston</a>, the <a href="https://www.mass.gov/">Commonwealth of Massachusetts</a>, and other entities. These files are ready to be imported into <a href="https://www.microsoft.com/en-us/microsoft-365/excel">Microsoft Excel</a> or your preferred tool for data analysis.</p>
       <p>You can also download an entire backup of our PostgreSQL database. See our <a href="https://github.com/nstory/wokewindows">GitHub project page</a> for more information.</p>
       <p>Have you done something interesting with this data and want to share? Do you need help or have questions? Reach out to us at <%= contact_us %> or <a href="https://twitter.com/nathan_story">on Twitter</a>. We would love to hear from you!</p>
       <table class="table">
@@ -318,7 +318,7 @@
         </tr>
         <tr>
           <td>party_affiliation</td>
-          <td>party affiliation of the committee; provided by OCPF for state data; for FEC data, determined manually by Woke Windows</td>
+          <td>party affiliation of the committee; provided by OCPF for state data; for FEC data, determined manually by StateReference Window</td>
         </tr>
         <tr>
           <td>committee_id</td>
@@ -409,7 +409,7 @@
         </tr>
         <tr>
           <td>latitude</td>
-          <td>latitude geocoded by Woke Windows based on the street_no, street, and/or xstreet fields</td>
+          <td>latitude geocoded by StateReference Window based on the street_no, street, and/or xstreet fields</td>
         </tr>
         <tr>
           <td>longitude</td>
@@ -685,7 +685,7 @@
         </tr>
         <tr>
           <td>ia_score</td>
-          <td>metric calculated by Woke Windows based on the officer's Internal Affairs (IA) record; a number from <code>0</code> (least concerning) to <code>5</code> (very concerning); see <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %></td>
+          <td>metric calculated by StateReference Window based on the officer's Internal Affairs (IA) record; a number from <code>0</code> (least concerning) to <code>5</code> (very concerning); see <%= link_to "IA Score", help_path("internal_affairs", anchor: "ia_score") %></td>
         </tr>
         <tr>
           <td>ia_sustained_conduct_unbecoming</td>
@@ -773,7 +773,7 @@
         </tr>
         <tr>
           <td>url</td>
-          <td>link to the page for the officer on Woke Windows</td>
+          <td>link to the page for the officer on StateReference Window</td>
         </tr>
       <% end %>
 

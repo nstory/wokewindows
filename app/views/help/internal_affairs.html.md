@@ -142,7 +142,7 @@ conduct alleged in the complaint occurred.</td>
 </table>
 
 <h2 id="ia_score">IA Score</h2>
-We calculate a score from 0 - 5 that indicates the severity of the Internal Affairs Division cases opened against an officer. This score is defined and calculated by The Woke Windows Project. The algorithm which calculates the score and the classification of allegations was invented by us, and is open to change.
+We calculate a score from 0 - 5 that indicates the severity of the Internal Affairs Division cases opened against an officer. This score is defined and calculated by The StateReference Window Project. The algorithm which calculates the score and the classification of allegations was invented by us, and is open to change.
 
 <table class="table">
   <thead>

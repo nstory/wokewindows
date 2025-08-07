@@ -2,7 +2,7 @@
 <% @subheadline = "Decisions made by the Public Records Division of the Secretary of the Commonwealth of Massachusetts" %>
 
 ## Overview
-We've collected (or "scraped") Massachusetts public records appeals and made them available as a [searchable database on Woke Windows](/appeals).
+We've collected (or "scraped") Massachusetts public records appeals and made them available as a [searchable database on StateReference Window](/appeals).
 
 **[Read the blog post to learn more](https://blog.wokewindows.org/2021/03/28/appeals-database.html)**
 

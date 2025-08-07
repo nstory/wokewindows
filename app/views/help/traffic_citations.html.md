@@ -9,7 +9,7 @@ Citations issued for speeding, marked lanes violation, and a variety of other in
 <%= image_tag "ma_uniform_citation.png", alt: "Massachusetts Uniform Citation", class: "d-block" %>
 [Download a high-resolution PDF of this form](https://wokewindows-data.s3.amazonaws.com/MA_Uniform_Citation 2012_sub7_13_12.pdf)
 
-When an officer issues a citation, a copy of that citation is sent to MassDOT where it is scanned and entered into a database. The traffic citations we display on Woke Windows come from a [public records request](/data_sources/2011_2020_citations) to MassDOT.
+When an officer issues a citation, a copy of that citation is sent to MassDOT where it is scanned and entered into a database. The traffic citations we display on StateReference Window come from a [public records request](/data_sources/2011_2020_citations) to MassDOT.
 
 ### Caveats
 
