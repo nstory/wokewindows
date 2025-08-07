@@ -1,10 +1,10 @@
 [![Ceasefire Now](https://badge.techforpalestine.org/default)](https://techforpalestine.org/learn-more)
 
-# The Woke Windows Project
+# StateReference Window
 
 ![Rails Tests](https://github.com/nstory/wokewindows/workflows/Rails%20Tests/badge.svg)
 
-This is the code base for the [Woke Windows Project](https://www.wokewindows.org). Pull requests are most definitely welcome!
+This is the code base for the [StateReference Window](https://window.statereference.com/) (formerly known as "Woke Windows").
 
 This is a [Ruby on Rails](https://rubyonrails.org/) project. For general information regarding Ruby on Rails development, I highly suggest the official [Ruby on Rails Guides](https://guides.rubyonrails.org/).
 
@@ -51,8 +51,7 @@ The system tests use Chrome in headless mode; they should automatically find any
 
 ## Deploy to Production
 ```
-gem install kamal
-kamal setup
+./kamal.sh setup
 ```
 
 ## LICENSE

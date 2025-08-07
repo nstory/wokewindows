@@ -1,139 +1,52 @@
+<% require "dotenv"; Dotenv.load(".env") %>
+
 # Name of your application. Used to uniquely configure containers.
-service: wokewindows
+service: window
 
 # Name of the container image.
-image: <%= ENV['DOCKER_IMAGE'] %>
+image: <%= ENV.fetch("DOCKER_IMAGE") %>
 
 # Deploy to these servers.
 servers:
   web:
     hosts:
-      - <%= ENV['DEPLOY_SERVER'] %>
+      - <%= ENV.fetch('DEPLOY_SERVER') %>
     options:
       init: true
-    labels:
-      traefik.http.routers.blog.entrypoints: websecure
-      traefik.http.routers.blog.rule: Host(`www.wokewindows.org`)
-      traefik.http.routers.blog.tls.certresolver: letsencrypt
 
-# Credentials for your image host.
 registry:
-  # Specify the registry server, if you're not using Docker Hub
   server: registry.digitalocean.com
-  username:
-    - DOCKER_REGISTRY_TOKEN
-  password:
-    - DOCKER_REGISTRY_TOKEN
+  username: <%= ENV.fetch("REGISTRY_USERNAME") %>
+  password: <%= ENV.fetch("REGISTRY_PASSWORD") %>
 
 accessories:
   db:
     image: postgres:15.3
-    host: <%= ENV['DEPLOY_SERVER'] %>
+    host: <%= ENV.fetch('DEPLOY_SERVER') %>
     port: 5432
     env:
       clear:
-        POSTGRES_PASSWORD: <%= ENV['DATABASE_PASSWORD'] %>
+        POSTGRES_PASSWORD: <%= ENV.fetch('DATABASE_PASSWORD') %>
     volumes:
       - /pgdata:/var/lib/postgresql/data
 
-# Inject ENV variables into containers (secrets come from .env).
-# Remember to run `kamal env push` after making changes!
 env:
   clear:
     RAILS_SERVE_STATIC_FILES: true
-#   secret:
-#     - RAILS_MASTER_KEY
-
-
-traefik:
-  options:
-    publish:
-      - "443:443"
-    volume:
-      - "/letsencrypt/acme.json:/letsencrypt/acme.json" # To save the configuration file.
-  args:
-    entryPoints.web.address: ":80"
-    entryPoints.websecure.address: ":443"
-    entryPoints.web.http.redirections.entryPoint.to: websecure # We want to force https
-    entryPoints.web.http.redirections.entryPoint.scheme: https
-    entryPoints.web.http.redirections.entrypoint.permanent: true
-    certificatesResolvers.letsencrypt.acme.email: "nstory@wokewindows.org"
-    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json" # Must match the path in `volume`
-    certificatesResolvers.letsencrypt.acme.httpchallenge: true
-    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web # Must match the role in `servers`
 
 builder:
+  arch: amd64
   context: "."
   args:
     RAILS_MASTER_KEY: <%= ENV.fetch("RAILS_MASTER_KEY") %>
 
-# Use a different ssh user than root
-# ssh:
-#   user: app
-
-# Configure builder setup.
-# builder:
-#   args:
-#     RUBY_VERSION: 3.2.0
-#   secrets:
-#     - GITHUB_TOKEN
-#   remote:
-#     arch: amd64
-#     host: ssh://app@192.168.0.1
-
-# Use accessory services (secrets come from .env).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     port: 3306
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
-#   redis:
-#     image: redis:7.0
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
-
-# Configure custom arguments for Traefik
-# traefik:
-#   args:
-#     accesslog: true
-#     accesslog.format: json
-
-# Configure a custom healthcheck (default is /up on port 3000)
-healthcheck:
-  path: /
-  port: 3000
-  max_attempts: 8
-
-# Bridge fingerprinted assets, like JS and CSS, between versions to avoid
-# hitting 404 on in-flight requests. Combines all files from new and old
-# version inside the asset_path.
-# asset_path: /rails/public/assets
-
-# Configure rolling deploys by setting a wait time between batches of restarts.
-# boot:
-#   limit: 10 # Can also specify as a percentage of total hosts, such as "25%"
-#   wait: 2
-
-# Configure the role used to determine the primary_host. This host takes
-# deploy locks, runs health checks during the deploy, and follow logs, etc.
-#
-# Caution: there's no support for role renaming yet, so be careful to cleanup
-#          the previous role on the deployed hosts.
-# primary_role: web
-
-# Controls if we abort when see a role with no hosts. Disabling this may be
-# useful for more complex deploy configurations.
-#
-# allow_empty_roles: false
+proxy:
+  hosts:
+    - window.statereference.com
+  app_port: 3000
+  ssl: true
+  ssl_redirect: true
+  healthcheck:
+    path: /
+    interval: 5
+    timeout: 5

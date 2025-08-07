@@ -17,7 +17,9 @@ ENV RAILS_ENV="production" \
 FROM base as build
 
 # Install packages needed to build gems and node modules
-RUN apt-get update -qq && \
+RUN sed -e 's/deb.debian.org/archive.debian.org/g' -i /etc/apt/sources.list && \
+    sed -e 's/security.debian.org/archive.debian.org/g' -i /etc/apt/sources.list && \
+    apt-get --allow-releaseinfo-change update -qq && \
     apt-get install --no-install-recommends -y build-essential curl git libpq-dev node-gyp pkg-config # python-is-python3 libvips
 
 # Install JavaScript dependencies
@@ -54,7 +56,9 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 FROM base
 
 # Install packages needed for deployment
-RUN apt-get update -qq && \
+RUN sed -e 's/deb.debian.org/archive.debian.org/g' -i /etc/apt/sources.list && \
+    sed -e 's/security.debian.org/archive.debian.org/g' -i /etc/apt/sources.list && \
+    apt-get --allow-releaseinfo-change update -qq && \
     apt-get install --no-install-recommends -y curl nodejs postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 

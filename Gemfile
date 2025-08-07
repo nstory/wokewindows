@@ -30,7 +30,7 @@ gem 'bootstrap', '~> 4.5.0'
 gem 'counter_culture', '~> 2.5.1'
 gem 'ajax-datatables-rails', '1.2.0'
 gem 'high_voltage', '~> 3.1.2'
-gem 'metainspector', '~> 5.10.0'
+# gem 'metainspector', '~> 5.10.0'
 gem 'pg', '~> 1.2.3'
 gem 'actionview-encoded_mail_to', '1.0.9'
 gem 'aws-sdk-s3', '~> 1.72'
@@ -48,10 +48,14 @@ gem 'front_matter_parser', '0.2.1'
 gem 'haversine', '0.3.2'
 gem 'scoped_search', '~> 4.1.9'
 gem 'kaminari', '~> 1.2.1'
+gem 'ffi', '1.16.3'
 
 # https://www.ruby-forum.com/t/i-am-using-ruby-version-2-3-8-and-rails-version-5-2-6-to-develop-my-application-since-yesterday-i-am-getting-the-error-i-tried-to-find-the-occurrence-of-this-nokogiri-html4-in-my-application-but-i-didnt-find-any-of-the-occurrence-like-this/263852/4 :shrug:
 gem 'loofah', '~>2.19.1'
 
+gem 'nokogiri', '~>1.11'
+
+gem 'concurrent-ruby', '1.3.4' # https://stackoverflow.com/a/79361034
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
