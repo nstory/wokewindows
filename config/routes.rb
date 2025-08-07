@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get "/help/*id" => 'help#show', as: :help, format: false
   get "/data_sources" => 'data_sources#index', as: :data_sources, format: false
   get "/data_sources/*id" => 'data_sources#show', as: :data_source, format: false
+  get "/up" => "root#up"
 
   root "root#index"
 end

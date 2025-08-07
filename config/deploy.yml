@@ -43,10 +43,12 @@ builder:
 proxy:
   hosts:
     - window.statereference.com
+    - www.wokewindows.org
+    - wokewindows.org
   app_port: 3000
   ssl: true
   ssl_redirect: true
   healthcheck:
-    path: /
+    path: /up
     interval: 5
     timeout: 5

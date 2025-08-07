@@ -19,5 +19,6 @@ module Copsonrails
     config.site_password = ENV['SITE_PASSWORD']
     config.court_listener_token = ENV['COURT_LISTENER_TOKEN']
     config.last_year = 2020
+    config.preferred_host = nil
   end
 end

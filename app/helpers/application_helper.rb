@@ -71,7 +71,7 @@ module ApplicationHelper
   end
 
   def contact_us(text = nil)
-    email = "n"+"s"+"t"+"ory@wokewindows.org"
+    email = "n"+"s"+"t"+"ory@statereference.com"
     text ||= email
     mail_to email, text, encode: "javascript"
   end
